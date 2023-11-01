@@ -1,0 +1,127 @@
+---
+title: "Instructivo para la generación de material ERGOSTATS"
+author: "Centro de Investigación Estadística ERGOSTATS"
+format: html
+editor: visual
+---
+
+## Clausula Contractual para Colaboradores de ERGOSTATS
+
+Este contrato establece los términos y condiciones bajo los cuales los colaboradores de ERGOSTATS ("el Colaborador") acuerdan trabajar en el desarrollo de contenido y código para ERGOSTATS ("la Compañía").
+
+-   **Entrega de Commits:** El Colaborador se compromete a entregar un mínimo de 30 commits, divididos en tres secciones por cada una de las 10 clases asignadas. Cada commit debe representar una contribución significativa al proyecto.
+
+-   **Pull Requests:** El Colaborador se compromete a realizar un mínimo de 10 pull requests durante el periodo del contrato. Cada pull request debe ser revisado y aprobado por un miembro senior del equipo antes de ser fusionado con la rama principal.
+
+-   **No Cumplimiento:** En caso de que el Colaborador no cumpla con la entrega de los 30 commits y los 10 pull requests, la Compañía se reserva el derecho de retener el pago hasta que se cumplan estas condiciones.
+
+-   **Buenas Prácticas de Desarrollo:** El Colaborador se compromete a seguir las buenas prácticas de desarrollo establecidas por la Compañía, incluyendo pero no limitado a: mantener un código limpio y legible, comentar adecuadamente el código, y seguir las directrices de estilo de código de la Compañía.
+
+-   **Incumplimiento de las Buenas Prácticas:** En caso de que el Colaborador no siga las buenas prácticas de desarrollo, la Compañía se reserva el derecho de retener el pago hasta que el Colaborador corrija su trabajo para cumplir con estas prácticas. Al firmar este contrato, el Colaborador acepta estos términos y condiciones.
+
+Guía de GIT para Analistas de DatosConfiguración de GIT en localAntes de empezar a trabajar con GIT, es importante configurarlo correctamente en tu máquina local. Aquí te mostramos cómo hacerlo:
+
+-   **Instalación de GIT:** Primero, necesitas instalar GIT en tu máquina local. Puedes descargarlo desde la página oficial de GIT.
+-   **Configuración del usuario:** Una vez instalado, debes configurar tu nombre de usuario y correo electrónico, ya que GIT adjunta esta información a cada commit que haces.
+
+```         
+git config --global user.name "Tu Nombre"
+git config --global user.email "tuemail@example.com"
+```
+
+-   **Creación de un nuevo repositorio:** Para crear un nuevo repositorio, navega hasta el directorio donde deseas crearlo y ejecuta el siguiente comando:
+
+```         
+git init
+```
+
+Esto creará un nuevo repositorio GIT en tu directorio actual. Conceptos clave de GIT- HEAD: Es una referencia al último commit en la rama actualmente activa.
+
+-   **Árbol:** En GIT, un "árbol" es un objeto que representa un directorio del sistema de archivos. Contiene referencias a blobs (archivos) y árboles (subdirectorios).
+-   **Rama (Branch):** Una rama en GIT es simplemente un apuntador móvil a uno de los commits.
+-   **Add:** El comando git add agrega un cambio en el archivo de trabajo a la zona de preparación (también llamada índice). Le dice a GIT que quieres incluir las actualizaciones de un archivo particular en el próximo commit.
+-   **Commit:** El comando git commit captura una instantánea de los cambios del proyecto. Los commits son la forma en que se guarda el estado del proyecto en GIT.
+-   **Pull:** El comando git pull se usa para obtener y descargar contenido desde un repositorio remoto y actualizar inmediatamente el repositorio local para que coincida con ese contenido.
+-   **Push:** El comando git push se usa para subir contenido local al repositorio remoto. Espero que esta guía te sea útil para empezar a trabajar con GIT.
+
+Recuerda, la práctica hace al maestro
+
+
+## Creación de un archivo Quarto para Reveal.js con RStudio y seguimiento con GIT
+
+### Paso 1: Crear un nuevo archivo Quarto
+
+Primero, necesitas crear un nuevo archivo Quarto en RStudio. Aquí te mostramos cómo hacerlo:
+
+- Abre RStudio.
+- Haz clic en File > New File > Quarto Document.
+- En el cuadro de diálogo que aparece, selecciona Reveal.js Slide Presentation y luego haz clic en OK.
+Esto creará un nuevo archivo Quarto con la extensión .qmd.
+
+### Paso 2: Seguimiento del archivo con GIT
+
+Una vez que hayas creado tu archivo, puedes empezar a seguirlo con GIT. Aquí te mostramos cómo hacerlo:
+
+- Navega hasta el directorio donde se encuentra tu archivo Quarto utilizando la terminal.
+- Inicializa un nuevo repositorio GIT con el comando git init.
+- Agrega tu archivo al repositorio con el comando git add nombre_del_archivo.qmd.
+
+### Paso 3: Realizar cambios y hacer commit
+
+Ahora puedes empezar a hacer cambios en tu archivo. Cada vez que hagas un cambio significativo, debes hacer commit de ese cambio. Aquí te mostramos cómo hacerlo:
+- Haz algunos cambios en tu archivo Quarto.
+- Una vez que estés satisfecho con tus cambios, guarda el archivo y vuelve a la terminal.
+- Agrega los cambios al área de preparación con el comando git add nombre_del_archivo.qmd.
+- Haz commit de los cambios con el comando git commit -m "Descripción de los cambios".
+
+Recuerda que la descripción de los cambios debe ser breve y descriptiva, para que otros miembros del equipo puedan entender qué has cambiado.
+
+## Trabajando con Branches y Pull Requests en GITCrear una nueva Branch
+
+Para crear una nueva branch en GIT, puedes usar el comando git branch. Por ejemplo, si quieres crear una branch llamada clase-python, puedes hacerlo de la siguiente manera:
+
+```
+git branch clase-python
+```
+
+Cambiar a la nueva BranchPara cambiar a tu nueva branch, puedes usar el comando git checkout. Aquí te mostramos cómo hacerlo:
+
+```
+git checkout clase-python
+```
+
+Ahora estás en la branch clase-python y puedes empezar a hacer cambios.
+Crear Commits en la BranchVamos a suponer que estás desarrollando el contenido de una clase de Python y quieres dividir tu trabajo en tres commits: contenido conceptual, contenido de programación y contenido multimedia. Aquí te mostramos cómo hacerlo:
+
+- Contenido Conceptual: Primero, desarrolla el contenido conceptual de tu clase. Una vez que estés satisfecho con tu trabajo, puedes hacer commit de tus cambios con el siguiente comando:
+
+```
+git add .
+git commit -m "Desarrollo del contenido conceptual de la clase de Python"
+```
+
+- Contenido de Programación: Luego, desarrolla el contenido de programación. Cuando termines, haz commit de tus cambios:
+
+```
+git add .
+git commit -m "Desarrollo del contenido de programación para la clase de Python"
+```
+
+- Contenido Multimedia: Finalmente, añade cualquier contenido multimedia que necesites para tu clase. Cuando termines, haz commit de tus cambios:
+
+
+```
+git add .
+git commit -m "Añadido contenido multimedia para la clase de Python"
+```
+
+
+Hacer un Pull RequestUna vez que hayas terminado de desarrollar tu clase y hayas hecho todos tus commits, puedes hacer un pull request para fusionar tus cambios con la branch principal.
+
+Primero, necesitas subir tu branch al repositorio remoto con el comando git push:
+
+```
+git push origin clase-python
+```
+
+Luego, puedes ir al repositorio en GitHub y hacer clic en New pull request. Selecciona tu branch en el menú desplegable y luego haz clic en Create pull request.
