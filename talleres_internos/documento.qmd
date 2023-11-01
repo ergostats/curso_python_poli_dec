@@ -121,7 +121,9 @@ git commit -m "Añadido contenido multimedia para la clase de Python"
 ```
 
 
-Hacer un Pull RequestUna vez que hayas terminado de desarrollar tu clase y hayas hecho todos tus commits, puedes hacer un pull request para fusionar tus cambios con la branch principal.
+## Hacer un Pull Request
+
+Una vez que hayas terminado de desarrollar tu clase y hayas hecho todos tus commits, puedes hacer un pull request para fusionar tus cambios con la branch principal.
 
 Primero, necesitas subir tu branch al repositorio remoto con el comando git push:
 
