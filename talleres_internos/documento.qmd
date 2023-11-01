@@ -35,7 +35,9 @@ git config --global user.email "tuemail@example.com"
 git init
 ```
 
-Esto creará un nuevo repositorio GIT en tu directorio actual. Conceptos clave de GIT- HEAD: Es una referencia al último commit en la rama actualmente activa.
+Esto creará un nuevo repositorio GIT en tu directorio actual. Conceptos clave de GIT
+
+- **HEAD:** Es una referencia al último commit en la rama actualmente activa.
 
 -   **Árbol:** En GIT, un "árbol" es un objeto que representa un directorio del sistema de archivos. Contiene referencias a blobs (archivos) y árboles (subdirectorios).
 -   **Rama (Branch):** Una rama en GIT es simplemente un apuntador móvil a uno de los commits.
@@ -69,6 +71,7 @@ Una vez que hayas creado tu archivo, puedes empezar a seguirlo con GIT. Aquí te
 ### Paso 3: Realizar cambios y hacer commit
 
 Ahora puedes empezar a hacer cambios en tu archivo. Cada vez que hagas un cambio significativo, debes hacer commit de ese cambio. Aquí te mostramos cómo hacerlo:
+
 - Haz algunos cambios en tu archivo Quarto.
 - Una vez que estés satisfecho con tus cambios, guarda el archivo y vuelve a la terminal.
 - Agrega los cambios al área de preparación con el comando git add nombre_del_archivo.qmd.
@@ -76,7 +79,9 @@ Ahora puedes empezar a hacer cambios en tu archivo. Cada vez que hagas un cambio
 
 Recuerda que la descripción de los cambios debe ser breve y descriptiva, para que otros miembros del equipo puedan entender qué has cambiado.
 
-## Trabajando con Branches y Pull Requests en GITCrear una nueva Branch
+## Trabajando con Branches y Pull Requests en GIT
+
+### Crear una nueva Branch
 
 Para crear una nueva branch en GIT, puedes usar el comando git branch. Por ejemplo, si quieres crear una branch llamada clase-python, puedes hacerlo de la siguiente manera:
 
