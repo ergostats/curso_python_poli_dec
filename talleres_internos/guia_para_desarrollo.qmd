@@ -132,3 +132,21 @@ git push origin clase-python
 ```
 
 Luego, puedes ir al repositorio en GitHub y hacer clic en New pull request. Selecciona tu branch en el menú desplegable y luego haz clic en Create pull request.
+
+### Otros comandos muy utiles:
+
+Actualizar la relación entre el remoto y el local:
+
+```
+git fetch
+```
+> Para poder hacer un pull primero debemos hacer un add, y un commit. Con eso actualizamos la versión local y traemos de la nube o Github los cambios de mis compañeros con Git pull. Y luego procedemos con la creacion de la rama para nuestro trabajo.
+
+```
+git pull origin main
+```
+
+
+
+
+
