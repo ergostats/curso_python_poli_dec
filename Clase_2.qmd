@@ -10,11 +10,11 @@ editor: visual
 ## Importación de datos en Python desde diferentes fuentes utilizando la biblioteca pandas. 
 
 ```{python}
-1+1
+1+1+1
 
 ```
 
-## Descripción de nuestras fuentes de datos y metadatos 
+## Descripción de nuestras fuentes de datos y metadatos. 
 
 ```{python}
 1 + 1
@@ -24,7 +24,7 @@ You can add options to executable code like this
 
 ```{python}
 #| echo: false
-2 * 2
+2 * 2+4
 ```
 
 The `echo: false` option disables the printing of code (only output is displayed).
