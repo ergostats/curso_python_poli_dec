@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Centro de Investigación Estadística ERGOSTATS">
+
+<title>Instructivo para la generación de material ERGOSTATS</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="guia_para_desarrollo_files/libs/clipboard/clipboard.min.js"></script>
+<script src="guia_para_desarrollo_files/libs/quarto-html/quarto.js"></script>
+<script src="guia_para_desarrollo_files/libs/quarto-html/popper.min.js"></script>
+<script src="guia_para_desarrollo_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="guia_para_desarrollo_files/libs/quarto-html/anchor.min.js"></script>
+<link href="guia_para_desarrollo_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="guia_para_desarrollo_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="guia_para_desarrollo_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="guia_para_desarrollo_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="guia_para_desarrollo_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Instructivo para la generación de material ERGOSTATS</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Centro de Investigación Estadística ERGOSTATS </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="clausula-contractual-para-colaboradores-de-ergostats" class="level2">
+<h2 class="anchored" data-anchor-id="clausula-contractual-para-colaboradores-de-ergostats">Clausula Contractual para Colaboradores de ERGOSTATS</h2>
+<p>Este contrato establece los términos y condiciones bajo los cuales los colaboradores de ERGOSTATS (“el Colaborador”) acuerdan trabajar en el desarrollo de contenido y código para ERGOSTATS (“la Compañía”).</p>
+<ul>
+<li><p><strong>Entrega de Commits:</strong> El Colaborador se compromete a entregar un mínimo de 30 commits, divididos en tres secciones por cada una de las 10 clases asignadas. Cada commit debe representar una contribución significativa al proyecto.</p></li>
+<li><p><strong>Pull Requests:</strong> El Colaborador se compromete a realizar un mínimo de 10 pull requests durante el periodo del contrato. Cada pull request debe ser revisado y aprobado por un miembro senior del equipo antes de ser fusionado con la rama principal.</p></li>
+<li><p><strong>No Cumplimiento:</strong> En caso de que el Colaborador no cumpla con la entrega de los 30 commits y los 10 pull requests, la Compañía se reserva el derecho de retener el pago hasta que se cumplan estas condiciones.</p></li>
+<li><p><strong>Buenas Prácticas de Desarrollo:</strong> El Colaborador se compromete a seguir las buenas prácticas de desarrollo establecidas por la Compañía, incluyendo pero no limitado a: mantener un código limpio y legible, comentar adecuadamente el código, y seguir las directrices de estilo de código de la Compañía.</p></li>
+<li><p><strong>Incumplimiento de las Buenas Prácticas:</strong> En caso de que el Colaborador no siga las buenas prácticas de desarrollo, la Compañía se reserva el derecho de retener el pago hasta que el Colaborador corrija su trabajo para cumplir con estas prácticas. Al firmar este contrato, el Colaborador acepta estos términos y condiciones.</p></li>
+</ul>
+<p>Guía de GIT para Analistas de DatosConfiguración de GIT en localAntes de empezar a trabajar con GIT, es importante configurarlo correctamente en tu máquina local. Aquí te mostramos cómo hacerlo:</p>
+<ul>
+<li><strong>Instalación de GIT:</strong> Primero, necesitas instalar GIT en tu máquina local. Puedes descargarlo desde la página oficial de GIT.</li>
+<li><strong>Configuración del usuario:</strong> Una vez instalado, debes configurar tu nombre de usuario y correo electrónico, ya que GIT adjunta esta información a cada commit que haces.</li>
+</ul>
+<pre><code>git config --global user.name "Tu Nombre"
+git config --global user.email "tuemail@example.com"</code></pre>
+<ul>
+<li><strong>Creación de un nuevo repositorio:</strong> Para crear un nuevo repositorio, navega hasta el directorio donde deseas crearlo y ejecuta el siguiente comando:</li>
+</ul>
+<pre><code>git init</code></pre>
+<p>Esto creará un nuevo repositorio GIT en tu directorio actual. Conceptos clave de GIT</p>
+<ul>
+<li><p><strong>HEAD:</strong> Es una referencia al último commit en la rama actualmente activa.</p></li>
+<li><p><strong>Árbol:</strong> En GIT, un “árbol” es un objeto que representa un directorio del sistema de archivos. Contiene referencias a blobs (archivos) y árboles (subdirectorios).</p></li>
+<li><p><strong>Rama (Branch):</strong> Una rama en GIT es simplemente un apuntador móvil a uno de los commits.</p></li>
+<li><p><strong>Add:</strong> El comando git add agrega un cambio en el archivo de trabajo a la zona de preparación (también llamada índice). Le dice a GIT que quieres incluir las actualizaciones de un archivo particular en el próximo commit.</p></li>
+<li><p><strong>Commit:</strong> El comando git commit captura una instantánea de los cambios del proyecto. Los commits son la forma en que se guarda el estado del proyecto en GIT.</p></li>
+<li><p><strong>Pull:</strong> El comando git pull se usa para obtener y descargar contenido desde un repositorio remoto y actualizar inmediatamente el repositorio local para que coincida con ese contenido.</p></li>
+<li><p><strong>Push:</strong> El comando git push se usa para subir contenido local al repositorio remoto. Espero que esta guía te sea útil para empezar a trabajar con GIT.</p></li>
+</ul>
+<p>Recuerda, la práctica hace al maestro</p>
+</section>
+<section id="creación-de-un-archivo-quarto-para-reveal.js-con-rstudio-y-seguimiento-con-git" class="level2">
+<h2 class="anchored" data-anchor-id="creación-de-un-archivo-quarto-para-reveal.js-con-rstudio-y-seguimiento-con-git">Creación de un archivo Quarto para Reveal.js con RStudio y seguimiento con GIT</h2>
+<section id="paso-1-crear-un-nuevo-archivo-quarto" class="level3">
+<h3 class="anchored" data-anchor-id="paso-1-crear-un-nuevo-archivo-quarto">Paso 1: Crear un nuevo archivo Quarto</h3>
+<p>Primero, necesitas crear un nuevo archivo Quarto en RStudio. Aquí te mostramos cómo hacerlo:</p>
+<ul>
+<li>Abre RStudio.</li>
+<li>Haz clic en File &gt; New File &gt; Quarto Document.</li>
+<li>En el cuadro de diálogo que aparece, selecciona Reveal.js Slide Presentation y luego haz clic en OK. Esto creará un nuevo archivo Quarto con la extensión .qmd.</li>
+</ul>
+</section>
+<section id="paso-2-seguimiento-del-archivo-con-git" class="level3">
+<h3 class="anchored" data-anchor-id="paso-2-seguimiento-del-archivo-con-git">Paso 2: Seguimiento del archivo con GIT</h3>
+<p>Una vez que hayas creado tu archivo, puedes empezar a seguirlo con GIT. Aquí te mostramos cómo hacerlo:</p>
+<ul>
+<li>Navega hasta el directorio donde se encuentra tu archivo Quarto utilizando la terminal.</li>
+<li>Inicializa un nuevo repositorio GIT con el comando git init.</li>
+<li>Agrega tu archivo al repositorio con el comando git add nombre_del_archivo.qmd.</li>
+</ul>
+</section>
+<section id="paso-3-realizar-cambios-y-hacer-commit" class="level3">
+<h3 class="anchored" data-anchor-id="paso-3-realizar-cambios-y-hacer-commit">Paso 3: Realizar cambios y hacer commit</h3>
+<p>Ahora puedes empezar a hacer cambios en tu archivo. Cada vez que hagas un cambio significativo, debes hacer commit de ese cambio. Aquí te mostramos cómo hacerlo:</p>
+<ul>
+<li>Haz algunos cambios en tu archivo Quarto.</li>
+<li>Una vez que estés satisfecho con tus cambios, guarda el archivo y vuelve a la terminal.</li>
+<li>Agrega los cambios al área de preparación con el comando git add nombre_del_archivo.qmd.</li>
+<li>Haz commit de los cambios con el comando git commit -m “Descripción de los cambios”.</li>
+</ul>
+<p>Recuerda que la descripción de los cambios debe ser breve y descriptiva, para que otros miembros del equipo puedan entender qué has cambiado.</p>
+</section>
+</section>
+<section id="trabajando-con-branches-y-pull-requests-en-git" class="level2">
+<h2 class="anchored" data-anchor-id="trabajando-con-branches-y-pull-requests-en-git">Trabajando con Branches y Pull Requests en GIT</h2>
+<section id="crear-una-nueva-branch" class="level3">
+<h3 class="anchored" data-anchor-id="crear-una-nueva-branch">Crear una nueva Branch</h3>
+<p>Para crear una nueva branch en GIT, puedes usar el comando git branch. Por ejemplo, si quieres crear una branch llamada clase-python, puedes hacerlo de la siguiente manera:</p>
+<pre><code>git branch clase-python</code></pre>
+<p>Cambiar a la nueva BranchPara cambiar a tu nueva branch, puedes usar el comando git checkout. Aquí te mostramos cómo hacerlo:</p>
+<pre><code>git checkout clase-python</code></pre>
+<p>Ahora estás en la branch clase-python y puedes empezar a hacer cambios. Crear Commits en la BranchVamos a suponer que estás desarrollando el contenido de una clase de Python y quieres dividir tu trabajo en tres commits: contenido conceptual, contenido de programación y contenido multimedia. Aquí te mostramos cómo hacerlo:</p>
+<ul>
+<li>Contenido Conceptual: Primero, desarrolla el contenido conceptual de tu clase. Una vez que estés satisfecho con tu trabajo, puedes hacer commit de tus cambios con el siguiente comando:</li>
+</ul>
+<pre><code>git add .
+git commit -m "Desarrollo del contenido conceptual de la clase de Python"</code></pre>
+<ul>
+<li>Contenido de Programación: Luego, desarrolla el contenido de programación. Cuando termines, haz commit de tus cambios:</li>
+</ul>
+<pre><code>git add .
+git commit -m "Desarrollo del contenido de programación para la clase de Python"</code></pre>
+<ul>
+<li>Contenido Multimedia: Finalmente, añade cualquier contenido multimedia que necesites para tu clase. Cuando termines, haz commit de tus cambios:</li>
+</ul>
+<pre><code>git add .
+git commit -m "Añadido contenido multimedia para la clase de Python"</code></pre>
+</section>
+</section>
+<section id="hacer-un-pull-request" class="level2">
+<h2 class="anchored" data-anchor-id="hacer-un-pull-request">Hacer un Pull Request</h2>
+<p>Una vez que hayas terminado de desarrollar tu clase y hayas hecho todos tus commits, puedes hacer un pull request para fusionar tus cambios con la branch principal.</p>
+<p>Primero, necesitas subir tu branch al repositorio remoto con el comando git push:</p>
+<pre><code>git push origin clase-python</code></pre>
+<p>Luego, puedes ir al repositorio en GitHub y hacer clic en New pull request. Selecciona tu branch en el menú desplegable y luego haz clic en Create pull request.</p>
+<section id="otros-comandos-muy-utiles" class="level3">
+<h3 class="anchored" data-anchor-id="otros-comandos-muy-utiles">Otros comandos muy utiles:</h3>
+<p>Actualizar la relación entre el remoto y el local:</p>
+<pre><code>git fetch</code></pre>
+<blockquote class="blockquote">
+<p>Para poder hacer un pull primero debemos hacer un add, y un commit. Con eso actualizamos la versión local y traemos de la nube o Github los cambios de mis compañeros con Git pull. Y luego procedemos con la creacion de la rama para nuestro trabajo.</p>
+</blockquote>
+<pre><code>git pull origin main</code></pre>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
