@@ -146,3 +146,16 @@ git fetch
 ```         
 git pull origin main
 ```
+
+# Para crear una nueva branch
+
+```         
+git checkout -b clase_1_desarrollo
+```
+
+Que es equivalente a 
+
+```
+git branch clase_1_desarrollo
+git checkout clase_1_desarrollo
+```

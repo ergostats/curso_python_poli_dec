@@ -4,23 +4,80 @@ format: html
 editor: visual
 ---
 
-## Quarto
+# Sintaxis básica de python:
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+## 1 Sintaxis
 
-## Running Code
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
 
-```{r}
-1 + 1
+## 2 Vocabulrio
+
+Es muy particular para cada lenduaje:
+```
+# stata
+do my-dofile.do
+# R
+source("my-R.R")
+
+#Python
+
+py my-py.py
 ```
 
-You can add options to executable code like this
+## 3 Semantica
 
-```{r}
-#| echo: false
-2 * 2
+Que el orden importa: 
+
+- Anita lava la tina
+- Sujeto, verbo y predicado
+- tina Anita lava la (no tiene sentido)
+
+>  Ya han trabajado con alguno, la idea es crear conexciones neurales con lo que los estudiantes ya conocen 
+
+# En particular con python tenemos
+
+# Variables y tipos de datos: Python tiene varios tipos de datos estándar disponibles: números, cadenas, listas, tuplas, diccionarios.
+
+```{python}
+# Esto es una variable
+mi_variable = "Hola Mundo"
+
+# Esto es una lista
+mi_lista = [1, 2, 3, 4, 5]
+
+# Esto es un diccionario
+mi_diccionario = {"clave": "valor"}
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+# Estructuras de control: Python soporta las estructuras de control típicas como if, for y while.
+
+```{python}
+
+# Estructura if
+if mi_variable == "Hola Mundo":
+    print("¡Hola Mundo!")
+
+# Estructura for
+for i in mi_lista:
+    print(i)
+
+# Estructura while
+contador = 0
+while contador < 5:
+    print(contador)
+    contador += 1
+
+```
+# Funciones: En Python, una función es un bloque de código reutilizable que realiza una acción específica.
+
+```{python}
+# Definición de una función
+def mi_funcion():
+    print("¡Hola desde mi función!")
+
+# Llamada a la función
+mi_funcion()
+```
+
+> Python es un lenguaje de programación orientada a objetos
+
