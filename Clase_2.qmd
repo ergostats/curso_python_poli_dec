@@ -1,29 +1,37 @@
 ---
-title: "clase_2"
+title: "Clase 2:Introducción al manejo de datos en Python con pandas"
 author: "Paul Yungan"
 format: html
 editor: visual
 ---
 
-## Quarto
+# Clase 2: Introducción al manejo de datos en Python con pandas  
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+## Importación de datos en Python desde diferentes fuentes utilizando la biblioteca pandas. 
 
-## Running Code
+```{python}
+1+1+1+1
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+```
 
-hola
+## Descripción de nuestras fuentes de datos y metadatos. 
 
-```{r}
+```{python}
 1 + 1
 ```
 
 You can add options to executable code like this
 
-```{r}
+```{python}
 #| echo: false
-2 * 2
+2 * 2+4
 ```
 
 The `echo: false` option disables the printing of code (only output is displayed).
+
+```{python}
+
+5+6
+
+
+```
