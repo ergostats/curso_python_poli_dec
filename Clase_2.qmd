@@ -35,3 +35,51 @@ The `echo: false` option disables the printing of code (only output is displayed
 
 
 ```
+
+
+
+# Estructuras de control: Python soporta las estructuras de control típicas como if, for y while.
+
+```{python}
+
+# Estructura if
+if mi_variable == "Hola Mundo":
+    print("¡Hola Mundo!")
+
+# Estructura for
+for i in mi_lista:
+    print(i)
+
+# Estructura while
+contador = 0
+while contador < 5:
+    print(contador)
+    contador += 1
+
+```
+# Funciones: En Python, una función es un bloque de código reutilizable que realiza una acción específica.
+
+```{python}
+# Definición de una función
+def mi_funcion():
+    print("¡Hola desde mi función!")
+
+# Llamada a la función
+mi_funcion()
+```
+
+> Python es un lenguaje de programación orientada a objetos
+
+
+# Variables y tipos de datos: Python tiene varios tipos de datos estándar disponibles: números, cadenas, listas, tuplas, diccionarios.
+
+```{python}
+# Esto es una variable
+mi_variable = "Hola Mundo"
+
+# Esto es una lista
+mi_lista = [1, 2, 3, 4, 5]
+
+# Esto es un diccionario
+mi_diccionario = {"clave": "valor"}
+```
