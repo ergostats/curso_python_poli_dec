@@ -1,6 +1,6 @@
 ---
 title: "Clase_3"
-format: revealjs
+format: html
 editor: visual
 ---
 
@@ -9,3 +9,16 @@ editor: visual
 -   Conceptos clave para el análisis efectivo de datos.
 
 -   Iniciativas para abordar el temas sociales utilizando Python, como el uso de módulos como pandas em investigación académica.
+
+
+## ¿Qué es el análisis de datos?
+  Si bien existen varias definiciones de este tema, todas llevan a un mismo lado,por tanto diremos que es un proceso de examinar, transformar, limpiar datos para obtener conclusiones con los mismos. En el mismo se involucran varias técnicas estadísticas para determinar relaciones, dependecia y demás entre conjutos de datos. El mismo es ampliamente usado en investigación académica, estudios de mercadotecnia, decisiones en recursos humanos, etc. 
+
+## ¿Cómo se realiza el análisis de datos?
+Nio existe una receta establecida para generar este análisis pero podemos decir que se siguen los siguientes pasos:
+- Definir la razón del análisis, qué preguntas queremos responder, debemos tratar de ser precisos.
+- Qué es lo que mediremos y cómo lo haremos. Ejemplo: Si queremos medir los objetos más vendidos podemos ver como las personas se informaron sobre el mismo, por qué plataforma lo adquieieron, etc.
+- Obtención de datos y su organización.
+- Clasificación y análisis de datos.
+- Interpretación de resultados.
+ 
