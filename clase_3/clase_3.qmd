@@ -136,3 +136,69 @@ Este divertido post lo puedes encontrar en: https://www.kaggle.com/code/ash316/l
 
 El mismo ayuda a entender las bases del análisis de datos de una manera más amigable
 
+#  Funciones con python:
+
+- Tenemos un caso donde repetimos una operación varias, lo que queremos es reutilizar ese código
+
+Ejemplo con r:
+
+```{python}
+df_agrupado = df.groupby('A').agg({'C': 'sum'})
+df_agrupado = df.groupby('B').agg({'C': 'sum'})
+df_agrupado = df.groupby('D').agg({'C': 'sum'})
+df_agrupado = df.groupby('E').agg({'C': 'sum'})
+```
+
+Las oepraciones on las mismas pero cambia la variable de grupo.
+
+Para eso empleamos funciones:
+
+```{python}
+def saludo(nombre):
+    """En esta funcion vamos a saludar a los asistentes del curso"""
+    print(f"Hola {nombre}")
+```
+
+1. Nombre de la función
+2. body o cuerpo de la función
+3. Outputs
+
+> Todas las funciones deben tener su comentario 
+
+> Actividad: Ahora es tu turno, copia la función y cambia el argumento `nombre` por tu nombre
+
+Las buenas prácticas al escribir funciones en Python incluyen:
+
+1. **Nombres descriptivos**: Los nombres de las funciones deben ser descriptivos y seguir la convención de nombres en Python (snake_case para las funciones).
+
+2. **Docstrings**: Siempre debes documentar tus funciones con docstrings. Los docstrings ayudan a otros desarrolladores a entender qué hace tu función y cómo usarla.
+
+3. **Un solo trabajo**: Cada función debe hacer una sola cosa. Si una función está haciendo varias cosas, considera dividirla en varias funciones.
+
+4. **Parámetros**: Evita usar un gran número de parámetros en tus funciones. Si una función necesita muchos parámetros, puede ser una señal de que la función está haciendo demasiado.
+
+5. **Valores de retorno**: Siempre que sea posible, las funciones deben devolver valores en lugar de imprimirlos directamente. Esto hace que las funciones sean más reutilizables.
+
+6. **Evita usar variables globales**: Las funciones deben evitar depender de variables globales. En su lugar, pasa los valores que la función necesita como parámetros.
+
+Aquí tienes un ejemplo de una función bien escrita siguiendo estas prácticas:
+
+```python
+def calcular_promedio(numeros):
+    """
+    Calcula el promedio de una lista de números.
+
+    Args:
+        numeros (list): Una lista de números.
+
+    Returns:
+        float: El promedio de los números.
+    """
+    suma = sum(numeros)
+    promedio = suma / len(numeros)
+    return promedio
+```
+
+Esta función es clara, hace una sola cosa, tiene un docstring útil, y no depende de ninguna variable global.
+
+> Vamos a crear una función que nos permite identificar si un número es primo
