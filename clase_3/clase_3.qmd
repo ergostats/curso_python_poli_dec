@@ -10,15 +10,62 @@ editor: visual
 
 -   Iniciativas para abordar el temas sociales utilizando Python, como el uso de módulos como pandas em investigación académica.
 
-
 ## ¿Qué es el análisis de datos?
-  Si bien existen varias definiciones de este tema, todas llevan a un mismo lado,por tanto diremos que es un proceso de examinar, transformar, limpiar datos para obtener conclusiones con los mismos. En el mismo se involucran varias técnicas estadísticas para determinar relaciones, dependecia y demás entre conjutos de datos. El mismo es ampliamente usado en investigación académica, estudios de mercadotecnia, decisiones en recursos humanos, etc. 
+
+Si bien existen varias definiciones de este tema, todas llevan a un mismo lado,por tanto diremos que es un proceso de examinar, transformar, limpiar datos para obtener conclusiones con los mismos. En el mismo se involucran varias técnicas estadísticas para determinar relaciones, dependecia y demás entre conjutos de datos. El mismo es ampliamente usado en investigación académica, estudios de mercadotecnia, decisiones en recursos humanos, etc.
 
 ## ¿Cómo se realiza el análisis de datos?
-Nio existe una receta establecida para generar este análisis pero podemos decir que se siguen los siguientes pasos:
-- Definir la razón del análisis, qué preguntas queremos responder, debemos tratar de ser precisos.
-- Qué es lo que mediremos y cómo lo haremos. Ejemplo: Si queremos medir los objetos más vendidos podemos ver como las personas se informaron sobre el mismo, por qué plataforma lo adquieieron, etc.
-- Obtención de datos y su organización.
-- Clasificación y análisis de datos.
-- Interpretación de resultados.
- 
+
+No existe una receta establecida para generar este análisis pero podemos decir que se siguen los siguientes pasos:
+
+-   Definir la razón del análisis, qué preguntas queremos responder, debemos tratar de ser precisos.
+-   Qué es lo que mediremos y cómo lo haremos. Ejemplo: Si queremos medir los objetos más vendidos podemos ver como las personas se informaron sobre el mismo, por qué plataforma lo adquieieron, etc.
+-   Obtención de datos y su organización. - Clasificación y análisis de datos.
+-   Interpretación de resultados.
+
+## Tipos de análisis de datos
+
+De acuerdo al tipo de datos quer vayamos a analizar podemos tener: análisis cualitativo y cuantitativo.
+
+-   Cualitativo: Aquí analizamos información no numérica (críticas, opiniones, creeencias, etc.), respondemos preguntas del tipo ¿Cómo? ¿Por qué?
+-   Cuantitativo: Se analiza información cuantificable.
+
+## Herramientas para el análisis de datos
+
+Con el auge que esta teniendo el análisis de datos últimamente existen varias herramientas para realizar el mismo, entre las cuales vale nombrar:
+
+-   Power BI
+-   R
+-   Python
+-   Tableau
+-   Excel
+-   SQL
+-   Qlik
+
+Cabe mencionar que existen diferencias entre ellas, ya sea que uno sepa fundamentos de programación o no, por ello se debe entender que el análissi de datos es un conjunto de procesos que llevan a un objetivo. En este curso usaremos Python pero es recomendable conocer un poco de las herramientas antes mencionadas.
+
+<div>
+<p style = 'text-align:center;'>
+<img src="images/Meme1.jpg" alt="JuveYell" width="300px">
+</p>
+</div>
+
+## Análisis de datos en la vida real
+
+Existen varios ejemplos de cómo se ha aplicado el análisis de datos en el día a día, aquí mostramos algunos de ellos.
+
+- BBVA y la Navidad
+
+  Resumiendo, se deseaba determinar en qué gastaban más su dinero los clientes en la época navideña, pues cómo sabemos, es una época en la que los gastos suben. Se puede leer esta investigación en su página siguiendo el siguiente enlace: https://www.bbva.com/es/navidata-gastado-dinero-esta-navidad/
+
+- Inditex y videojuegos
+
+  La empresa busco a una compañia de videojuegos para que les ayuden en el análisis de datos para así no quedarse atrás. Se puede leer el artículo completo aquí: https://www.lavozdegalicia.es/noticia/galicia-economica/2020/03/01/inditex-ficha-experta-videojuegos-explotar-mina-oro-big-data/00031583073737230198202.htm
+  
+Existen muchas más historias relacionadas al análisis de datos, aunque no es fácil llegar a ser considerado un "analista de datos", con dedicación se puede lograr mucho en este campo que esta emergiendo rápidamente.
+
+<div>
+<p style = 'text-align:center;'>
+<img src="images/Meme2.jpg" alt="JuveYell" width="300px">
+</p>
+</div>
