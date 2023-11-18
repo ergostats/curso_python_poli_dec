@@ -10,10 +10,6 @@ editor: visual
 
 -   Iniciativas para abordar el temas sociales utilizando Python, como el uso de módulos como pandas em investigación académica.
 
-Para mejorar y expandir el material didáctico sobre el análisis de datos, podemos elaborar más en las definiciones, procesos y herramientas, e incorporar ejemplos prácticos, notas al margen y sugerencias adicionales. Aquí tienes una versión mejorada del texto:
-
----
-
 ## ¿Qué es el análisis de datos?
 
 El análisis de datos es un proceso integral y multifacético que implica examinar, limpiar, transformar y modelar datos con el objetivo de descubrir información útil, llegar a conclusiones y apoyar la toma de decisiones. Este proceso está en el corazón de la investigación académica, las estrategias de mercadotecnia, la gestión de recursos humanos, y se extiende hasta el dominio de la política pública y más allá. Las técnicas estadísticas se aplican para descubrir patrones, identificar relaciones y tendencias, y probar hipótesis.
