@@ -1,0 +1,54 @@
+---
+title: "Clase_6"
+format: html
+editor: visual
+---
+
+## **Clase 6: Exploración y visualización de datos con Matplotlib y Seaborn en Python**
+
+● La gramática de los gráficos utilizando bibliotecas como Matplotlib y Seaborn.
+
+● Visualización de variables numéricas y categóricas con ejemplos prácticos en Python.
+
+● Personalización de gráficos, paletas de colores y etiquetas para mejorar la interpretación de los datos en Python.
+
+## Matplotlib y Seaborn
+
+Matplotlib es una librería open source de Python con la que se pueden crear gráficos en dos dimensiones, visualizaciones dinámicas, interactivas, muy importante para la visualización de datos al momento de realizar un análisis. Fue creada en 2002 por John Hunter, neurobiólogo, quien buscaba una forma de replicar la creación gráfica de Matlab en Python. A pesar del fallecimiento de su creador en el año 2012, esta al ser open source, ha ido mejorando gracias al aporte de la comunidad hasta convertirse en una gran alternativa a Matlab.
+
+Con Matplotlib también se habla de PyPlot, el cual es un módulo que nos presenta funciones para añadir elementos a nuestros gráficos como líneas, imágenes o texto, posee una interfaz sencilla y es muy usado.
+
+Seaborn es una biblioteca de visualización de datos en Python que está construida sobre Matplotlib. Fue creado por Michael Waskom y tiene como objetivo hacer que la creación de gráficos estadísticos atractivos y informativos sea más fácil. Algunos puntos a resaltar serían:
+
+1.  **Estética agradable:** Seaborn proporciona una interfaz de alto nivel para crear gráficos estadísticos atractivos y con estilo. Ofrece opciones de color predefinidas y temas, lo que facilita la creación de visualizaciones agradables sin tener que personalizar todos los detalles manualmente.
+
+2.  **Integración con pandas:** Seaborn se integra bien con pandas, otra biblioteca popular de Python para manipulación y análisis de datos. Puedes pasar fácilmente DataFrames de pandas a funciones de Seaborn para crear visualizaciones rápidas.
+
+3.  **Visualizaciones estadísticas:** Seaborn está diseñado específicamente para la visualización de datos estadísticos. Ofrece funciones para visualizar distribuciones univariadas y bivariadas, matrices de correlación, y más. Esto lo hace especialmente útil en entornos de análisis de datos y estadísticas.
+
+4.  **Facilidad de uso:** Seaborn simplifica la creación de gráficos complejos mediante funciones especializadas que facilitan la generación de diagramas de dispersión, diagramas de caja, gráficos de barras, entre otros.
+
+5.  **Personalización:** Aunque Seaborn proporciona una estética agradable de forma predeterminada, también permite una gran personalización. Puedes ajustar colores, estilos y otros aspectos visuales según tus preferencias.
+
+Cabe recordar que tanto Matplotlib como Seaborn tienen su respectiva documentación que vale la pena revisar, la misma ayudará a entender de mejor manera cómo usar las cientos de funciones que poseen cada una. 
+
+Ahora veamos como llamar a estas librerias
+
+```{phyton}
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+```
+>**Nota:** Pandas es una librería que se integra de muy buena manera con estas dos, puesto que el uso de DataFrames es muy versátil con esta librería.
+
+<div>
+
+<p style="text-align:center;">
+
+<img src="images/meme1.jpg" alt="JuveYell" width="300px"/>
+
+</p>
+
+</div>
