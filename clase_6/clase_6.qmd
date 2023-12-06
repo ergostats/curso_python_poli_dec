@@ -30,18 +30,20 @@ Seaborn es una biblioteca de visualización de datos en Python que está constru
 
 5.  **Personalización:** Aunque Seaborn proporciona una estética agradable de forma predeterminada, también permite una gran personalización. Puedes ajustar colores, estilos y otros aspectos visuales según tus preferencias.
 
-Cabe recordar que tanto Matplotlib como Seaborn tienen su respectiva documentación que vale la pena revisar, la misma ayudará a entender de mejor manera cómo usar las cientos de funciones que poseen cada una. 
+Cabe recordar que tanto Matplotlib como Seaborn tienen su respectiva documentación que vale la pena revisar, la misma ayudará a entender de mejor manera cómo usar las cientos de funciones que poseen cada una.
 
 Ahora veamos como llamar a estas librerias
 
 ```{phyton}
 
 import seaborn as sns
+
 import matplotlib.pyplot as plt
 import pandas as pd
 
 ```
->**Nota:** Pandas es una librería que se integra de muy buena manera con estas dos, puesto que el uso de DataFrames es muy versátil con esta librería.
+
+> **Nota:** Pandas es una librería que se integra de muy buena manera con estas dos, puesto que el uso de DataFrames es muy versátil con esta librería.
 
 <div>
 
@@ -52,3 +54,37 @@ import pandas as pd
 </p>
 
 </div>
+
+## Variables numéricas y categóricas
+
+En esta parte vamos a dar un pequeño recordatorio de qué son cada una de las variables
+
+-   **Numéricas**: Son aquellas que pueden ser representadas por cantidades numéricas, son discretas o continuas. Algunos ejemplos son la edad, el peso o la altura.
+
+-   **Categóricas**: Son aquellas que representan diferentes grupos y no tienen un orden entre ellas. Pueden ser el género, etnia, etc
+
+Veamos un ejemplo de como crear un arreglo de estas variables
+
+```{python}
+nombres = ["Edgar", "María", "Pablo","Alex"]
+edad = [26,25,24,28]
+estatura = [171,170,178,185]
+
+#Vamos a crear un gráfico simple de barras, que muestre el nombre de cada uno y sus distintas edades y estaturas
+
+plt.bar(nombres, edad, color='red')
+
+# Agregamos etiquetas y el título
+
+plt.xlabel('Nombre')
+plt.ylabel('Edad')
+plt.title('Diagrama de Barras')
+
+# Mostrar el diagrama de barras
+plt.show()
+
+```
+
+Listo, hemos creado nuestro primer gráfico. Compliquemos un poco las cosas
+
+## Presentación de gráficos: paletas de color y etiquetas 
