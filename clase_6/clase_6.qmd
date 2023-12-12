@@ -37,7 +37,6 @@ Ahora veamos como llamar a estas librerias
 ```{phyton}
 
 import seaborn as sns
-
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -63,14 +62,16 @@ En esta parte vamos a dar un pequeño recordatorio de qué son cada una de las v
 
 -   **Categóricas**: Son aquellas que representan diferentes grupos y no tienen un orden entre ellas. Pueden ser el género, etnia, etc
 
-Veamos un ejemplo de como crear un arreglo de estas variables
+Ahora veamos cómo crear estos gráficos usando ambas librerias.
+
+-   Gráfico de barras:
 
 ```{python}
 nombres = ["Edgar", "María", "Pablo","Alex"]
 edad = [26,25,24,28]
 estatura = [171,170,178,185]
 
-#Vamos a crear un gráfico simple de barras, que muestre el nombre de cada uno y sus distintas edades y estaturas
+#Vamos a crear un gráfico simple de barras, que muestre el nombre de cada uno y sus distintas edades
 
 plt.bar(nombres, edad, color='red')
 
@@ -85,6 +86,130 @@ plt.show()
 
 ```
 
-Listo, hemos creado nuestro primer gráfico. Compliquemos un poco las cosas
+Listo, hemos creado nuestro primer gráfico. Ahora, usaremos otra librearia para crear lo mismo
 
-## Presentación de gráficos: paletas de color y etiquetas 
+```{python}
+##Usando la librería seaborn
+import seaborn as sns
+
+#Creamos un datafrme con los datos anteriores
+datos = {
+  'nombres': ["Edgar", "María", "Pablo","Alex"],
+  'edad' : [26,25,24,28],
+  'estatura': [171,180,189,165]
+}
+
+df= pd.DataFrame(datos)
+
+
+sns.barplot(x='nombres', y='edad', data= df)
+plt.xlabel('Nombre')
+plt.ylabel('Edad')
+plt.title('Diagrama de Barras')
+plt.show()
+```
+
+Como podemos observar, usando la primera opción no fue necesario crear un dataframe, sin embargo en la segunda tuvimos que hacer uso del mismo y además saber los nombres de las variables para saber qué vamos a graficar, por tanto el uso de una u otra dependerá de cada uno. Veamos más ejemplos de otros gráficos muy usados en el data storytelling.
+
+-   Gráfico de barras agrupadas:
+
+```{python}
+# Usando matplotlib el código es el siguiente
+x= np.arange(4)
+ancho = 0.40
+  
+# plot data in grouped manner of bar type
+plt.bar(x-0.2, edad, ancho)
+plt.bar(x+0.2, estatura, ancho)
+plt.show()
+```
+
+```{python}
+#Usando Seaborn tenemos
+
+sns.barplot(data=df, x='nombres', y='edad', label='edad', color='blue')
+sns.barplot(data=df, x='nombres', y='estatura', label='estatura', color='orange', bottom=df['edad'])
+
+# Configurar etiquetas y leyenda
+plt.xlabel('Nombres')
+plt.ylabel('Valores')
+plt.title('Gráfico de Barras Agrupadas usando Seaborn')
+plt.legend()
+```
+
+-   Diagrama de pastel
+
+```{python}
+
+#creamos nuevas variables 
+objeto = ['Detergente A', 'Detergente B', 'Detergente C', 'Detergente D']
+cantidad = [34,26,11,30]
+
+plt.pie(cantidad, labels=objeto, autopct='%1.1f%%', startangle=90, colors=['lightblue', 'lightgreen', 'lightcoral','red'])
+
+# Configuración adicional
+plt.axis('equal')  
+plt.title('Diagrama de Pastel')
+
+# Mostrar el gráfico
+plt.show()
+```
+
+```{python}
+#Usando Seaborn, junto con matplotlib
+colores = sns.color_palette("bright")
+plt.pie(cantidad, labels=objeto, colors=colores, autopct='%1.1f%%')
+plt.title('Diagrama de Pastel')
+plt.show()
+
+#Aqui hemos usado la paleta de colores de seaborn 
+```
+
+-   Gráfico de lineas
+
+```{python}
+#Crearemos variables con el PIB del país a traves de los años
+anio = [2014,2015,2016,2017,2018,2019,2020]
+pib = [101.7,99.3,99.9,104.3,107.6,108.1,98.8]
+
+plt.plot(anio, pib, marker='o', linestyle='-', color='b', label='Datos de ejemplo')
+
+# Titulos y más
+plt.title('Gráfico de Líneas')
+plt.xlabel('Año')
+plt.ylabel('PIB')
+plt.legend()  # Muestra la leyenda si se proporcionan etiquetas
+
+# Mostrar el gráfico
+plt.show()
+```
+
+```{python}
+sns.set(style="whitegrid")
+sns.lineplot(x=anio, y=pib, marker='*', color='red', label='Datos de ejemplo')
+
+# Títulos y más
+plt.title('Gráfico de Líneas con Seaborn')
+plt.xlabel('Eje X')
+plt.ylabel('Eje Y')
+plt.legend()
+
+# Mostrar el gráfico
+plt.show()
+```
+
+## Presentación de gráficos: paletas de color y etiquetas
+
+En el data storytelling el color juega un papel muy importante ya que estos deben ser relevantes. La percepción del color se estudia en varias disciplinas, desde psicología hasta optometría. La interpretación del significado del color esta fuertemente influenciada por factores ajenos a uno, como pueden ser la religión o las costumbres.
+
+Si lo que deseamos es comunicar de manera efectiva alguna información es escencial comprender las necesidades, costumbres y actitudes del receptor de la misma. Es así que para seleccionar el color podemos guiarnos por:
+
+-   Contraste en los colores:
+
+    Al momento de escoger el color debemos darnos cuenta en como estos ayudan a resaltar una idea o mostrar una diferencia.
+
+-   Metáfora en los colores y degradados:
+
+    Los colores como una metáfora se refiere a cuando los usamos con un significado en la sociedad, por ejemplo el rojo para decir parar o el verde para seguir. El degradado se refiere a escalas que crecen o decrecen según algunos valores.
+
+Hablemos ahora de las etiquetas de los gráficos, las cuales facilitan la compresión del mismo y sirven de guía para quien va dirigido.
