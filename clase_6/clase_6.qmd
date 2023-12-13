@@ -67,6 +67,7 @@ Ahora veamos cómo crear estos gráficos usando ambas librerias.
 -   Gráfico de barras:
 
 ```{python}
+# Creamos 3 variables 
 nombres = ["Edgar", "María", "Pablo","Alex"]
 edad = [26,25,24,28]
 estatura = [171,170,178,185]
@@ -77,9 +78,9 @@ plt.bar(nombres, edad, color='red')
 
 # Agregamos etiquetas y el título
 
-plt.xlabel('Nombre')
-plt.ylabel('Edad')
-plt.title('Diagrama de Barras')
+plt.xlabel('Nombre') #Eje x
+plt.ylabel('Edad') #Eje y
+plt.title('Diagrama de Barras') #Titulo
 
 # Mostrar el diagrama de barras
 plt.show()
@@ -89,7 +90,8 @@ plt.show()
 Listo, hemos creado nuestro primer gráfico. Ahora, usaremos otra librearia para crear lo mismo
 
 ```{python}
-##Usando la librería seaborn
+
+# Usando la librería seaborn
 import seaborn as sns
 
 #Creamos un datafrme con los datos anteriores
@@ -101,8 +103,10 @@ datos = {
 
 df= pd.DataFrame(datos)
 
-
+# Se crea el gráfico
 sns.barplot(x='nombres', y='edad', data= df)
+
+#Titulos y más
 plt.xlabel('Nombre')
 plt.ylabel('Edad')
 plt.title('Diagrama de Barras')
@@ -115,10 +119,10 @@ Como podemos observar, usando la primera opción no fue necesario crear un dataf
 
 ```{python}
 # Usando matplotlib el código es el siguiente
-x= np.arange(4)
+x= np.arange(4) #creamos un arreglo con numpy con el numero de variables, 4 nombres
 ancho = 0.40
   
-# plot data in grouped manner of bar type
+# Se crean ambos gráficos 
 plt.bar(x-0.2, edad, ancho)
 plt.bar(x+0.2, estatura, ancho)
 plt.show()
@@ -185,6 +189,7 @@ plt.show()
 ```
 
 ```{python}
+# Usando Seaborn
 sns.set(style="whitegrid")
 sns.lineplot(x=anio, y=pib, marker='*', color='red', label='Datos de ejemplo')
 
@@ -212,4 +217,4 @@ Si lo que deseamos es comunicar de manera efectiva alguna información es escenc
 
     Los colores como una metáfora se refiere a cuando los usamos con un significado en la sociedad, por ejemplo el rojo para decir parar o el verde para seguir. El degradado se refiere a escalas que crecen o decrecen según algunos valores.
 
-Hablemos ahora de las etiquetas de los gráficos, las cuales facilitan la compresión del mismo y sirven de guía para quien va dirigido.
+Hablemos ahora de las etiquetas de los gráficos, las cuales facilitan la compresión del mismo y sirven de guía para quien va dirigido. Por la misma razón debemos escoger etiquetas que no se presten para ambigüedades. Al momento de poner nuestras etiquetas debemos pensar que otras interpetaciones puede tener nuestro gráfico y luego de ello escoger la mejor que resalte lo que deseamos expresar.
