@@ -28,6 +28,14 @@ Este capítulo no solo aborda lo técnico, sino también la importancia estraté
 ##pip install pandas pyreadstat
 import pandas as pd
 #import pyreadstat
+from IPython.display import display
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.impute import KNNImputer
+from sklearn.linear_model import LinearRegression
+from impyute.imputation.cs import mice
+
 ```
 Trabajaremos con la data 'EMPRESAS2021_periodo_2012_2021.sav'.
 ```{python}
@@ -55,12 +63,12 @@ print(df.select_dtypes(include=['category']).columns)
 ```
 
 ```{python}
-##tipos category 
+##tipos object 
 print(df.select_dtypes(include=['object']).columns)
 ```
 
 ```{python}
-##tipos category 
+##tipos float64 
 print(df.select_dtypes(include=['float64']).columns)
 ```
 Como detectamos la variabale id_empresa esta python le detecto como un número, ahora le definiremos como una variable categorica, en este caso le definimos de 'str' (cadena):
@@ -91,7 +99,8 @@ tabla_missing = pd.DataFrame({
     'num_nulos': var_missing.values,
     'porc_nulos' : (var_missing/len(df))
     })
-print (tabla_missing)
+#pd.set_option('display.max_rows', None) 
+display(tabla_missing)
 ```
 En la anterior tabla mostramos los datos perdidos o NA por variable y su respectivo porcentaje del total de observaciones. 
 
@@ -109,19 +118,129 @@ Para el ejercicio de elegiremos las variables :
 df_1 = df[[ 'anio', 'forma_institucional', 'tamano_cop', 'gsectores', 'propietarios_sexo', 'ventas_totales', 'exportaciones_netas', 'ventas_nacionales']]
 print (df_1.head(5))
 df_1.shape
+
 ```
+
+
 ## Métodos de Imputación
 
-n el proceso de análisis de datos, es frecuente enfrentarse a conjuntos de datos que presentan valores faltantes, los cuales requieren ser tratados para llevar a cabo un análisis o modelado preciso. Arreglar esto es clave para hacer análisis o modelos precisos. Para llenar esos huecos, usamos trucos llamados técnicas de imputación, que básicamente son maneras de poner valores en los espacios vacíos. Pero aquí está el truco: NO hay una solución única que funcione para todos los casos. ¿Por qué? Pues, porque la mejor forma de lidiar con esos vacíos depende de por qué se fueron o de dónde vinieron. No todos los métodos valen para todo. Entender la razón detrás de esos huecos es clave para elegir la mejor estrategia y conseguir resultados confiables. ¡Así que, a llenar esos huecos de manera inteligente! 😉✨
+En el proceso de análisis de datos, es frecuente enfrentarse a conjuntos de datos que presentan valores faltantes, los cuales requieren ser tratados para llevar a cabo un análisis o modelado preciso. Arreglar esto es clave para hacer análisis o modelos precisos. Para llenar esos huecos, usamos trucos llamados técnicas de imputación, que básicamente son maneras de poner valores en los espacios vacíos. Pero aquí está el truco: NO hay una solución única que funcione para todos los casos. ¿Por qué? Pues, porque la mejor forma de lidiar con esos vacíos depende de por qué se fueron o de dónde vinieron. No todos los métodos valen para todo. Entender la razón detrás de esos huecos es clave para elegir la mejor estrategia y conseguir resultados confiables. ¡Así que, a llenar esos huecos de manera inteligente! 😉✨
+
+Para los siguientes ejemplos de imputación revisaremos los datos perdidos pero iniciamos con un analisis univariado de las variables continuas.
+
+
+```{python}
+## df para pruebas
+df_2 = df_1
+
+print (
+    pd.DataFrame ({
+    'variable': df_2.isna().sum().index,
+    'num_nulos': df_2.isna().sum().values,
+    'porc_nulos':df_2.isna().sum()/ len(df_2)
+    })
+)
+```
+
+```{python}
+sns.set(style="ticks")
+sns.pairplot(df_2[['ventas_totales', 'exportaciones_netas', 'ventas_nacionales']], height=2, diag_kind="hist", diag_kws=dict(bins=20))
+plt.show()
+```
+Observamos que los datos presentan una concentración notable o un sesgo hacia la derecha. Para contrarrestar este efecto, podemos aplicar ingeniería de variables, lo que nos permitirá suavizar la distribución. Una técnica comúnmente utilizada es aplicar el logaritmo a la variable más 1.
+
+```{python}
+
+df_2[['log_ventas_totales', 'log_exportaciones_netas', 'log_ventas_nacionales']] = np.log1p(df_2[['ventas_totales', 'exportaciones_netas', 'ventas_nacionales']])
+
+print(df_2.head(5))
+```  
+
+```{python}
+sns.set(style="ticks")
+sns.pairplot(df_2[['log_ventas_totales', 'log_exportaciones_netas', 'log_ventas_nacionales']], height=2, diag_kind="hist", diag_kws=dict(bins=20))
+plt.show()
+
+
+```
+
+```{python}
+df_2.describe
+```
+```{python}
+
+df_2.shape
+```
+
+A pesar de haber suavizado la distribución de los datos, notamos una presencia notable de valores iguales a cero. En este contexto, con el fin de facilitar el análisis, procederemos a eliminar las observaciones que presentan un valor de cero en las tres variables que estamos estudiando.
+
+```{python}
+df_2 = df_2.loc[(df_2[['log_ventas_totales', 'log_exportaciones_netas', 'log_ventas_nacionales']] == 0).all(axis=1)]
+
+print(df_2.head(5))
+```
+
+```{python}
+df_2.shape
+```
+
+```{python}
+df_2.describe
+```
+
+```{python}
+sns.set(style="ticks")
+sns.pairplot(df_2[['log_ventas_totales', 'log_exportaciones_netas', 'log_ventas_nacionales']], height=2, diag_kind="hist", diag_kws=dict(bins=20))
+plt.show()
+
+```
+
+Ahora, tras realizar esta breve pero esencial limpieza de datos, procedemos a examinar el porcentaje de valores nulos en esta tabla de datos depurada.
+
+```{python}
+print (
+    pd.DataFrame ({
+    'variable': df_2.isna().sum().index,
+    'num_nulos': df_2.isna().sum().values,
+    'porc_nulos':df_2.isna().sum()/ len(df_2)
+    })
+)
+```
+
+```{python}
+##funcion para generar una taba summary
+def tabla_summ(df, variables):
+    summary = pd.DataFrame(index=variables)
+    summary['Count'] = df[variables].count()
+    summary['Mean'] = df[variables].mean()
+    summary['Std Dev'] = df[variables].std()
+    summary['Min'] = df[variables].min()
+    summary['25%'] = df[variables].quantile(0.25)
+    summary['50%'] = df[variables].median()
+    summary['75%'] = df[variables].quantile(0.75)
+    summary['Max'] = df[variables].max()
+    summary['Missing'] = df[variables].isnull().sum()
+    summary['Missing %'] = (summary['Missing'] / len(df)) 
+   
+    return summary
+```
+
+```{python}
+var = ['ventas_totales',  'exportaciones_netas','ventas_nacionales','log_ventas_totales','log_exportaciones_netas','log_ventas_nacionales']
+summary_result = tabla_summ(df_2, var)
+display(summary_result)
+```
+
 
 ### Imputación por Media/Mediana/Moda:
 - Cuándo Usar: Ideal para variables numéricas con distribuciones no sesgadas. Rápido y simple.
 - Ventajas: Simple y rápida. Apropiada para variables numéricas.
 - Consideraciones: Puede no ser apropiado si los datos tienen sesgo o distribuciones atípicas.
 
+
 ```{python}
 # Ejemplo de imputación por media
-df['columna'].fillna(df['columna'].mean(), inplace=True)
+df2['columna'].fillna(df['columna'].mean(), inplace=True)
 
 ```
 
@@ -132,9 +251,8 @@ Imputación por Vecinos Más Cercanos (KNN)
 - Consideraciones: Puede ser computacionalmente costoso.
 
 ```{python}
-from sklearn.impute import KNNImputer
 imputer = KNNImputer(n_neighbors=2)
-df_imputed = pd.DataFrame(imputer.fit_transform(df), columns=df.columns)
+df_imputed = pd.DataFrame(imputer.fit_transform(df_2), columns=df_2.columns) ### revisaremos ojooo#######
 
 ```
 ### Imputación por regresión
@@ -143,12 +261,12 @@ df_imputed = pd.DataFrame(imputer.fit_transform(df), columns=df.columns)
 - Consideraciones: Requiere que las variables predictoras estén correlacionadas con la variable a imputar.
 
 ```{python}
-from sklearn.linear_model import LinearRegression
-# Supongamos que 'target' es la variable a imputar
+
+# REVISARRRRRR!!! EJEMPLO : VAR_2 A IMPUTAR
 model = LinearRegression()
-known_data = df.dropna(subset=['target'])
-model.fit(known_data[['feature1', 'feature2']], known_data['target'])
-df.loc[df['target'].isna(), 'target'] = model.predict(df.loc[df['target'].isna(), ['feature1', 'feature2']])
+known_data = df_2.dropna(subset=['VAR_2'])
+model.fit(known_data[['feature1', 'feature2']], known_data['VAR_2'])
+df.loc[df['VAR_2'].isna(), 'VAR_2'] = model.predict(df.loc[df['VAR_2'].isna(), ['VAR_2', 'VAR_2']])
 
 ```
 
@@ -159,7 +277,7 @@ df.loc[df['target'].isna(), 'target'] = model.predict(df.loc[df['target'].isna()
 - Consideraciones: Puede ser computacionalmente intensivo y puede requerir ajustes adicionales.
 
 ```{python}
-from impyute.imputation.cs import mice
+
 df_imputed = pd.DataFrame(mice(df.values), columns=df.columns)
 ```
 
@@ -167,3 +285,7 @@ df_imputed = pd.DataFrame(mice(df.values), columns=df.columns)
 
 
 ## Las partes de un objeto `DataFrame` de pandas como clave (`key`) e índice (`index`) en el contexto de series de tiempo. 
+
+
+
+```
