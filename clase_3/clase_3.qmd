@@ -20,15 +20,15 @@ El análisis de datos es un proceso integral y multifacético que implica examin
 
 El proceso de análisis de datos puede variar en función del contexto y los objetivos específicos, pero generalmente sigue una estructura lógica y metódica que incluye:
 
-1. **Definición de objetivos**: Determinar el propósito del análisis. ¿Qué preguntas específicas estamos tratando de responder? Es esencial establecer metas claras y medibles.
-   
-2. **Selección de métricas**: Identificar qué datos serán recogidos y cómo. Por ejemplo, al medir los productos más vendidos, considerar aspectos como los canales de marketing, las plataformas de compra y las preferencias del cliente.
-   
-3. **Recolección y organización de datos**: Adquirir los datos necesarios de fuentes confiables y organizarlos de manera que sean accesibles y manejables para el análisis.
-   
-4. **Clasificación y análisis de datos**: Utilizar métodos estadísticos y de minería de datos para examinar y modelar los datos.
-   
-5. **Interpretación de resultados**: Extraer significado de los datos analizados y comunicar los hallazgos de manera efectiva.
+1.  **Definición de objetivos**: Determinar el propósito del análisis. ¿Qué preguntas específicas estamos tratando de responder? Es esencial establecer metas claras y medibles.
+
+2.  **Selección de métricas**: Identificar qué datos serán recogidos y cómo. Por ejemplo, al medir los productos más vendidos, considerar aspectos como los canales de marketing, las plataformas de compra y las preferencias del cliente.
+
+3.  **Recolección y organización de datos**: Adquirir los datos necesarios de fuentes confiables y organizarlos de manera que sean accesibles y manejables para el análisis.
+
+4.  **Clasificación y análisis de datos**: Utilizar métodos estadísticos y de minería de datos para examinar y modelar los datos.
+
+5.  **Interpretación de resultados**: Extraer significado de los datos analizados y comunicar los hallazgos de manera efectiva.
 
 > **Sugerencia**: Al interpretar los resultados, es crucial ser consciente de los posibles sesgos y limitaciones de los datos y métodos utilizados.
 
@@ -36,20 +36,20 @@ El proceso de análisis de datos puede variar en función del contexto y los obj
 
 El tipo de análisis de datos a realizar depende de la naturaleza de la información que se maneja:
 
-- **Análisis cualitativo**: Se centra en datos no numéricos como textos, entrevistas, imágenes y observaciones. Responde preguntas como "¿Cómo?" y "¿Por qué?" y se preocupa por el contexto y el significado.
-- **Análisis cuantitativo**: Trata con datos numéricos y cuantificables, a menudo utilizando estadísticas y modelos matemáticos para probar hipótesis y predecir tendencias.
+-   **Análisis cualitativo**: Se centra en datos no numéricos como textos, entrevistas, imágenes y observaciones. Responde preguntas como "¿Cómo?" y "¿Por qué?" y se preocupa por el contexto y el significado.
+-   **Análisis cuantitativo**: Trata con datos numéricos y cuantificables, a menudo utilizando estadísticas y modelos matemáticos para probar hipótesis y predecir tendencias.
 
 ## Herramientas para el análisis de datos
 
 El análisis de datos se beneficia enormemente de la variedad de herramientas disponibles, cada una con sus fortalezas:
 
-- **Power BI**: Una herramienta de visualización de datos y business intelligence de Microsoft.
-- **R**: Un lenguaje de programación orientado a la estadística y el análisis de datos.
-- **Python**: Un lenguaje de programación de alto nivel con potentes bibliotecas para análisis de datos como Pandas y NumPy.
-- **Tableau**: Una herramienta de visualización de datos intuitiva para crear dashboards interactivos.
-- **Excel**: Una aplicación de hoja de cálculo versátil y ampliamente utilizada para análisis básicos.
-- **SQL**: Un lenguaje de consulta estructurado para la gestión de bases de datos.
-- **Qlik**: Una plataforma de análisis y visualización de datos orientada al usuario de negocios.
+-   **Power BI**: Una herramienta de visualización de datos y business intelligence de Microsoft.
+-   **R**: Un lenguaje de programación orientado a la estadística y el análisis de datos.
+-   **Python**: Un lenguaje de programación de alto nivel con potentes bibliotecas para análisis de datos como Pandas y NumPy.
+-   **Tableau**: Una herramienta de visualización de datos intuitiva para crear dashboards interactivos.
+-   **Excel**: Una aplicación de hoja de cálculo versátil y ampliamente utilizada para análisis básicos.
+-   **SQL**: Un lenguaje de consulta estructurado para la gestión de bases de datos.
+-   **Qlik**: Una plataforma de análisis y visualización de datos orientada al usuario de negocios.
 
 Cada una de estas herramientas tiene su propia curva de aprendizaje y se adapta mejor a diferentes necesidades y habilidades. Por ejemplo, R y Python requieren una base en programación, mientras que herramientas como Power BI y Tableau son más accesibles para los no programadores.
 
@@ -110,6 +110,8 @@ La pergunta que todos se hacen es: ¿sirve Python en el mundo real? La respuesta
 
 Empezó como un sitio de viajes en línea llamado EZTrip.com, evolucionó para ofrecer servicios de reserva y también se diversificó con contenido de reseñas de viajes, blogs y fotos. La compañía utiliza sistemas de reserva en línea y se enfrenta a desafíos al integrar sistemas antiguos basados en mainframes y sistemas más modernos mediante técnicas como "screen scraping". Han adoptado Python para facilitar la integración y mejorar la eficiencia en tareas diarias.
 
+#### ¿Por qué Python?
+
 Los sistemas de reserva basados en mainframes presentan limitaciones en la entrada de datos y formatos, lo que hace que el uso de Python sea crucial en tareas como procesamiento de texto, limpieza de datos y desarrollo rápido. Python ha sido fundamental en la construcción de una red social para viajeros y en la transición hacia un modelo de contenido generado por usuarios.
 
 Gusto.com utiliza Python para procesar grandes conjuntos de datos de manera eficiente, como en la creación de un sistema de localización para descripciones de hoteles. Python también ha sido efectivo en la integración de servicios web de proveedores, y se ha destacado por su capacidad de desarrollo rápido y sus herramientas de procesamiento de XML.
@@ -121,6 +123,8 @@ Puedes leer el artículo completo en: https://www.python.org/about/success/gusto
 ### Strakt y Python
 
 Strakt, ha tenido éxito con el proyecto CAPS (Collaborative Approach to Problem Solving). Este proyecto, ofrece soluciones modulares de colaboración y flujos de trabajo, utilizando Python como lenguaje principal.
+
+#### ¿ Por qué Python?
 
 Python fue elegido por su portabilidad, acceso al código fuente, capacidad de integración con sistemas existentes, desarrollo rápido, soporte para optimización selectiva, scriptabilidad y por ser fácil de aprender. A pesar de ser nuevos en Python, los desarrolladores de Strakt encontraron que el lenguaje era fácil de aprender y aumentaba la productividad. Python también influyó positivamente en el proceso de diseño y facilitó las revisiones de código.
 
@@ -134,11 +138,11 @@ Como podemos observar el uso de Python es diverso, pero ahora entremos en el uso
 
 Este divertido post lo puedes encontrar en: https://www.kaggle.com/code/ash316/learn-pandas-with-pokemons
 
-El mismo ayuda a entender las bases del análisis de datos de una manera más amigable
+El mismo ayuda a entender las bases del análisis de datos de una manera más amigable.
 
-#  Funciones con python:
+# Funciones con python:
 
-- Tenemos un caso donde repetimos una operación varias, lo que queremos es reutilizar ese código
+-   Tenemos un caso donde repetimos una operación varias, lo que queremos es reutilizar ese código
 
 Ejemplo con r:
 
@@ -149,7 +153,7 @@ df_agrupado = df.groupby('D').agg({'C': 'sum'})
 df_agrupado = df.groupby('E').agg({'C': 'sum'})
 ```
 
-Las oepraciones on las mismas pero cambia la variable de grupo.
+Las oepraciones son las mismas pero cambia la variable de grupo.
 
 Para eso empleamos funciones:
 
@@ -159,31 +163,41 @@ def saludo(nombre):
     print(f"Hola {nombre}")
 ```
 
-1. Nombre de la función
-2. body o cuerpo de la función
-3. Outputs
+1.  Nombre de la función
+2.  body o cuerpo de la función
+3.  Outputs
 
-> Todas las funciones deben tener su comentario 
+> Todas las funciones deben tener su comentario
 
 > Actividad: Ahora es tu turno, copia la función y cambia el argumento `nombre` por tu nombre
 
 Las buenas prácticas al escribir funciones en Python incluyen:
 
-1. **Nombres descriptivos**: Los nombres de las funciones deben ser descriptivos y seguir la convención de nombres en Python (snake_case para las funciones).
+1.  **Nombres descriptivos**: Los nombres de las funciones deben ser descriptivos y seguir la convención de nombres en Python (snake_case para las funciones).
 
-2. **Docstrings**: Siempre debes documentar tus funciones con docstrings. Los docstrings ayudan a otros desarrolladores a entender qué hace tu función y cómo usarla.
+2.  **Docstrings**: Siempre debes documentar tus funciones con docstrings. Los docstrings ayudan a otros desarrolladores a entender qué hace tu función y cómo usarla.
 
-3. **Un solo trabajo**: Cada función debe hacer una sola cosa. Si una función está haciendo varias cosas, considera dividirla en varias funciones.
+3.  **Un solo trabajo**: Cada función debe hacer una sola cosa. Si una función está haciendo varias cosas, considera dividirla en varias funciones.
 
-4. **Parámetros**: Evita usar un gran número de parámetros en tus funciones. Si una función necesita muchos parámetros, puede ser una señal de que la función está haciendo demasiado.
+4.  **Parámetros**: Evita usar un gran número de parámetros en tus funciones. Si una función necesita muchos parámetros, puede ser una señal de que la función está haciendo demasiado.
 
-5. **Valores de retorno**: Siempre que sea posible, las funciones deben devolver valores en lugar de imprimirlos directamente. Esto hace que las funciones sean más reutilizables.
+5.  **Valores de retorno**: Siempre que sea posible, las funciones deben devolver valores en lugar de imprimirlos directamente. Esto hace que las funciones sean más reutilizables.
 
-6. **Evita usar variables globales**: Las funciones deben evitar depender de variables globales. En su lugar, pasa los valores que la función necesita como parámetros.
+6.  **Evita usar variables globales**: Las funciones deben evitar depender de variables globales. En su lugar, pasa los valores que la función necesita como parámetros.
+
+<div>
+
+<p style="text-align:center;">
+
+<img src="images/Meme3.jpg" alt="JuveYell" width="300px"/>
+
+</p>
+
+</div>
 
 Aquí tienes un ejemplo de una función bien escrita siguiendo estas prácticas:
 
-```python
+``` python
 def calcular_promedio(numeros):
     """
     Calcula el promedio de una lista de números.
@@ -202,3 +216,23 @@ def calcular_promedio(numeros):
 Esta función es clara, hace una sola cosa, tiene un docstring útil, y no depende de ninguna variable global.
 
 > Vamos a crear una función que nos permite identificar si un número es primo
+
+``` python
+def verificar_primo(numero):
+    """
+    Verfica si un numero es primo o no.
+
+    Args:
+        numero (float): Un número cualquiera.
+
+    Returns:
+        Booleana: True si es verdad, False caso contrario
+    """
+    for i in range(2,numero):
+      if (n%i) == 0:
+        return False
+    return True
+    
+```
+
+Esta función es muy básica pero ayuda a comprender mejor tipos de variables, estructuras y la lógica tras la programación; esta función se ha explotado mucho así que te animo a uscar formas de realizar lo mismo pero optimizandola.
