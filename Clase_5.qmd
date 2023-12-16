@@ -7,16 +7,285 @@ editor: visual
 
 # Limpieza y transformación de datos con pandas en Python
 
+En el universo de la ciencia de datos, el manejo de datos crudos es el primer desafío que enfrentamos. Aquí es donde Pandas, la biblioteca de Python, se convierte en nuestra aliada clave. Este capítulo se sumerge en la esencia de la limpieza y transformación de datos, habilidades fundamentales para cualquier análisis significativo.
+
+La importancia radica en que la limpieza de datos sienta las bases para cualquier análisis. Pandas no solo facilita la eliminación de imperfecciones como valores nulos y duplicados, sino que también ofrece herramientas para transformar datos, adaptándolos a nuestras necesidades analíticas.
+
+Este capítulo no solo aborda lo técnico, sino también la importancia estratégica de la limpieza en todo el ciclo de vida de un proyecto de ciencia de datos. Desde la adquisición de datos hasta la preparación para modelos, estas habilidades son vitales en cada etapa del camino.
+
+## ¿Sabías que....?
+¿Sabías que el nombre "Pandas" proviene de las palabras "Panel Data"? Esta biblioteca fue creada por Wes McKinney en 2008 con el propósito de proporcionar herramientas de análisis de datos flexibles y de alto rendimiento. Desde entonces, Pandas se ha convertido en un pilar fundamental en la caja de herramientas de cualquier científico de datos que se precie.
+
+### Objetivos de hoy:
+
+- Dominaremos las Habilidades Básicas de Limpieza: Comprenderemos y aplicaremos técnicas esenciales de limpieza de datos, como la identificación y manejo de valores faltantes, duplicados y atípicos.
+- Explorararemos Métodos de Transformación: Aprenderemos a transformar datos para adaptarlos a nuestras necesidades analíticas, ya sea mediante la modificación de tipos de datos, la creación de nuevas variables o la combinación de conjuntos de datos.
+
+¡Prepárate para explorar el poder de Pandas y transformar tus datos en conocimiento valioso!
+
 ```{python}
-1+1
+# importante instalar : 
+##pip install pandas pyreadstat
+import pandas as pd
+#import pyreadstat
+from IPython.display import display
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.impute import KNNImputer
+from sklearn.linear_model import LinearRegression
+from impyute.imputation.cs import mice
+
 ```
+Trabajaremos con la data 'EMPRESAS2021_periodo_2012_2021.sav'.
+```{python}
+df = pd.read_spss (r"data/directorio_empresas\data_original/EMPRESAS2021_periodo_2012_2021.sav")
+df.head(10)
+```
+
+Esta data corresponde a datos de La Encuesta Estructural Empresarial 2019.
+
+```{python}
+df.shape
+```
+Recodifiquemos las variables y verificamos los tipos de variables
 ## Recodificación de variables y creación de nuevas variables a partir de datos existentes utilizando pandas. 
 
+1. definiremos el datos
+Identificamos el tipo de datos que tiene nuestra tabla de datos.   
+```{python}
+df.info()
+```
+
+```{python}
+##tipos category 
+print(df.select_dtypes(include=['category']).columns)
+```
+
+```{python}
+##tipos object 
+print(df.select_dtypes(include=['object']).columns)
+```
+
+```{python}
+##tipos float64 
+print(df.select_dtypes(include=['float64']).columns)
+```
+Como detectamos la variabale id_empresa esta python le detecto como un número, ahora le definiremos como una variable categorica, en este caso le definimos de 'str' (cadena):
+
+```{python}
+df['id_empresa'] = df['id_empresa'].astype(str)
+print (df['id_empresa'].dtype)
+```
+
+Como ejemplo,  si necesitamos cambiar el tipo de dato de multiples variables podemos reaizarlo con la siguiente linea de código:
+'df = df.astype({'variable1': float64, 'variable2': str, 'variable3': int ...})'
 
 ## Limpieza de datos, tratamiento de valores vacíos y duplicados en Python. 
 
+En el ámbito económico y de la ciencia de datos, la calidad de los datos es esencial para la toma de decisiones informadas y el desarrollo de modelos precisos. En esta sección, nos sumergiremos en el proceso de limpieza de datos utilizando la biblioteca Pandas en Python, una herramienta omnipresente en la comunidad de análisis de datos.
+
+Exploraremos estrategias específicas para abordar valores vacíos y duplicados, destacando las capacidades de Pandas para gestionar estos desafíos de manera eficiente. Desde la identificación de celdas nulas hasta la detección y eliminación de registros duplicados, aprenderemos a utilizar las funciones clave de Pandas para mejorar la calidad de los conjuntos de datos.
+
+A lo largo de ejemplos prácticos y aplicaciones en contextos económicos y científicos de datos, proporcionaremos insights valiosos sobre cómo aprovechar al máximo Pandas para optimizar la preparación de datos. Estas habilidades son fundamentales para garantizar que los economistas y científicos de datos puedan realizar análisis robustos y fundamentar sus conclusiones en datos confiables.
+
+Detectamos de nuestra tabla de datos valores nulos o vacios por variable.
+```{python}
+##creamos una df para saber cuantas NAs hay por vaiable y su porcentaje
+var_missing = df.isna().sum()
+
+tabla_missing = pd.DataFrame({
+    'variable': var_missing.index,
+    'num_nulos': var_missing.values,
+    'porc_nulos' : (var_missing/len(df))
+    })
+#pd.set_option('display.max_rows', None) 
+display(tabla_missing)
+```
+En la anterior tabla mostramos los datos perdidos o NA por variable y su respectivo porcentaje del total de observaciones. 
+
+Para el ejercicio de elegiremos las variables :
+- anio
+- forma_institucional
+- tamano_cop
+- gsectores 
+-propietarios_sexo
+- ventas_totales
+-exportaciones_netas
+- ventas_nacionales
+
+```{python}
+df_1 = df[[ 'anio', 'forma_institucional', 'tamano_cop', 'gsectores', 'propietarios_sexo', 'ventas_totales', 'exportaciones_netas', 'ventas_nacionales']]
+print (df_1.head(5))
+df_1.shape
+
+```
+
+
+## Métodos de Imputación
+
+En el proceso de análisis de datos, es frecuente enfrentarse a conjuntos de datos que presentan valores faltantes, los cuales requieren ser tratados para llevar a cabo un análisis o modelado preciso. Arreglar esto es clave para hacer análisis o modelos precisos. Para llenar esos huecos, usamos trucos llamados técnicas de imputación, que básicamente son maneras de poner valores en los espacios vacíos. Pero aquí está el truco: NO hay una solución única que funcione para todos los casos. ¿Por qué? Pues, porque la mejor forma de lidiar con esos vacíos depende de por qué se fueron o de dónde vinieron. No todos los métodos valen para todo. Entender la razón detrás de esos huecos es clave para elegir la mejor estrategia y conseguir resultados confiables. ¡Así que, a llenar esos huecos de manera inteligente! 😉✨
+
+Para los siguientes ejemplos de imputación revisaremos los datos perdidos pero iniciamos con un analisis univariado de las variables continuas.
+
+
+```{python}
+## df para pruebas
+df_2 = df_1
+
+print (
+    pd.DataFrame ({
+    'variable': df_2.isna().sum().index,
+    'num_nulos': df_2.isna().sum().values,
+    'porc_nulos':df_2.isna().sum()/ len(df_2)
+    })
+)
+```
+
+```{python}
+sns.set(style="ticks")
+sns.pairplot(df_2[['ventas_totales', 'exportaciones_netas', 'ventas_nacionales']], height=2, diag_kind="hist", diag_kws=dict(bins=20))
+plt.show()
+```
+Observamos que los datos presentan una concentración notable o un sesgo hacia la derecha. Para contrarrestar este efecto, podemos aplicar ingeniería de variables, lo que nos permitirá suavizar la distribución. Una técnica comúnmente utilizada es aplicar el logaritmo a la variable más 1.
+
+```{python}
+
+df_2[['log_ventas_totales', 'log_exportaciones_netas', 'log_ventas_nacionales']] = np.log1p(df_2[['ventas_totales', 'exportaciones_netas', 'ventas_nacionales']])
+
+print(df_2.head(5))
+```  
+
+```{python}
+sns.set(style="ticks")
+sns.pairplot(df_2[['log_ventas_totales', 'log_exportaciones_netas', 'log_ventas_nacionales']], height=2, diag_kind="hist", diag_kws=dict(bins=20))
+plt.show()
+
+
+```
+
+```{python}
+df_2.describe
+```
+```{python}
+
+df_2.shape
+```
+
+A pesar de haber suavizado la distribución de los datos, notamos una presencia notable de valores iguales a cero. En este contexto, con el fin de facilitar el análisis, procederemos a eliminar las observaciones que presentan un valor de cero en las tres variables que estamos estudiando.
+
+```{python}
+df_2 = df_2.loc[(df_2[['log_ventas_totales', 'log_exportaciones_netas', 'log_ventas_nacionales']] == 0).all(axis=1)]
+
+print(df_2.head(5))
+```
+
+```{python}
+df_2.shape
+```
+
+```{python}
+df_2.describe
+```
+
+```{python}
+sns.set(style="ticks")
+sns.pairplot(df_2[['log_ventas_totales', 'log_exportaciones_netas', 'log_ventas_nacionales']], height=2, diag_kind="hist", diag_kws=dict(bins=20))
+plt.show()
+
+```
+
+Ahora, tras realizar esta breve pero esencial limpieza de datos, procedemos a examinar el porcentaje de valores nulos en esta tabla de datos depurada.
+
+```{python}
+print (
+    pd.DataFrame ({
+    'variable': df_2.isna().sum().index,
+    'num_nulos': df_2.isna().sum().values,
+    'porc_nulos':df_2.isna().sum()/ len(df_2)
+    })
+)
+```
+
+```{python}
+##funcion para generar una taba summary
+def tabla_summ(df, variables):
+    summary = pd.DataFrame(index=variables)
+    summary['Count'] = df[variables].count()
+    summary['Mean'] = df[variables].mean()
+    summary['Std Dev'] = df[variables].std()
+    summary['Min'] = df[variables].min()
+    summary['25%'] = df[variables].quantile(0.25)
+    summary['50%'] = df[variables].median()
+    summary['75%'] = df[variables].quantile(0.75)
+    summary['Max'] = df[variables].max()
+    summary['Missing'] = df[variables].isnull().sum()
+    summary['Missing %'] = (summary['Missing'] / len(df)) 
+   
+    return summary
+```
+
+```{python}
+var = ['ventas_totales',  'exportaciones_netas','ventas_nacionales','log_ventas_totales','log_exportaciones_netas','log_ventas_nacionales']
+summary_result = tabla_summ(df_2, var)
+display(summary_result)
+```
+
+
+### Imputación por Media/Mediana/Moda:
+- Cuándo Usar: Ideal para variables numéricas con distribuciones no sesgadas. Rápido y simple.
+- Ventajas: Simple y rápida. Apropiada para variables numéricas.
+- Consideraciones: Puede no ser apropiado si los datos tienen sesgo o distribuciones atípicas.
+
+
+```{python}
+# Ejemplo de imputación por media
+df2['columna'].fillna(df['columna'].mean(), inplace=True)
+
+```
+
+### Imputación por Vecinos Más Cercanos (KNN):
+Imputación por Vecinos Más Cercanos (KNN)
+- Cuándo Usar: Útil cuando los valores faltantes están relacionados con valores cercanos en el espacio de características.
+- Ventajas: Utiliza información de variables relacionadas. Útil para datos con patrones complejos.
+- Consideraciones: Puede ser computacionalmente costoso.
+
+```{python}
+imputer = KNNImputer(n_neighbors=2)
+df_imputed = pd.DataFrame(imputer.fit_transform(df_2), columns=df_2.columns) ### revisaremos ojooo#######
+
+```
+### Imputación por regresión
+- Cuándo Usar: Efectivo cuando existe una relación lineal entre las variables. Adecuado para variables continuas.
+- Ventajas: Utiliza relaciones lineales entre variables.
+- Consideraciones: Requiere que las variables predictoras estén correlacionadas con la variable a imputar.
+
+```{python}
+
+# REVISARRRRRR!!! EJEMPLO : VAR_2 A IMPUTAR
+model = LinearRegression()
+known_data = df_2.dropna(subset=['VAR_2'])
+model.fit(known_data[['feature1', 'feature2']], known_data['VAR_2'])
+df.loc[df['VAR_2'].isna(), 'VAR_2'] = model.predict(df.loc[df['VAR_2'].isna(), ['VAR_2', 'VAR_2']])
+
+```
+
+### Imputación Múltiple (MICE)
+
+- Cuándo Usar: Útil cuando se desea considerar la incertidumbre en el proceso de imputación. Adecuado para conjuntos de datos complejos.
+- Ventajas: Considera la incertidumbre. Puede utilizarse para imputar múltiples variables simultáneamente
+- Consideraciones: Puede ser computacionalmente intensivo y puede requerir ajustes adicionales.
+
+```{python}
+
+df_imputed = pd.DataFrame(mice(df.values), columns=df.columns)
+```
 
 ## Normalización y estandarización de datos en Python.
 
- 
+
 ## Las partes de un objeto `DataFrame` de pandas como clave (`key`) e índice (`index`) en el contexto de series de tiempo. 
+
+
+
+```
