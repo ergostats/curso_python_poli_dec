@@ -3,6 +3,8 @@ title: "Clase 2:Introducción al manejo de datos en Python con pandas"
 author: "Paul Yungan"
 format: html
 editor: visual
+execute: 
+  eval: false
 ---
 
 # Clase 2: Introducción al manejo de datos en Python con pandas  

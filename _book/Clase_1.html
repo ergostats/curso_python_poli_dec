@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>mybook - 2&nbsp; Untitled</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Clase_2.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Untitled</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">mybook</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Clase_1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Untitled</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Clase_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Clase 2:Introducción al manejo de datos en Python con pandas</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Clase_5.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Clase 5:Limpieza y transformación de datos con pandas en Python</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#python-un-lenguaje-de-programación-orientado-a-objetos" id="toc-python-un-lenguaje-de-programación-orientado-a-objetos" class="nav-link active" data-scroll-target="#python-un-lenguaje-de-programación-orientado-a-objetos"><span class="toc-section-number">2.1</span>  Python, un lenguaje de programación orientado a objetos</a></li>
+  <li><a href="#cuál-fue-la-motivación-para-crear-python" id="toc-cuál-fue-la-motivación-para-crear-python" class="nav-link" data-scroll-target="#cuál-fue-la-motivación-para-crear-python"><span class="toc-section-number">2.2</span>  ¿Cuál fue la motivación para crear Python?</a></li>
+  <li><a href="#pyhton-un-lenguahe-open-source" id="toc-pyhton-un-lenguahe-open-source" class="nav-link" data-scroll-target="#pyhton-un-lenguahe-open-source"><span class="toc-section-number">2.3</span>  Pyhton, un lenguahe <em>open source</em></a></li>
+  <li><a href="#los-elementos-de-un-lenguaje-de-programación" id="toc-los-elementos-de-un-lenguaje-de-programación" class="nav-link" data-scroll-target="#los-elementos-de-un-lenguaje-de-programación"><span class="toc-section-number">3</span>  Los elementos de un lenguaje de programación</a></li>
+  <li><a href="#en-particular-con-python-tenemos" id="toc-en-particular-con-python-tenemos" class="nav-link" data-scroll-target="#en-particular-con-python-tenemos"><span class="toc-section-number">4</span>  En particular con python tenemos</a></li>
+  <li><a href="#instalación-de-módulos-o-paquetes-de-python" id="toc-instalación-de-módulos-o-paquetes-de-python" class="nav-link" data-scroll-target="#instalación-de-módulos-o-paquetes-de-python"><span class="toc-section-number">5</span>  Instalación de módulos o paquetes de python</a></li>
+  <li><a href="#buscando-ayuda-con-python" id="toc-buscando-ayuda-con-python" class="nav-link" data-scroll-target="#buscando-ayuda-con-python"><span class="toc-section-number">6</span>  Buscando ayuda con python</a></li>
+  <li><a href="#buenas-prácticas-para-programar-en-python" id="toc-buenas-prácticas-para-programar-en-python" class="nav-link" data-scroll-target="#buenas-prácticas-para-programar-en-python"><span class="toc-section-number">7</span>  Buenas prácticas para programar en Python,</a></li>
+  <li><a href="#el-entorno-de-visual-studio-code" id="toc-el-entorno-de-visual-studio-code" class="nav-link" data-scroll-target="#el-entorno-de-visual-studio-code"><span class="toc-section-number">8</span>  El entorno de Visual Studio Code</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Untitled</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="python-un-lenguaje-de-programación-orientado-a-objetos" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="python-un-lenguaje-de-programación-orientado-a-objetos"><span class="header-section-number">2.1</span> Python, un lenguaje de programación orientado a objetos</h2>
+<p>Python es un lenguaje de programación orientado a objetos porque proporciona características que soportan la programación orientada a objetos, que incluye la definición de clases, la herencia y la encapsulación. En Python, todo es un objeto, incluyendo los números, las cadenas y las funciones.</p>
+</section>
+<section id="cuál-fue-la-motivación-para-crear-python" class="level2 page-columns page-full" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="cuál-fue-la-motivación-para-crear-python"><span class="header-section-number">2.2</span> ¿Cuál fue la motivación para crear Python?</h2>
+<p>Python fue creado por Guido van Rossum en 1989. La motivación principal era crear un lenguaje de alto nivel que fuera fácil de leer y de escribir. Guido quería que Python fuera un lenguaje que pudiera hacer las cosas de manera rápida, pero que también permitiera escribir código que fuera fácil de entender y de mantener. Guido trabajó en el proyecto durante su tiempo en el Centro para las Matemáticas y la Informática (CWI) en los Países Bajos.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="https://th.bing.com/th/id/OIP.M560NYtRbNcvFTiHDdY0NQAAAA?pid=ImgDet&amp;rs=1" class="img-fluid"></p>
+</div></div></section>
+<section id="pyhton-un-lenguahe-open-source" class="level2 page-columns page-full" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="pyhton-un-lenguahe-open-source"><span class="header-section-number">2.3</span> Pyhton, un lenguahe <em>open source</em></h2>
+<p>Python es un lenguaje de programación de código abierto. Esto significa que su código fuente es libremente disponible y puede ser distribuido y modificado. Python es desarrollado y mantenido por una comunidad de voluntarios de todo el mundo que colaboran a través de la Python Software Foundation.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Puedes acceder a la Python Software Foundation en este enlace <a href="http://staging.python.org/psf/">Python Software Foundation</a></p>
+</div></div></section>
+<section id="los-elementos-de-un-lenguaje-de-programación" class="level1 page-columns page-full" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Los elementos de un lenguaje de programación</h1>
+<ol type="1">
+<li><p><strong>Sintaxis:</strong> Se refiere a las reglas que definen cómo se deben escribir y organizar las instrucciones en un programa. En Python, por ejemplo, los bloques de código se definen por su indentación.</p></li>
+<li><p><strong>Semántica:</strong> Se refiere al significado de las instrucciones y expresiones en un programa. Por ejemplo, en Python, el operador + tiene una semántica diferente dependiendo de si se usa con números (donde realiza una suma) o con cadenas (donde realiza una concatenación).</p></li>
+</ol>
+<p>Es muy particular para cada lenguaje:</p>
+<pre><code># stata
+do my-dofile.do
+# R
+source("my-R.R")
+
+#Python
+
+py my-py.py</code></pre>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Esto es un ejemplo de cómo la sintaxis y la semántica pueden variar entre diferentes lenguajes de programación. Aunque la operación subyacente (ejecutar un script) es la misma en todos los casos, la forma en que se expresa en cada lenguaje es diferente.</p>
+</div></div><ol start="3" type="1">
+<li><strong>Pragmática:</strong> Se refiere a cómo y por qué se utilizan ciertas construcciones y patrones de programación en un lenguaje. Por ejemplo, en Python, es común utilizar listas por comprensión para transformar listas de una manera concisa y legible.</li>
+</ol>
+<p>El orden importa como en este ejemplo:</p>
+<ul>
+<li>Anita lava la tina</li>
+<li>Sujeto, verbo y predicado</li>
+<li>tina Anita lava la (no tiene sentido)</li>
+</ul>
+<p>De la misma manera:</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejecución correcta:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejecución incorrecta:</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5
+5</code></pre>
+</div>
+</div>
+</section>
+<section id="en-particular-con-python-tenemos" class="level1 page-columns page-full" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> En particular con python tenemos</h1>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Tal vez ya haz trabajado con algun otro lenguaje de programación. Lo importante es que puedas identificar estos tres elementos (sintaxis, semántica y pragmática) para poder utiizarlos dependiendo de cada situación.</p>
+</div></div></section>
+<section id="instalación-de-módulos-o-paquetes-de-python" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Instalación de módulos o paquetes de python</h1>
+<p><code>pip</code> es el sistema de gestión de paquetes de Python, que te permite instalar y administrar paquetes de software adicionales que no se incluyen en la biblioteca estándar de Python.</p>
+<p>Aquí te muestro cómo puedes instalar algunos paquetes comunes. Abre tu terminal o línea de comandos e introduce los siguientes comandos:</p>
+<ul>
+<li><em>Pandas:</em> Es una biblioteca de manipulación y análisis de datos. Puedes instalarla con:</li>
+</ul>
+<pre><code>pip install pandas
+</code></pre>
+<ul>
+<li><em>NumPy:</em> Es una biblioteca para el cálculo científico con Python. Puedes instalarla con:</li>
+</ul>
+<pre><code>pip install numpy
+</code></pre>
+<ul>
+<li><em>SciPy:</em> Es una biblioteca que se utiliza para cálculos científicos y técnicos. Puedes instalarla con:</li>
+</ul>
+<pre><code>pip install scipy
+</code></pre>
+<ul>
+<li><em>Matplotlib:</em> Es una biblioteca para la creación de gráficos estáticos, animados e interactivos en Python. Puedes instalarla con:</li>
+</ul>
+<pre><code>pip install matplotlib
+</code></pre>
+<p>Recuerda que debes tener instalado Python y pip en tu sistema para poder ejecutar estos comandos. Si estás utilizando un entorno virtual (lo cual es una buena práctica), estos paquetes se instalarán en el entorno virtual en lugar de en tu instalación global de Python.</p>
+</section>
+<section id="buscando-ayuda-con-python" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Buscando ayuda con python</h1>
+<p>Para acceder a la documentación oficial de Python, puedes visitar el siguiente enlace: <a href="https://docs.python.org/3/">Documentación oficial de Python</a>. Aquí encontrarás guías, tutoriales y referencias detalladas sobre el lenguaje y su biblioteca estándar.</p>
+<p>Además de la documentación oficial, aquí tienes tres fuentes adicionales de consulta para obtener ayuda con Python:</p>
+<ol type="1">
+<li><p><strong>Stack Overflow</strong>: Es un foro de preguntas y respuestas donde puedes buscar soluciones a problemas específicos de programación. Hay una gran cantidad de preguntas y respuestas sobre Python. <a href="https://stackoverflow.com/questions/tagged/python">Stack Overflow - Python</a></p></li>
+<li><p><strong>Real Python</strong>: Ofrece tutoriales y artículos detallados sobre diversos temas de Python. <a href="https://realpython.com/">Real Python</a></p></li>
+<li><p><strong>Python Tutor</strong>: Es una herramienta en línea que te permite visualizar cómo se ejecuta tu código Python paso a paso. Es útil para entender cómo funciona el código y para depurar problemas. <a href="http://www.pythontutor.com/">Python Tutor</a></p></li>
+</ol>
+<p>Recuerda que la mejor manera de aprender es practicando. No dudes en experimentar y probar cosas por ti mismo.</p>
+</section>
+<section id="buenas-prácticas-para-programar-en-python" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Buenas prácticas para programar en Python,</h1>
+<p>Consiserando que vamos a hacer aplicaciones estadísticas:</p>
+<ol type="1">
+<li><p><strong>Usa nombres de variables descriptivos</strong>: Los nombres de las variables deben ser cortos pero descriptivos. Por ejemplo, <code>media_edades</code> es mejor que simplemente <code>m</code>.</p></li>
+<li><p><strong>Comenta tu código</strong>: Los comentarios son esenciales para entender qué hace tu código. Usa comentarios para explicar por qué estás haciendo algo, no qué estás haciendo.</p></li>
+<li><p><strong>Usa espacios en blanco</strong>: El uso de espacios en blanco hace que tu código sea más legible. Python recomienda usar 4 espacios para la indentación.</p></li>
+<li><p><strong>Manejo de excepciones</strong>: Asegúrate de manejar las excepciones correctamente para evitar que tu programa se bloquee debido a errores inesperados.</p></li>
+<li><p><strong>Usa funciones y clases</strong>: Evita repetir código. Si estás copiando y pegando bloques de código, probablemente deberías poner ese código en una función o clase.</p></li>
+<li><p><strong>Pruebas unitarias</strong>: Escribe pruebas para tu código para asegurarte de que funciona como se espera.</p></li>
+<li><p><strong>Usa bibliotecas estándar de Python para análisis de datos</strong>: Bibliotecas como NumPy, Pandas, Matplotlib y SciPy son muy útiles para el análisis de datos y tienen una amplia comunidad de usuarios que pueden ayudarte si te encuentras con problemas.</p></li>
+<li><p><strong>Sigue la guía de estilo de Python (PEP 8)</strong>: PEP 8 es una guía de estilo para el código Python que proporciona convenciones sobre cómo escribir código que es fácil de entender y de leer. Puedes encontrarla en <a href="https://pep8.org/">PEP 8 – Style Guide for Python Code</a>.</p></li>
+<li><p><strong>Documenta tus funciones y clases</strong>: Usa docstrings para documentar tus funciones y clases. Esto hace que tu código sea más fácil de entender y usar para otros.</p></li>
+<li><p><strong>Usa control de versiones</strong>: El control de versiones, como Git, es esencial para cualquier proyecto de programación. Te permite rastrear los cambios en tu código y colaborar con otros.</p></li>
+</ol>
+</section>
+<section id="el-entorno-de-visual-studio-code" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> El entorno de Visual Studio Code</h1>
+<p>Te dejamos una guía paso a paso para instalar Visual Studio Code y Python:</p>
+<ol type="1">
+<li><p><strong>Instalación de Visual Studio Code</strong>:</p>
+<ul>
+<li>Ve al sitio web oficial de Visual Studio Code en <a href="https://code.visualstudio.com/">https://code.visualstudio.com</a>.</li>
+<li>Haz clic en el botón de descarga para tu sistema operativo (Windows, MacOS o Linux).</li>
+<li>Una vez descargado el archivo, abre el instalador y sigue las instrucciones.</li>
+</ul></li>
+<li><p><strong>Instalación de Python</strong>:</p>
+<ul>
+<li>Ve al sitio web oficial de Python en <a href="https://www.python.org/">https://www.python.org</a>.</li>
+<li>Haz clic en “Downloads” y luego selecciona la versión que corresponda a tu sistema operativo.</li>
+<li>Descarga el archivo y abre el instalador. Asegúrate de marcar la casilla “Add Python to PATH” antes de iniciar la instalación.</li>
+<li>Sigue las instrucciones del instalador.</li>
+</ul></li>
+<li><p><strong>Configuración de Python en Visual Studio Code</strong>:</p>
+<ul>
+<li>Abre Visual Studio Code.</li>
+<li>Ve a la barra lateral y haz clic en el icono de “Extensiones” (el cuadrado en la barra lateral).</li>
+<li>Busca “Python” en el cuadro de búsqueda y selecciona la extensión oficial de Python ofrecida por Microsoft.</li>
+<li>Haz clic en “Instalar” para instalar la extensión.</li>
+<li>Una vez instalada la extensión, puedes abrir un archivo Python (.py) y Visual Studio Code automáticamente usará el intérprete de Python que instalaste en el paso 2.</li>
+</ul></li>
+</ol>
+<p>Con estos pasos, deberías estar listo para empezar a programar en Python usando Visual Studio Code.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Clase_2.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Clase 2:Introducción al manejo de datos en Python con pandas</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
