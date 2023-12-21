@@ -64,7 +64,7 @@ En esta parte vamos a dar un pequeño recordatorio de qué son cada una de las v
 
 Ahora veamos cómo crear estos gráficos usando ambas librerias.
 
--   Gráfico de barras:
+### Gráfico de barras
 
 ```{python}
 # Creamos 3 variables 
@@ -115,7 +115,7 @@ plt.show()
 
 Como podemos observar, usando la primera opción no fue necesario crear un dataframe, sin embargo en la segunda tuvimos que hacer uso del mismo y además saber los nombres de las variables para saber qué vamos a graficar, por tanto el uso de una u otra dependerá de cada uno. Veamos más ejemplos de otros gráficos muy usados en el data storytelling.
 
--   Gráfico de barras agrupadas:
+### Gráfico de barras agrupado
 
 ```{python}
 # Usando matplotlib el código es el siguiente
@@ -141,7 +141,7 @@ plt.title('Gráfico de Barras Agrupadas usando Seaborn')
 plt.legend()
 ```
 
--   Diagrama de pastel
+### Diagrama de pastel
 
 ```{python}
 
@@ -169,7 +169,7 @@ plt.show()
 #Aqui hemos usado la paleta de colores de seaborn 
 ```
 
--   Gráfico de lineas
+### Gráfico de lineas
 
 ```{python}
 #Crearemos variables con el PIB del país a traves de los años
