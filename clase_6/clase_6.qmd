@@ -66,6 +66,8 @@ Ahora veamos cómo crear estos gráficos usando ambas librerias.
 
 ### Gráfico de barras
 
+Este gráfico es recomendable usarlo cuando comparas variables numéricas con una categórica. Es muy bueno para mostrar diferencias entre los datos de la variable categórica.
+
 ```{python}
 # Creamos 3 variables 
 nombres = ["Edgar", "María", "Pablo","Alex"]
@@ -117,6 +119,8 @@ Como podemos observar, usando la primera opción no fue necesario crear un dataf
 
 ### Gráfico de barras agrupado
 
+Es similar a un gráfico de barras solo que las categorías pueden mostrar más de una variable. Es recomendable usarlo cuando quieres contrastar dos variables relacionadas.
+
 ```{python}
 # Usando matplotlib el código es el siguiente
 x= np.arange(4) #creamos un arreglo con numpy con el numero de variables, 4 nombres
@@ -141,7 +145,81 @@ plt.title('Gráfico de Barras Agrupadas usando Seaborn')
 plt.legend()
 ```
 
+### Gráfico de burbuja
+
+Es un gráfico que muestra datos en tres dimensiones en un plano de dos, la tercera sería el tamaño de la burbuja, sirve para mostrar la difencia entre conjuntos de la misma variable u otras.
+
+```{python}
+import pandas as pd
+import numpy as np
+
+#Leemos el archivo de datos
+
+archivo_excel = 'C:/Users/Brad/Documents/curso_python_poli_dec/data/co2.xlsx'
+
+datos_excel = pd.read_excel(archivo_excel)
+
+col1=datos_excel['Country Name'].head(4)
+col2= np.arange(1,5)
+tamanio= datos_excel['2020'].head(4)
+
+plt.scatter(col1, col2, s=tamanio, alpha=0.5)
+
+# Personalizar el gráfico
+plt.title('Emiciones de CO2 en 2020')
+plt.xlabel('Países')
+
+# Mostrar el gráfico
+plt.show()
+```
+
+### Gráfico de araña (radar chart)
+
+Este gráfico es útil para comparar varias categorías o variables en relación a un conjunto de ejes en común.
+
+```{python}
+# usaremos nuestro archivo de emisiones de Co2 
+datos1 = datos_excel.loc[8,['1990','2000','2010','2020']] 
+datos2 = datos_excel.loc[12,['1990','2000','2010','2020']] 
+datos11 = datos1.tolist() 
+datos22 = datos2.tolist() 
+# Primer gráfico 
+categorias1 = ['1990', '2000', '2010', '2020'] 
+valores1 = datos11 
+# Segundo gráfico 
+categorias2 = ['1990', '2000', '2010', '2020'] 
+valores2 = datos22 
+# ángulo de cada eje
+angulos = np.linspace(0, 2 * np.pi, len(categorias1), endpoint=False) 
+# Asegurar que el gráfico es circular
+valores1 += valores1[:1]
+valores2 += valores2[:1]
+angulos = np.concatenate((angulos, [angulos[0]]))
+
+# Crear subgráficos
+fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
+
+# Creamos el primer gráfico de telaraña
+ax.plot(angulos, valores1, label='Antigua y Barbuda', marker='o')
+ax.fill(angulos, valores1, alpha=0.25)
+
+# Creamos el segundo gráfico de telaraña
+ax.plot(angulos, valores2, label='Burundi', marker='o')
+ax.fill(angulos, valores2, alpha=0.25)
+
+# Personalizar el gráfico
+ax.set_xticks(angulos[:-1])
+ax.set_xticklabels(categorias1)
+
+# Mostrar leyenda
+ax.legend()
+
+plt.show()
+```
+
 ### Diagrama de pastel
+
+Sirven para comparar porcentajes de cierta variable y es recomendable usarlo cuando se quiera resaltar el mayor porcentaje de datos en nuestras variables.
 
 ```{python}
 
@@ -169,7 +247,57 @@ plt.show()
 #Aqui hemos usado la paleta de colores de seaborn 
 ```
 
+### Gráfico de matriz
+
+Sirve para mostrar valores que surgen de la intersección de dos variables y es recomendable usarlo cuando queramos resaltar ciertos valores.
+
+```{python}
+#Cargamos una librería de bases de datos 
+from sklearn import datasets
+
+cigs=data('Cigarette')
+#Creamos la matriz de correlación de forma primitiva
+corr=cigs.corr()
+#Vamos a usar matplotlib para crear esta matriz de una mejor forma 
+#Creamos la matriz
+fig, ax = plt.subplots(figsize=(8,8))
+im = ax.imshow(corr, vmin=-1,vmax=1,cmap="Blues")
+
+#Creamos una leyenda que ayude a la visualización
+cbar = ax.figure.colorbar(im,ax=ax)
+cbar.ax.set_ylabel("Leyenda",rotation=-90)
+
+ax.set_xticks(np.arange(len(corr.columns)))
+ax.set_yticks(np.arange(len(corr.index)))
+
+#Ponemos las etiquetas a los ejes
+ax.set_xticklabels(corr.columns)
+ax.set_yticklabels(corr.index)
+
+plt.setp(ax.get_xticklabels(),rotation =90, ha= "right", rotation_mode="anchor")
+
+for i in range(len(corr.index)):
+    for j in range(len(corr.columns)):
+        text= ax.text(j,i,round(corr.iloc[i,j],2), ha="center",va= "center", color="black")
+        
+#Ponemos el título y mostramos
+ax.set_title("Gráfico de correlación")
+fig.tight_layout()
+plt.show()
+```
+
+Ahora veamos cómo con seaborn podemos ahorrar mucho trabajo
+
+```{python}
+# Usamos seaborn para hacer la matriz de correlación mucho más fácil 
+sns.heatmap(corr, annot=True, cmap="YlGnBu",vmax=1,vmin=-1)
+plt.title('Gráfico de Correlación')
+plt.show()
+```
+
 ### Gráfico de lineas
+
+Es muy útil para mostrar como evolucionan los datos a través del tiempo.
 
 ```{python}
 #Crearemos variables con el PIB del país a traves de los años
@@ -216,5 +344,54 @@ Si lo que deseamos es comunicar de manera efectiva alguna información es escenc
 -   Metáfora en los colores y degradados:
 
     Los colores como una metáfora se refiere a cuando los usamos con un significado en la sociedad, por ejemplo el rojo para decir parar o el verde para seguir. El degradado se refiere a escalas que crecen o decrecen según algunos valores.
+
+Para ahondar más en el tema hablemos de las paletas de colores en seaborn, esta librería facilita el uso de los mismos y nos da pistas de cómo encontrar la mejor solución para nuestro trabajo. Podemos clasificar las paletas en tres categorías:
+
+-   Paletas cualitativas
+
+-   Paletas secuenciales
+
+-   Paletas divergentes
+
+### Paletas cualitativas
+
+Es recomendable usar las mismas con datos categóricos, ya que su variación se enceuntra en el componente del tono. Uno puede ver los diez tonos usando el siguiente código
+
+```{python}
+sns.color_palette()
+```
+
+Uno puede comparar esta paleta de colores con la derterminada de matplotlib la cual es más intensa, además seaborn cuenta con 6 variaciones de la misma.
+
+### Paletas secuenciales
+
+Esta paleta es apropiada cuando los datos varían desde valores bajos hasta valores altos. En donde varía esta paleta es en la luminancia. Existen varias paletas con esta característica en Seaborn por lo que tenemos varias opciones para elegir, a continuación mostramos algunas que se pueden visualizar
+
+```{python}
+sns.color_palette("rocket", as_cmap=True)
+sns.color_palette("mako", as_cmap=True)
+#Paletas de una solo color
+sns.light_palette("seagreen", as_cmap=True)
+sns.dark_palette("#69d", reverse=True, as_cmap=True)
+```
+
+### Paletas divergentes
+
+Estas se usan para datos en donde los valores altos como los bajos son de interés, a menudo con punto medio sin tanta importancia. Aquí debemos tener en cuenta que debe haber dos tonos dominantes, uno en cada polo.
+
+Para ver lo que nos ofrece Seaborn podemos usar el siguiente código
+
+```{python}
+sns.color_palette("vlag", as_cmap=True)
+sns.color_palette("icefire", as_cmap=True)
+```
+
+Cabe destacar que toda esta información se encuentra más detallada en la página oficial del paquete seaborn
+
+> https://seaborn.pydata.org/tutorial/color_palettes.html
+
+Existe otra librería que nos deja escocger nuestras paletas de colores, esta es \`Palettable\`. Aquí esta un link directo a su página en github
+
+> https://jiffyclub.github.io/palettable/
 
 Hablemos ahora de las etiquetas de los gráficos, las cuales facilitan la compresión del mismo y sirven de guía para quien va dirigido. Por la misma razón debemos escoger etiquetas que no se presten para ambigüedades. Al momento de poner nuestras etiquetas debemos pensar que otras interpetaciones puede tener nuestro gráfico y luego de ello escoger la mejor que resalte lo que deseamos expresar.
