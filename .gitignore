@@ -1,3 +1,11 @@
+# Pära usuarios de RStudio
+data/
+
+.Rproj
+.Rhistory
+.RData
+.Ruserdata
+
 # History files
 .Rhistory
 .Rapp.history
@@ -47,3 +55,4 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+

@@ -37,17 +37,21 @@ git init
 
 Esto creará un nuevo repositorio GIT en tu directorio actual. Conceptos clave de GIT
 
-- **HEAD:** Es una referencia al último commit en la rama actualmente activa.
+-   **HEAD:** Es una referencia al último commit en la rama actualmente activa.
 
 -   **Árbol:** En GIT, un "árbol" es un objeto que representa un directorio del sistema de archivos. Contiene referencias a blobs (archivos) y árboles (subdirectorios).
+
 -   **Rama (Branch):** Una rama en GIT es simplemente un apuntador móvil a uno de los commits.
+
 -   **Add:** El comando git add agrega un cambio en el archivo de trabajo a la zona de preparación (también llamada índice). Le dice a GIT que quieres incluir las actualizaciones de un archivo particular en el próximo commit.
+
 -   **Commit:** El comando git commit captura una instantánea de los cambios del proyecto. Los commits son la forma en que se guarda el estado del proyecto en GIT.
+
 -   **Pull:** El comando git pull se usa para obtener y descargar contenido desde un repositorio remoto y actualizar inmediatamente el repositorio local para que coincida con ese contenido.
+
 -   **Push:** El comando git push se usa para subir contenido local al repositorio remoto. Espero que esta guía te sea útil para empezar a trabajar con GIT.
 
 Recuerda, la práctica hace al maestro
-
 
 ## Creación de un archivo Quarto para Reveal.js con RStudio y seguimiento con GIT
 
@@ -55,27 +59,26 @@ Recuerda, la práctica hace al maestro
 
 Primero, necesitas crear un nuevo archivo Quarto en RStudio. Aquí te mostramos cómo hacerlo:
 
-- Abre RStudio.
-- Haz clic en File > New File > Quarto Document.
-- En el cuadro de diálogo que aparece, selecciona Reveal.js Slide Presentation y luego haz clic en OK.
-Esto creará un nuevo archivo Quarto con la extensión .qmd.
+-   Abre RStudio.
+-   Haz clic en File \> New File \> Quarto Document.
+-   En el cuadro de diálogo que aparece, selecciona Reveal.js Slide Presentation y luego haz clic en OK. Esto creará un nuevo archivo Quarto con la extensión .qmd.
 
 ### Paso 2: Seguimiento del archivo con GIT
 
 Una vez que hayas creado tu archivo, puedes empezar a seguirlo con GIT. Aquí te mostramos cómo hacerlo:
 
-- Navega hasta el directorio donde se encuentra tu archivo Quarto utilizando la terminal.
-- Inicializa un nuevo repositorio GIT con el comando git init.
-- Agrega tu archivo al repositorio con el comando git add nombre_del_archivo.qmd.
+-   Navega hasta el directorio donde se encuentra tu archivo Quarto utilizando la terminal.
+-   Inicializa un nuevo repositorio GIT con el comando git init.
+-   Agrega tu archivo al repositorio con el comando git add nombre_del_archivo.qmd.
 
 ### Paso 3: Realizar cambios y hacer commit
 
 Ahora puedes empezar a hacer cambios en tu archivo. Cada vez que hagas un cambio significativo, debes hacer commit de ese cambio. Aquí te mostramos cómo hacerlo:
 
-- Haz algunos cambios en tu archivo Quarto.
-- Una vez que estés satisfecho con tus cambios, guarda el archivo y vuelve a la terminal.
-- Agrega los cambios al área de preparación con el comando git add nombre_del_archivo.qmd.
-- Haz commit de los cambios con el comando git commit -m "Descripción de los cambios".
+-   Haz algunos cambios en tu archivo Quarto.
+-   Una vez que estés satisfecho con tus cambios, guarda el archivo y vuelve a la terminal.
+-   Agrega los cambios al área de preparación con el comando git add nombre_del_archivo.qmd.
+-   Haz commit de los cambios con el comando git commit -m "Descripción de los cambios".
 
 Recuerda que la descripción de los cambios debe ser breve y descriptiva, para que otros miembros del equipo puedan entender qué has cambiado.
 
@@ -85,41 +88,38 @@ Recuerda que la descripción de los cambios debe ser breve y descriptiva, para q
 
 Para crear una nueva branch en GIT, puedes usar el comando git branch. Por ejemplo, si quieres crear una branch llamada clase-python, puedes hacerlo de la siguiente manera:
 
-```
+```         
 git branch clase-python
 ```
 
 Cambiar a la nueva BranchPara cambiar a tu nueva branch, puedes usar el comando git checkout. Aquí te mostramos cómo hacerlo:
 
-```
+```         
 git checkout clase-python
 ```
 
-Ahora estás en la branch clase-python y puedes empezar a hacer cambios.
-Crear Commits en la BranchVamos a suponer que estás desarrollando el contenido de una clase de Python y quieres dividir tu trabajo en tres commits: contenido conceptual, contenido de programación y contenido multimedia. Aquí te mostramos cómo hacerlo:
+Ahora estás en la branch clase-python y puedes empezar a hacer cambios. Crear Commits en la BranchVamos a suponer que estás desarrollando el contenido de una clase de Python y quieres dividir tu trabajo en tres commits: contenido conceptual, contenido de programación y contenido multimedia. Aquí te mostramos cómo hacerlo:
 
-- Contenido Conceptual: Primero, desarrolla el contenido conceptual de tu clase. Una vez que estés satisfecho con tu trabajo, puedes hacer commit de tus cambios con el siguiente comando:
+-   Contenido Conceptual: Primero, desarrolla el contenido conceptual de tu clase. Una vez que estés satisfecho con tu trabajo, puedes hacer commit de tus cambios con el siguiente comando:
 
-```
+```         
 git add .
 git commit -m "Desarrollo del contenido conceptual de la clase de Python"
 ```
 
-- Contenido de Programación: Luego, desarrolla el contenido de programación. Cuando termines, haz commit de tus cambios:
+-   Contenido de Programación: Luego, desarrolla el contenido de programación. Cuando termines, haz commit de tus cambios:
 
-```
+```         
 git add .
 git commit -m "Desarrollo del contenido de programación para la clase de Python"
 ```
 
-- Contenido Multimedia: Finalmente, añade cualquier contenido multimedia que necesites para tu clase. Cuando termines, haz commit de tus cambios:
+-   Contenido Multimedia: Finalmente, añade cualquier contenido multimedia que necesites para tu clase. Cuando termines, haz commit de tus cambios:
 
-
-```
+```         
 git add .
 git commit -m "Añadido contenido multimedia para la clase de Python"
 ```
-
 
 ## Hacer un Pull Request
 
@@ -127,7 +127,7 @@ Una vez que hayas terminado de desarrollar tu clase y hayas hecho todos tus comm
 
 Primero, necesitas subir tu branch al repositorio remoto con el comando git push:
 
-```
+```         
 git push origin clase-python
 ```
 
@@ -137,16 +137,25 @@ Luego, puedes ir al repositorio en GitHub y hacer clic en New pull request. Sele
 
 Actualizar la relación entre el remoto y el local:
 
-```
+```         
 git fetch
 ```
+
 > Para poder hacer un pull primero debemos hacer un add, y un commit. Con eso actualizamos la versión local y traemos de la nube o Github los cambios de mis compañeros con Git pull. Y luego procedemos con la creacion de la rama para nuestro trabajo.
 
-```
+```         
 git pull origin main
 ```
 
+# Para crear una nueva branch
 
+```         
+git checkout -b clase_1_desarrollo
+```
 
+Que es equivalente a 
 
-
+```
+git branch clase_1_desarrollo
+git checkout clase_1_desarrollo
+```
