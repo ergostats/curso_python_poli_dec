@@ -1,0 +1,22 @@
+---
+title: "Clase 5:Limpieza y transformación de datos con pandas en Python"
+author: "Paul Yungan"
+format: html
+editor: visual
+---
+
+# Limpieza y transformación de datos con pandas en Python
+
+```{python}
+1+1
+```
+## Recodificación de variables y creación de nuevas variables a partir de datos existentes utilizando pandas. 
+
+
+## Limpieza de datos, tratamiento de valores vacíos y duplicados en Python. 
+
+
+## Normalización y estandarización de datos en Python.
+
+ 
+## Las partes de un objeto `DataFrame` de pandas como clave (`key`) e índice (`index`) en el contexto de series de tiempo. 

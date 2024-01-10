@@ -14,6 +14,7 @@ Asi mismo, la sección sobre la búsqueda de ayuda con Python destaca recursos �
 
 # Python, un lenguaje de programación orientado a objetos
 
+
 Python es un lenguaje de programación orientado a objetos porque proporciona características que soportan la programación orientada a objetos, que incluye la definición de clases, la herencia y la encapsulación. En Python, todo es un objeto, **incluyendo los números, las cadenas y las funciones.**
 
 ## ¿Cuál fue la motivación para crear Python?
@@ -205,3 +206,4 @@ Te dejamos una guía paso a paso para instalar Visual Studio Code y Python:
     -   Una vez instalada la extensión, puedes abrir un archivo Python (.py) y Visual Studio Code automáticamente usará el intérprete de Python que instalaste en el paso 2.
 
 Con estos pasos, deberías estar listo para empezar a programar en Python usando Visual Studio Code.
+
