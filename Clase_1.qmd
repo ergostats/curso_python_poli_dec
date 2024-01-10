@@ -1,10 +1,18 @@
 ---
-title: "Untitled"
+title: "Introducción a Python y su entorno de desarrollo"
 format: html
 editor: visual
 ---
 
-## Python, un lenguaje de programación orientado a objetos
+# Resumen
+
+Este capítulo introducimos Python como un lenguaje de programación orientado a objetos, destacando sus características clave como su sintaxis, gramática, entre otros. Exploramos la historia de Python, destacando la visión de Guido van Rossum de crear un lenguaje legible y fácil de mantener. Se subraya el carácter de código abierto de Python, resaltando su desarrollo y mantenimiento por una comunidad global de voluntarios como tu y como yo.
+
+Despues de este capítulo realizar la instalación de módulos o paquetes comunes en Python, como Pandas, NumPy, SciPy y Matplotlib, lo que hará más sencillo tu trabajo estadístico.
+Asi mismo, la sección sobre la búsqueda de ayuda con Python destaca recursos útiles como la documentación oficial, Stack Overflow, Real Python, Python Tutor y el uso de la función `help()`. Finalmente, se presentan buenas prácticas para programar en Python, especialmente enfocadas en aplicaciones estadísticas, y se proporciona una guía para instalar y configurar Python y Visual Studio Code, preparando al lector para un desarrollo efectivo y eficiente.
+
+
+# Python, un lenguaje de programación orientado a objetos
 
 
 Python es un lenguaje de programación orientado a objetos porque proporciona características que soportan la programación orientada a objetos, que incluye la definición de clases, la herencia y la encapsulación. En Python, todo es un objeto, **incluyendo los números, las cadenas y las funciones.**
@@ -123,7 +131,7 @@ Además de la documentación oficial, aquí tienes tres fuentes adicionales de c
 
 3.  **Python Tutor**: Es una herramienta en línea que te permite visualizar cómo se ejecuta tu código Python paso a paso. Es útil para entender cómo funciona el código y para depurar problemas. [Python Tutor](http://www.pythontutor.com/)
 
-4.  **La función `help()`**: Dentro de tu entorno de desarrollo en el que estes trabajando con `pyhton` puedes acceder a la ventana de ayuda HTML de cada módulo o función de `python`.
+4.  **La función ``help(`)`**: Dentro de tu entorno de desarrollo en el que estes trabajando con `pyhton` puedes acceder a la ventana de ayuda HTML de cada módulo o función de `python`.
 
 Por ejemplo, durante el curso vamos a trabajar con Visual Studio Code, si tienes el siguiente código:
 
