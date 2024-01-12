@@ -1,0 +1,70 @@
+---
+title: "Clase_7"
+format: html
+editor: visual
+---
+
+## **Clase 7: Pruebas de hipótesis para la media entre grupos en Python**
+
+●Introducción a las pruebas de hipótesis en Python.
+
+● Casos de acuerdo a la varianza en los grupos (prueba t de Student) y casos de desbalance en los tamaños de los grupos.
+
+●Comparación y validación de estadísticas de grupo utilizando bibliotecas como SciPy.
+
+## Pruebas de hipótesis
+
+Las pruebas de hipótesis son una herramienta muy útil en la estadística inferencial, la cual usamos para tomar una decisión sobre una población basandonos en una muestra de la misma. Son usadas para evaluar afirmaciones o suposiciones sobre una característica desconocida de una población.
+
+Aquí introducimos el concepto de hipótesis nula e hipótesis alternativa , nivel de significación y errores Tipo I y Tipo II:
+
+-   Hipótesis nula ( $H_0$ ): Es lo que queremos poner a prueba, lo que se cree en un inicio es verdad.
+
+-   Hipótesis alternativa ( $H_1$ ): Es lo que se acepta si los datos nos dan evidencia para rechazar la hipótesis nula, la negación de $H_0$.
+
+-   Nivel de significación ( $\alpha$): Representa la probabilidad de cometer un error de tipo I al rechazar incorrectamente la hipótesis nula.
+
+-   Error Tipo I: Rechazar incorrectamente la hipóstesis nula cuando es verdadera.
+
+-   Error Tipo II: No rechazar la hipótesis nula cuando es falsa.
+
+Definidas las hipótesis a contrastar se realiza una prueba donde se obtendrá un valor llamado *valor p*. Veremos cuando este es significativo (por lo general mayor que 0.05) y como se le usa para rechazar $H_0$. Otro punto a tomar en cuenta es nuestro tamaño de muestra, por lo general un número mayor a 30 es considerado grande y es posible usar algunos resultados estadísticos para aproximar nuestros resultados, si esto no ocurre tendremos que usar otras técnicas.
+
+Veamos ahora una prueba de hipótesis sencilla usando python. Tomemos nuestros datos sobre las emiciones de CO2 por cada país, tomemos dos de ellos, Emiratos Árabes y Argentina, y propongamos las siguientes hipotesis
+
+-   $H_0$ : Ambos países tienen, en promedio, las mismas emisiones de CO2 ( $u_1=u_2$ ).
+
+-   $H_1$ : Las medias son distintas.
+
+Veamos como dar una respuesta usando python
+
+```{python}
+#Cargamos las librerias 
+import pandas as pd
+import numpy as np 
+from scipy import stats
+
+
+# Leemos nuestro archivo de datos de CO2
+ruta_archivo_excel = 'C:/Users/Brad/Documents/curso_python_poli_dec/data/co2.xlsx'
+
+# Creamos un objeto llamado datos para almacenarlo
+datos = pd.read_excel(ruta_archivo_excel)
+
+#Seleccionar los dos países
+fila_seleccionada1 = datos.iloc[5,4:]
+fila_seleccionada2 = datos.iloc[6,4:]
+
+#Tranformamos
+emiratos = np.array(fila_seleccionada1) 
+argentina = np.array(fila_seleccionada2)
+
+#buscamos el valor p mencionado
+t_stat, p_valor = stats.ttest_ind(emiratos, argentina)
+print(t_stat)
+print(p_valor) 
+```
+
+Con ello podemos ver que el valor p es mayor a 0.05, por lo que no rechazamos la hipotesis nula y podriamos considerar que ambos países tienen, en promedio, una emisión igual.
+
+## Casos cuando existe varianza en los grupos
