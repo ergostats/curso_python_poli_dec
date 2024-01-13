@@ -35,6 +35,8 @@ import numpy as np
 from sklearn.impute import KNNImputer
 from sklearn.linear_model import LinearRegression
 from impyute.imputation.cs import mice
+import missingno as msno
+
 
 ```
 Trabajaremos con la data 'EMPRESAS2021_periodo_2012_2021.sav'.
@@ -99,12 +101,13 @@ tabla_missing = pd.DataFrame({
     'num_nulos': var_missing.values,
     'porc_nulos' : (var_missing/len(df))
     })
-#pd.set_option('display.max_rows', None) 
+pd.set_option('display.max_rows', None) 
 display(tabla_missing)
 ```
 En la anterior tabla mostramos los datos perdidos o NA por variable y su respectivo porcentaje del total de observaciones. 
 
-Para el ejercicio de elegiremos las variables :
+Para el ejercicio de elegiremos, por simplicidad las variables :
+- id_empresa
 - anio
 - forma_institucional
 - tamano_cop
@@ -115,18 +118,81 @@ Para el ejercicio de elegiremos las variables :
 - ventas_nacionales
 
 ```{python}
-df_1 = df[[ 'anio', 'forma_institucional', 'tamano_cop', 'gsectores', 'propietarios_sexo', 'ventas_totales', 'exportaciones_netas', 'ventas_nacionales']]
+df_1 = df[[ 'id_empresa','anio', 'forma_institucional', 'tamano_cop', 'gsectores', 'propietarios_sexo', 'ventas_totales', 'exportaciones_netas', 'ventas_nacionales']]
 print (df_1.head(5))
 df_1.shape
 
+df_1 = df.groupby(['id_empresa', 'anio', 'forma_institucional', 'tamano_cop', 'gsectores', 'propietarios_sexo']).agg({
+    'ventas_totales': 'sum',
+    'exportaciones_netas': 'sum',
+    'ventas_nacionales': 'sum'
+}).reset_index()
+
+df_1 = df.groupby (['id_empres', 'anio','forma_institucional','tamano_cop', 'gsectores', 'propietarios_sexo']).agg({
+    'ventas_totales': 'sum',
+    
+})
+
 ```
+## Análisis de datos faltantes
+En el proceso de análisis de datos, es frecuente enfrentarse a conjuntos de datos que presentan valores faltantes, los cuales requieren ser tratados para llevar a cabo un análisis o modelado preciso. Arreglar esto es clave para hacer análisis o modelos precisos. Para llenar esos huecos, usamos trucos llamados técnicas de imputación, que básicamente son maneras de poner valores en los espacios vacíos. Pero aquí está el truco: NO hay una solución única que funcione para todos los casos. ¿Por qué? Pues, porque la mejor forma de lidiar con esos vacíos depende de por qué se fueron o de dónde vinieron. No todos los métodos valen para todo. Entender la razón detrás de esos huecos es clave para elegir la mejor estrategia y conseguir resultados confiables. ¡Así que, a llenar esos huecos de manera inteligente! 😉✨
+
+Para los siguientes ejemplos de imputación revisaremos los datos perdidos pero iniciamos con un analisis univariado de las variables continuas.
+
+Revisamos atravez de del siguiente grafico los datos faltantes por variable de nuestra dataset:
+
+```{python}
+
+msno.bar(df_1,figsize=(12, 6), sort="ascending",fontsize=12, color='tomato') 
+```
+
+Tambien Podemos visualizar las posiciones en el dataset de los datos faltantes usando la matrix(). El gráfico aparece en blanco siempre que falten valores.
+
+```{python}
+msno.matrix(df_1,figsize=(12, 6), fontsize=12, color=[0,0,0.2])
+```
+
+### Razones  para tener datos faltantes
+
+#### 1.Missing Completely at Random (MCAR)
+- Los valores faltantes de una variable dada (Y) no estan asociados con otras variables del dataset dado o con la misma variable (Y).
+- Se refiere a la situación en la que la falta de datos ocurre de manera totalmente aleatoria, sin relación con ninguna variable observada o no observada. En otras palabras, la probabilidad de que falten datos es la misma para todas las unidades, sin importar sus valores o la naturaleza de los datos faltantes.
+
+Ejemplo:
+
+Supongamos que estamos recopilando datos sobre los ingresos mensuales de los empleados en una empresa. Si algunas personas olvidan proporcionar sus ingresos debido a distracciones casuales o simplemente a errores administrativos, y este olvido no está relacionado con la cantidad de ingresos que tienen ni con ninguna otra característica observada, entonces estamos en una situación de Missing Completely at Random (MCAR).
+
+En este escenario, la falta de datos (no informar los ingresos) ocurre al azar, sin depender de ninguna variable específica, y podría ser tan probable para un empleado con ingresos bajos como para uno con ingresos altos. Este comportamiento aleatorio de la falta de datos caracteriza la condición de MCAR.
+
+#### 2. Missing at Random (MAR)
+- MAR ocurre la pérdida de los datos no es aleatoria, pero puede ser explicada completamente como funcion de otras variables con informacion completa.
+- Se refiere a la situación en la que la falta de datos puede depender de variables observadas, pero no de los valores reales de los datos faltantes. En otras palabras, la probabilidad de que falten datos puede estar relacionada con otras variables conocidas, pero no directamente con la información que está ausente.
+
+Ejemplo:
+
+Imagina que estás estudiando los patrones de gasto en compras en línea. La probabilidad de que alguien no proporcione sus datos de gasto puede depender de una variable observada, como el número de transacciones realizadas en el último mes, pero no directamente del monto real gastado.
+
+Por ejemplo, aquellos que realizan muchas transacciones podrían ser menos propensos a informar cada una de ellas. Aunque la falta de datos (no informar el gasto) está relacionada con una variable observada (número de transacciones), no está directamente vinculada con la cantidad exacta de gasto en compras en línea. En este caso, estaríamos en una situación de Missing at Random (MAR), ya que la falta de datos está relacionada con una variable observada pero no con la información faltante en sí misma.
+
+#### 3. Missing Not at Random (MNAR)
+- La pérdida depende de datos no observados o del valor perdido.
+- MNAR (Missing Not at Random) se refiere a la situación en la que la falta de datos está relacionada directamente con la información que está ausente. En este caso, la probabilidad de que falten datos depende de los valores reales no observados. Existen patrones sistemáticos en la ausencia de datos que no pueden explicarse por variables observadas.
+
+Ejemplo:
+
+Imagina que estás llevando a cabo una encuesta sobre los niveles de endeudamiento de las personas. Sin embargo, resulta que aquellos con deudas más altas son más propensos a ocultar sus cifras reales. En este caso, la falta de datos (no informar la deuda) está directamente relacionada con la información que está ausente (deudas elevadas).
+
+Las personas con deudas significativas podrían sentirse incómodas al divulgar la totalidad de su endeudamiento y, por lo tanto, tienen más probabilidades de no proporcionar la información precisa. La falta de datos no puede explicarse fácilmente por variables observadas; está intrínsecamente vinculada a la magnitud real de la deuda. Este escenario representa un ejemplo de Missing Not at Random (MNAR).
+
 
 
 ## Métodos de Imputación
 
-En el proceso de análisis de datos, es frecuente enfrentarse a conjuntos de datos que presentan valores faltantes, los cuales requieren ser tratados para llevar a cabo un análisis o modelado preciso. Arreglar esto es clave para hacer análisis o modelos precisos. Para llenar esos huecos, usamos trucos llamados técnicas de imputación, que básicamente son maneras de poner valores en los espacios vacíos. Pero aquí está el truco: NO hay una solución única que funcione para todos los casos. ¿Por qué? Pues, porque la mejor forma de lidiar con esos vacíos depende de por qué se fueron o de dónde vinieron. No todos los métodos valen para todo. Entender la razón detrás de esos huecos es clave para elegir la mejor estrategia y conseguir resultados confiables. ¡Así que, a llenar esos huecos de manera inteligente! 😉✨
+Para este caso, como primer proceso se realizaremos la eliminanción de valores perdidos en comun entre las variables 
 
-Para los siguientes ejemplos de imputación revisaremos los datos perdidos pero iniciamos con un analisis univariado de las variables continuas.
+```{python}
+msno.bar(melb_data,figsize=(12, 6), sort="ascending",fontsize=12, color='tomato') 
+```
 
 
 ```{python}
