@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Untitled</title>
+<title>Introducción a Python y su entorno de desarrollo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -109,7 +109,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Untitled</h1>
+<h1 class="title">Introducción a Python y su entorno de desarrollo</h1>
 </div>
 
 
@@ -124,10 +124,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="python-un-lenguaje-de-programación-orientado-a-objetos" class="level2">
-<h2 class="anchored" data-anchor-id="python-un-lenguaje-de-programación-orientado-a-objetos">Python, un lenguaje de programación orientado a objetos</h2>
-<p>Python es un lenguaje de programación orientado a objetos porque proporciona características que soportan la programación orientada a objetos, que incluye la definición de clases, la herencia y la encapsulación. En Python, todo es un objeto, incluyendo los números, las cadenas y las funciones.</p>
+<section id="resumen" class="level1">
+<h1>Resumen</h1>
+<p>Este capítulo introducimos Python como un lenguaje de programación orientado a objetos, destacando sus características clave como su sintaxis, gramática, entre otros. Exploramos la historia de Python, destacando la visión de Guido van Rossum de crear un lenguaje legible y fácil de mantener. Se subraya el carácter de código abierto de Python, resaltando su desarrollo y mantenimiento por una comunidad global de voluntarios como tu y como yo.</p>
+<p>Despues de este capítulo realizar la instalación de módulos o paquetes comunes en Python, como Pandas, NumPy, SciPy y Matplotlib, lo que hará más sencillo tu trabajo estadístico. Asi mismo, la sección sobre la búsqueda de ayuda con Python destaca recursos útiles como la documentación oficial, Stack Overflow, Real Python, Python Tutor y el uso de la función <code>help()</code>. Finalmente, se presentan buenas prácticas para programar en Python, especialmente enfocadas en aplicaciones estadísticas, y se proporciona una guía para instalar y configurar Python y Visual Studio Code, preparando al lector para un desarrollo efectivo y eficiente.</p>
 </section>
+<section id="python-un-lenguaje-de-programación-orientado-a-objetos" class="level1 page-columns page-full">
+<h1>Python, un lenguaje de programación orientado a objetos</h1>
+<p>Python es un lenguaje de programación orientado a objetos porque proporciona características que soportan la programación orientada a objetos, que incluye la definición de clases, la herencia y la encapsulación. En Python, todo es un objeto, <strong>incluyendo los números, las cadenas y las funciones.</strong></p>
 <section id="cuál-fue-la-motivación-para-crear-python" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="cuál-fue-la-motivación-para-crear-python">¿Cuál fue la motivación para crear Python?</h2>
 <p>Python fue creado por Guido van Rossum en 1989. La motivación principal era crear un lenguaje de alto nivel que fuera fácil de leer y de escribir. Guido quería que Python fuera un lenguaje que pudiera hacer las cosas de manera rápida, pero que también permitiera escribir código que fuera fácil de entender y de mantener. Guido trabajó en el proyecto durante su tiempo en el Centro para las Matemáticas y la Informática (CWI) en los Países Bajos.</p>
@@ -142,14 +146,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Puedes acceder a la Python Software Foundation en este enlace <a href="http://staging.python.org/psf/">Python Software Foundation</a></p>
 </div></div></section>
-<section id="sintaxis-básica-de-python" class="level1">
-<h1>Sintaxis básica de python:</h1>
-<section id="sintaxis" class="level2">
-<h2 class="anchored" data-anchor-id="sintaxis">1 Sintaxis</h2>
 </section>
-<section id="vocabulrio" class="level2">
-<h2 class="anchored" data-anchor-id="vocabulrio">2 Vocabulrio</h2>
-<p>Es muy particular para cada lenduaje:</p>
+<section id="los-elementos-de-un-lenguaje-de-programación" class="level1 page-columns page-full">
+<h1>Los elementos de un lenguaje de programación</h1>
+<ol type="1">
+<li><strong>Sintaxis:</strong> Se refiere a las reglas que definen cómo se deben escribir y organizar las instrucciones en un programa. En Python, por ejemplo, los bloques de código se definen por su <em>indentación</em>.</li>
+</ol>
+<blockquote class="blockquote">
+<p><code>python</code> emplea el tabulador para indentar el código.</p>
+</blockquote>
+<ol start="2" type="1">
+<li><strong>Semántica:</strong> Se refiere al significado de las instrucciones y expresiones en un programa. Por ejemplo, en Python, el operador + tiene una semántica diferente dependiendo de si se usa con números (donde realiza una suma) o con cadenas (donde realiza una concatenación).</li>
+</ol>
+<p>Es muy particular para cada lenguaje:</p>
 <pre><code># stata
 do my-dofile.do
 # R
@@ -158,83 +167,135 @@ source("my-R.R")
 #Python
 
 py my-py.py</code></pre>
-</section>
-<section id="semantica" class="level2">
-<h2 class="anchored" data-anchor-id="semantica">3 Semantica</h2>
-<p>Que el orden importa:</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Esto es un ejemplo de cómo la sintaxis y la semántica pueden variar entre diferentes lenguajes de programación. Aunque la operación subyacente (ejecutar un script) es la misma en todos los casos, la forma en que se expresa en cada lenguaje es diferente.</p>
+</div></div><ol start="3" type="1">
+<li><strong>Pragmática:</strong> Se refiere a cómo y por qué se utilizan ciertas construcciones y patrones de programación en un lenguaje. Por ejemplo, en Python, es común utilizar listas por comprensión para transformar listas de una manera concisa y legible.</li>
+</ol>
+<p>El orden importa como en este ejemplo:</p>
 <ul>
 <li>Anita lava la tina</li>
 <li>Sujeto, verbo y predicado</li>
 <li>tina Anita lava la (no tiene sentido)</li>
 </ul>
-<blockquote class="blockquote">
-<p>Ya han trabajado con alguno, la idea es crear conexciones neurales con lo que los estudiantes ya conocen</p>
-</blockquote>
-</section>
-</section>
-<section id="en-particular-con-python-tenemos" class="level1">
-<h1>En particular con python tenemos</h1>
-</section>
-<section id="variables-y-tipos-de-datos-python-tiene-varios-tipos-de-datos-estándar-disponibles-números-cadenas-listas-tuplas-diccionarios." class="level1">
-<h1>Variables y tipos de datos: Python tiene varios tipos de datos estándar disponibles: números, cadenas, listas, tuplas, diccionarios.</h1>
+<p>De la misma manera:</p>
 <div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Esto es una variable</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mi_variable <span class="op">=</span> <span class="st">"Hola Mundo"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Esto es una lista</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>mi_lista <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Esto es un diccionario</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>mi_diccionario <span class="op">=</span> {<span class="st">"clave"</span>: <span class="st">"valor"</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejecución correcta:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5</code></pre>
 </div>
-</section>
-<section id="estructuras-de-control-python-soporta-las-estructuras-de-control-típicas-como-if-for-y-while." class="level1">
-<h1>Estructuras de control: Python soporta las estructuras de control típicas como if, for y while.</h1>
+</div>
 <div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estructura if</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> mi_variable <span class="op">==</span> <span class="st">"Hola Mundo"</span>:</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"¡Hola Mundo!"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Estructura for</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> mi_lista:</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Estructura while</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>contador <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> contador <span class="op">&lt;</span> <span class="dv">5</span>:</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(contador)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    contador <span class="op">+=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>¡Hola Mundo!
-1
-2
-3
-4
-5
-0
-1
-2
-3
-4</code></pre>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejecución incorrecta:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>NameError: name 'x' is not defined</code></pre>
 </div>
 </div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Tal vez ya haz trabajado con algun otro lenguaje de programación. Lo importante es que puedas identificar estos tres elementos (sintaxis, semántica y pragmática) para poder utiizarlos dependiendo de cada situación.</p>
+</div></div></section>
+<section id="instalación-de-módulos-o-paquetes-de-python" class="level1">
+<h1>Instalación de módulos o paquetes de python</h1>
+<p><code>pip</code> es el sistema de gestión de paquetes de Python, que te permite instalar y administrar paquetes de software adicionales que no se incluyen en la biblioteca estándar de Python.</p>
+<p>Aquí te mostramos cómo puedes instalar algunos paquetes comunes. Abre tu terminal o línea de comandos e introduce los siguientes comandos:</p>
+<ul>
+<li><em>Pandas:</em> Es una biblioteca de manipulación y análisis de datos. Puedes instalarla con:</li>
+</ul>
+<pre><code>pip install pandas</code></pre>
+<ul>
+<li><em>NumPy:</em> Es una biblioteca para el cálculo científico con Python. Puedes instalarla con:</li>
+</ul>
+<pre><code>pip install numpy</code></pre>
+<ul>
+<li><em>SciPy:</em> Es una biblioteca que se utiliza para cálculos científicos y técnicos. Puedes instalarla con:</li>
+</ul>
+<pre><code>pip install scipy</code></pre>
+<ul>
+<li><em>Matplotlib:</em> Es una biblioteca para la creación de gráficos estáticos, animados e interactivos en Python. Puedes instalarla con:</li>
+</ul>
+<pre><code>pip install matplotlib</code></pre>
+<p>Recuerda que debes tener instalado Python y pip en tu sistema para poder ejecutar estos comandos. Si estás utilizando un entorno virtual (lo cual es una buena práctica), estos paquetes se instalarán en el entorno virtual en lugar de en tu instalación global de Python.</p>
 </section>
-<section id="funciones-en-python-una-función-es-un-bloque-de-código-reutilizable-que-realiza-una-acción-específica." class="level1">
-<h1>Funciones: En Python, una función es un bloque de código reutilizable que realiza una acción específica.</h1>
+<section id="buscando-ayuda-con-python" class="level1">
+<h1>Buscando ayuda con python</h1>
+<p>Para acceder a la documentación oficial de Python, puedes visitar el siguiente enlace: <a href="https://docs.python.org/3/">Documentación oficial de Python</a>. Aquí encontrarás guías, tutoriales y referencias detalladas sobre el lenguaje y su biblioteca estándar.</p>
+<p>Además de la documentación oficial, aquí tienes tres fuentes adicionales de consulta para obtener ayuda con Python:</p>
+<ol type="1">
+<li><p><strong>Stack Overflow</strong>: Es un foro de preguntas y respuestas donde puedes buscar soluciones a problemas específicos de programación. Hay una gran cantidad de preguntas y respuestas sobre Python. <a href="https://stackoverflow.com/questions/tagged/python">Stack Overflow - Python</a></p></li>
+<li><p><strong>Real Python</strong>: Ofrece tutoriales y artículos detallados sobre diversos temas de Python. <a href="https://realpython.com/">Real Python</a></p></li>
+<li><p><strong>Python Tutor</strong>: Es una herramienta en línea que te permite visualizar cómo se ejecuta tu código Python paso a paso. Es útil para entender cómo funciona el código y para depurar problemas. <a href="http://www.pythontutor.com/">Python Tutor</a></p></li>
+<li><p>**La función `<code>help(</code>)<code>**: Dentro de tu entorno de desarrollo en el que estes trabajando con</code>pyhton<code>puedes acceder a la ventana de ayuda HTML de cada módulo o función de</code>python`.</p></li>
+</ol>
+<p>Por ejemplo, durante el curso vamos a trabajar con Visual Studio Code, si tienes el siguiente código:</p>
 <div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definición de una función</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mi_funcion():</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"¡Hola desde mi función!"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Llamada a la función</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>mi_funcion()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>¡Hola desde mi función!</code></pre>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>np.array()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>TypeError: array() missing required argument 'object' (pos 0)</code></pre>
 </div>
 </div>
+<p>Cuando coloques el cursor sobre array o después de abrir el paréntesis, Visual Studio Code mostrará un tooltip con la ayuda de la función <code>np.array</code>.</p>
+<p>También puedes usar la función incorporada help() en la terminal de Python para obtener ayuda sobre una función. Por ejemplo:</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(np.array)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Esto imprimirá la documentación de la función <code>np.array</code> en la terminal.</p>
 <blockquote class="blockquote">
-<p>Python es un lenguaje de programación orientada a objetos</p>
+<p>Recuerda que la mejor manera de aprender es practicando. No dudes en experimentar y probar cosas por ti mismo.</p>
 </blockquote>
+</section>
+<section id="buenas-prácticas-para-programar-en-python" class="level1">
+<h1>Buenas prácticas para programar en Python,</h1>
+<p>Consiserando que vamos a hacer aplicaciones estadísticas:</p>
+<ol type="1">
+<li><p><strong>Usa nombres de variables descriptivos</strong>: Los nombres de las variables deben ser cortos pero descriptivos. Por ejemplo, <code>media_edades</code> es mejor que simplemente <code>m</code>.</p></li>
+<li><p><strong>Comenta tu código</strong>: Los comentarios son esenciales para entender qué hace tu código. Usa comentarios para explicar por qué estás haciendo algo, no qué estás haciendo.</p></li>
+<li><p><strong>Usa espacios en blanco</strong>: El uso de espacios en blanco hace que tu código sea más legible. Python recomienda usar 4 espacios para la indentación.</p></li>
+<li><p><strong>Manejo de excepciones</strong>: Asegúrate de manejar las excepciones correctamente para evitar que tu programa se bloquee debido a errores inesperados.</p></li>
+<li><p><strong>Usa funciones y clases</strong>: Evita repetir código. Si estás copiando y pegando bloques de código, probablemente deberías poner ese código en una función o clase.</p></li>
+<li><p><strong>Pruebas unitarias</strong>: Escribe pruebas para tu código para asegurarte de que funciona como se espera.</p></li>
+<li><p><strong>Usa bibliotecas estándar de Python para análisis de datos</strong>: Bibliotecas como NumPy, Pandas, Matplotlib y SciPy son muy útiles para el análisis de datos y tienen una amplia comunidad de usuarios que pueden ayudarte si te encuentras con problemas.</p></li>
+<li><p><strong>Sigue la guía de estilo de Python (PEP 8)</strong>: PEP 8 es una guía de estilo para el código Python que proporciona convenciones sobre cómo escribir código que es fácil de entender y de leer. Puedes encontrarla en <a href="https://pep8.org/">PEP 8 – Style Guide for Python Code</a>.</p></li>
+<li><p><strong>Documenta tus funciones y clases</strong>: Usa docstrings para documentar tus funciones y clases. Esto hace que tu código sea más fácil de entender y usar para otros.</p></li>
+<li><p><strong>Usa control de versiones</strong>: El control de versiones, como Git, es esencial para cualquier proyecto de programación. Te permite rastrear los cambios en tu código y colaborar con otros.</p></li>
+</ol>
+</section>
+<section id="el-entorno-de-visual-studio-code" class="level1">
+<h1>El entorno de Visual Studio Code</h1>
+<p>Te dejamos una guía paso a paso para instalar Visual Studio Code y Python:</p>
+<ol type="1">
+<li><p><strong>Instalación de Visual Studio Code</strong>:</p>
+<ul>
+<li>Ve al sitio web oficial de Visual Studio Code en <a href="https://code.visualstudio.com/">https://code.visualstudio.com</a>.</li>
+<li>Haz clic en el botón de descarga para tu sistema operativo (Windows, MacOS o Linux).</li>
+<li>Una vez descargado el archivo, abre el instalador y sigue las instrucciones.</li>
+</ul></li>
+<li><p><strong>Instalación de Python</strong>:</p>
+<ul>
+<li>Ve al sitio web oficial de Python en <a href="https://www.python.org/">https://www.python.org</a>.</li>
+<li>Haz clic en “Downloads” y luego selecciona la versión que corresponda a tu sistema operativo.</li>
+<li>Descarga el archivo y abre el instalador. Asegúrate de marcar la casilla “Add Python to PATH” antes de iniciar la instalación.</li>
+<li>Sigue las instrucciones del instalador.</li>
+</ul></li>
+<li><p><strong>Configuración de Python en Visual Studio Code</strong>:</p>
+<ul>
+<li>Abre Visual Studio Code.</li>
+<li>Ve a la barra lateral y haz clic en el icono de “Extensiones” (el cuadrado en la barra lateral).</li>
+<li>Busca “Python” en el cuadro de búsqueda y selecciona la extensión oficial de Python ofrecida por Microsoft.</li>
+<li>Haz clic en “Instalar” para instalar la extensión.</li>
+<li>Una vez instalada la extensión, puedes abrir un archivo Python (.py) y Visual Studio Code automáticamente usará el intérprete de Python que instalaste en el paso 2.</li>
+</ul></li>
+</ol>
+<p>Con estos pasos, deberías estar listo para empezar a programar en Python usando Visual Studio Code.</p>
 </section>
 
 </main>

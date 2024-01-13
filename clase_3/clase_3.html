@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Clase_3</title>
+<title>Funciones y la importancia del análisis de datos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -37,15 +100,16 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
-<main class="content" id="quarto-document-content">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Clase_3</h1>
+<h1 class="title">Funciones y la importancia del análisis de datos</h1>
 </div>
 
 
@@ -60,55 +124,63 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="sílabo-clase-3-la-importancia-del-análisis-de-datos-conceptual" class="level2">
-<h2 class="anchored" data-anchor-id="sílabo-clase-3-la-importancia-del-análisis-de-datos-conceptual">Sílabo: clase 3 <strong>La importancia del análisis de datos (Conceptual)</strong></h2>
-<ul>
-<li><p>Conceptos clave para el análisis efectivo de datos.</p></li>
-<li><p>Iniciativas para abordar el temas sociales utilizando Python, como el uso de módulos como pandas em investigación académica.</p></li>
-</ul>
-</section>
-<section id="qué-es-el-análisis-de-datos" class="level2">
+<section id="resumen" class="level1 page-columns page-full">
+<h1>Resumen</h1>
+<p>En este capitulo 3, exploramos conceptos clave para un análisis efectivo de datos y cómo Python, especialmente con módulos como Pandas, se utiliza en iniciativas para abordar temas sociales en la investigación académica. Comenzamos definiendo el análisis de datos como un proceso integral para descubrir información útil, apoyar decisiones y comprender tanto datos numéricos como no numéricos. El proceso implica definir objetivos, seleccionar métricas, recolectar y organizar datos, clasificar y analizar estos datos, e interpretar los resultados, siempre conscientes de posibles sesgos y limitaciones.</p>
+<p>Diferenciamos entre análisis cualitativo y cuantitativo, destacando la importancia de ambos en distintos contextos. Examinamos herramientas clave para el análisis de datos, incluyendo Python, R, Power BI, Tableau, Excel, SQL y Qlik, cada una adecuada para diferentes necesidades y habilidades.</p>
+<p>A través de ejemplos prácticos y casos de estudio, demostramos cómo el análisis de datos se aplica en la vida real, incluyendo ejemplos en sectores como la banca y la moda. Discutimos el papel de Python en la sociedad, abarcando desde el análisis de datos hasta la investigación social y académica, y presentamos historias de éxito que ilustran su aplicación práctica.</p>
+<p>Finalmente, nos centramos en las funciones en Python, destacando su importancia en la reutilización de código y eficiencia. Cubrimos buenas prácticas en la escritura de funciones, como nombres descriptivos, uso de docstrings, y la importancia de funciones dedicadas a una sola tarea. Con ejemplos prácticos, mostramos cómo implementar estas prácticas para funciones específicas, incluyendo una función para identificar números primos, demostrando así la utilidad y flexibilidad de Python en el análisis de datos y programación general.</p>
+<section id="qué-es-el-análisis-de-datos" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="qué-es-el-análisis-de-datos">¿Qué es el análisis de datos?</h2>
-<p>Si bien existen varias definiciones de este tema, todas llevan a un mismo lado,por tanto diremos que es un proceso de examinar, transformar, limpiar datos para obtener conclusiones con los mismos. En el mismo se involucran varias técnicas estadísticas para determinar relaciones, dependecia y demás entre conjutos de datos. El mismo es ampliamente usado en investigación académica, estudios de mercadotecnia, decisiones en recursos humanos, etc.</p>
-</section>
+<p>El análisis de datos es un proceso integral y multifacético que implica examinar, limpiar, transformar y modelar datos con el objetivo de descubrir información útil, llegar a conclusiones y apoyar la toma de decisiones. Este proceso está en el corazón de la investigación académica, las estrategias de mercadotecnia, la gestión de recursos humanos, y se extiende hasta el dominio de la política pública y más allá. Las técnicas estadísticas se aplican para descubrir patrones, identificar relaciones y tendencias, y probar hipótesis.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Nota</strong>: Aunque el análisis de datos puede parecer un campo dominado por números y estadísticas, su alcance va más allá, abarcando interpretaciones cualitativas de textos, imágenes y otros medios no estructurados.</p>
+</div></div></section>
 <section id="cómo-se-realiza-el-análisis-de-datos" class="level2">
 <h2 class="anchored" data-anchor-id="cómo-se-realiza-el-análisis-de-datos">¿Cómo se realiza el análisis de datos?</h2>
-<p>No existe una receta establecida para generar este análisis pero podemos decir que se siguen los siguientes pasos:</p>
-<ul>
-<li>Definir la razón del análisis, qué preguntas queremos responder, debemos tratar de ser precisos.</li>
-<li>Qué es lo que mediremos y cómo lo haremos. Ejemplo: Si queremos medir los objetos más vendidos podemos ver como las personas se informaron sobre el mismo, por qué plataforma lo adquieieron, etc.</li>
-<li>Obtención de datos y su organización. - Clasificación y análisis de datos.</li>
-<li>Interpretación de resultados.</li>
-</ul>
+<p>El proceso de análisis de datos puede variar en función del contexto y los objetivos específicos, pero generalmente sigue una estructura lógica y metódica que incluye:</p>
+<ol type="1">
+<li><p><strong>Definición de objetivos</strong>: Determinar el propósito del análisis. ¿Qué preguntas específicas estamos tratando de responder? Es esencial establecer metas claras y medibles.</p></li>
+<li><p><strong>Selección de métricas</strong>: Identificar qué datos serán recogidos y cómo. Por ejemplo, al medir los productos más vendidos, considerar aspectos como los canales de marketing, las plataformas de compra y las preferencias del cliente.</p></li>
+<li><p><strong>Recolección y organización de datos</strong>: Adquirir los datos necesarios de fuentes confiables y organizarlos de manera que sean accesibles y manejables para el análisis.</p></li>
+<li><p><strong>Clasificación y análisis de datos</strong>: Utilizar métodos estadísticos y de minería de datos para examinar y modelar los datos.</p></li>
+<li><p><strong>Interpretación de resultados</strong>: Extraer significado de los datos analizados y comunicar los hallazgos de manera efectiva.</p></li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>Sugerencia</strong>: Al interpretar los resultados, es crucial ser consciente de los posibles sesgos y limitaciones de los datos y métodos utilizados.</p>
+</blockquote>
 </section>
 <section id="tipos-de-análisis-de-datos" class="level2">
 <h2 class="anchored" data-anchor-id="tipos-de-análisis-de-datos">Tipos de análisis de datos</h2>
-<p>De acuerdo al tipo de datos quer vayamos a analizar podemos tener: análisis cualitativo y cuantitativo.</p>
+<p>El tipo de análisis de datos a realizar depende de la naturaleza de la información que se maneja:</p>
 <ul>
-<li>Cualitativo: Aquí analizamos información no numérica (críticas, opiniones, creeencias, etc.), respondemos preguntas del tipo ¿Cómo? ¿Por qué?</li>
-<li>Cuantitativo: Se analiza información cuantificable.</li>
+<li><strong>Análisis cualitativo</strong>: Se centra en datos no numéricos como textos, entrevistas, imágenes y observaciones. Responde preguntas como “¿Cómo?” y “¿Por qué?” y se preocupa por el contexto y el significado.</li>
+<li><strong>Análisis cuantitativo</strong>: Trata con datos numéricos y cuantificables, a menudo utilizando estadísticas y modelos matemáticos para probar hipótesis y predecir tendencias.</li>
 </ul>
 </section>
-<section id="herramientas-para-el-análisis-de-datos" class="level2">
+<section id="herramientas-para-el-análisis-de-datos" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="herramientas-para-el-análisis-de-datos">Herramientas para el análisis de datos</h2>
-<p>Con el auge que esta teniendo el análisis de datos últimamente existen varias herramientas para realizar el mismo, entre las cuales vale nombrar:</p>
+<p>El análisis de datos se beneficia enormemente de la variedad de herramientas disponibles, cada una con sus fortalezas:</p>
 <ul>
-<li>Power BI</li>
-<li>R</li>
-<li>Python</li>
-<li>Tableau</li>
-<li>Excel</li>
-<li>SQL</li>
-<li>Qlik</li>
+<li><strong>Power BI</strong>: Una herramienta de visualización de datos y business intelligence de Microsoft.</li>
+<li><strong>R</strong>: Un lenguaje de programación orientado a la estadística y el análisis de datos.</li>
+<li><strong>Python</strong>: Un lenguaje de programación de alto nivel con potentes bibliotecas para análisis de datos como Pandas y NumPy.</li>
+<li><strong>Tableau</strong>: Una herramienta de visualización de datos intuitiva para crear dashboards interactivos.</li>
+<li><strong>Excel</strong>: Una aplicación de hoja de cálculo versátil y ampliamente utilizada para análisis básicos.</li>
+<li><strong>SQL</strong>: Un lenguaje de consulta estructurado para la gestión de bases de datos.</li>
+<li><strong>Qlik</strong>: Una plataforma de análisis y visualización de datos orientada al usuario de negocios.</li>
 </ul>
-<p>Cabe mencionar que existen diferencias entre ellas, ya sea que uno sepa fundamentos de programación o no, por ello se debe entender que el análissi de datos es un conjunto de procesos que llevan a un objetivo. En este curso usaremos Python pero es recomendable conocer un poco de las herramientas antes mencionadas.</p>
-<div>
-<p style="text-align:center;">
-</p><p><img src="images/Meme1.jpg" alt="JuveYell" width="300px"></p>
-<p></p>
-</div>
-</section>
-<section id="análisis-de-datos-en-la-vida-real" class="level2">
+<p>Cada una de estas herramientas tiene su propia curva de aprendizaje y se adapta mejor a diferentes necesidades y habilidades. Por ejemplo, R y Python requieren una base en programación, mientras que herramientas como Power BI y Tableau son más accesibles para los no programadores.</p>
+<blockquote class="blockquote">
+<p><strong>Ejemplo práctico</strong>: Para ilustrar cómo estas herramientas pueden ser utilizadas en la vida real, considere un caso de estudio en el que Python se utiliza para analizar tendencias de ventas y luego Tableau para visualizar</p>
+</blockquote>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="images/Meme1.jpg" alt="JuveYell" width="300px"></p>
+<p>!Siempre es importante gestionar el trabajo en equipo cuando empleamos varias herramientas en un mismo trabajo¡</p>
+</div></div></section>
+<section id="análisis-de-datos-en-la-vida-real" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="análisis-de-datos-en-la-vida-real">Análisis de datos en la vida real</h2>
 <p>Existen varios ejemplos de cómo se ha aplicado el análisis de datos en el día a día, aquí mostramos algunos de ellos.</p>
 <ul>
@@ -118,12 +190,10 @@ ul.task-list li input[type="checkbox"] {
 <p>La empresa busco a una compañia de videojuegos para que les ayuden en el análisis de datos para así no quedarse atrás. Se puede leer el artículo completo aquí: https://www.lavozdegalicia.es/noticia/galicia-economica/2020/03/01/inditex-ficha-experta-videojuegos-explotar-mina-oro-big-data/00031583073737230198202.htm</p></li>
 </ul>
 <p>Existen muchas más historias relacionadas al análisis de datos, aunque no es fácil llegar a ser considerado un “analista de datos”, con dedicación se puede lograr mucho en este campo que esta emergiendo rápidamente.</p>
-<div>
-<p style="text-align:center;">
-</p><p><img src="images/Meme2.jpg" alt="JuveYell" width="300px"></p>
-<p></p>
-</div>
-</section>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><img src="images/Meme2.jpg" alt="JuveYell" width="300px"></p>
+</div></div></section>
 <section id="python-y-sus-usos-en-la-sociedad" class="level2">
 <h2 class="anchored" data-anchor-id="python-y-sus-usos-en-la-sociedad">Python y sus usos en la sociedad</h2>
 <p>Como sabemos Python es un lenguaje muy usado en la actualidad, el mismo puede ser aplicado a muchos campos. Si entramos a temas sociales Python puede ser usado en:</p>
@@ -137,27 +207,216 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>Por lo que Python es una herramienta escencial al momento de querer realizar análisis de datos, nos facilita la comprensión y nos da una forma de abordar los poblemas.</p>
 </section>
-<section id="historias-de-éxito-con-python" class="level2">
-<h2 class="anchored" data-anchor-id="historias-de-éxito-con-python">Historias de éxito con Python</h2>
+</section>
+<section id="historias-de-éxito-con-python" class="level1 page-columns page-full">
+<h1>Historias de éxito con Python</h1>
 <p>La pergunta que todos se hacen es: ¿sirve Python en el mundo real? La respuesta es sí, muchos avances se han logrado con este lenguaje, es por ello que hemos puesto aquí algunos de ellos.</p>
-<section id="caso-de-gusto.com" class="level3">
-<h3 class="anchored" data-anchor-id="caso-de-gusto.com">Caso de Gusto.com</h3>
+<section id="caso-de-gusto.com" class="level2">
+<h2 class="anchored" data-anchor-id="caso-de-gusto.com">Caso de Gusto.com</h2>
 <p>Empezó como un sitio de viajes en línea llamado EZTrip.com, evolucionó para ofrecer servicios de reserva y también se diversificó con contenido de reseñas de viajes, blogs y fotos. La compañía utiliza sistemas de reserva en línea y se enfrenta a desafíos al integrar sistemas antiguos basados en mainframes y sistemas más modernos mediante técnicas como “screen scraping”. Han adoptado Python para facilitar la integración y mejorar la eficiencia en tareas diarias.</p>
+<section id="por-qué-python" class="level4">
+<h4 class="anchored" data-anchor-id="por-qué-python">¿Por qué Python?</h4>
 <p>Los sistemas de reserva basados en mainframes presentan limitaciones en la entrada de datos y formatos, lo que hace que el uso de Python sea crucial en tareas como procesamiento de texto, limpieza de datos y desarrollo rápido. Python ha sido fundamental en la construcción de una red social para viajeros y en la transición hacia un modelo de contenido generado por usuarios.</p>
 <p>Gusto.com utiliza Python para procesar grandes conjuntos de datos de manera eficiente, como en la creación de un sistema de localización para descripciones de hoteles. Python también ha sido efectivo en la integración de servicios web de proveedores, y se ha destacado por su capacidad de desarrollo rápido y sus herramientas de procesamiento de XML.</p>
 <p>La elección de Python se basó en su portabilidad, acceso al código fuente, capacidad de integración, desarrollo rápido, soporte para optimización selectiva, scriptabilidad y facilidad de aprendizaje. Además, la comunidad de Python y la independencia del sistema operativo han sido aspectos beneficiosos para Gusto.com. Python ha demostrado ser una herramienta clave en el éxito y crecimiento de Gusto.com en el espacio de viajes en línea.</p>
 <p>Puedes leer el artículo completo en: https://www.python.org/about/success/gusto/</p>
 </section>
-<section id="strakt-y-python" class="level3">
-<h3 class="anchored" data-anchor-id="strakt-y-python">Strakt y Python</h3>
+</section>
+<section id="strakt-y-python" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="strakt-y-python">Strakt y Python</h2>
 <p>Strakt, ha tenido éxito con el proyecto CAPS (Collaborative Approach to Problem Solving). Este proyecto, ofrece soluciones modulares de colaboración y flujos de trabajo, utilizando Python como lenguaje principal.</p>
+<section id="por-qué-python-1" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="por-qué-python-1">¿ Por qué Python?</h4>
 <p>Python fue elegido por su portabilidad, acceso al código fuente, capacidad de integración con sistemas existentes, desarrollo rápido, soporte para optimización selectiva, scriptabilidad y por ser fácil de aprender. A pesar de ser nuevos en Python, los desarrolladores de Strakt encontraron que el lenguaje era fácil de aprender y aumentaba la productividad. Python también influyó positivamente en el proceso de diseño y facilitó las revisiones de código.</p>
 <p>El proyecto CAPS fue exitoso, y la implementación se desplegó en una universidad sueca como cliente beta. La elección de Python ha sido fundamental para el éxito de Strakt en el desarrollo de soluciones colaborativas y de flujo de trabajo.</p>
 <p>Se puede encontrar el resumen completo en: https://www.python.org/about/success/strakt/</p>
 <p>Como podemos observar el uso de Python es diverso, pero ahora entremos en el uso de la librería <code>pandas</code>. Veamos esta divertida forma de aprender su uso</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Historias de éxito como las de Gusto.com y Strakt ilustran cómo Python, con su amplia gama de bibliotecas y comunidad activa, es fundamental en la integración de sistemas complejos y en el procesamiento eficiente de grandes conjuntos de datos. La capacidad de Python para trabajar con texto, números, imágenes y datos complejos lo convierte en una herramienta versátil y potente para el análisis de datos.</p>
+</div></div></section>
 </section>
-<section id="pandas-y-pokémon" class="level3">
-<h3 class="anchored" data-anchor-id="pandas-y-pokémon">Pandas y Pokémon</h3>
+<section id="pandas-y-pokémon" class="level2">
+<h2 class="anchored" data-anchor-id="pandas-y-pokémon">Pandas y Pokémon</h2>
+<p>Para todos los interesados en aprender más sobre análisis de datos utilizando Python, especialmente con la biblioteca Pandas, hay una oportunidad emocionante y única que no deben perderse. Les invito a explorar el enlace: Aprende Pandas con Pokémon. Esta guía combina el aprendizaje práctico de Pandas, una herramienta esencial en el análisis de datos con Python, con el atractivo y la familiaridad del mundo de Pokémon.</p>
+<p>Es una forma excelente y divertida de entender los conceptos fundamentales de Pandas, aplicándolos a un conjunto de datos interesante y amigable. Ideal tanto para principiantes en Python como para aquellos que buscan solidificar sus habilidades en el manejo de datos, este recurso ofrece una experiencia de aprendizaje interactiva y atractiva. ¡No dejen pasar la oportunidad de mejorar sus habilidades en análisis de datos con este recurso único!</p>
+<p>Este divertido post lo puedes encontrar en: https://www.kaggle.com/code/ash316/learn-pandas-with-pokemons</p>
+<p>El mismo ayuda a entender las bases del análisis de datos de una manera más amigable.</p>
+<blockquote class="blockquote">
+<p>El análisis de datos ha revolucionado innumerables campos, desde la academia hasta la industria, ofreciendo insights profundos y conduciendo a decisiones informadas. Python, como herramienta open source y lenguaje amigable, ha jugado un papel crucial en esta revolución. Su simplicidad y poder han permitido a analistas y científicos de datos de todos los niveles, desde principiantes hasta expertos, procesar, analizar y visualizar datos de manera efectiva.</p>
+</blockquote>
+</section>
+</section>
+<section id="beneficios-de-mantener-el-trabajo-ordenado-y-reproducible-con-python-y-visual-studio-code" class="level1">
+<h1>Beneficios de Mantener el Trabajo Ordenado y Reproducible con Python y Visual Studio Code</h1>
+<p>Mantener un trabajo de análisis de datos ordenado y reproducible es fundamental para la integridad y eficacia de cualquier proyecto. Python, en conjunto con herramientas como Visual Studio Code, facilita esta tarea. La reproducibilidad no solo es crucial para validar resultados, sino también para compartir hallazgos y colaborar con otros. Al trabajar con Python en un entorno como Visual Studio Code, se beneficia de:</p>
+<ol type="1">
+<li><p><strong>Estandarización del Código</strong>: Python promueve un estilo de codificación claro y coherente, respaldado por las directrices de PEP 8. Esto hace que el código sea más legible y fácil de mantener, tanto para el autor original como para otros colaboradores.</p></li>
+<li><p><strong>Documentación y Comentarios</strong>: Visual Studio Code, con sus características de edición y anotación, facilita la documentación del código, lo cual es esencial para explicar los procesos y decisiones tomadas durante el análisis.</p></li>
+<li><p><strong>Control de Versiones</strong>: Integraciones de control de versiones como Git en Visual Studio Code permiten rastrear y gestionar cambios en el código, lo que es vital para la reproducibilidad y colaboración.</p></li>
+<li><p><strong>Entornos Virtuales</strong>: Visual Studio Code permite gestionar entornos virtuales de Python, lo que asegura que los proyectos se ejecuten con las dependencias correctas y evita conflictos entre proyectos.</p></li>
+<li><p><strong>Facilidad de Depuración</strong>: Las herramientas de depuración integradas en Visual Studio Code permiten identificar y corregir errores más rápidamente, lo cual es crucial en el análisis de datos para asegurar la precisión de los resultados.</p></li>
+</ol>
+<p>En resumen, Python y Visual Studio Code forman un dúo poderoso para el análisis de datos, ofreciendo un entorno eficiente, reproducible y colaborativo. La combinación de la simplicidad y potencia de Python con las avanzadas características de Visual Studio Code empodera a los analistas y científicos de datos para abordar proyectos complejos con mayor eficacia y transparencia.</p>
+</section>
+<section id="funciones-análisis-de-datos-agrupados-por-sexo-del-dueño-de-los-establecimientos-en-ecuador" class="level1 page-columns page-full">
+<h1>Funciones: Análisis de Datos Agrupados por Sexo del dueño de los establecimientos en Ecuador</h1>
+<p>Cuando se trabaja con conjuntos de datos en Python, especialmente con DataFrames de Pandas, una tarea común es realizar análisis estadísticos agrupados por ciertas categorías. En esta sección, nos centraremos en un DataFrame que incluye variables como ventas, número de empleados, compras e impuestos. Vamos a explorar cómo se puede utilizar Python para calcular estadísticas clave como la media, la mediana, y los percentiles 25 y 75, agrupando los datos según el sexo del dueño de los establecimientos en Ecuador.</p>
+<section id="creando-el-dataframe" class="level4">
+<h4 class="anchored" data-anchor-id="creando-el-dataframe">Creando el DataFrame</h4>
+<p>Supongamos que tenemos un DataFrame llamado <code>df_negocios</code> con las siguientes columnas: ‘ventas’, ‘num_empleados’, ‘compras’, ‘impuestos’, y ‘sexo_dueno’. Este DataFrame representa diversos establecimientos con sus respectivos datos financieros y demográficos.</p>
+</section>
+<section id="cálculo-de-estadísticas-agrupadas" class="level4">
+<h4 class="anchored" data-anchor-id="cálculo-de-estadísticas-agrupadas">Cálculo de Estadísticas Agrupadas</h4>
+<p>Para realizar nuestro análisis, utilizaremos la función <code>groupby</code> de Pandas, que nos permite agrupar datos en base a una columna específica (en este caso, ‘sexo_dueno’) y luego aplicar funciones de agregación a las demás columnas numéricas.</p>
+<section id="media-por-grupo" class="level5">
+<h5 class="anchored" data-anchor-id="media-por-grupo">1. Media por Grupo</h5>
+<p>La media es un indicador central que nos da una idea del valor ‘promedio’ de nuestras variables numéricas para cada grupo.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>media_por_grupo <span class="op">=</span> df_negocios.groupby(<span class="st">'sexo_dueno'</span>).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="mediana-por-grupo" class="level5">
+<h5 class="anchored" data-anchor-id="mediana-por-grupo">2. Mediana por Grupo</h5>
+<p>La mediana es el valor medio que divide nuestro conjunto de datos en dos mitades iguales. Es especialmente útil cuando los datos contienen valores extremos que pueden distorsionar la media.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mediana_por_grupo <span class="op">=</span> df_negocios.groupby(<span class="st">'sexo_dueno'</span>).median()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="percentil-25-por-grupo" class="level5">
+<h5 class="anchored" data-anchor-id="percentil-25-por-grupo">3. Percentil 25 por Grupo</h5>
+<p>El percentil 25, también conocido como primer cuartil, indica el valor por debajo del cual se encuentra el 25% de los datos.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>percentil_25_por_grupo <span class="op">=</span> df_negocios.groupby(<span class="st">'sexo_dueno'</span>).quantile(<span class="fl">0.25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="percentil-75-por-grupo" class="level5">
+<h5 class="anchored" data-anchor-id="percentil-75-por-grupo">4. Percentil 75 por Grupo</h5>
+<p>El percentil 75, o tercer cuartil, muestra el valor por debajo del cual se encuentra el 75% de los datos.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>percentil_75_por_grupo <span class="op">=</span> df_negocios.groupby(<span class="st">'sexo_dueno'</span>).quantile(<span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="aplicación-práctica-de-las-funciones" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="aplicación-práctica-de-las-funciones">Aplicación práctica de las funciones</h4>
+<p>Esta técnica de agrupación y cálculo de estadísticas es fundamental en el análisis de datos, ya que permite desglosar y entender mejor las tendencias y patrones dentro de subgrupos de nuestro conjunto de datos. Al entender cómo diferentes categorías (como el sexo del dueño del establecimiento en este caso) pueden influir en las variables numéricas de un negocio, podemos obtener insights valiosos para la toma de decisiones estratégicas y políticas comerciales.</p>
+<p>Ahora, en tu negocio, o investigación, usualmente tienes más de una variable categórica como es <code>sexo_dueno</code> y para cada una de ellas, o para combinaciones de ella vamos a querer realizar estas cuatro operaciones, o incluso más operaciones a nivel de grupos. Imaginate que tenemos las variables: <strong>tipo_cliente</strong> que puede tomar valores <em>persona natural</em>, <em>sociedad</em>, <em>contribuyente especial</em>; <em>genero_empleado</em> que puede tomar valores de <em>masculino</em>, <em>femenino</em>, <em>otro</em>. Si quiseramos realizar las cuatro operaciones sobre estas variables tendriamos que repetir el código y en total tendríamos <strong>! 12 lineas de código ¡</strong>. Mejor usemos una función que nos permita hacer estás operaciones para hacer nuestro código más legible y reproducible y además incluyamos otras operaciones interesantes.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Fijate como en esta función toma como argumentos un DataFrame y el nombre de la variable de grupo. Calcula la media, mediana, percentil 25, percentil 75 y rango intercuartilico por grupo. Luego, une todos estos DataFrames en uno solo y cambia los nombres de las columnas para reflejar las estadísticas calculadas. Finalmente, devuelve el DataFrame final. Sobre todo fijate que para cada operación usamos <strong>comentarios</strong> para saber que hace nuestra función de forma interna.</p>
+</div></div><div class="cell" data-source-line-numbers="1" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calcular_estadisticas(df, variable_grupo):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calcular estadísticas por grupo</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    media_por_grupo <span class="op">=</span> df.groupby(variable_grupo).mean()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    mediana_por_grupo <span class="op">=</span> df.groupby(variable_grupo).median()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    percentil_25_por_grupo <span class="op">=</span> df.groupby(variable_grupo).quantile(<span class="fl">0.25</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    percentil_75_por_grupo <span class="op">=</span> df.groupby(variable_grupo).quantile(<span class="fl">0.75</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calcular el rango intercuartilico</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    rango_intercuartilico <span class="op">=</span> percentil_75_por_grupo <span class="op">-</span> percentil_25_por_grupo</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Unir todos los dataframes</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    df_final <span class="op">=</span> pd.concat([media_por_grupo, mediana_por_grupo, percentil_25_por_grupo, percentil_75_por_grupo, rango_intercuartilico], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Cambiar los nombres de las columnas</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    df_final.columns <span class="op">=</span> [<span class="st">'media'</span>, <span class="st">'mediana'</span>, <span class="st">'percentil_25'</span>, <span class="st">'percentil_75'</span>, <span class="st">'rango_intercuartilico'</span>]</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_final</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ahora la aplicación con el <code>dataframe</code> que estamos utilizando quedaría como:</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>calcular_estadisticas(df_negocios, <span class="st">'sexo_dueno'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>calcular_estadisticas(df_negocios, <span class="st">'tipo_cliente'</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>calcular_estadisticas(df_negocios, <span class="st">'genero_empleado'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Genial, ahora podemos extender el uso de nuestro función para un conjunto de variables categoricas adicional a lo largo de nuestro análisis.</p>
+<blockquote class="blockquote">
+<p>Desafio: ¿Como modificarias la función? para 1. Añadir más de una variable de grupo 2. Añadir la columna <code>desviacion_estandar</code> 3. Conteo y proporción de casos ***** Añadir a la guía ******</p>
+</blockquote>
+</section>
+<section id="la-importancia-de-la-documentación" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="la-importancia-de-la-documentación">La importancia de la documentación</h4>
+<p>El uso de funciones y métodos en Python, como <code>groupby</code>, <code>mean</code>, <code>median</code>, y <code>quantile</code>, no solo facilita la realización de análisis estadísticos complejos sino que también asegura que nuestro trabajo sea reproducible y eficiente. Este enfoque ordenado y metódico es esencial para cualquier científico de datos o analista que busque extraer el máximo valor de sus datos.</p>
+<p>Para eso empleamos funciones, aquí un ejemplo sencillo de una:</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> saludo(nombre):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""En esta funcion vamos a saludar a los asistentes del curso"""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Hola </span><span class="sc">{</span>nombre<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ten en cuentaa las siguientes consideraciones dentro de las buenas prácticas para escribir funciones en Python:</p>
+<ol type="1">
+<li><p><strong>Nombres descriptivos</strong>: Los nombres de las funciones deben ser descriptivos y seguir la convención de nombres en Python (snake_case para las funciones).</p></li>
+<li><p><strong>Docstrings</strong>: Siempre debes documentar tus funciones con docstrings. Los docstrings ayudan a otros desarrolladores a entender qué hace tu función y cómo usarla.</p></li>
+<li><p><strong>Un solo trabajo</strong>: Cada función debe hacer una sola cosa. Si una función está haciendo varias cosas, considera dividirla en varias funciones.</p></li>
+<li><p><strong>Parámetros</strong>: Evita usar un gran número de parámetros en tus funciones. Si una función necesita muchos parámetros, puede ser una señal de que la función está haciendo demasiado.</p></li>
+<li><p><strong>Valores de retorno</strong>: Siempre que sea posible, las funciones deben devolver valores en lugar de imprimirlos directamente. Esto hace que las funciones sean más reutilizables.</p></li>
+<li><p><strong>Evita usar variables globales</strong>: Las funciones deben evitar depender de variables globales. En su lugar, pasa los valores que la función necesita como parámetros.</p></li>
+</ol>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Una función en programación actúa como una herramienta para encapsular código que realiza una tarea específica. Al definir una función, estás creando un bloque reutilizable de código que puede ser invocado en cualquier momento y en diferentes partes de tu programa. Esto tiene varias ventajas clave para mantener tu código limpio, ordenado y eficiente:</p>
+<ol type="1">
+<li><p><strong>Reutilización de Código:</strong> En lugar de repetir las mismas líneas de código cada vez que necesitas realizar la misma tarea, puedes llamar a una función que ya realiza esa tarea. Esto no solo ahorra tiempo sino que también reduce la posibilidad de errores.</p></li>
+<li><p><strong>Organización y Legibilidad:</strong> Las funciones ayudan a segmentar tu código en bloques lógicos y bien definidos. Cada función debe tener un propósito claro y estar separada de otras partes del código. Esto hace que tu código sea más fácil de leer y entender, tanto para ti como para otros desarrolladores.</p></li>
+<li><p><strong>Mantenimiento y Actualizaciones:</strong> Si necesitas cambiar la forma en que se realiza una tarea específica, solo necesitas modificar la función correspondiente. Esto es mucho más eficiente que buscar y actualizar múltiples instancias del mismo código.</p></li>
+<li><p><strong>Recordatorio de tu Trabajo:</strong> Al utilizar funciones bien documentadas, creas una especie de documentación en el código que te ayuda a recordar lo que hace cada parte del programa. Los nombres descriptivos de las funciones y los comentarios (docstrings) ayudan a mantener claro el propósito y funcionamiento del código.</p></li>
+</ol>
+<p>En resumen, las funciones son esenciales para escribir código eficiente, limpio y fácil de mantener. Permiten una mejor organización, facilitan la reutilización y ayudan a mantener un registro claro de lo que hace tu programa.</p>
+<p><img src="images/Meme3.jpg" alt="JuveYell" width="300px"></p>
+</div></div><p>Aquí hay un ejemplo de una función escrita siguiendo estas prácticas:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calcular_promedio(numeros):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Calcula el promedio de una lista de números.</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">        numeros (list): Una lista de números.</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">        float: El promedio de los números.</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    suma <span class="op">=</span> <span class="bu">sum</span>(numeros)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    promedio <span class="op">=</span> suma <span class="op">/</span> <span class="bu">len</span>(numeros)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> promedio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Esta función es clara, hace una sola cosa, tiene un docstring útil, y no depende de ninguna variable global.</p>
+<p>Retomando el ejemplo que estabamos viendo anteriormente y habiendo recorrido las buenas prácticas de programación tenemos la siguiente función:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> funcion_ejemplo(variable_cat):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Calcularemos la suma y contaremos cuantos elementos hay en la variable categótica.</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">        variable_cat: nombre columna del data frame</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">        promedio de la variable categórica</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    suma <span class="op">=</span> df.groupby(variable_cat).agg({<span class="st">'tipo_item'</span>: <span class="st">'sum'</span>})</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    cuenta <span class="op">=</span> df.groupby(variable_cat).count()</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    promedio <span class="op">=</span> suma<span class="op">/</span>cuenta</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> promedio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Esta función nos ayuda a realizar las acciones que habíamos planteado anteriormente, para usarla solamente debemos llamar a la función de la siguiente manera:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>variable_cat(<span class="st">'ventas'</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>variable_cat(<span class="st">'salidas'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>variable_cat(<span class="st">'entradas'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>promedio_uno <span class="op">=</span> variable_cat(<span class="st">'devoluciones'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>Vamos a crear una función que nos permite identificar si un número es primo</p>
+</blockquote>
+<p>Primero definamos qué es un número primo, de forma sencilla, es un número que es divisible para sí mismo y para el número 1. Aquí es donde entra el operador <code>%</code> que devuelve el residuo de la división entre dos números.Pongamos un ejemplo, si dividimos el número primo 17 entre 2, obtenemos un residuo de 1, en cambio si lo dividimos entre 17 mismo obtenemos un residuo de 0; esta es la lógica que usaremos para crear nuestra función.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> verificar_primo(numero):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Verfica si un numero es primo o no.</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">        numero (float): Un número cualquiera.</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Booleana: True si es verdad, False caso contrario</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,numero):</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (numero<span class="op">%</span>i) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Esta función es muy básica pero ayuda a comprender mejor tipos de variables, estructuras y la lógica tras la programación; esta función se ha explotado mucho así que te animo a uscar formas de realizar lo mismo pero optimizandola.</p>
+<blockquote class="blockquote">
+<p>Desafio: ¿Como modificarias la función? para 1. Documentar siguiendo las buenas practicas 2. Que modulo de pyhton nos puede dar un resultado similñar a la función descrita 3. cual crees que es el beneficio de usar funciones construidas por nosotros mismos ***** Añadir a la guía ******</p>
+</blockquote>
 </section>
 </section>
 

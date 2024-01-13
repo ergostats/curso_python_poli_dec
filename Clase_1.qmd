@@ -1,7 +1,13 @@
 ---
 title: "Introducción a Python y su entorno de desarrollo"
-format: html
+format: 
+    html:
+        code-line-numbers: true
+filters: 
+  - line-highlight
 editor: visual
+execute: 
+  eval: false
 ---
 
 # Resumen

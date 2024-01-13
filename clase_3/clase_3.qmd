@@ -1,11 +1,6 @@
 ---
 title: "Funciones y la importancia del análisis de datos"
 format: html
-format: 
-    html:
-        code-line-numbers: true
-filters: 
-  - line-highlight
 editor: visual
 execute: 
   eval: false
@@ -25,11 +20,13 @@ Finalmente, nos centramos en las funciones en Python, destacando su importancia 
 ## ¿Qué es el análisis de datos?
 
 El análisis de datos es un proceso integral y multifacético que implica examinar, limpiar, transformar y modelar datos con el objetivo de descubrir información útil, llegar a conclusiones y apoyar la toma de decisiones. Este proceso está en el corazón de la investigación académica, las estrategias de mercadotecnia, la gestión de recursos humanos, y se extiende hasta el dominio de la política pública y más allá. Las técnicas estadísticas se aplican para descubrir patrones, identificar relaciones y tendencias, y probar hipótesis.
+
 ::: column-margin
 
 **Nota**: Aunque el análisis de datos puede parecer un campo dominado por números y estadísticas, su alcance va más allá, abarcando interpretaciones cualitativas de textos, imágenes y otros medios no estructurados.
 
 ::: 
+
 ## ¿Cómo se realiza el análisis de datos?
 
 El proceso de análisis de datos puede variar en función del contexto y los objetivos específicos, pero generalmente sigue una estructura lógica y metódica que incluye:
