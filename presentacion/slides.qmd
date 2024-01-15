@@ -1,0 +1,449 @@
+---
+format: revealjs
+title-slide-attributes:
+  data-background-image: cover.png
+  data-background-size: contain
+
+---
+
+```{=html}
+<style>
+
+ol.custom-list {
+    list-style: none;
+    counter-reset: list-counter;
+}
+ol.custom-list li {
+    counter-increment: list-counter;
+    position: relative;
+    margin-left: 4em; 
+}
+ol.custom-list li::before {
+    content: counter(list-counter);
+    position: absolute;
+    left: -2em;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background-color: purple;
+    color: white;
+    text-align: center;
+    line-height: 1.5em;
+}
+ol.custom-list li:not(.active) {
+    opacity: 0.6;
+}
+ol.custom-list li:not(.active)::before {
+    background-color: #888;
+}
+ol.custom-list li strong {
+    font-weight: bold;
+}
+
+.side-by-side-images img {
+    width: 42%; /* Ajusta el ancho para que ambas imágenes quepan lado a lado */
+    height: auto; /* Mantiene la proporción de las imágenes */
+    display: inline-block; /* Alinea las imágenes una al lado de la otra */
+    vertical-align: top; /* Alinea las imágenes en la parte superior */
+    margin-right: 4%; /* Espacio entre las imágenes */
+
+    opacity: 20%;
+}
+.reveal h2 {
+    color: #4B0082;  /* Morado oscuro */
+}
+.reveal h3 {
+    color: #800080;  /* Morado */
+}
+.reveal h4 {
+    color: #DA70D6;  /* Morado claro */
+}
+.reveal ul {
+    counter-reset: item;
+    list-style: none;
+}
+.reveal ul li:before {
+    content: counter(item) ". ";
+    counter-increment: item;
+    color: #800080;  /* Color para los numerales */
+}
+.reveal strong {
+    color: #4B0082;  /* Color para el texto en negrita */
+}
+</style>
+```
+
+```{=html}
+<section data-background-image="cover.png" data-background-size="contain">
+</section>
+```
+
+---
+
+```{=html}
+<ol class="custom-list">
+    <li class="active">El proyecto <strong>"Nido del Búho"</strong> </li>
+    <li>El <strong>personal academico</strong></li>
+    <li><strong>Silabo</strong> del curso</li>
+    <li>Creación de tu <strong>cuenta de Github</strong></li>
+    <li><strong>Rubrica</strong> de calificación</li>
+</ol>
+```
+
+---
+
+```{=html}
+<section data-background-image="presentacion_nido.png" data-background-size="contain">
+</section>
+```
+---
+
+### El proyecto <strong>"Nido del Búho"</strong> ...
+
+<hr>
+
+Es una iniciativa del **Centro de Investigación Estadística ERGOSTATS** 📊 para brindar cursos accesibles 📚 a la comunidad académica 🏫 en sus primeras etapas de estudio 📝 y **preparar a sus miembros para los desafíos 🎓 en su carrera universitaria y en la vida laboral**👩‍💼👨‍💼. 
+
+<br>
+
+
+Promovemos la participación de los estudiantes 🙋‍♀️🙋‍♂️ en la educación de sus compañeros 👥 **en un marco de solidaridad 👐, inclusión 🤝 y compañerismo** 🤗.
+
+---
+```{=html}
+<section>
+    <div class="side-by-side-images">
+        <img src="icenf.png" alt="Imagen 1">
+        <img src="hex.png" alt="Imagen 2">
+    </div>
+</section>
+```
+
+La Asociación de Estudiantes de Economía 📈 de la escuela Politécnica Nacional 🏫 tenía el requerimiento de capacitación en Python 🐍 para los estudiantes de su carrera. Entramos en un proceso de negociación 🤝. 
+
+<br>
+
+ERGOSTATS 📊 da inicio al proyecto "Nido del Búho" 🦉 como respuesta. Esta iniciativa involucra: profesores comprometidos 👩‍🏫👨‍🏫, participación activa de la asociación de estudiantes 👥, gestión del espacio de aprendizaje 🏢, recursos y materiales 📚🖥️, consideración de la situación de los estudiantes en condición vulnerable 👫🛡️.
+---
+
+<ol class="custom-list">
+    <li>El proyecto <strong>"Nido del Búho"</strong> </li>
+    <li class="active">El <strong>personal academico</strong></li>
+    <li><strong>Silabo</strong> del curso</li>
+    <li>Creación de tu <strong>cuenta de Github</strong></li>
+    <li><strong>Rubrica</strong> de calificación</li>
+</ol>
+
+---
+
+:::: {.columns}
+
+::: {.column width="60%"}
+### **Paul Andrés Yungán**
+
+Ingeniero en Ciencias Económicas y Financieras de la EPN, actualmente cursando la **maestría en Inteligencia Artificial en el Tecnológico de Monterrey**. Lidero el **Área de Analítica Avanzada & BI en una empresa de marketing y publicidad**. 
+
+> **¡Listo para compartir y aprender en este curso!**
+:::
+
+::: {.column width="2%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="36%"}
+<img src = "paul_330_400.png">
+
+Mi pasión por la investigación económica se refleja en proyectos que contribuyen al desarrollo de Ecuador. 
+:::
+
+::: {.column width="2%"}
+<!-- empty column to create gap -->
+:::
+
+::::
+
+---
+
+:::: {.columns}
+
+::: {.column width="60%"}
+### **Brad Puglla**
+
+Ingeniero en Matemáticas de la EPN en proceso, actualmente **trabajo en ERGOSTATS** en la dirección de producción Estadística. 
+
+> **¡Exitos en el curso!**
+:::
+
+::: {.column width="2%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="36%"}
+<img src = "brad_330_400.png">
+
+Actualmente trabajo en temas relacionados a ---- 
+:::
+
+::: {.column width="2%"}
+<!-- empty column to create gap -->
+:::
+
+::::
+
+---
+
+
+:::: {.columns}
+
+::: {.column width="60%"}
+### **Alex Bajaña**
+
+Ingeniero en Ciencias Económicas y Financieras, fundador del **Centro de Investigación Estadística ERGOSTATS**  y consultor estadístico en el **Banco Mundial**. Me apasiona la estadística, el dibujo, y el ciclimos de montaña. Actualmente **realizo una maestría en gestión de proyectos**.  
+
+> **¡Bienvenidos a la comunidad ERGOSTATS!**
+:::
+
+::: {.column width="2%"}
+<!-- empty column to create gap -->
+:::
+
+::: {.column width="36%"}
+<img src = "3 (1).jpg">
+
+:::
+
+::: {.column width="2%"}
+<!-- empty column to create gap -->
+:::
+
+::::
+
+---
+
+
+<ol class="custom-list">
+    <li>El proyecto <strong>"Nido del Búho"</strong> </li>
+    <li>El <strong>personal academico</strong></li>
+    <li class="active"><strong>Silabo</strong> del curso</li>
+    <li>Creación de tu <strong>cuenta de Github</strong></li>
+    <li><strong>Rubrica</strong> de calificación</li>
+</ol>
+
+---
+
+### Módulo 1: Evaluación y diagnóstico
+
+<hr>
+
+#### Lección 1: 
+
+Introducción a Python y su entorno de desarrollo
+
+<br>
+
+#### Lección 2: 
+Introducción al manejo de datos en Python con pandas 
+
+<br>
+
+#### Lección 3: 
+La importancia del análisis de datos (Conceptual)
+
+---
+
+### Módulo 2: Análisis exploratorio
+
+<hr>
+
+#### Lección 4: 
+
+ Principios de estadística en Python
+
+<br>
+
+#### Lección 5: 
+Limpieza y transformación de datos con pandas en Python
+
+<br>
+
+#### Lección 6: 
+
+Normalización y estandarización de datos en Python.
+
+---
+
+### Módulo 3: Modelamiento estadístico
+
+<hr>
+
+#### Lección 7: 
+
+Pruebas de hipótesis para la media entre grupos en Python 
+
+<br>
+
+#### Lección 8: 
+Análisis de correlación y modelos de regresión en Python
+
+<br>
+
+#### Lección 9: 
+Regresión lineal con múltiples variables en Python
+
+---
+
+### Cierre: Fin del curso
+
+#### Lección 10: 
+Revisión de Estudios académicos  para dirigir el aprendizaje estadístico.
+
+<hr>
+
+> El curso está diseñado para tener una duración de 10 clases (~ 3 semanas) 
+
+
+---
+
+
+<ol class="custom-list">
+    <li>El proyecto <strong>"Nido del Búho"</strong> </li>
+    <li>El <strong>personal academico</strong></li>
+    <li><strong>Silabo</strong> del curso</li>
+    <li class="active">Creación de tu <strong>cuenta de Github</strong></li>
+    <li><strong>Rubrica</strong> de calificación</li>
+</ol>
+
+---
+
+
+
+#### Paso 1: Crear una Cuenta en `GitHub`
+
+<hr>
+
+- Ve a [GitHub](https://github.com).
+- Haz clic en "Sign up" en la parte superior derecha.
+- Rellena los campos con tu información: nombre de usuario, correo electrónico y contraseña.
+- Verifica tu cuenta siguiendo las instrucciones enviadas a tu correo electrónico.
+
+---
+
+#### Paso 2: Navegar por Repositorios
+
+
+<hr>
+
+
+- Una vez en tu cuenta, utiliza la barra de búsqueda de GitHub para encontrar repositorios.
+- Puedes buscar por nombre de usuario, lenguaje de programación, topic o nombre de repositorio.
+- Este es el repositorio del curso:
+
+[https://github.com/ergostats/python_nido_buho](https://github.com/ergostats/python_nido_buho)
+
+---
+
+
+#### Paso 3: Dar Estrella al Repositorio
+
+<hr>
+
+- En la página del repositorio, localiza y haz clic en el botón de "Star" en la parte superior derecha.
+- Al dar estrella, estás mostrando tu interés o apoyo al proyecto.
+![](star.png)
+
+---
+
+#### Paso 4: Dejar un Issue en el Repositorio del Curso
+
+<hr>
+
+- En la página del repositorio, haz clic en la pestaña "Issues".
+- Haz clic en el botón "New issue".
+- En cada clase los profesores habilitarán un *Issue* para que peudas realzar tus aportes.
+
+![](issues.png)
+
+
+---
+
+<ol class="custom-list">
+    <li>El proyecto <strong>"Nido del Búho"</strong> </li>
+    <li>El <strong>personal academico</strong></li>
+    <li><strong>Silabo</strong> del curso</li>
+    <li>Creación de tu <strong>cuenta de Github</strong></li>
+    <li class="active"><strong>Rubrica</strong> de calificación</li>
+</ol>
+
+---
+
+## Reacciones para Interactuar en Zoom
+
+<br>
+
+- ✋ **Mano Levantada:** Preguntas o cuando quieras participar.
+- 😲 **Cara Sorprendida:** Indica que podríamos ir más lento o que algo no quedó claro.
+- 🎉 **Festejo:** Señal de que podemos avanzar al siguiente tema.
+- ❤️ **Corazón:** Solicitud de ayuda con Python o indicar que algo es confuso.
+
+---
+
+## Tipos de Actividades:
+
+<br>
+
+**1. Actividades Grupales:**
+
+- En clases con Break Out Rooms de Zoom. 
+- Si no asistes a la clase, puedes hacer tu aporte individual después de ver el video de la sesión.
+
+**2. Actividades Individuales:**
+
+- Tareas para hacer en casa.
+
+---
+
+## Aportes y Tareas:
+
+<br>
+
+**Aportes en Clase:**
+
+- 1 aporte por clase en forma de issue en GitHub.
+- El representante del grupo sube el issue con los nombres de todos.
+
+**Tareas en Casa:**
+
+- Se suben a GitHub en un repositorio individual (usando botones, no se necesita conocimiento de Git).
+- Dejar en los issues el enlace a la entrega de la tarea.
+
+---
+
+## Evaluación y Calificación:
+
+<br>
+
+**Aportes:**
+
+- Valor máximo de 10 puntos.
+- Textos de opinión no deben superar las 150 palabras.
+
+**Tareas en Casa:**
+
+- Total de 3 deberes.
+- Cada tarea vale 10 puntos.
+
+---
+
+## Evaluación y Calificación:
+
+<br>
+
+**Ponderación del Curso:**
+
+- **Tareas en Casa:** 60% del total.
+- **Aportes en Clase:** 40% del total.
+
+**Aprobación del Curso:**
+
+- Se aprueba con un promedio de 8 combinando las dos actividades.
+
