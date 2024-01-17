@@ -1,17 +1,22 @@
 ---
-title: "Clase 2:Introducción al manejo de datos en Python con pandas"
-author: "Paul Yungan"
-format: html
+title: "Introducción al manejo de datos en Python con pandas"
+format: 
+    html:
+        code-line-numbers: true
+filters: 
+  - line-highlight
 editor: visual
 execute: 
   eval: false
 ---
 
-# Clase 2: Introducción al manejo de datos en Python con pandas  
+# Resumen
 
 En la era digital actual, la capacidad de analizar y manejar datos se ha vuelto esencial en una variedad de disciplinas, incluida la economía. Python, un lenguaje de programación versátil y poderoso, se ha convertido en una herramienta fundamental para el análisis de datos. 
 
 En este capítulo, exploraremos cómo Python, en combinación con la biblioteca Pandas, puede potenciar tus habilidades en el manejo eficiente y efectivo de datos económicos.
+
+# Pandas: Una libreria para manejar datos con Python
 
 ## Librería Pandas 
 Pandas, una biblioteca de Python diseñada específicamente para el análisis y manejos de datos, ofrece estructuras de datos flexibles y herramientas de manipulación que facilitan la tarea de explorar y comprender conjuntos de datos complejos. 
@@ -20,19 +25,101 @@ En este curso, nos sumergiremos en el mundo de Pandas para descubrir cómo puede
 
 ### Objetivos de hoy
 
--  Aprenderemos los conceptos básicos de Pandas, desde la creación de estructuras de datos hasta la manipulación de marcos de datos.
-- Aplicaremos los conocimientos adquiridos para realizar análisis de datos específicos relacionados con la economía.
+# Variables y tipos de datos: Python tiene varios tipos de datos estándar disponibles: números, cadenas, listas, tuplas, diccionarios.
+
+En el corazón del análisis de datos con Python se encuentran las variables y los tipos de datos. Python ofrece una variedad de tipos estándar, incluyendo números, cadenas, listas, tuplas y diccionarios. En este subtema, exploraremos cómo declarar variables, comprender la dinámica de los tipos de datos, y aprovechar las estructuras fundamentales de almacenamiento de información. Al dominar el manejo de variables y tipos de datos, los analistas pueden organizar y manipular datos de manera eficaz, allanando el camino para un análisis preciso y significativo.
+
+Vamos a ver cuales son los tipos de objetos más frecuentes en Python:
+
+```{python}
+# Esto es una variable de texto
+mi_variable = "Hola Mundo"
+
+# Esto es una lista de números
+mi_lista = [1, 2, 3, 4, 5]
+
+# Esto es un diccionario 
+mi_diccionario = {"clave": "valor", "clave_2": "valor_2"}
+```
+
+Mientras que ahora te  presentamos los tipos de variable que 
+
+- **Númerico:**
+
+Usos:
+
+-  Enteros:
+
+    - Conteo de elementos o iteraciones en bucles (loops).
+    - Índices en arreglos o listas.
+    - Operaciones matemáticas básicas como sumas o restas en situaciones donde no se requieren decimales. Por ejemplo cuando contamos personas, empresas u otros elementos enteros.
+- Flotantes (o decimales):
+
+    - Cálculos que requieren precisión decimal, como en ingeniería y ciencias.
+    - Representar medidas físicas como distancias o temperaturas.
+    - Operaciones financieras que implican decimales, como intereses o tasas de cambio.
+
+- Complejos:
+
+    - Resolver ecuaciones en ingeniería eléctrica (por ejemplo, análisis de circuitos).
+    - Procesamiento de señales y análisis de Fourier en matemáticas e ingeniería.
+    - Simulaciones en física que involucran números complejos, como la mecánica cuántica.
+
+```{python}
+# Creemos vectores con 5 elementos repetidos cada uno
+vector_entero = [10] * 5
+vector_flotante = [3.14] * 5 # Con decimales
+vector_complejo = [(1 + 2j)] * 5
+
+# Crear un diccionario que contenga estos vectores
+diccionario = {
+    "entero": vector_entero,
+    "flotante": vector_flotante,
+    "complejo": vector_complejo
+}
+
+print(diccionario)
+```
+
+- **Cadenas:**
+
+Usos:
+
+- Mensajes y salidas para interacción con el usuario.
+- Manipulación y análisis de texto en procesamiento de datos y análisis lingüístico.
+- Almacenamiento y representación de datos no numéricos, como nombres, direcciones, etc.
+- Creación de identificadores, etiquetas y nombres en programación.
+
+
+```{python}
+cadena_simple = 'Hola, mundo!'
+
+cadena_doble = ["¡Python es poderoso!", "Me gusta aprender"]
+
+```
+
+- **Lógicos o booleanos:**
+
+```{python}
+valores_logicos = [True, False]
+
+```
+
+Usos:
+
+- Controlar el flujo de programas con estructuras condicionales (if-else).
+- Manejar la lógica en bucles (loops) como en las instrucciones while.
+- Realizar comprobaciones y validaciones, como verificar si una condición se cumple.
+- Representar estados o condiciones en programación, como el estado de una conexión o si un usuario está autenticado.
+
+## ¿ Que es un DataFrame?
+Un DataFrame es una estructura de datos con dos dimensiones en la cual se puede guardar datos de distintos tipos (como caractéres, enteros, valores de punto flotante, factores y más) en columnas. Es similar a una hoja de cálculo o una tabla de SQL o el data.frame de R. Un DataFrame siempre tiene un índice (con inicio en 0). El índice refiere a la posición de un elemento en la estructura de datos. Primero vamos a importar `pandas`.
 
 ```{python}
 import pandas as pd
 ```
 
-## ¿ Que es un DataFrame?
-Un DataFrame es una estructura de datos con dos dimensiones en la cual se puede guardar datos de distintos tipos (como caractéres, enteros, valores de punto flotante, factores y más) en columnas. Es similar a una hoja de cálculo o una tabla de SQL o el data.frame de R. Un DataFrame siempre tiene un índice (con inicio en 0). El índice refiere a la posición de un elemento en la estructura de datos.
-
-Ejemplo:
-
-Imaginemos que tenemos información sobre el rendimiento de nuestros amigos en diferentes juegos durante una semana. Queremos organizar estos datos de manera clara y fácil de entender, ¡y para eso usaremos Pandas!
+> **Ejemplo:** Imaginemos que tenemos información sobre el rendimiento de nuestros amigos en diferentes juegos durante una semana. Queremos organizar estos datos de manera clara y fácil de entender, ¡y para eso usaremos Pandas!
 
 ```{python}
 # Crear un DataFrame con los datos de rendimiento en juegos
@@ -48,22 +135,27 @@ df = pd.DataFrame(datos)
 # Mostrar el DataFrame
 print(df)
 ```
+::: column-margin
+¡Con Pandas, explorar y entender datos se vuelve tan fácil como jugar un juego!
+
+![](https://pbs.twimg.com/media/FSgAtaxWYAIwHHI.jpg)
+:::
+
 En este ejemplo:
 
-- La columna 'Nombre' contiene los nombres de nuestros amigos.
-- Las columnas 'Juego 1 (puntos)', 'Juego 2 (puntos)', y 'Juego 3 (puntos)' representan los puntos obtenidos por cada amigo en diferentes juegos.
+- La columna `Nombre` contiene los nombres de nuestros amigos.
+- Las columnas `Juego 1 (puntos)`, `Juego 2 (puntos)`, y `Juego 3 (puntos)` representan los puntos obtenidos por cada amigo en diferentes juegos.
 
 El DataFrame nos permite organizar estos datos de manera clara. Ahora, podemos realizar diversas operaciones para entender mejor el rendimiento de cada amigo, como calcular promedios, encontrar el máximo puntaje, o incluso visualizar los datos de manera gráfica.
 
-¡Con Pandas, explorar y entender datos se vuelve tan fácil como jugar un juego!
 
 
-## Importación de datos en Python desde diferentes fuentes utilizando la biblioteca pandas. 
+# Importación de datos en Python desde diferentes fuentes utilizando la biblioteca pandas. 
 La información proviene de diversas fuentes: hojas de cálculo, bases de datos, archivos CSV, y más. En este subcapítulo, aprenderemos cómo Python, junto con la biblioteca Pandas, puede funcionar como un puente eficaz para importar y manipular datos de diferentes fuentes. Este proceso es fundamental para transformar datos crudos en conocimientos significativos.
 
 Utilizaremos las tablas llamadas IMP_SRI.xlsx, ventas_SRI.CSV, riesgo_pais.txt 
 
-### Importación de un archivo .xlsx
+## Importación de un archivo .xlsx
 
 En la ciencia de datos, es común trabajar con conjuntos de datos almacenados en diversos formatos, y uno de los formatos populares para el almacenamiento de datos tabulares es el formato Excel (.xlsx). Pandas, una biblioteca de Python ampliamente utilizada para el análisis de datos, proporciona una funcionalidad sencilla y poderosa para importar datos desde archivos .xlsx.
 
@@ -74,11 +166,16 @@ Exploraremos cómo utilizar la biblioteca pandas para importar datos desde un ar
 imp_sri = pd.read_excel ("data/otras_fuentes/IMP_SRI.xlsx")
 print(df)
 ```
-Ahora revisaremos los tipos de datos que contiene nuestro DataFrame
+Ahora revisaremos los tipos de datos que contiene nuestro DataFrame con `dataframe.dtypes`
 
-- int64 : para enteros de 64 bits
-- float64: para números de punto flotante de 64 bits
-- object : para objetos de texto (cadenas o mixtos)
+- `int64` : para enteros de 64 bits
+- `float64`: para números de punto flotante de 64 bits
+- `object` : para objetos de texto (cadenas o mixtos)
+
+::: column.margin
+
+Observa como en estas lineas de código revisamos los **atributos** de nuestro Pandas Dataframe, estos atributos nos dan idea de la **estructura del dataframe**.
+:::
 
 ```{python}
 imp_sri.dtypes
@@ -89,27 +186,30 @@ Ahora revisamos el numbre de las variables (columnas)
 imp_sri.columns
 ```
 
-Si deseamos saber cuantas filas y columnas tiene nuestro DataFrame (df), los hacemos con .shape.
-
-Nos muestra que tenemos 18 observaciones (observaciones) con 5 variables (columnas)
+Si deseamos saber cuantas filas y columnas tiene nuestro DataFrame (df), lo hacemos con `dataframe.shape`, esto nos muestra que tenemos 18 observaciones (observaciones) con 5 variables (columnas)
 
 ```{python}
 imp_sri.shape
 ```
 
-Si deseamos realizar una estadistica descriptiva rapida podemos utilizar .describe ()
+::: column-margin
+
+Asi mismo observa que algunos un *Pandas Dataframe* tiene atributos y **métodos**. En este caso `describe()` y `head()` son métodos que requieren o no argumentos. Siempre puedes usar el comando `print(dir(df))` para revisar los métodos y atributos. Asi mismo no olvides que puedes usar `help(df.describe)` para recibir ayuda de Python.
+:::
+
+Si deseamos realizar una estadistica descriptiva rapida podemos utilizar `dataframe.describe()`
 
 ```{python}
-imp_sri.describe ()
+imp_sri.describe()
 ```
 
-Ahora si deseamos unicamente imprimir las 10 primeras observaciones lo realizamos de la siguiente manera utilizando .head(número de observaciones que deseo ver) : 
+Ahora si deseamos unicamente imprimir las 10 primeras observaciones lo realizamos de la siguiente manera utilizando `dataframe.head(n)` siendo `n` el número de observaciones que deseamos observar, en este caso 10. 
 
 ```{python}
-imp_sri.head (10)
+imp_sri.head(10)
 ```
 
-### Importación de un archivo .CSV
+## Importación de un archivo .CSV
 
 La importación de datos desde archivos en formato CSV (Comma-Separated Values) es una tarea común en el análisis de datos. Los archivos CSV son ampliamente utilizados debido a su simplicidad y compatibilidad con una variedad de aplicaciones. Pandas facilita la importación de datos CSV mediante la función `read_csv()`.
 
@@ -127,24 +227,12 @@ Ahora repliquemos lo que ya ralizamos anteriormente:
 
 ```{python}
 ventas_sri.dtypes
-```
-
-```{python}
-ventas_sri.dtypes
-```
-
-```{python}
 ventas_sri.columns
-```
-
-```{python}
-ventas_sri.describe ()
-```
-
-```{python}
+ventas_sri.describe()
 ventas_sri.head (10)
 ```
-### Importación de un .txt
+
+## Importación de un .txt
 
 En el ámbito económico, la importación efectiva de datos es esencial para desentrañar patrones y tendencias clave. En este subsubcapítulo, exploraremos cómo utilizar pandas en Python para importar datos desde archivos de texto (.txt), una tarea crucial para analistas económicos y profesionales del sector. Desde indicadores económicos hasta tasas de cambio y riesgo país, aprenderemos a convertir estos datos textuales en estructuras tabulares (DataFrames). Abordaremos desafíos específicos, como la elección de codificaciones y la gestión de delimitadores, proporcionando habilidades prácticas para aprovechar al máximo la información contenida en archivos de texto y potenciar el análisis económico con datos fiables.
 
@@ -158,11 +246,23 @@ print(riesgo_pais)
 
 
 
-# Estructuras de control: Python soporta las estructuras de control típicas como if, for y while.
+# Estructuras de control
 
-En el análisis de datos con Python, las estructuras de control como 'if', 'for', y 'while' desempeñan un papel clave en la manipulación y procesamiento eficiente de datos. 
+> Python soporta las estructuras de control típicas en otros lenguajes de programación como *if, for* y *while*. ¿Cual crees que sería la diferencia entre ellos?
+
+En el análisis de datos con Python, las estructuras de control como 'if', 'for', y 'while' desempeñan un papel clave en la manipulación y procesamiento eficiente y ordenado de datos. 
+
 La estructura condicional 'if' permite tomar decisiones basadas en condiciones específicas, mientras que los bucles 'for' y 'while' posibilitan recorrer conjuntos de datos y realizar iteraciones, respectivamente. Estas herramientas permiten a los analistas personalizar el flujo de ejecución de sus programas, optimizando la manipulación de datos y simplificando tareas repetitivas en el análisis de datos.
 
+::: column-margin
+
+**!Muy importante¡** Fijate en como en todos estos operadores es de extremada importancia la indentación (fijate bien el número de tabuladores antes de cada linea de código). *Visual Studio Code* tiene extensiones que te pueden ayudar a verificar si tu código está bien indentado. 
+
+![](https://media.makeameme.org/created/gracias-por-su-4b7762e138.jpg)
+
+:::
+
+Primero veamos algunos ejemplos sencillos:
 
 ```{python}
 
@@ -182,6 +282,69 @@ while contador < 5:
 
 ```
 
+
+
+## `if` el operador condicional
+
+El comando `if` en Python no funciona directamente con vectores como lo haría en lenguajes como R o MATLAB. En Python, tendrías que iterar sobre los elementos del vector y aplicar la condición `if` a cada elemento. 
+
+Por ejemplo, si tienes dos listas, `utilidad` y `costo`, y quieres verificar si la relación utilidad/costo es mayor o menor que 1 para cada elemento, podrías hacer algo como esto:
+
+```{python}
+#| source-line-numbers: "6-11"
+utilidad = [10, 20, 30, 40, 50]
+costo = [20, 20, 30, 40, 40]
+
+for u, c in zip(utilidad, costo):
+    ratio = u / c
+    if ratio < 1:
+        print(f"Deficit: La utilidad {u} es menor que el costo {c}.")
+    elif ratio == 1:
+        print(f"Equilibrio: La utilidad {u} es igual al costo {c}.")
+    else:
+        print(f"Ganancia: La utilidad {u} es mayor que el costo {c}.")
+```
+
+::: column-margin
+En este código, `zip(utilidad, costo)` empareja cada elemento de `utilidad` con el correspondiente elemento de `costo`. Luego, para cada par de valores, calculamos el ratio `u / c` y usamos una estructura `if` para imprimir un mensaje basado en si el ratio es menor que, igual a, o mayor que 1.
+:::
+
+Algunas consideraciones importantes al usar `if` en Python:
+
+- Python usa indentación para delimitar bloques de código. Asegúrate de indentar correctamente tu código dentro de la estructura `if`.
+- Python usa `==` para comparar igualdad, `!=` para desigualdad, `<` para menor que, `>` para mayor que, `<=` para menor o igual que, y `>=` para mayor o igual que.
+- Puedes usar `and` y `or` para combinar condiciones, y `not` para negar una condición.
+- La estructura `if` puede ser seguida por una o más estructuras `elif` (abreviatura de "else if") para comprobar múltiples condiciones, y una estructura `else` para especificar qué hacer si ninguna de las condiciones anteriores es verdadera.
+
+# `for` el operador de las iteraciones
+
+En Python, el bucle `for` se utiliza para iterar sobre una secuencia (como una lista, tupla, diccionario, conjunto o cadena) o cualquier otro objeto iterable.
+
+Veamos un ejemplo, si tienes un vector adicional llamado `impuestos` y quieres calcular el ratio de utilidad después de impuestos a costo, puedes hacerlo de la siguiente manera:
+
+::: column-margin
+Fijate como en este código, `zip(utilidad, costo, impuestos)` empareja cada elemento de `utilidad` con el correspondiente elemento de `costo` e `impuestos`. Luego, para cada trío de valores, calculamos la utilidad después de impuestos como `u - i` y el ratio como `utilidad_despues_impuestos / c`. Finalmente, usamos una estructura `if` para imprimir un mensaje basado en si el ratio es menor que, igual a, o mayor que 1.
+:::
+
+```{python}
+#| source-line-numbers: "5"
+utilidad = [10, 20, 30, 40, 50]
+costo = [20, 20, 30, 40, 40]
+impuestos = [2, 4, 6, 8, 10]
+
+for u, c, i in zip(utilidad, costo, impuestos):
+    utilidad_despues_impuestos = u - i
+    ratio = utilidad_despues_impuestos / c
+    if ratio < 1:
+        print(f"Deficit: La utilidad después de impuestos {utilidad_despues_impuestos} es menor que el costo {c}.")
+    elif ratio == 1:
+        print(f"Equilibrio: La utilidad después de impuestos {utilidad_despues_impuestos} es igual al costo {c}.")
+    else:
+        print(f"Ganancia: La utilidad después de impuestos {utilidad_despues_impuestos} es mayor que el costo {c}.")
+```
+
+
+
 # Funciones: En Python, una función es un bloque de código reutilizable que realiza una acción específica.
 
 Las funciones en Python representan bloques de código reutilizables que promueven la modularidad y organización en el análisis de datos. En este subtema, exploraremos la creación y aplicación de funciones, permitiéndonos encapsular tareas específicas para su fácil reutilización. Aprenderemos a definir funciones con parámetros, gestionar valores de retorno y entender el ámbito de las variables. Al incorporar funciones en nuestro flujo de trabajo, no solo simplificamos el código, sino que también mejoramos la mantenibilidad y legibilidad, optimizando así el proceso de análisis de datos con Python.
@@ -195,58 +358,6 @@ def mi_funcion():
 mi_funcion()
 ```
 
-> Python es un lenguaje de programación orientada a objetos
+> Python es un lenguaje de programación orientada a objetos. Y las funciones son un pilar en este tipo de lenguajes, en el próximo capítulo vamos a dedicar toda nuestra atención a las funciones.
 
 
-# Variables y tipos de datos: Python tiene varios tipos de datos estándar disponibles: números, cadenas, listas, tuplas, diccionarios.
-En el corazón del análisis de datos con Python se encuentran las variables y los tipos de datos. Python ofrece una variedad de tipos estándar, incluyendo números, cadenas, listas, tuplas y diccionarios. En este subtema, exploraremos cómo declarar variables, comprender la dinámica de los tipos de datos, y aprovechar las estructuras fundamentales de almacenamiento de información. Al dominar el manejo de variables y tipos de datos, los analistas pueden organizar y manipular datos de manera eficaz, allanando el camino para un análisis preciso y significativo.
-
-```{python}
-# Esto es una variable
-mi_variable = "Hola Mundo"
-
-# Esto es una lista
-mi_lista = [1, 2, 3, 4, 5]
-
-# Esto es un diccionario
-mi_diccionario = {"clave": "valor"}
-```
-
-- Números 
-```{python}
-entero = 10
-flotante = 3.14
-complejo = 1 + 2j
-```
-
--Cadenas:
-
-
-```{python}
-cadena_simple = 'Hola, mundo!'
-cadena_doble = "¡Python es poderoso!"
-```
-
-- Listas:
-
-
-```{python}
-lista_numeros = [1, 2, 3, 4, 5]
-lista_cadenas = ['manzana', 'banana', 'cereza']
-```
-
-- Tuplas: 
-
-
-```{python}
-tupla_colores = ('rojo', 'verde', 'azul')
-tupla_coordenadas = (3.5, 7.2)
-```
-
-- Diccionarios:
-
-
-```{python}
-diccionario_edades = {'Juan': 25, 'María': 30, 'Carlos': 22}
-diccionario_frutas = {'manzana': 3, 'banana': 5, 'cereza': 8}
-```
