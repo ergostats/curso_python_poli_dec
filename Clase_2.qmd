@@ -23,8 +23,6 @@ Pandas, una biblioteca de Python diseñada específicamente para el análisis y 
 
 En este curso, nos sumergiremos en el mundo de Pandas para descubrir cómo puede facilitar el análisis y la manipulación de datos económicos.
 
-### Objetivos de hoy
-
 # Variables y tipos de datos: Python tiene varios tipos de datos estándar disponibles: números, cadenas, listas, tuplas, diccionarios.
 
 En el corazón del análisis de datos con Python se encuentran las variables y los tipos de datos. Python ofrece una variedad de tipos estándar, incluyendo números, cadenas, listas, tuplas y diccionarios. En este subtema, exploraremos cómo declarar variables, comprender la dinámica de los tipos de datos, y aprovechar las estructuras fundamentales de almacenamiento de información. Al dominar el manejo de variables y tipos de datos, los analistas pueden organizar y manipular datos de manera eficaz, allanando el camino para un análisis preciso y significativo.

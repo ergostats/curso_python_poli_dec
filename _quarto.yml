@@ -1,17 +1,21 @@
 project:
   type: book
+  output-dir: docs
 book:
-  title: "mybook"
-  author: "Jane Doe"
+  title: "Introducción al Lenguaje de Programación Python para Análisis Estadístico"
+  subtitle: "Guía para el estudiante"
+  author: 
+    - Alex Bajaña
+    - Brad Puglla
+    - Paul Yungán
   date: "8/18/2021"
   chapters:
     - index.qmd
+    - intro.qmd
     - Clase_1.qmd
     - Clase_2.qmd
-    - Clase_5.qmd
 format:
   html:
+    number-sections: false
     theme: cosmo
-  pdf:
-    documentclass: scrreport
-  
+number-depth: 1

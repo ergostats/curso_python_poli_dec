@@ -1,42 +1,66 @@
-Clase 1: Introducción a Python y su entorno de desarrollo
-●	Introducción a Python y su sintaxis básica.
-●	Instalación de paquetes en Python utilizando `pip`.
-●	Uso de entornos virtuales para gestionar dependencias.
-●	Fuentes primarias de consulta con Python, incluyendo la documentación oficial y la comunidad en línea.
-●	Buenas prácticas de programación en Python.
-●	Comprendiendo el entorno de desarrollo de Python, como Jupyter Notebook.
-Clase 2: Introducción al manejo de datos en Python con pandas 
-●	Importación de datos en Python desde diferentes fuentes utilizando la biblioteca pandas.
-Clase 3: La importancia del análisis de datos (Conceptual)
-●	Conceptos clave para el análisis efectivo de datos.
-●	Iniciativas para abordar el temas sociales utilizando Python, como el uso de módulos como pandas em investigación académica. 
-Clase 4: Principios de estadística en Python
-●	Conceptos estadísticos como variables aleatorias, funciones de distribución y medidas de tendencia central.
-●	Análisis de variables numéricas utilizando módulos como scipy y pandas.
-●	Análisis de variables categóricas con enfoque en la biblioteca pandas.
-●	Operaciones entre variables y cálculos estadísticos en Python.
-Clase 5: Limpieza y transformación de datos con pandas en Python
-●	Recodificación de variables y creación de nuevas variables a partir de datos existentes utilizando pandas.
-●	Limpieza de datos, tratamiento de valores vacíos y duplicados en Python.
-●	Normalización y estandarización de datos en Python.
-●	Las partes de un objeto `DataFrame` de pandas como clave (`key`) e índice (`index`) en el contexto de series de tiempo.
-Clase 6: Exploración y visualización de datos con Matplotlib y Seaborn en Python
-●	La gramática de los gráficos utilizando bibliotecas como Matplotlib y Seaborn.
-●	Visualización de variables numéricas y categóricas con ejemplos prácticos en Python.
-●	Personalización de gráficos, paletas de colores y etiquetas para mejorar la interpretación de los datos en Python.
-Clase 7: Pruebas de hipótesis para la media entre grupos en Python 
-●	Introducción a las pruebas de hipótesis en Python.
-●	Casos de acuerdo a la varianza en los grupos (prueba t de Student) y casos de desbalance en los tamaños de los grupos.
-●	Comparación y validación de estadísticas de grupo utilizando bibliotecas como SciPy.
-Clase 8: Análisis de correlación y modelos de regresión en Python
-●	El modelo de mínimos cuadrados ordinarios con una sola variable en Python.
-●	Interpretación y validación de los parámetros de una regresión en Python.
-●	La relación entre un modelo de regresión y la correlación de los datos en Python.
-Clase 9: Regresión lineal con múltiples variables en Python
-●	Inclusión de variables dicotómicas en el modelo de regresión en Python.
-●	Interpretación de las estadísticas de rendimiento de los modelos de regresión, incluyendo R cuadrado y p-valores.
-●	Selección y comparación de modelos utilizando técnicas como el método de selección de características.
-Clase 10: Estudios académicos 
-●	Revisión de la estructura de una investigación académica relacionada con la movilidad humana en Python.
-●	Métodos para abordar estadística desde la visualización y la disponibilidad de datos en Python. 
-●	Lecciones y métodos narrativos para abordar desde la estadística a la migración en Python.
+---
+title: "Indice (en construcción)"
+format: html
+---
+
+## Clase 1: Introducción a Python y su entorno de desarrollo
+
+-	Introducción a Python y su sintaxis básica.
+-	Instalación de paquetes en Python utilizando `pip`.
+-	Uso de entornos virtuales para gestionar dependencias.
+-	Fuentes primarias de consulta con Python, incluyendo la documentación oficial y la comunidad en línea.
+-	Buenas prácticas de programación en Python.
+-	Comprendiendo el entorno de desarrollo de Python
+
+## Clase 2: Introducción al manejo de datos en Python con pandas 
+
+-	Importación de datos en Python desde diferentes fuentes utilizando la biblioteca pandas.
+
+## Clase 3: La importancia del análisis de datos y reproducibilidad con funciones
+
+-	Conceptos clave para el análisis efectivo de datos.
+-	Iniciativas para abordar el temas sociales utilizando Python, como el uso de módulos como pandas em investigación académica. 
+
+## Clase 4: Principios de estadística en Python
+
+-	Conceptos estadísticos como variables aleatorias, funciones de distribución y medidas de tendencia central.
+-	Análisis de variables numéricas utilizando módulos como scipy y pandas.
+-	Análisis de variables categóricas con enfoque en la biblioteca pandas.
+-	Operaciones entre variables y cálculos estadísticos en Python.
+
+## Clase 5: Limpieza y transformación de datos con pandas en Python
+
+-	Recodificación de variables y creación de nuevas variables a partir de datos existentes utilizando pandas.
+-	Limpieza de datos, tratamiento de valores vacíos y duplicados en Python.
+-	Normalización y estandarización de datos en Python.
+-	Las partes de un objeto `DataFrame` de pandas como clave (`key`) e índice (`index`) en el contexto de series de tiempo.
+
+## Clase 6: Exploración y visualización de datos con Matplotlib y Seaborn en Python
+
+-	La gramática de los gráficos utilizando bibliotecas como Matplotlib y Seaborn.
+-	Visualización de variables numéricas y categóricas con ejemplos prácticos en Python.
+-	Personalización de gráficos, paletas de colores y etiquetas para mejorar la interpretación de los datos en Python.
+
+## Clase 7: Pruebas de hipótesis para la media entre grupos en Python 
+
+-	Introducción a las pruebas de hipótesis en Python.
+-	Casos de acuerdo a la varianza en los grupos (prueba t de Student) y casos de desbalance en los tamaños de los grupos.
+-	Comparación y validación de estadísticas de grupo utilizando bibliotecas como SciPy.
+
+## Clase 8: Análisis de correlación y modelos de regresión en Python
+
+-	El modelo de mínimos cuadrados ordinarios con una sola variable en Python.
+-	Interpretación y validación de los parámetros de una regresión en Python.
+-	La relación entre un modelo de regresión y la correlación de los datos en Python.
+
+## Clase 9: Regresión lineal con múltiples variables en Python
+
+-	Inclusión de variables dicotómicas en el modelo de regresión en Python.
+-	Interpretación de las estadísticas de rendimiento de los modelos de regresión, incluyendo R cuadrado y p-valores.
+-	Selección y comparación de modelos utilizando técnicas como el método de selección de características.
+
+## Clase 10: Estudios académicos 
+
+-	Revisión de la estructura de una investigación académica relacionada con la movilidad humana en Python.
+-	Métodos para abordar estadística desde la visualización y la disponibilidad de datos en Python. 
+-	Lecciones y métodos narrativos para abordar desde la estadística a la migración en Python.

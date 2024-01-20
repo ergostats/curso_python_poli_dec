@@ -31,7 +31,7 @@ Python fue creado por Guido van Rossum en 1989. La motivación principal era cre
 ![](https://th.bing.com/th/id/OIP.M560NYtRbNcvFTiHDdY0NQAAAA?pid=ImgDet&rs=1)
 :::
 
-## Pyhton, un lenguahe *open source*
+## Pyhton, un lenguaje *open source*
 
 Python es un lenguaje de programación de código abierto. Esto significa que su código fuente es libremente disponible y puede ser distribuido y modificado. Python es desarrollado y mantenido por una comunidad de voluntarios de todo el mundo que colaboran a través de la Python Software Foundation.
 

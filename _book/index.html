@@ -6,10 +6,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Jane Doe">
+<meta name="author" content="Alex Bajaña">
+<meta name="author" content="Brad Puglla">
+<meta name="author" content="Paul Yungán">
 <meta name="dcterms.date" content="2021-08-18">
 
-<title>mybook</title>
+<title>Introducción al Lenguaje de Programación Python para Análisis Estadístico</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +34,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Clase_1.html" rel="next">
+<link href="./intro.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -65,13 +67,13 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating fullcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">mybook</h1>
+      <h1 class="quarto-secondary-nav-title">Introducción al Lenguaje de Programación Python para Análisis Estadístico</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -84,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">mybook</a> 
+      <a href="./">Introducción al Lenguaje de Programación Python para Análisis Estadístico</a> 
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -96,35 +98,53 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Indice (en construcción)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Clase_1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Untitled</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Clase_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Clase 2:Introducción al manejo de datos en Python con pandas</span></a>
+  <a href="./Clase_1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción a Python y su entorno de desarrollo</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Clase_5.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Clase 5:Limpieza y transformación de datos con pandas en Python</span></a>
+  <a href="./Clase_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción al manejo de datos en Python con pandas</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#clase-1-introducción-a-python-y-su-entorno-de-desarrollo" id="toc-clase-1-introducción-a-python-y-su-entorno-de-desarrollo" class="nav-link active" data-scroll-target="#clase-1-introducción-a-python-y-su-entorno-de-desarrollo">Clase 1: Introducción a Python y su entorno de desarrollo</a></li>
+  <li><a href="#clase-2-introducción-al-manejo-de-datos-en-python-con-pandas" id="toc-clase-2-introducción-al-manejo-de-datos-en-python-con-pandas" class="nav-link" data-scroll-target="#clase-2-introducción-al-manejo-de-datos-en-python-con-pandas">Clase 2: Introducción al manejo de datos en Python con pandas</a></li>
+  <li><a href="#clase-3-la-importancia-del-análisis-de-datos-y-reproducibilidad-con-funciones" id="toc-clase-3-la-importancia-del-análisis-de-datos-y-reproducibilidad-con-funciones" class="nav-link" data-scroll-target="#clase-3-la-importancia-del-análisis-de-datos-y-reproducibilidad-con-funciones">Clase 3: La importancia del análisis de datos y reproducibilidad con funciones</a></li>
+  <li><a href="#clase-4-principios-de-estadística-en-python" id="toc-clase-4-principios-de-estadística-en-python" class="nav-link" data-scroll-target="#clase-4-principios-de-estadística-en-python">Clase 4: Principios de estadística en Python</a></li>
+  <li><a href="#clase-5-limpieza-y-transformación-de-datos-con-pandas-en-python" id="toc-clase-5-limpieza-y-transformación-de-datos-con-pandas-en-python" class="nav-link" data-scroll-target="#clase-5-limpieza-y-transformación-de-datos-con-pandas-en-python">Clase 5: Limpieza y transformación de datos con pandas en Python</a></li>
+  <li><a href="#clase-6-exploración-y-visualización-de-datos-con-matplotlib-y-seaborn-en-python" id="toc-clase-6-exploración-y-visualización-de-datos-con-matplotlib-y-seaborn-en-python" class="nav-link" data-scroll-target="#clase-6-exploración-y-visualización-de-datos-con-matplotlib-y-seaborn-en-python">Clase 6: Exploración y visualización de datos con Matplotlib y Seaborn en Python</a></li>
+  <li><a href="#clase-7-pruebas-de-hipótesis-para-la-media-entre-grupos-en-python" id="toc-clase-7-pruebas-de-hipótesis-para-la-media-entre-grupos-en-python" class="nav-link" data-scroll-target="#clase-7-pruebas-de-hipótesis-para-la-media-entre-grupos-en-python">Clase 7: Pruebas de hipótesis para la media entre grupos en Python</a></li>
+  <li><a href="#clase-8-análisis-de-correlación-y-modelos-de-regresión-en-python" id="toc-clase-8-análisis-de-correlación-y-modelos-de-regresión-en-python" class="nav-link" data-scroll-target="#clase-8-análisis-de-correlación-y-modelos-de-regresión-en-python">Clase 8: Análisis de correlación y modelos de regresión en Python</a></li>
+  <li><a href="#clase-9-regresión-lineal-con-múltiples-variables-en-python" id="toc-clase-9-regresión-lineal-con-múltiples-variables-en-python" class="nav-link" data-scroll-target="#clase-9-regresión-lineal-con-múltiples-variables-en-python">Clase 9: Regresión lineal con múltiples variables en Python</a></li>
+  <li><a href="#clase-10-estudios-académicos" id="toc-clase-10-estudios-académicos" class="nav-link" data-scroll-target="#clase-10-estudios-académicos">Clase 10: Estudios académicos</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">mybook</h1>
+<h1 class="title d-none d-lg-block">Introducción al Lenguaje de Programación Python para Análisis Estadístico</h1>
+<p class="subtitle lead">Guía para el estudiante</p>
 </div>
 
 
@@ -132,9 +152,11 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Authors</div>
     <div class="quarto-title-meta-contents">
-             <p>Jane Doe </p>
+             <p>Alex Bajaña </p>
+             <p>Brad Puglla </p>
+             <p>Paul Yungán </p>
           </div>
   </div>
     
@@ -151,9 +173,90 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Clase 1: Introducción a Python y su entorno de desarrollo ● Introducción a Python y su sintaxis básica. ● Instalación de paquetes en Python utilizando <code>pip</code>. ● Uso de entornos virtuales para gestionar dependencias. ● Fuentes primarias de consulta con Python, incluyendo la documentación oficial y la comunidad en línea. ● Buenas prácticas de programación en Python. ● Comprendiendo el entorno de desarrollo de Python, como Jupyter Notebook. Clase 2: Introducción al manejo de datos en Python con pandas ● Importación de datos en Python desde diferentes fuentes utilizando la biblioteca pandas. Clase 3: La importancia del análisis de datos (Conceptual) ● Conceptos clave para el análisis efectivo de datos. ● Iniciativas para abordar el temas sociales utilizando Python, como el uso de módulos como pandas em investigación académica. Clase 4: Principios de estadística en Python ● Conceptos estadísticos como variables aleatorias, funciones de distribución y medidas de tendencia central. ● Análisis de variables numéricas utilizando módulos como scipy y pandas. ● Análisis de variables categóricas con enfoque en la biblioteca pandas. ● Operaciones entre variables y cálculos estadísticos en Python. Clase 5: Limpieza y transformación de datos con pandas en Python ● Recodificación de variables y creación de nuevas variables a partir de datos existentes utilizando pandas. ● Limpieza de datos, tratamiento de valores vacíos y duplicados en Python. ● Normalización y estandarización de datos en Python. ● Las partes de un objeto <code>DataFrame</code> de pandas como clave (<code>key</code>) e índice (<code>index</code>) en el contexto de series de tiempo. Clase 6: Exploración y visualización de datos con Matplotlib y Seaborn en Python ● La gramática de los gráficos utilizando bibliotecas como Matplotlib y Seaborn. ● Visualización de variables numéricas y categóricas con ejemplos prácticos en Python. ● Personalización de gráficos, paletas de colores y etiquetas para mejorar la interpretación de los datos en Python. Clase 7: Pruebas de hipótesis para la media entre grupos en Python ● Introducción a las pruebas de hipótesis en Python. ● Casos de acuerdo a la varianza en los grupos (prueba t de Student) y casos de desbalance en los tamaños de los grupos. ● Comparación y validación de estadísticas de grupo utilizando bibliotecas como SciPy. Clase 8: Análisis de correlación y modelos de regresión en Python ● El modelo de mínimos cuadrados ordinarios con una sola variable en Python. ● Interpretación y validación de los parámetros de una regresión en Python. ● La relación entre un modelo de regresión y la correlación de los datos en Python. Clase 9: Regresión lineal con múltiples variables en Python ● Inclusión de variables dicotómicas en el modelo de regresión en Python. ● Interpretación de las estadísticas de rendimiento de los modelos de regresión, incluyendo R cuadrado y p-valores. ● Selección y comparación de modelos utilizando técnicas como el método de selección de características. Clase 10: Estudios académicos ● Revisión de la estructura de una investigación académica relacionada con la movilidad humana en Python. ● Métodos para abordar estadística desde la visualización y la disponibilidad de datos en Python. ● Lecciones y métodos narrativos para abordar desde la estadística a la migración en Python.</p>
+<section id="clase-1-introducción-a-python-y-su-entorno-de-desarrollo" class="level2">
+<h2 class="anchored" data-anchor-id="clase-1-introducción-a-python-y-su-entorno-de-desarrollo">Clase 1: Introducción a Python y su entorno de desarrollo</h2>
+<ul>
+<li>Introducción a Python y su sintaxis básica.</li>
+<li>Instalación de paquetes en Python utilizando <code>pip</code>.</li>
+<li>Uso de entornos virtuales para gestionar dependencias.</li>
+<li>Fuentes primarias de consulta con Python, incluyendo la documentación oficial y la comunidad en línea.</li>
+<li>Buenas prácticas de programación en Python.</li>
+<li>Comprendiendo el entorno de desarrollo de Python</li>
+</ul>
+</section>
+<section id="clase-2-introducción-al-manejo-de-datos-en-python-con-pandas" class="level2">
+<h2 class="anchored" data-anchor-id="clase-2-introducción-al-manejo-de-datos-en-python-con-pandas">Clase 2: Introducción al manejo de datos en Python con pandas</h2>
+<ul>
+<li>Importación de datos en Python desde diferentes fuentes utilizando la biblioteca pandas.</li>
+</ul>
+</section>
+<section id="clase-3-la-importancia-del-análisis-de-datos-y-reproducibilidad-con-funciones" class="level2">
+<h2 class="anchored" data-anchor-id="clase-3-la-importancia-del-análisis-de-datos-y-reproducibilidad-con-funciones">Clase 3: La importancia del análisis de datos y reproducibilidad con funciones</h2>
+<ul>
+<li>Conceptos clave para el análisis efectivo de datos.</li>
+<li>Iniciativas para abordar el temas sociales utilizando Python, como el uso de módulos como pandas em investigación académica.</li>
+</ul>
+</section>
+<section id="clase-4-principios-de-estadística-en-python" class="level2">
+<h2 class="anchored" data-anchor-id="clase-4-principios-de-estadística-en-python">Clase 4: Principios de estadística en Python</h2>
+<ul>
+<li>Conceptos estadísticos como variables aleatorias, funciones de distribución y medidas de tendencia central.</li>
+<li>Análisis de variables numéricas utilizando módulos como scipy y pandas.</li>
+<li>Análisis de variables categóricas con enfoque en la biblioteca pandas.</li>
+<li>Operaciones entre variables y cálculos estadísticos en Python.</li>
+</ul>
+</section>
+<section id="clase-5-limpieza-y-transformación-de-datos-con-pandas-en-python" class="level2">
+<h2 class="anchored" data-anchor-id="clase-5-limpieza-y-transformación-de-datos-con-pandas-en-python">Clase 5: Limpieza y transformación de datos con pandas en Python</h2>
+<ul>
+<li>Recodificación de variables y creación de nuevas variables a partir de datos existentes utilizando pandas.</li>
+<li>Limpieza de datos, tratamiento de valores vacíos y duplicados en Python.</li>
+<li>Normalización y estandarización de datos en Python.</li>
+<li>Las partes de un objeto <code>DataFrame</code> de pandas como clave (<code>key</code>) e índice (<code>index</code>) en el contexto de series de tiempo.</li>
+</ul>
+</section>
+<section id="clase-6-exploración-y-visualización-de-datos-con-matplotlib-y-seaborn-en-python" class="level2">
+<h2 class="anchored" data-anchor-id="clase-6-exploración-y-visualización-de-datos-con-matplotlib-y-seaborn-en-python">Clase 6: Exploración y visualización de datos con Matplotlib y Seaborn en Python</h2>
+<ul>
+<li>La gramática de los gráficos utilizando bibliotecas como Matplotlib y Seaborn.</li>
+<li>Visualización de variables numéricas y categóricas con ejemplos prácticos en Python.</li>
+<li>Personalización de gráficos, paletas de colores y etiquetas para mejorar la interpretación de los datos en Python.</li>
+</ul>
+</section>
+<section id="clase-7-pruebas-de-hipótesis-para-la-media-entre-grupos-en-python" class="level2">
+<h2 class="anchored" data-anchor-id="clase-7-pruebas-de-hipótesis-para-la-media-entre-grupos-en-python">Clase 7: Pruebas de hipótesis para la media entre grupos en Python</h2>
+<ul>
+<li>Introducción a las pruebas de hipótesis en Python.</li>
+<li>Casos de acuerdo a la varianza en los grupos (prueba t de Student) y casos de desbalance en los tamaños de los grupos.</li>
+<li>Comparación y validación de estadísticas de grupo utilizando bibliotecas como SciPy.</li>
+</ul>
+</section>
+<section id="clase-8-análisis-de-correlación-y-modelos-de-regresión-en-python" class="level2">
+<h2 class="anchored" data-anchor-id="clase-8-análisis-de-correlación-y-modelos-de-regresión-en-python">Clase 8: Análisis de correlación y modelos de regresión en Python</h2>
+<ul>
+<li>El modelo de mínimos cuadrados ordinarios con una sola variable en Python.</li>
+<li>Interpretación y validación de los parámetros de una regresión en Python.</li>
+<li>La relación entre un modelo de regresión y la correlación de los datos en Python.</li>
+</ul>
+</section>
+<section id="clase-9-regresión-lineal-con-múltiples-variables-en-python" class="level2">
+<h2 class="anchored" data-anchor-id="clase-9-regresión-lineal-con-múltiples-variables-en-python">Clase 9: Regresión lineal con múltiples variables en Python</h2>
+<ul>
+<li>Inclusión de variables dicotómicas en el modelo de regresión en Python.</li>
+<li>Interpretación de las estadísticas de rendimiento de los modelos de regresión, incluyendo R cuadrado y p-valores.</li>
+<li>Selección y comparación de modelos utilizando técnicas como el método de selección de características.</li>
+</ul>
+</section>
+<section id="clase-10-estudios-académicos" class="level2">
+<h2 class="anchored" data-anchor-id="clase-10-estudios-académicos">Clase 10: Estudios académicos</h2>
+<ul>
+<li>Revisión de la estructura de una investigación académica relacionada con la movilidad humana en Python.</li>
+<li>Métodos para abordar estadística desde la visualización y la disponibilidad de datos en Python.</li>
+<li>Lecciones y métodos narrativos para abordar desde la estadística a la migración en Python.</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -293,8 +396,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Clase_1.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Untitled</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./intro.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Introducción</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,7 +1,7 @@
 # Pära usuarios de RStudio
 data/
 
-.Rproj
+*.Rproj
 .Rhistory
 .RData
 .Ruserdata
@@ -47,8 +47,6 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-# pkgdown site
-docs/
 
 # translation temp files
 po/*~

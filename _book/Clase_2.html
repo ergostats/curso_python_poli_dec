@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Paul Yungan">
 
-<title>mybook - 3&nbsp; Clase 2:Introducción al manejo de datos en Python con pandas</title>
+<title>Introducción al Lenguaje de Programación Python para Análisis Estadístico - 4&nbsp; Introducción al manejo de datos en Python con pandas</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -94,7 +93,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Clase_5.html" rel="next">
 <link href="./Clase_1.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -105,6 +103,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -128,13 +127,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Clase 2:Introducción al manejo de datos en Python con pandas</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Introducción al manejo de datos en Python con pandas</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -147,7 +146,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">mybook</a> 
+      <a href="./">Introducción al Lenguaje de Programación Python para Análisis Estadístico</a> 
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -159,22 +158,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Indice (en construcción)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Clase_1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Untitled</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Clase_2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Clase 2:Introducción al manejo de datos en Python con pandas</span></a>
+  <a href="./Clase_1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción a Python y su entorno de desarrollo</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Clase_5.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Clase 5:Limpieza y transformación de datos con pandas en Python</span></a>
+  <a href="./Clase_2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Introducción al manejo de datos en Python con pandas</span></a>
   </div>
 </li>
     </ul>
@@ -186,44 +185,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#clase-2-introducción-al-manejo-de-datos-en-python-con-pandas" id="toc-clase-2-introducción-al-manejo-de-datos-en-python-con-pandas" class="nav-link active" data-scroll-target="#clase-2-introducción-al-manejo-de-datos-en-python-con-pandas"><span class="toc-section-number">4</span>  Clase 2: Introducción al manejo de datos en Python con pandas&nbsp;&nbsp;</a>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link active" data-scroll-target="#resumen">Resumen</a></li>
+  <li><a href="#pandas-una-libreria-para-manejar-datos-con-python" id="toc-pandas-una-libreria-para-manejar-datos-con-python" class="nav-link" data-scroll-target="#pandas-una-libreria-para-manejar-datos-con-python">Pandas: Una libreria para manejar datos con Python</a>
   <ul class="collapse">
-  <li><a href="#librería-pandas" id="toc-librería-pandas" class="nav-link" data-scroll-target="#librería-pandas"><span class="toc-section-number">4.1</span>  Librería Pandas</a>
+  <li><a href="#librería-pandas" id="toc-librería-pandas" class="nav-link" data-scroll-target="#librería-pandas">Librería Pandas</a>
   <ul class="collapse">
-  <li><a href="#objetivos-de-hoy" id="toc-objetivos-de-hoy" class="nav-link" data-scroll-target="#objetivos-de-hoy"><span class="toc-section-number">4.1.1</span>  Objetivos de hoy</a></li>
-  </ul></li>
-  <li><a href="#que-es-un-dataframe" id="toc-que-es-un-dataframe" class="nav-link" data-scroll-target="#que-es-un-dataframe"><span class="toc-section-number">4.2</span>  ¿ Que es un DataFrame?</a></li>
-  <li><a href="#importación-de-datos-en-python-desde-diferentes-fuentes-utilizando-la-biblioteca-pandas." id="toc-importación-de-datos-en-python-desde-diferentes-fuentes-utilizando-la-biblioteca-pandas." class="nav-link" data-scroll-target="#importación-de-datos-en-python-desde-diferentes-fuentes-utilizando-la-biblioteca-pandas."><span class="toc-section-number">4.3</span>  Importación de datos en Python desde diferentes fuentes utilizando la biblioteca pandas.&nbsp;</a>
-  <ul class="collapse">
-  <li><a href="#importación-de-un-archivo-.xlsx" id="toc-importación-de-un-archivo-.xlsx" class="nav-link" data-scroll-target="#importación-de-un-archivo-.xlsx"><span class="toc-section-number">4.3.1</span>  Importación de un archivo .xlsx</a></li>
-  <li><a href="#importación-de-un-archivo-.csv" id="toc-importación-de-un-archivo-.csv" class="nav-link" data-scroll-target="#importación-de-un-archivo-.csv"><span class="toc-section-number">4.3.2</span>  Importación de un archivo .CSV</a></li>
-  <li><a href="#importación-de-un-.txt" id="toc-importación-de-un-.txt" class="nav-link" data-scroll-target="#importación-de-un-.txt"><span class="toc-section-number">4.3.3</span>  Importación de un .txt</a></li>
+  <li><a href="#objetivos-de-hoy" id="toc-objetivos-de-hoy" class="nav-link" data-scroll-target="#objetivos-de-hoy">Objetivos de hoy</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#estructuras-de-control-python-soporta-las-estructuras-de-control-típicas-como-if-for-y-while." id="toc-estructuras-de-control-python-soporta-las-estructuras-de-control-típicas-como-if-for-y-while." class="nav-link" data-scroll-target="#estructuras-de-control-python-soporta-las-estructuras-de-control-típicas-como-if-for-y-while."><span class="toc-section-number">5</span>  Estructuras de control: Python soporta las estructuras de control típicas como if, for y while.</a></li>
-  <li><a href="#funciones-en-python-una-función-es-un-bloque-de-código-reutilizable-que-realiza-una-acción-específica." id="toc-funciones-en-python-una-función-es-un-bloque-de-código-reutilizable-que-realiza-una-acción-específica." class="nav-link" data-scroll-target="#funciones-en-python-una-función-es-un-bloque-de-código-reutilizable-que-realiza-una-acción-específica."><span class="toc-section-number">6</span>  Funciones: En Python, una función es un bloque de código reutilizable que realiza una acción específica.</a></li>
-  <li><a href="#variables-y-tipos-de-datos-python-tiene-varios-tipos-de-datos-estándar-disponibles-números-cadenas-listas-tuplas-diccionarios." id="toc-variables-y-tipos-de-datos-python-tiene-varios-tipos-de-datos-estándar-disponibles-números-cadenas-listas-tuplas-diccionarios." class="nav-link" data-scroll-target="#variables-y-tipos-de-datos-python-tiene-varios-tipos-de-datos-estándar-disponibles-números-cadenas-listas-tuplas-diccionarios."><span class="toc-section-number">7</span>  Variables y tipos de datos: Python tiene varios tipos de datos estándar disponibles: números, cadenas, listas, tuplas, diccionarios.</a></li>
+  <li><a href="#variables-y-tipos-de-datos-python-tiene-varios-tipos-de-datos-estándar-disponibles-números-cadenas-listas-tuplas-diccionarios." id="toc-variables-y-tipos-de-datos-python-tiene-varios-tipos-de-datos-estándar-disponibles-números-cadenas-listas-tuplas-diccionarios." class="nav-link" data-scroll-target="#variables-y-tipos-de-datos-python-tiene-varios-tipos-de-datos-estándar-disponibles-números-cadenas-listas-tuplas-diccionarios.">Variables y tipos de datos: Python tiene varios tipos de datos estándar disponibles: números, cadenas, listas, tuplas, diccionarios.</a>
+  <ul class="collapse">
+  <li><a href="#que-es-un-dataframe" id="toc-que-es-un-dataframe" class="nav-link" data-scroll-target="#que-es-un-dataframe">¿ Que es un DataFrame?</a></li>
+  </ul></li>
+  <li><a href="#importación-de-datos-en-python-desde-diferentes-fuentes-utilizando-la-biblioteca-pandas." id="toc-importación-de-datos-en-python-desde-diferentes-fuentes-utilizando-la-biblioteca-pandas." class="nav-link" data-scroll-target="#importación-de-datos-en-python-desde-diferentes-fuentes-utilizando-la-biblioteca-pandas.">Importación de datos en Python desde diferentes fuentes utilizando la biblioteca pandas.&nbsp;</a>
+  <ul class="collapse">
+  <li><a href="#importación-de-un-archivo-.xlsx" id="toc-importación-de-un-archivo-.xlsx" class="nav-link" data-scroll-target="#importación-de-un-archivo-.xlsx">Importación de un archivo .xlsx</a></li>
+  <li><a href="#importación-de-un-archivo-.csv" id="toc-importación-de-un-archivo-.csv" class="nav-link" data-scroll-target="#importación-de-un-archivo-.csv">Importación de un archivo .CSV</a></li>
+  <li><a href="#importación-de-un-.txt" id="toc-importación-de-un-.txt" class="nav-link" data-scroll-target="#importación-de-un-.txt">Importación de un .txt</a></li>
+  </ul></li>
+  <li><a href="#estructuras-de-control" id="toc-estructuras-de-control" class="nav-link" data-scroll-target="#estructuras-de-control">Estructuras de control</a>
+  <ul class="collapse">
+  <li><a href="#if-el-operador-condicional" id="toc-if-el-operador-condicional" class="nav-link" data-scroll-target="#if-el-operador-condicional"><code>if</code> el operador condicional</a></li>
+  </ul></li>
+  <li><a href="#for-el-operador-de-las-iteraciones" id="toc-for-el-operador-de-las-iteraciones" class="nav-link" data-scroll-target="#for-el-operador-de-las-iteraciones"><code>for</code> el operador de las iteraciones</a></li>
+  <li><a href="#funciones-en-python-una-función-es-un-bloque-de-código-reutilizable-que-realiza-una-acción-específica." id="toc-funciones-en-python-una-función-es-un-bloque-de-código-reutilizable-que-realiza-una-acción-específica." class="nav-link" data-scroll-target="#funciones-en-python-una-función-es-un-bloque-de-código-reutilizable-que-realiza-una-acción-específica.">Funciones: En Python, una función es un bloque de código reutilizable que realiza una acción específica.</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Clase 2:Introducción al manejo de datos en Python con pandas</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Introducción al manejo de datos en Python con pandas</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Paul Yungan </p>
-          </div>
-  </div>
     
   
     
@@ -232,211 +232,305 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="clase-2-introducción-al-manejo-de-datos-en-python-con-pandas" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Clase 2: Introducción al manejo de datos en Python con pandas&nbsp;&nbsp;</h1>
+<section id="resumen" class="level1">
+<h1>Resumen</h1>
 <p>En la era digital actual, la capacidad de analizar y manejar datos se ha vuelto esencial en una variedad de disciplinas, incluida la economía. Python, un lenguaje de programación versátil y poderoso, se ha convertido en una herramienta fundamental para el análisis de datos.</p>
 <p>En este capítulo, exploraremos cómo Python, en combinación con la biblioteca Pandas, puede potenciar tus habilidades en el manejo eficiente y efectivo de datos económicos.</p>
-<section id="librería-pandas" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="librería-pandas"><span class="header-section-number">4.1</span> Librería Pandas</h2>
+</section>
+<section id="pandas-una-libreria-para-manejar-datos-con-python" class="level1">
+<h1>Pandas: Una libreria para manejar datos con Python</h1>
+<section id="librería-pandas" class="level2">
+<h2 class="anchored" data-anchor-id="librería-pandas">Librería Pandas</h2>
 <p>Pandas, una biblioteca de Python diseñada específicamente para el análisis y manejos de datos, ofrece estructuras de datos flexibles y herramientas de manipulación que facilitan la tarea de explorar y comprender conjuntos de datos complejos.</p>
 <p>En este curso, nos sumergiremos en el mundo de Pandas para descubrir cómo puede facilitar el análisis y la manipulación de datos económicos.</p>
-<section id="objetivos-de-hoy" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="objetivos-de-hoy"><span class="header-section-number">4.1.1</span> Objetivos de hoy</h3>
-<ul>
-<li>Aprenderemos los conceptos básicos de Pandas, desde la creación de estructuras de datos hasta la manipulación de marcos de datos.</li>
-<li>Aplicaremos los conocimientos adquiridos para realizar análisis de datos específicos relacionados con la economía.</li>
-</ul>
+<section id="objetivos-de-hoy" class="level3">
+<h3 class="anchored" data-anchor-id="objetivos-de-hoy">Objetivos de hoy</h3>
+</section>
+</section>
+</section>
+<section id="variables-y-tipos-de-datos-python-tiene-varios-tipos-de-datos-estándar-disponibles-números-cadenas-listas-tuplas-diccionarios." class="level1 page-columns page-full">
+<h1>Variables y tipos de datos: Python tiene varios tipos de datos estándar disponibles: números, cadenas, listas, tuplas, diccionarios.</h1>
+<p>En el corazón del análisis de datos con Python se encuentran las variables y los tipos de datos. Python ofrece una variedad de tipos estándar, incluyendo números, cadenas, listas, tuplas y diccionarios. En este subtema, exploraremos cómo declarar variables, comprender la dinámica de los tipos de datos, y aprovechar las estructuras fundamentales de almacenamiento de información. Al dominar el manejo de variables y tipos de datos, los analistas pueden organizar y manipular datos de manera eficaz, allanando el camino para un análisis preciso y significativo.</p>
+<p>Vamos a ver cuales son los tipos de objetos más frecuentes en Python:</p>
 <div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Esto es una variable de texto</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>mi_variable <span class="op">=</span> <span class="st">"Hola Mundo"</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Esto es una lista de números</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>mi_lista <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># Esto es un diccionario </span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>mi_diccionario <span class="op">=</span> {<span class="st">"clave"</span>: <span class="st">"valor"</span>, <span class="st">"clave_2"</span>: <span class="st">"valor_2"</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-</section>
-<section id="que-es-un-dataframe" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="que-es-un-dataframe"><span class="header-section-number">4.2</span> ¿ Que es un DataFrame?</h2>
-<p>Un DataFrame es una estructura de datos con dos dimensiones en la cual se puede guardar datos de distintos tipos (como caractéres, enteros, valores de punto flotante, factores y más) en columnas. Es similar a una hoja de cálculo o una tabla de SQL o el data.frame de R. Un DataFrame siempre tiene un índice (con inicio en 0). El índice refiere a la posición de un elemento en la estructura de datos.</p>
-<p>Ejemplo:</p>
-<p>Imaginemos que tenemos información sobre el rendimiento de nuestros amigos en diferentes juegos durante una semana. Queremos organizar estos datos de manera clara y fácil de entender, ¡y para eso usaremos Pandas!</p>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear un DataFrame con los datos de rendimiento en juegos</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>datos <span class="op">=</span> {</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Nombre'</span>: [<span class="st">'Juan'</span>, <span class="st">'María'</span>, <span class="st">'Carlos'</span>, <span class="st">'Ana'</span>],</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Juego 1 (puntos)'</span>: [<span class="dv">150</span>, <span class="dv">180</span>, <span class="dv">130</span>, <span class="dv">200</span>],</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Juego 2 (puntos)'</span>: [<span class="dv">120</span>, <span class="dv">90</span>, <span class="dv">110</span>, <span class="dv">150</span>],</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Juego 3 (puntos)'</span>: [<span class="dv">200</span>, <span class="dv">160</span>, <span class="dv">180</span>, <span class="dv">190</span>]</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(datos)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar el DataFrame</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>En este ejemplo:</p>
+<p>Mientras que ahora te presentamos los tipos de variable que</p>
 <ul>
-<li>La columna ‘Nombre’ contiene los nombres de nuestros amigos.</li>
-<li>Las columnas ‘Juego 1 (puntos)’, ‘Juego 2 (puntos)’, y ‘Juego 3 (puntos)’ representan los puntos obtenidos por cada amigo en diferentes juegos.</li>
+<li><strong>Númerico:</strong></li>
 </ul>
-<p>El DataFrame nos permite organizar estos datos de manera clara. Ahora, podemos realizar diversas operaciones para entender mejor el rendimiento de cada amigo, como calcular promedios, encontrar el máximo puntaje, o incluso visualizar los datos de manera gráfica.</p>
-<p>¡Con Pandas, explorar y entender datos se vuelve tan fácil como jugar un juego!</p>
-</section>
-<section id="importación-de-datos-en-python-desde-diferentes-fuentes-utilizando-la-biblioteca-pandas." class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="importación-de-datos-en-python-desde-diferentes-fuentes-utilizando-la-biblioteca-pandas."><span class="header-section-number">4.3</span> Importación de datos en Python desde diferentes fuentes utilizando la biblioteca pandas.&nbsp;</h2>
-<p>La información proviene de diversas fuentes: hojas de cálculo, bases de datos, archivos CSV, y más. En este subcapítulo, aprenderemos cómo Python, junto con la biblioteca Pandas, puede funcionar como un puente eficaz para importar y manipular datos de diferentes fuentes. Este proceso es fundamental para transformar datos crudos en conocimientos significativos.</p>
-<p>Utilizaremos las tablas llamadas IMP_SRI.xlsx, ventas_SRI.CSV, riesgo_pais.txt</p>
-<section id="importación-de-un-archivo-.xlsx" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="importación-de-un-archivo-.xlsx"><span class="header-section-number">4.3.1</span> Importación de un archivo .xlsx</h3>
-<p>En la ciencia de datos, es común trabajar con conjuntos de datos almacenados en diversos formatos, y uno de los formatos populares para el almacenamiento de datos tabulares es el formato Excel (.xlsx). Pandas, una biblioteca de Python ampliamente utilizada para el análisis de datos, proporciona una funcionalidad sencilla y poderosa para importar datos desde archivos .xlsx.</p>
-<p>Exploraremos cómo utilizar la biblioteca pandas para importar datos desde un archivo Excel (.xlsx) y cargarlos en un DataFrame.</p>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>imp_sri <span class="op">=</span> pd.read_excel (<span class="st">"data/otras_fuentes/IMP_SRI.xlsx"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Ahora revisaremos los tipos de datos que contiene nuestro DataFrame</p>
+<p>Usos:</p>
 <ul>
-<li>int64 : para enteros de 64 bits</li>
-<li>float64: para números de punto flotante de 64 bits</li>
-<li>object : para objetos de texto (cadenas o mixtos)</li>
+<li><p>Enteros:</p>
+<ul>
+<li>Conteo de elementos o iteraciones en bucles (loops).</li>
+<li>Índices en arreglos o listas.</li>
+<li>Operaciones matemáticas básicas como sumas o restas en situaciones donde no se requieren decimales. Por ejemplo cuando contamos personas, empresas u otros elementos enteros.</li>
+</ul></li>
+<li><p>Flotantes (o decimales):</p>
+<ul>
+<li>Cálculos que requieren precisión decimal, como en ingeniería y ciencias.</li>
+<li>Representar medidas físicas como distancias o temperaturas.</li>
+<li>Operaciones financieras que implican decimales, como intereses o tasas de cambio.</li>
+</ul></li>
+<li><p>Complejos:</p>
+<ul>
+<li>Resolver ecuaciones en ingeniería eléctrica (por ejemplo, análisis de circuitos).</li>
+<li>Procesamiento de señales y análisis de Fourier en matemáticas e ingeniería.</li>
+<li>Simulaciones en física que involucran números complejos, como la mecánica cuántica.</li>
+</ul></li>
+</ul>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Creemos vectores con 5 elementos repetidos cada uno</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>vector_entero <span class="op">=</span> [<span class="dv">10</span>] <span class="op">*</span> <span class="dv">5</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>vector_flotante <span class="op">=</span> [<span class="fl">3.14</span>] <span class="op">*</span> <span class="dv">5</span> <span class="co"># Con decimales</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>vector_complejo <span class="op">=</span> [(<span class="dv">1</span> <span class="op">+</span> <span class="ot">2j</span>)] <span class="op">*</span> <span class="dv">5</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># Crear un diccionario que contenga estos vectores</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>diccionario <span class="op">=</span> {</span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="st">"entero"</span>: vector_entero,</span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="st">"flotante"</span>: vector_flotante,</span>
+<span id="cb2-10"><a href="#cb2-10"></a>    <span class="st">"complejo"</span>: vector_complejo</span>
+<span id="cb2-11"><a href="#cb2-11"></a>}</span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="bu">print</span>(diccionario)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong>Cadenas:</strong></li>
+</ul>
+<p>Usos:</p>
+<ul>
+<li>Mensajes y salidas para interacción con el usuario.</li>
+<li>Manipulación y análisis de texto en procesamiento de datos y análisis lingüístico.</li>
+<li>Almacenamiento y representación de datos no numéricos, como nombres, direcciones, etc.</li>
+<li>Creación de identificadores, etiquetas y nombres en programación.</li>
+</ul>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>cadena_simple <span class="op">=</span> <span class="st">'Hola, mundo!'</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a>cadena_doble <span class="op">=</span> [<span class="st">"¡Python es poderoso!"</span>, <span class="st">"Me gusta aprender"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong>Lógicos o booleanos:</strong></li>
 </ul>
 <div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>imp_sri.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>valores_logicos <span class="op">=</span> [<span class="va">True</span>, <span class="va">False</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Usos:</p>
+<ul>
+<li>Controlar el flujo de programas con estructuras condicionales (if-else).</li>
+<li>Manejar la lógica en bucles (loops) como en las instrucciones while.</li>
+<li>Realizar comprobaciones y validaciones, como verificar si una condición se cumple.</li>
+<li>Representar estados o condiciones en programación, como el estado de una conexión o si un usuario está autenticado.</li>
+</ul>
+<section id="que-es-un-dataframe" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="que-es-un-dataframe">¿ Que es un DataFrame?</h2>
+<p>Un DataFrame es una estructura de datos con dos dimensiones en la cual se puede guardar datos de distintos tipos (como caractéres, enteros, valores de punto flotante, factores y más) en columnas. Es similar a una hoja de cálculo o una tabla de SQL o el data.frame de R. Un DataFrame siempre tiene un índice (con inicio en 0). El índice refiere a la posición de un elemento en la estructura de datos. Primero vamos a importar <code>pandas</code>.</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Ejemplo:</strong> Imaginemos que tenemos información sobre el rendimiento de nuestros amigos en diferentes juegos durante una semana. Queremos organizar estos datos de manera clara y fácil de entender, ¡y para eso usaremos Pandas!</p>
+</blockquote>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Crear un DataFrame con los datos de rendimiento en juegos</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>datos <span class="op">=</span> {</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="st">'Nombre'</span>: [<span class="st">'Juan'</span>, <span class="st">'María'</span>, <span class="st">'Carlos'</span>, <span class="st">'Ana'</span>],</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="st">'Juego 1 (puntos)'</span>: [<span class="dv">150</span>, <span class="dv">180</span>, <span class="dv">130</span>, <span class="dv">200</span>],</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="st">'Juego 2 (puntos)'</span>: [<span class="dv">120</span>, <span class="dv">90</span>, <span class="dv">110</span>, <span class="dv">150</span>],</span>
+<span id="cb6-6"><a href="#cb6-6"></a>    <span class="st">'Juego 3 (puntos)'</span>: [<span class="dv">200</span>, <span class="dv">160</span>, <span class="dv">180</span>, <span class="dv">190</span>]</span>
+<span id="cb6-7"><a href="#cb6-7"></a>}</span>
+<span id="cb6-8"><a href="#cb6-8"></a></span>
+<span id="cb6-9"><a href="#cb6-9"></a>df <span class="op">=</span> pd.DataFrame(datos)</span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co"># Mostrar el DataFrame</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>¡Con Pandas, explorar y entender datos se vuelve tan fácil como jugar un juego!</p>
+<p><img src="https://pbs.twimg.com/media/FSgAtaxWYAIwHHI.jpg" class="img-fluid"></p>
+</div></div><p>En este ejemplo:</p>
+<ul>
+<li>La columna <code>Nombre</code> contiene los nombres de nuestros amigos.</li>
+<li>Las columnas <code>Juego 1 (puntos)</code>, <code>Juego 2 (puntos)</code>, y <code>Juego 3 (puntos)</code> representan los puntos obtenidos por cada amigo en diferentes juegos.</li>
+</ul>
+<p>El DataFrame nos permite organizar estos datos de manera clara. Ahora, podemos realizar diversas operaciones para entender mejor el rendimiento de cada amigo, como calcular promedios, encontrar el máximo puntaje, o incluso visualizar los datos de manera gráfica.</p>
+</section>
+</section>
+<section id="importación-de-datos-en-python-desde-diferentes-fuentes-utilizando-la-biblioteca-pandas." class="level1 page-columns page-full">
+<h1>Importación de datos en Python desde diferentes fuentes utilizando la biblioteca pandas.&nbsp;</h1>
+<p>La información proviene de diversas fuentes: hojas de cálculo, bases de datos, archivos CSV, y más. En este subcapítulo, aprenderemos cómo Python, junto con la biblioteca Pandas, puede funcionar como un puente eficaz para importar y manipular datos de diferentes fuentes. Este proceso es fundamental para transformar datos crudos en conocimientos significativos.</p>
+<p>Utilizaremos las tablas llamadas IMP_SRI.xlsx, ventas_SRI.CSV, riesgo_pais.txt</p>
+<section id="importación-de-un-archivo-.xlsx" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="importación-de-un-archivo-.xlsx">Importación de un archivo .xlsx</h2>
+<p>En la ciencia de datos, es común trabajar con conjuntos de datos almacenados en diversos formatos, y uno de los formatos populares para el almacenamiento de datos tabulares es el formato Excel (.xlsx). Pandas, una biblioteca de Python ampliamente utilizada para el análisis de datos, proporciona una funcionalidad sencilla y poderosa para importar datos desde archivos .xlsx.</p>
+<p>Exploraremos cómo utilizar la biblioteca pandas para importar datos desde un archivo Excel (.xlsx) y cargarlos en un DataFrame.</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>imp_sri <span class="op">=</span> pd.read_excel (<span class="st">"data/otras_fuentes/IMP_SRI.xlsx"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ahora revisaremos los tipos de datos que contiene nuestro DataFrame con <code>dataframe.dtypes</code></p>
+<ul>
+<li><code>int64</code> : para enteros de 64 bits</li>
+<li><code>float64</code>: para números de punto flotante de 64 bits</li>
+<li><code>object</code> : para objetos de texto (cadenas o mixtos)</li>
+</ul>
+<div class="column.margin">
+<p>Observa como en estas lineas de código revisamos los <strong>atributos</strong> de nuestro Pandas Dataframe, estos atributos nos dan idea de la <strong>estructura del dataframe</strong>.</p>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>imp_sri.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Ahora revisamos el numbre de las variables (columnas)</p>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>imp_sri.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb9" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>imp_sri.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Si deseamos saber cuantas filas y columnas tiene nuestro DataFrame (df), los hacemos con .shape.</p>
-<p>Nos muestra que tenemos 18 observaciones (observaciones) con 5 variables (columnas)</p>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>imp_sri.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Si deseamos saber cuantas filas y columnas tiene nuestro DataFrame (df), lo hacemos con <code>dataframe.shape</code>, esto nos muestra que tenemos 18 observaciones (observaciones) con 5 variables (columnas)</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>imp_sri.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Si deseamos realizar una estadistica descriptiva rapida podemos utilizar .describe ()</p>
-<div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>imp_sri.describe ()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Asi mismo observa que algunos un <em>Pandas Dataframe</em> tiene atributos y <strong>métodos</strong>. En este caso <code>describe()</code> y <code>head()</code> son métodos que requieren o no argumentos. Siempre puedes usar el comando <code>print(dir(df))</code> para revisar los métodos y atributos. Asi mismo no olvides que puedes usar <code>help(df.describe)</code> para recibir ayuda de Python.</p>
+</div></div><p>Si deseamos realizar una estadistica descriptiva rapida podemos utilizar <code>dataframe.describe()</code></p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb11" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>imp_sri.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Ahora si deseamos unicamente imprimir las 10 primeras observaciones lo realizamos de la siguiente manera utilizando .head(número de observaciones que deseo ver) :</p>
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>imp_sri.head (<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Ahora si deseamos unicamente imprimir las 10 primeras observaciones lo realizamos de la siguiente manera utilizando <code>dataframe.head(n)</code> siendo <code>n</code> el número de observaciones que deseamos observar, en este caso 10.</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb12" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>imp_sri.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="importación-de-un-archivo-.csv" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="importación-de-un-archivo-.csv"><span class="header-section-number">4.3.2</span> Importación de un archivo .CSV</h3>
+<section id="importación-de-un-archivo-.csv" class="level2">
+<h2 class="anchored" data-anchor-id="importación-de-un-archivo-.csv">Importación de un archivo .CSV</h2>
 <p>La importación de datos desde archivos en formato CSV (Comma-Separated Values) es una tarea común en el análisis de datos. Los archivos CSV son ampliamente utilizados debido a su simplicidad y compatibilidad con una variedad de aplicaciones. Pandas facilita la importación de datos CSV mediante la función <code>read_csv()</code>.</p>
 <p>Exploraremos cómo cargar datos desde un archivo CSV en un DataFrame utilizando pandas. Veremos cómo manejar archivos CSV que contienen información tabular y cómo aprovechar las capacidades de pandas para realizar operaciones sobre estos datos.</p>
 <p>Importaremos la tabla “ventas_SRI.csv”, la cual presenta un registro detallado de las ventas efectuadas en Ecuador por diversas industrias desde el 2006. Esta tabla distingue entre las ventas sujetas a impuestos del IVA al 12% y aquellas que están exentas de este impuesto, gravadas al 0%.</p>
-<div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ventas_sri <span class="op">=</span> pd.read_csv (<span class="st">"data/otras_fuentes/ventas_SRI.csv"</span>, delimiter <span class="op">=</span> <span class="st">';'</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ventas_sri)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb13" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>ventas_sri <span class="op">=</span> pd.read_csv (<span class="st">"data/otras_fuentes/ventas_SRI.csv"</span>, delimiter <span class="op">=</span> <span class="st">';'</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="bu">print</span>(ventas_sri)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Ahora repliquemos lo que ya ralizamos anteriormente:</p>
-<div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ventas_sri.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ventas_sri.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ventas_sri.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ventas_sri.describe ()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ventas_sri.head (<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>ventas_sri.dtypes</span>
+<span id="cb14-2"><a href="#cb14-2"></a>ventas_sri.columns</span>
+<span id="cb14-3"><a href="#cb14-3"></a>ventas_sri.describe()</span>
+<span id="cb14-4"><a href="#cb14-4"></a>ventas_sri.head (<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="importación-de-un-.txt" class="level3" data-number="4.3.3">
-<h3 data-number="4.3.3" class="anchored" data-anchor-id="importación-de-un-.txt"><span class="header-section-number">4.3.3</span> Importación de un .txt</h3>
+<section id="importación-de-un-.txt" class="level2">
+<h2 class="anchored" data-anchor-id="importación-de-un-.txt">Importación de un .txt</h2>
 <p>En el ámbito económico, la importación efectiva de datos es esencial para desentrañar patrones y tendencias clave. En este subsubcapítulo, exploraremos cómo utilizar pandas en Python para importar datos desde archivos de texto (.txt), una tarea crucial para analistas económicos y profesionales del sector. Desde indicadores económicos hasta tasas de cambio y riesgo país, aprenderemos a convertir estos datos textuales en estructuras tabulares (DataFrames). Abordaremos desafíos específicos, como la elección de codificaciones y la gestión de delimitadores, proporcionando habilidades prácticas para aprovechar al máximo la información contenida en archivos de texto y potenciar el análisis económico con datos fiables.</p>
 <p>Importaremos el documento riesgo_pais_1.txt donde describe el riesgo país del Ecuador desde el 2004.</p>
 <div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>riesgo_pais <span class="op">=</span> pd.read_table(<span class="st">'data/otras_fuentes/riesgo_pais_1.txt'</span>, delimiter<span class="op">=</span><span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># El parámetro encoding='latin-1' que se proporciona al leer un archivo con pandas especifica la codificación de caracteres que se utilizará para decodificar el contenido del archivo de texto.</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(riesgo_pais)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>riesgo_pais <span class="op">=</span> pd.read_table(<span class="st">'data/otras_fuentes/riesgo_pais_1.txt'</span>, delimiter<span class="op">=</span><span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co"># El parámetro encoding='latin-1' que se proporciona al leer un archivo con pandas especifica la codificación de caracteres que se utilizará para decodificar el contenido del archivo de texto.</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="bu">print</span>(riesgo_pais)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-</section>
-<section id="estructuras-de-control-python-soporta-las-estructuras-de-control-típicas-como-if-for-y-while." class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Estructuras de control: Python soporta las estructuras de control típicas como if, for y while.</h1>
-<p>En el análisis de datos con Python, las estructuras de control como ‘if’, ‘for’, y ‘while’ desempeñan un papel clave en la manipulación y procesamiento eficiente de datos. La estructura condicional ‘if’ permite tomar decisiones basadas en condiciones específicas, mientras que los bucles ‘for’ y ‘while’ posibilitan recorrer conjuntos de datos y realizar iteraciones, respectivamente. Estas herramientas permiten a los analistas personalizar el flujo de ejecución de sus programas, optimizando la manipulación de datos y simplificando tareas repetitivas en el análisis de datos.</p>
+<section id="estructuras-de-control" class="level1 page-columns page-full">
+<h1>Estructuras de control</h1>
+<blockquote class="blockquote">
+<p>Python soporta las estructuras de control típicas en otros lenguajes de programación como <em>if, for</em> y <em>while</em>. ¿Cual crees que sería la diferencia entre ellos?</p>
+</blockquote>
+<p>En el análisis de datos con Python, las estructuras de control como ‘if’, ‘for’, y ‘while’ desempeñan un papel clave en la manipulación y procesamiento eficiente y ordenado de datos.</p>
+<p>La estructura condicional ‘if’ permite tomar decisiones basadas en condiciones específicas, mientras que los bucles ‘for’ y ‘while’ posibilitan recorrer conjuntos de datos y realizar iteraciones, respectivamente. Estas herramientas permiten a los analistas personalizar el flujo de ejecución de sus programas, optimizando la manipulación de datos y simplificando tareas repetitivas en el análisis de datos.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>!Muy importante¡</strong> Fijate en como en todos estos operadores es de extremada importancia la indentación (fijate bien el número de tabuladores antes de cada linea de código). <em>Visual Studio Code</em> tiene extensiones que te pueden ayudar a verificar si tu código está bien indentado.</p>
+<p><img src="https://media.makeameme.org/created/gracias-por-su-4b7762e138.jpg" class="img-fluid"></p>
+</div></div><p>Primero veamos algunos ejemplos sencillos:</p>
 <div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estructura if</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> mi_variable <span class="op">==</span> <span class="st">"Hola Mundo"</span>:</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"¡Hola Mundo!"</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Estructura for</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> mi_lista:</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Estructura while</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>contador <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> contador <span class="op">&lt;</span> <span class="dv">5</span>:</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(contador)</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    contador <span class="op">+=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Estructura if</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="cf">if</span> mi_variable <span class="op">==</span> <span class="st">"Hola Mundo"</span>:</span>
+<span id="cb16-3"><a href="#cb16-3"></a>    <span class="bu">print</span>(<span class="st">"¡Hola Mundo!"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4"></a></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="co"># Estructura for</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="cf">for</span> i <span class="kw">in</span> mi_lista:</span>
+<span id="cb16-7"><a href="#cb16-7"></a>    <span class="bu">print</span>(i)</span>
+<span id="cb16-8"><a href="#cb16-8"></a></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="co"># Estructura while</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a>contador <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="cf">while</span> contador <span class="op">&lt;</span> <span class="dv">5</span>:</span>
+<span id="cb16-12"><a href="#cb16-12"></a>    <span class="bu">print</span>(contador)</span>
+<span id="cb16-13"><a href="#cb16-13"></a>    contador <span class="op">+=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="if-el-operador-condicional" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="if-el-operador-condicional"><code>if</code> el operador condicional</h2>
+<p>El comando <code>if</code> en Python no funciona directamente con vectores como lo haría en lenguajes como R o MATLAB. En Python, tendrías que iterar sobre los elementos del vector y aplicar la condición <code>if</code> a cada elemento.</p>
+<p>Por ejemplo, si tienes dos listas, <code>utilidad</code> y <code>costo</code>, y quieres verificar si la relación utilidad/costo es mayor o menor que 1 para cada elemento, podrías hacer algo como esto:</p>
+<div class="cell" data-source-line-numbers="6-11" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb17" data-source-line-numbers="6-11" data-code-line-numbers="6-11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>utilidad <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>]</span>
+<span id="cb17-2"><a href="#cb17-2"></a>costo <span class="op">=</span> [<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">40</span>]</span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="cf">for</span> u, c <span class="kw">in</span> <span class="bu">zip</span>(utilidad, costo):</span>
+<span id="cb17-5"><a href="#cb17-5"></a>    ratio <span class="op">=</span> u <span class="op">/</span> c</span>
+<span id="cb17-6"><a href="#cb17-6"></a>    <span class="cf">if</span> ratio <span class="op">&lt;</span> <span class="dv">1</span>:</span>
+<span id="cb17-7"><a href="#cb17-7"></a>        <span class="bu">print</span>(<span class="ss">f"Deficit: La utilidad </span><span class="sc">{</span>u<span class="sc">}</span><span class="ss"> es menor que el costo </span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">."</span>)</span>
+<span id="cb17-8"><a href="#cb17-8"></a>    <span class="cf">elif</span> ratio <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb17-9"><a href="#cb17-9"></a>        <span class="bu">print</span>(<span class="ss">f"Equilibrio: La utilidad </span><span class="sc">{</span>u<span class="sc">}</span><span class="ss"> es igual al costo </span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">."</span>)</span>
+<span id="cb17-10"><a href="#cb17-10"></a>    <span class="cf">else</span>:</span>
+<span id="cb17-11"><a href="#cb17-11"></a>        <span class="bu">print</span>(<span class="ss">f"Ganancia: La utilidad </span><span class="sc">{</span>u<span class="sc">}</span><span class="ss"> es mayor que el costo </span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>En este código, <code>zip(utilidad, costo)</code> empareja cada elemento de <code>utilidad</code> con el correspondiente elemento de <code>costo</code>. Luego, para cada par de valores, calculamos el ratio <code>u / c</code> y usamos una estructura <code>if</code> para imprimir un mensaje basado en si el ratio es menor que, igual a, o mayor que 1.</p>
+</div></div><p>Algunas consideraciones importantes al usar <code>if</code> en Python:</p>
+<ul>
+<li>Python usa indentación para delimitar bloques de código. Asegúrate de indentar correctamente tu código dentro de la estructura <code>if</code>.</li>
+<li>Python usa <code>==</code> para comparar igualdad, <code>!=</code> para desigualdad, <code>&lt;</code> para menor que, <code>&gt;</code> para mayor que, <code>&lt;=</code> para menor o igual que, y <code>&gt;=</code> para mayor o igual que.</li>
+<li>Puedes usar <code>and</code> y <code>or</code> para combinar condiciones, y <code>not</code> para negar una condición.</li>
+<li>La estructura <code>if</code> puede ser seguida por una o más estructuras <code>elif</code> (abreviatura de “else if”) para comprobar múltiples condiciones, y una estructura <code>else</code> para especificar qué hacer si ninguna de las condiciones anteriores es verdadera.</li>
+</ul>
+</section>
+</section>
+<section id="for-el-operador-de-las-iteraciones" class="level1 page-columns page-full">
+<h1><code>for</code> el operador de las iteraciones</h1>
+<p>En Python, el bucle <code>for</code> se utiliza para iterar sobre una secuencia (como una lista, tupla, diccionario, conjunto o cadena) o cualquier otro objeto iterable.</p>
+<p>Veamos un ejemplo, si tienes un vector adicional llamado <code>impuestos</code> y quieres calcular el ratio de utilidad después de impuestos a costo, puedes hacerlo de la siguiente manera:</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Fijate como en este código, <code>zip(utilidad, costo, impuestos)</code> empareja cada elemento de <code>utilidad</code> con el correspondiente elemento de <code>costo</code> e <code>impuestos</code>. Luego, para cada trío de valores, calculamos la utilidad después de impuestos como <code>u - i</code> y el ratio como <code>utilidad_despues_impuestos / c</code>. Finalmente, usamos una estructura <code>if</code> para imprimir un mensaje basado en si el ratio es menor que, igual a, o mayor que 1.</p>
+</div></div><div class="cell" data-source-line-numbers="5" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb18" data-source-line-numbers="5" data-code-line-numbers="5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>utilidad <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>]</span>
+<span id="cb18-2"><a href="#cb18-2"></a>costo <span class="op">=</span> [<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">40</span>]</span>
+<span id="cb18-3"><a href="#cb18-3"></a>impuestos <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>]</span>
+<span id="cb18-4"><a href="#cb18-4"></a></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="cf">for</span> u, c, i <span class="kw">in</span> <span class="bu">zip</span>(utilidad, costo, impuestos):</span>
+<span id="cb18-6"><a href="#cb18-6"></a>    utilidad_despues_impuestos <span class="op">=</span> u <span class="op">-</span> i</span>
+<span id="cb18-7"><a href="#cb18-7"></a>    ratio <span class="op">=</span> utilidad_despues_impuestos <span class="op">/</span> c</span>
+<span id="cb18-8"><a href="#cb18-8"></a>    <span class="cf">if</span> ratio <span class="op">&lt;</span> <span class="dv">1</span>:</span>
+<span id="cb18-9"><a href="#cb18-9"></a>        <span class="bu">print</span>(<span class="ss">f"Deficit: La utilidad después de impuestos </span><span class="sc">{</span>utilidad_despues_impuestos<span class="sc">}</span><span class="ss"> es menor que el costo </span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">."</span>)</span>
+<span id="cb18-10"><a href="#cb18-10"></a>    <span class="cf">elif</span> ratio <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb18-11"><a href="#cb18-11"></a>        <span class="bu">print</span>(<span class="ss">f"Equilibrio: La utilidad después de impuestos </span><span class="sc">{</span>utilidad_despues_impuestos<span class="sc">}</span><span class="ss"> es igual al costo </span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">."</span>)</span>
+<span id="cb18-12"><a href="#cb18-12"></a>    <span class="cf">else</span>:</span>
+<span id="cb18-13"><a href="#cb18-13"></a>        <span class="bu">print</span>(<span class="ss">f"Ganancia: La utilidad después de impuestos </span><span class="sc">{</span>utilidad_despues_impuestos<span class="sc">}</span><span class="ss"> es mayor que el costo </span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="funciones-en-python-una-función-es-un-bloque-de-código-reutilizable-que-realiza-una-acción-específica." class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Funciones: En Python, una función es un bloque de código reutilizable que realiza una acción específica.</h1>
+<section id="funciones-en-python-una-función-es-un-bloque-de-código-reutilizable-que-realiza-una-acción-específica." class="level1">
+<h1>Funciones: En Python, una función es un bloque de código reutilizable que realiza una acción específica.</h1>
 <p>Las funciones en Python representan bloques de código reutilizables que promueven la modularidad y organización en el análisis de datos. En este subtema, exploraremos la creación y aplicación de funciones, permitiéndonos encapsular tareas específicas para su fácil reutilización. Aprenderemos a definir funciones con parámetros, gestionar valores de retorno y entender el ámbito de las variables. Al incorporar funciones en nuestro flujo de trabajo, no solo simplificamos el código, sino que también mejoramos la mantenibilidad y legibilidad, optimizando así el proceso de análisis de datos con Python.</p>
-<div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definición de una función</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mi_funcion():</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"¡Hola desde mi función!"</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Llamada a la función</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>mi_funcion()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb19" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Definición de una función</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">def</span> mi_funcion():</span>
+<span id="cb19-3"><a href="#cb19-3"></a>    <span class="bu">print</span>(<span class="st">"¡Hola desde mi función!"</span>)</span>
+<span id="cb19-4"><a href="#cb19-4"></a></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="co"># Llamada a la función</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>mi_funcion()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
-<p>Python es un lenguaje de programación orientada a objetos</p>
+<p>Python es un lenguaje de programación orientada a objetos. Y las funciones son un pilar en este tipo de lenguajes, en el próximo capítulo vamos a dedicar toda nuestra atención a las funciones.</p>
 </blockquote>
-</section>
-<section id="variables-y-tipos-de-datos-python-tiene-varios-tipos-de-datos-estándar-disponibles-números-cadenas-listas-tuplas-diccionarios." class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Variables y tipos de datos: Python tiene varios tipos de datos estándar disponibles: números, cadenas, listas, tuplas, diccionarios.</h1>
-<p>En el corazón del análisis de datos con Python se encuentran las variables y los tipos de datos. Python ofrece una variedad de tipos estándar, incluyendo números, cadenas, listas, tuplas y diccionarios. En este subtema, exploraremos cómo declarar variables, comprender la dinámica de los tipos de datos, y aprovechar las estructuras fundamentales de almacenamiento de información. Al dominar el manejo de variables y tipos de datos, los analistas pueden organizar y manipular datos de manera eficaz, allanando el camino para un análisis preciso y significativo.</p>
-<div class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Esto es una variable</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>mi_variable <span class="op">=</span> <span class="st">"Hola Mundo"</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Esto es una lista</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>mi_lista <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Esto es un diccionario</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>mi_diccionario <span class="op">=</span> {<span class="st">"clave"</span>: <span class="st">"valor"</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li>Números</li>
-</ul>
-<div class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>entero <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>flotante <span class="op">=</span> <span class="fl">3.14</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>complejo <span class="op">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="ot">2j</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>-Cadenas:</p>
-<div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>cadena_simple <span class="op">=</span> <span class="st">'Hola, mundo!'</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>cadena_doble <span class="op">=</span> <span class="st">"¡Python es poderoso!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li>Listas:</li>
-</ul>
-<div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>lista_numeros <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>lista_cadenas <span class="op">=</span> [<span class="st">'manzana'</span>, <span class="st">'banana'</span>, <span class="st">'cereza'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li>Tuplas:</li>
-</ul>
-<div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>tupla_colores <span class="op">=</span> (<span class="st">'rojo'</span>, <span class="st">'verde'</span>, <span class="st">'azul'</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>tupla_coordenadas <span class="op">=</span> (<span class="fl">3.5</span>, <span class="fl">7.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li>Diccionarios:</li>
-</ul>
-<div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>diccionario_edades <span class="op">=</span> {<span class="st">'Juan'</span>: <span class="dv">25</span>, <span class="st">'María'</span>: <span class="dv">30</span>, <span class="st">'Carlos'</span>: <span class="dv">22</span>}</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>diccionario_frutas <span class="op">=</span> {<span class="st">'manzana'</span>: <span class="dv">3</span>, <span class="st">'banana'</span>: <span class="dv">5</span>, <span class="st">'cereza'</span>: <span class="dv">8</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 
 
 </section>
@@ -578,17 +672,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./Clase_1.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Untitled</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Introducción a Python y su entorno de desarrollo</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Clase_5.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Clase 5:Limpieza y transformación de datos con pandas en Python</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
 
 
 
+<script src="site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 </body></html>

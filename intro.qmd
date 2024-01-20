@@ -1,0 +1,30 @@
+---
+title: "Introducción"
+format: html
+---
+
+Las necesidades de formación de los ecuatorianos han cambiado drásticamente a raíz de la pandemia COVID-19. La era de la *digitalización* ha determinado que las habilidades digitales son hoy en día requisitos para el éxito en el mercado laboral, más no una garantía.  
+
+América Latina enfrenta un problema importante: el descalce de habilidades entre la oferta y la demanda laboral. Es decir, no existe un consenso entre las habilidades que se enseñan en las aulas y las necesidades que las empresas buscan suplir con las habilidades de sus trabajadores. El incremento del personal subcalificado en las distintas ocupaciones se suma al déficit de habilidades digitales. (Cepal, Seminario Regional de Desarrollo Social, 2023).
+
+La formación en habilidades digitales representa un gran desafío para la academia en América Latina debido al descalce de habilidades entre la oferta y la demanda laboral. Ecuador presenta los porcentajes más bajos de adultos con altos niveles de logro en la resolución de problemas en ambientes digitales (5.3%) por debajo de países como Chile y Mexico (14.5% y 10.2%) que aun estando por encima de Ecuador, ilustran en conjunto la problemática que enfrenta la región. (CEPAL, base a datos PIAAC (Programa para la Evaluación Internacional de Competencias de Adultos), OCDE).
+
+Para superar esta problemática es necesario un cambio de enfoque en la manera en que se abordan las habilidades digitales y, por qué no, las habilidades que se imparten en las aulas. En primer lugar, se debe definir cuáles son las falencias de los sistemas educativos en los distintos niveles de educación acordes a cada etapa del desarrollo del individuo. Esta evaluación nos permitirá redireccionar la educación hacia un enfoque respetuoso, inclusivo y equitativo, que a su vez estén alineados con el sector productivo.
+
+Queda claro que superar esta problemática es una tarea que por definición debe ser articulada. Donde estudiantes, profesores, personal administrativo, gobierno y el sector productivo establezcan un dialogo proactivo en aras de garantizar una mejor calidad de la educación, el cierre de las brechas de oportunidades y la corrección del descalce entre la oferta y demanda laboral. Se han dado pasos importantes en esa dirección desde el sector gobierno del Ecuador al establecer un primer borrador sobre la calidad de evaluación de las habilidades digitales (INEVAL 2023). Así mismo, el crecimiento de la presencia centros de formación y capacitación dan cuenta de un avance paulatino hacía una sociedad con mayores oportunidades y beneficios sociales a partir de la educación.
+
+Es en este contexto, y en consonancia con las prioridades nacionales, el Centro de Investigación Estadística ERGOSTATS S.A.S (ERGOSTATS en adelante) determino como una de sus actividades principales la educación complementaria y alineada con los programas de formación académica oficiales de la educación superior del Ecuador. 
+
+En esta línea, desde 2021 ERGOSTATS se ha desempeñado en la planificación, ejecución y evaluación de cursos, talleres, webinars y charlas que fomenten la participación de la ciudadanía en espacios de aprendizaje sobre los usos, aplicaciones y experiencias en el análisis y visualización de datos, habilidades digitales altamente demandadas en el mercado laboral actual. 
+
+A raíz de la experiencia de ERGOSTATS en el campo de la enseñanza complementaria se ha corroborado la presencia del descalce entre la oferta y demanda laborales y los desafíos que está representa para llevar a cabo la nivelación de los trabajadores hasta el nivel que exige el sector productivo. Un desafío adicional evidenciado por ERGOSTATS es la discriminación a través del precio, lo cual se ha convertido en una brecha de acceso para estudiantes que están cursando sus primeras etapas en la educación superior. 
+
+En vista de lo mencionado, y contemplando que la educación en términos de habilidades digitales debe ser accesible, oportuna y de calidad el Centro de Investigación Estadística ERGOSTATS S.A.S ha decidido emprender el programa “Nido del Buho”, una iniciativa que involucra a estudiantes, profesores y al personal de la academia para fomentar la educación desde una perspectiva articulada, solidaria y participativa.
+
+“Nido del Buho” busca vincular los esfuerzos de personal profesional con experiencia en el análisis estadístico de datos para contribuir a la reducción de las brechas entre tres elementos: las necesidades de educación complementaria de los estudiantes, las mallas curriculares que tienen componentes de programación y análisis de datos, y las necesidades de las empresas que confirman los distintos sectores económicos del país.
+
+Dentro del componente 1 del proyecto (Planificación), se requiere el desarrollo de instrumentos y materiales de enseñanza que permita cubrir de manera efectiva el diseño curricular alineado a la malla curricular propuesta por las organizaciones estudiantiles. Mismo que deberá cumplir con los estándares, lineamientos, directrices, metodologías y manuales que ERGOSTATS ha diseñado para los cursos de formación y capacitación. 
+
+Por otro lado, el componente 3 del proyecto (Ejecución) establece que la puesta en escena de los cursos debe estar determinada por las metodologías de enseñanza de ERGOSTATS respetando el diseño y estructura de clases adaptado al material desarrollado para cada caso específico. 
+
+Ambos componentes son competencia del personal académico y administrativo de ERGOSTATS en conjunto con las organizaciones estudiantes. Para ello se ha llegado a la alianza académica con la Asociación de Estudiantes de la Carrera de Economía Cuantitativa de la Escuela Politécnica Nacional para la ejecución del curso “Introducción al lenguaje de programación Python para el análisis estadístico” en el contexto del programa “Nido del Búho”
