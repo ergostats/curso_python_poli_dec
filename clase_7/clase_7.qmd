@@ -68,3 +68,33 @@ print(p_valor)
 Con ello podemos ver que el valor p es mayor a 0.05, por lo que no rechazamos la hipotesis nula y podriamos considerar que ambos países tienen, en promedio, una emisión igual.
 
 ## Casos cuando existe varianza en los grupos
+
+Aunque los paquetes hagan la mayoría de trabajo no esta de más saber los distintos casos que existen en estas pruebas de hipótesis
+
+### Caso cuando la varianza poblacional es desconocida
+
+Es es el caso más común, en este desconocemos la varianza poblacional y por lo general se usa una distribucion $t$ de Student en lugar de una normal.
+
+En este caso usamos un estadístico de prueba $t=\frac{\bar{x}-u_0}{s/\sqrt{n}}$ donde $s$ es la desciación estándar y n el tamaño de la muestra y el cual sigue una distribución de Student con $n-1$ grados de libertad.
+
+Cabe recalcar que lo antes mencionado es solamente cuando tenemos una muestra, veamo ahora casos cuando queremos comparar dos muestras.
+
+### Caso cuando las varianzas son desconocidas pero iguales
+
+## Biblioteca Scipy
+
+Ahora que conocemos algunos casos que se nos podrían presentar vamos a ver como usar Python para solventarlos.
+
+Primero debemos instalar la librería y de la misma llamar a la funcion stats, puedes ahcerlo de la siguiente manera
+
+```{python}
+pip install scipy
+
+from scipy import stats
+```
+
+Listo, ahora veamos algunos casos
+
+-   Caso de una sola población:
+
+    Pongamos el siguiente caso, tomando nustro archivo de emisiones de CO2 y con la media poblacional
