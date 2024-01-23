@@ -1,0 +1,25 @@
+---
+title: "Funciones y la importancia del análisis de datos"
+format: html
+editor: visual
+execute: 
+  eval: false
+---
+
+# Resumen
+
+En el fascinante mundo de la estadística y la programación, las variables aleatorias juegan un papel crucial. Como estudiantes que están explorando el poder de Python en el análisis estadístico, es esencial comprender estos conceptos. Las variables aleatorias no solo nos permiten modelar y analizar fenómenos aleatorios del mundo real, sino que también son la base para avanzar en técnicas más complejas de análisis de datos. En esta guía, abordaremos desde lo más básico hasta conceptos más avanzados, siempre con ejemplos prácticos en Python para una mejor comprensión. Así que, ¡prepárense para sumergirse en el mundo de las variables aleatorias y su aplicación en Python!
+
+```{python}
+
+import random
+
+random.seed(1984)
+```
+
+
+##  Principios de estadística con python
+
+
+
+> Slido: ¿Cual es el numero más probable en la suma de dos dados?
