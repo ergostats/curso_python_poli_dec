@@ -81,6 +81,14 @@ Cabe recalcar que lo antes mencionado es solamente cuando tenemos una muestra, v
 
 ### Caso cuando las varianzas son desconocidas pero iguales
 
+Este caso es de los casos más comunes, aquí tenemos dos medias cuyas varianzas son desconocidas. Primero debemos hacer una prueba F ($F=\frac{s_1^2}{s_2^2}$) para probar si las varianzas son iguales y luego podemos usar el estadístico siguiente $$
+t=\frac{(\bar{x}_1-\bar{x}_2)-(u_1-u_2)}{s_p\sqrt{1/n_1+1/n_2}}
+$$ donde $$
+s^2_p=\frac{s_1^2(n_1-1)+s_2^2(n_2-1)}{n_1+n_2-2}
+$$ con grados de libertad dados por $v=n_1+n_2-2$
+
+### Caso cuando las varianzas son desconocidas pero distintas
+
 ## Biblioteca Scipy
 
 Ahora que conocemos algunos casos que se nos podrían presentar vamos a ver como usar Python para solventarlos.
