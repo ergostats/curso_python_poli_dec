@@ -1,5 +1,5 @@
 ---
-title: "Funciones y la importancia del análisis de datos"
+title: "Variables aleatorias, funciones de distribución y estimación de parametros"
 format: html
 editor: visual
 execute: 
