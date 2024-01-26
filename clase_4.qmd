@@ -1,0 +1,78 @@
+---
+title: "Funciones y la importancia del análisis de datos"
+format: html
+editor: visual
+execute: 
+  eval: true
+---
+
+# Resumen
+
+En el fascinante mundo de la estadística y la programación, las variables aleatorias juegan un papel crucial. Como estudiantes que están explorando el poder de Python en el análisis estadístico, es esencial comprender estos conceptos. Las variables aleatorias no solo nos permiten modelar y analizar fenómenos aleatorios del mundo real, sino que también son la base para avanzar en técnicas más complejas de análisis de datos. En esta guía, abordaremos desde lo más básico hasta conceptos más avanzados, siempre con ejemplos prácticos en Python para una mejor comprensión. Así que, ¡prepárense para sumergirse en el mundo de las variables aleatorias y su aplicación en Python!
+
+## Variables Aleatorias
+
+::: column-margin
+Con una variable aleatoria no sabemos con certeza qué valor tomará hasta que se realiza el experimento o se observa el fenómeno. En el idioma inglés es común decir que el valor de la variable se ha *realizado* cuando una variable aleatoria toma un valor y se convierte en una observación o dato.
+
+![](images/shrodinger.jpg)
+:::
+
+Una **variable aleatoria** puede ser vista como un puente entre el mundo real y el mundo matemático. En términos simples, es una variable que toma valores numéricos determinados por el resultado de un **fenómeno aleatorio.** A cada uno de estos resultados se lo asocia con una *probabilidad* como veremos más adelante. A diferencia de una **variable determinística**, cuyo valor es constante o predecible, una variable aleatoria tiene un grado de incertidumbre.
+
+Pensemos en algunos ejemplos de variable aleatoria en la vida cotidiana:
+
+1.  El **número de pichirilos** que podemos encontrar cada 20 carros que veamos con una tasa de exito aproximada del 1%.
+2.  El **número de estudiantes** atendidos por la secretaria del departamento de ciencias cada 5 minutos.
+3.  La **suma de dos dados** lanzados.
+4.  Los **salarios de los trabajadores** de una empresa en el mes de diciembre 2024.
+
+Fijate que en estos fenómenos de ejemplo, hemos definido unas **condiciones** específicas para reproducir los resultados y compararlos entre distintas **replicas** u observaciones.
+
+### Funciones de Distribución
+
+Una función de distribución describe cómo se distribuyen los valores de una variable aleatoria. Es como *un mapa que nos muestra la probabilidad de que la variable aleatoria* tome un valor específico o caiga dentro de un rango determinado. Esta función es fundamental para entender el comportamiento de variables aleatorias.
+
+Existen varios tipos, cada uno modelando diferentes situaciones. Por ejemplo, la distribución binomial modela escenarios con resultados de 'éxito' o 'fracaso', mientras que la distribución de Poisson se utiliza para contar eventos en un intervalo fijo de tiempo o espacio.
+
+Volviendo a los ejemplos presentados:
+
+1.  El **número de pichirilos** que podemos encontrar cada 20 carros que veamos con una tasa de exito aproximada del 1%.
+
+> Sigue una *distribución binomial* con *200 intentos (`n`)* y *probaibilidad de éxito del 1% (`p`)* lo que significa que:
+>
+> a\. Los resultados del fenómeno son enteros
+>
+> b\. El valor esperado de esta función es:
+>
+> $$
+> E(X) = n \times p
+> $$
+>
+> En nuestro caso esperamos encontrar 2 pichirilos cada 200 carros.
+
+2.  El **número de estudiantes** atendidos por la secretaría del departamento de ciencias cada hora con una tasa promedio de 2 estudiantes.
+
+2.  La **suma de dos dados** lanzados.
+3.  Los **salarios de los trabajadores** de una empresa en el mes de diciembre 2024.
+
+#### Relación entre Variables Aleatorias y Funciones de Distribución (50 palabras)
+
+La función de distribución proporciona la estructura matemática que necesitamos para trabajar con variables aleatorias. Al comprender la función de distribución, podemos predecir la probabilidad de diferentes resultados, lo cual es crucial en estadística y análisis de datos.
+
+## Algunos ejemplos con python
+
+En este código, `random.seed(123)` establece la semilla del generador de números aleatorios a 123. Esto significa que cada vez que generes números aleatorios después de establecer la semilla, obtendrás los mismos resultados, lo que puede ser útil para la reproducibilidad en ciencia de datos y machine learning.
+
+```{python}
+
+import random
+
+random.seed(1984)
+
+print(random.random())
+```
+
+## Principios de estadística con python
+
+> Slido: ¿Cual es el numero más probable en la suma de dos dados?
