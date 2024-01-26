@@ -15,6 +15,7 @@ book:
     - Clase_1.qmd
     - Clase_2.qmd
     - clase_3.qmd
+    - clase_4.qmd
 format:
   html:
     number-sections: false
