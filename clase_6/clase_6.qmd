@@ -1,16 +1,29 @@
 ---
-title: "Clase_6"
+title: "Exploración y visualización de datos con Matplotlib y Seaborn en Python"
 format: html
 editor: visual
 ---
 
-## **Clase 6: Exploración y visualización de datos con Matplotlib y Seaborn en Python**
+## Resumen
 
-● La gramática de los gráficos utilizando bibliotecas como Matplotlib y Seaborn.
+Este capítulo aborda dos importantes bibliotecas de visualización de datos en Python: Matplotlib y Seaborn.
 
-● Visualización de variables numéricas y categóricas con ejemplos prácticos en Python.
+Matplotlib, una librería open source creada en 2002 por John Hunter, es fundamental para la visualización de datos en Python, ofreciendo gráficos en dos dimensiones y visualizaciones dinámicas e interactivas. PyPlot, un módulo de Matplotlib, facilita la adición de elementos como líneas, imágenes o texto en los gráficos.
 
-● Personalización de gráficos, paletas de colores y etiquetas para mejorar la interpretación de los datos en Python.
+Seaborn, construido sobre Matplotlib y creado por Michael Waskom, busca simplificar la creación de gráficos estadísticos. Sus características clave incluyen:
+
+Estética agradable con opciones de color y temas predefinidos.
+Integración con pandas, permitiendo el uso eficiente de DataFrames.
+Enfoque en visualizaciones estadísticas para análisis de datos.
+Facilidad de uso con funciones especializadas.
+Alta capacidad de personalización.
+Ambas bibliotecas tienen documentación extensa y valiosa para su uso óptimo. La integración con pandas es especialmente útil, como se muestra en los ejemplos de código.
+
+El capítulo continúa con una discusión sobre variables numéricas y categóricas, seguido de ejemplos prácticos para crear diversos tipos de gráficos utilizando Matplotlib y Seaborn, como gráficos de barras, de burbuja, radar, de pastel, de matriz y de líneas. Estos ejemplos muestran la versatilidad y eficiencia de ambas bibliotecas en la representación gráfica de datos.
+
+Finalmente, se destaca la importancia de la selección de colores y etiquetas en la presentación de gráficos. Se aborda cómo el color puede influir en la interpretación y percepción de los datos. Seaborn ofrece diversas paletas de colores (cualitativas, secuenciales y divergentes) para adaptarse a diferentes tipos de datos y visualizaciones. La librería Palettable también se menciona como una alternativa para la selección de paletas de colores. La elección correcta de etiquetas es crucial para evitar ambigüedades y facilitar la comprensión de los gráficos.
+
+En resumen, este capítulo proporciona una comprensión integral de Matplotlib y Seaborn, destacando sus capacidades, integración con otras bibliotecas y su rol esencial en la visualización de datos en Python.
 
 ## Matplotlib y Seaborn
 
@@ -34,11 +47,12 @@ Cabe recordar que tanto Matplotlib como Seaborn tienen su respectiva documentaci
 
 Ahora veamos como llamar a estas librerias
 
-```{phyton}
-
+```{python}
+import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn import datasets
 
 ```
 
@@ -93,8 +107,7 @@ Listo, hemos creado nuestro primer gráfico. Ahora, usaremos otra librearia para
 
 ```{python}
 
-# Usando la librería seaborn
-import seaborn as sns
+
 
 #Creamos un datafrme con los datos anteriores
 datos = {
@@ -150,12 +163,11 @@ plt.legend()
 Es un gráfico que muestra datos en tres dimensiones en un plano de dos, la tercera sería el tamaño de la burbuja, sirve para mostrar la difencia entre conjuntos de la misma variable u otras.
 
 ```{python}
-import pandas as pd
-import numpy as np
+
 
 #Leemos el archivo de datos
 
-archivo_excel = 'C:/Users/Brad/Documents/curso_python_poli_dec/data/co2.xlsx'
+archivo_excel = 'co2.xlsx'
 
 datos_excel = pd.read_excel(archivo_excel)
 
@@ -247,53 +259,6 @@ plt.show()
 #Aqui hemos usado la paleta de colores de seaborn 
 ```
 
-### Gráfico de matriz
-
-Sirve para mostrar valores que surgen de la intersección de dos variables y es recomendable usarlo cuando queramos resaltar ciertos valores.
-
-```{python}
-#Cargamos una librería de bases de datos 
-from sklearn import datasets
-
-cigs=data('Cigarette')
-#Creamos la matriz de correlación de forma primitiva
-corr=cigs.corr()
-#Vamos a usar matplotlib para crear esta matriz de una mejor forma 
-#Creamos la matriz
-fig, ax = plt.subplots(figsize=(8,8))
-im = ax.imshow(corr, vmin=-1,vmax=1,cmap="Blues")
-
-#Creamos una leyenda que ayude a la visualización
-cbar = ax.figure.colorbar(im,ax=ax)
-cbar.ax.set_ylabel("Leyenda",rotation=-90)
-
-ax.set_xticks(np.arange(len(corr.columns)))
-ax.set_yticks(np.arange(len(corr.index)))
-
-#Ponemos las etiquetas a los ejes
-ax.set_xticklabels(corr.columns)
-ax.set_yticklabels(corr.index)
-
-plt.setp(ax.get_xticklabels(),rotation =90, ha= "right", rotation_mode="anchor")
-
-for i in range(len(corr.index)):
-    for j in range(len(corr.columns)):
-        text= ax.text(j,i,round(corr.iloc[i,j],2), ha="center",va= "center", color="black")
-        
-#Ponemos el título y mostramos
-ax.set_title("Gráfico de correlación")
-fig.tight_layout()
-plt.show()
-```
-
-Ahora veamos cómo con seaborn podemos ahorrar mucho trabajo
-
-```{python}
-# Usamos seaborn para hacer la matriz de correlación mucho más fácil 
-sns.heatmap(corr, annot=True, cmap="YlGnBu",vmax=1,vmin=-1)
-plt.title('Gráfico de Correlación')
-plt.show()
-```
 
 ### Gráfico de lineas
 
