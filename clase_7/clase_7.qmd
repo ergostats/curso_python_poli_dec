@@ -4,13 +4,7 @@ format: html
 editor: visual
 ---
 
-## **Clase 7: Pruebas de hipótesis para la media entre grupos en Python**
-
-●Introducción a las pruebas de hipótesis en Python.
-
-● Casos de acuerdo a la varianza en los grupos (prueba t de Student) y casos de desbalance en los tamaños de los grupos.
-
-●Comparación y validación de estadísticas de grupo utilizando bibliotecas como SciPy.
+# **Clase 7: Pruebas de hipótesis para la media entre grupos en Python**
 
 ## Pruebas de hipótesis
 
@@ -30,20 +24,120 @@ Aquí introducimos el concepto de hipótesis nula e hipótesis alternativa , niv
 
 Definidas las hipótesis a contrastar se realiza una prueba donde se obtendrá un valor llamado *valor p*. Veremos cuando este es significativo (por lo general mayor que 0.05) y como se le usa para rechazar $H_0$. Otro punto a tomar en cuenta es nuestro tamaño de muestra, por lo general un número mayor a 30 es considerado grande y es posible usar algunos resultados estadísticos para aproximar nuestros resultados, si esto no ocurre tendremos que usar otras técnicas.
 
-Veamos ahora una prueba de hipótesis sencilla usando python. Tomemos nuestros datos sobre las emiciones de CO2 por cada país, tomemos dos de ellos, Emiratos Árabes y Argentina, y propongamos las siguientes hipotesis
+## Casos cuando existe varianza en los grupos
 
--   $H_0$ : Ambos países tienen, en promedio, las mismas emisiones de CO2 ( $u_1=u_2$ ).
+Aunque los paquetes hagan la mayoría de trabajo no esta de más saber los distintos casos que existen en estas pruebas de hipótesis
 
--   $H_1$ : Las medias son distintas.
+### Caso cuando la varianza poblacional es desconocida
 
-Veamos como dar una respuesta usando python
+Es es el caso más común, en este desconocemos la varianza poblacional y por lo general se usa una distribucion $t$ de Student en lugar de una normal.
+
+En este caso usamos un estadístico de prueba $t=\frac{\bar{x}-u_0}{s/\sqrt{n}}$ donde $s$ es la desciación estándar y n el tamaño de la muestra y el cual sigue una distribución de Student con $n-1$ grados de libertad.
+
+Cabe recalcar que lo antes mencionado es solamente cuando tenemos una muestra, veamo ahora casos cuando queremos comparar dos muestras.
+
+### Caso cuando las varianzas son desconocidas pero iguales
+
+Este caso es de los casos más comunes, aquí tenemos dos medias cuyas varianzas son desconocidas. Primero debemos hacer una prueba F $(F=\frac{s_1^2}{s_2^2})$ para probar si las varianzas son iguales y luego podemos usar el estadístico siguiente $$
+t=\frac{(\bar{x}_1-\bar{x}_2)-(u_1-u_2)}{s_p\sqrt{1/n_1+1/n_2}}
+$$ donde $$
+s^2_p=\frac{s_1^2(n_1-1)+s_2^2(n_2-1)}{n_1+n_2-2}
+$$ con grados de libertad dados por $v=n_1+n_2-2$
+
+### Caso cuando las varianzas son desconocidas pero distintas
+
+Si luego de realizar la prueba F sobre las varianzas tenemos que no se pueden considerar iguales tenemos que uasr el siguiente estadístico $$
+t=\frac{(\bar{x}_1-\bar{x}_2)-(u_1-u_2)}{\sqrt{s_1^2/n_1+s_2^2/n_2}}
+$$ donde los grados de libertad vienen dados por $$
+v=\frac{(s_1^2/n_1+s_2^2/n_2)^2}{\frac{(s_1^2)^2}{(n_1-1)n_1^2}+\frac{(s_2^2)^2}{(n_2-1)n_2^2}}
+$$ y este valor rara vez será un número entero, por lo que será redondeado al menor entero más cercano.
+
+## Biblioteca Scipy
+
+Ahora que conocemos algunos casos que se nos podrían presentar vamos a ver como usar Python para solventarlos.
+
+Primero debemos instalar la librería y de la misma llamar a la funcion stats, puedes hacerlo de la siguiente manera:
+
+```{python}
+pip install scipy
+
+from scipy import stats
+```
+
+Listo, ahora veamos algunos casos
+
+-   Caso de una sola población:
+
+    Pongamos el siguiente caso, tomando nustro archivo de emisiones de CO2 y con la media poblacional. Supongamos que Australia cree que la media de emisiones en estos 30 años es de 340000 kt de C02, con esto hacemos nuestra prueba de hipótesis.
+
+```{python}
+import pandas as pd
+import numpy as np 
+from scipy import stats
+
+
+# Leemos nuestro archivo de datos de CO2
+ruta_archivo_excel = 'C:/Users/Brad/Documents/curso_python_poli_dec/data/co2.xlsx'
+
+# Creamos un objeto llamado datos para almacenarlo
+datos = pd.read_excel(ruta_archivo_excel)
+
+#Seleccionar los dos países
+fila_seleccionada = datos.iloc[9,4:]
+
+
+#Tranformamos
+australia = np.array(fila_seleccionada) 
+
+#Calculamos medidas de dispersion para despues
+media_muestra = np.mean(australia)
+desviacion = np.std(australia)
+
+#Definimos u_0
+u_0 = 340000
+
+#Realizamos el test
+
+resultado = stats.ttest_1samp(australia,u_0)
+
+#comprobamos nuestro valor p
+resultado.pvalue<0.05
+
+
+```
+
+Como podemos observar no tenemos evidencia suficiente para rechazar la hipotesis dicha al principio, esto puede ser gracias a la desviacion de los datos, las brechas entre ellos debido al incremento en las industrias en el país, pero sirve para ilustrar cómo realizar pruebas de hipótesis.
+
+Podemos incluso corroborar el estadístico que obtenemos con el siguiente código
+
+```{python}
+## Hagamos de forma manual para corroborar 
+t_prueba=(media_muestra-u_0)/(desviacion/np.sqrt(len(australia)))
+
+#Vemos el estadistico calculado manualmente
+print(t_prueba)
+
+#Obtenemos el estadítico de la función anterior
+print(resultado.statistic)
+```
+
+> Si bien los resultados difieren por decimales esto es normal ya que la librería usa un número mayor de decimales
+
+-   Caso de dos poblaciones:
+
+    Tomemos nuestros datos sobre las emiciones de CO2 por cada país, tomemos dos de ellos, Emiratos Árabes y Argentina, y propongamos las siguientes hipotesis
+
+    -   $H_0$ : Ambos países tienen, en promedio, las mismas emisiones de CO2 ( $u_1=u_2$ ).
+
+    -   $H_1$ : Las medias son distintas.
+
+    Veamos como dar una respuesta usando python
 
 ```{python}
 #Cargamos las librerias 
 import pandas as pd
 import numpy as np 
 from scipy import stats
-
 
 # Leemos nuestro archivo de datos de CO2
 ruta_archivo_excel = 'C:/Users/Brad/Documents/curso_python_poli_dec/data/co2.xlsx'
@@ -67,42 +161,4 @@ print(p_valor)
 
 Con ello podemos ver que el valor p es mayor a 0.05, por lo que no rechazamos la hipotesis nula y podriamos considerar que ambos países tienen, en promedio, una emisión igual.
 
-## Casos cuando existe varianza en los grupos
-
-Aunque los paquetes hagan la mayoría de trabajo no esta de más saber los distintos casos que existen en estas pruebas de hipótesis
-
-### Caso cuando la varianza poblacional es desconocida
-
-Es es el caso más común, en este desconocemos la varianza poblacional y por lo general se usa una distribucion $t$ de Student en lugar de una normal.
-
-En este caso usamos un estadístico de prueba $t=\frac{\bar{x}-u_0}{s/\sqrt{n}}$ donde $s$ es la desciación estándar y n el tamaño de la muestra y el cual sigue una distribución de Student con $n-1$ grados de libertad.
-
-Cabe recalcar que lo antes mencionado es solamente cuando tenemos una muestra, veamo ahora casos cuando queremos comparar dos muestras.
-
-### Caso cuando las varianzas son desconocidas pero iguales
-
-Este caso es de los casos más comunes, aquí tenemos dos medias cuyas varianzas son desconocidas. Primero debemos hacer una prueba F ($F=\frac{s_1^2}{s_2^2}$) para probar si las varianzas son iguales y luego podemos usar el estadístico siguiente $$
-t=\frac{(\bar{x}_1-\bar{x}_2)-(u_1-u_2)}{s_p\sqrt{1/n_1+1/n_2}}
-$$ donde $$
-s^2_p=\frac{s_1^2(n_1-1)+s_2^2(n_2-1)}{n_1+n_2-2}
-$$ con grados de libertad dados por $v=n_1+n_2-2$
-
-### Caso cuando las varianzas son desconocidas pero distintas
-
-## Biblioteca Scipy
-
-Ahora que conocemos algunos casos que se nos podrían presentar vamos a ver como usar Python para solventarlos.
-
-Primero debemos instalar la librería y de la misma llamar a la funcion stats, puedes ahcerlo de la siguiente manera
-
-```{python}
-pip install scipy
-
-from scipy import stats
-```
-
-Listo, ahora veamos algunos casos
-
--   Caso de una sola población:
-
-    Pongamos el siguiente caso, tomando nustro archivo de emisiones de CO2 y con la media poblacional
+Incluso podemos realizar esto de manera manual para comprobar, el código es el siguiente
