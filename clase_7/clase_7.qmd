@@ -71,6 +71,7 @@ Listo, ahora veamos algunos casos
     Pongamos el siguiente caso, tomando nustro archivo de emisiones de CO2 y con la media poblacional. Supongamos que Australia cree que la media de emisiones en estos 30 años es de 340000 kt de C02, con esto hacemos nuestra prueba de hipótesis.
 
 ```{python}
+#Cargamos las librerias 
 import pandas as pd
 import numpy as np 
 from scipy import stats
@@ -134,16 +135,6 @@ print(resultado.statistic)
     Veamos como dar una respuesta usando python
 
 ```{python}
-#Cargamos las librerias 
-import pandas as pd
-import numpy as np 
-from scipy import stats
-
-# Leemos nuestro archivo de datos de CO2
-ruta_archivo_excel = 'C:/Users/Brad/Documents/curso_python_poli_dec/data/co2.xlsx'
-
-# Creamos un objeto llamado datos para almacenarlo
-datos = pd.read_excel(ruta_archivo_excel)
 
 #Seleccionar los dos países
 fila_seleccionada1 = datos.iloc[5,4:]
@@ -154,11 +145,58 @@ emiratos = np.array(fila_seleccionada1)
 argentina = np.array(fila_seleccionada2)
 
 #buscamos el valor p mencionado
-t_stat, p_valor = stats.ttest_ind(emiratos, argentina)
-print(t_stat)
-print(p_valor) 
+resultado2 = stats.ttest_ind(emiratos, argentina,equal_var=False)
+print(resultado2.pvalue)
+#solo en la nueva versión --> print(resultado2.df) grados de libertad
 ```
 
-Con ello podemos ver que el valor p es mayor a 0.05, por lo que no rechazamos la hipotesis nula y podriamos considerar que ambos países tienen, en promedio, una emisión igual.
+Con ello podemos ver que el valor p es mayor a 0.05, por lo que no rechazamos la hipotesis nula y podriamos considerar que ambos países tienen, en promedio, una emisión igual. Notemos que un parámetro de la función es `equal_var`este por defecto lleva el valor "True", pero si conocemos que son dsitintas podemos cambiarlo.
 
 Incluso podemos realizar esto de manera manual para comprobar, el código es el siguiente
+
+```{python}
+#medidas que nos ayudaran a simplificar las operaciones
+desv1 = np.std(emiratos)
+media1 = np.mean(emiratos)
+desv2 = np.std(argentina)
+media2 = np.mean(argentina)
+var1 = desv1**2
+var2 = desv2**2
+
+#Primero verificamos si las varianzas son iguales
+#Utilizamos el estadítico F de prueba
+F_prueba = desv2**2/desv1**2
+F_prueba
+
+#Limites de rechazo prueba F
+F_est1 = stats.f.ppf(0.975,30,30)
+F_est1
+F_est2 = stats.f.ppf(0.025,30,30)
+F_est2
+
+# Rechazamos la hipotesis de que las varianzas son iguales, por tanto realizamos el análisis tomando en cuenta el tercer caso explicado anteriormente
+
+t_calculado = (media1-media2)/np.sqrt((desv1**2/31)+(desv2**2/31))
+t_calculado
+
+#grados de libertad
+v_arriba = ((var1/31)+(var2/31))**2
+v_abajo = ((var1/31)**2/30)+((var2/31)**2/30)
+v = v_arriba/v_abajo
+v 
+
+#limites de rechazo para t
+t_est1= stats.t.ppf(0.025,47) 
+t_est1
+t_est2 = stats.t.ppf(0.975,47)
+t_est2
+
+#Vemos que decidimos
+if t_est1<=t_calculado<=t_est2:
+    print("No se rechaza H_0")
+else:
+    print("Se rechaza H_0")
+
+```
+
+Se pueden cambiar más cosas para realizar pruebas de hipótesis (además de ver las funciones de distribucion y densidad de algunas distribuciones de probabilidad), se recomienda leer la documentación oficial de Scipy, la cual es la siguiente: https://docs.scipy.org/doc/scipy/reference/stats.html
