@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introducción al Lenguaje de Programación Python para Análisis Estadístico - 7&nbsp; Exploración y visualización de datos con Matplotlib y Seaborn en Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./clase_4.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Exploración y visualización de datos con Matplotlib y Seaborn en Python</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introducción al Lenguaje de Programación Python para Análisis Estadístico</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Indice (en construcción)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Clase_1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción a Python y su entorno de desarrollo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Clase_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción al manejo de datos en Python con pandas</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Funciones y la importancia del análisis de datos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Variables aleatorias, funciones de distribución y estimación de parametros</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_6.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Exploración y visualización de datos con Matplotlib y Seaborn en Python</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link active" data-scroll-target="#resumen">Resumen</a></li>
+  <li><a href="#matplotlib-y-seaborn" id="toc-matplotlib-y-seaborn" class="nav-link" data-scroll-target="#matplotlib-y-seaborn">Matplotlib y Seaborn</a></li>
+  <li><a href="#variables-numéricas-y-categóricas" id="toc-variables-numéricas-y-categóricas" class="nav-link" data-scroll-target="#variables-numéricas-y-categóricas">Variables numéricas y categóricas</a>
+  <ul class="collapse">
+  <li><a href="#gráfico-de-barras" id="toc-gráfico-de-barras" class="nav-link" data-scroll-target="#gráfico-de-barras">Gráfico de barras</a></li>
+  <li><a href="#gráfico-de-barras-agrupado" id="toc-gráfico-de-barras-agrupado" class="nav-link" data-scroll-target="#gráfico-de-barras-agrupado">Gráfico de barras agrupado</a></li>
+  <li><a href="#gráfico-de-burbuja" id="toc-gráfico-de-burbuja" class="nav-link" data-scroll-target="#gráfico-de-burbuja">Gráfico de burbuja</a></li>
+  <li><a href="#gráfico-de-araña-radar-chart" id="toc-gráfico-de-araña-radar-chart" class="nav-link" data-scroll-target="#gráfico-de-araña-radar-chart">Gráfico de araña (radar chart)</a></li>
+  <li><a href="#diagrama-de-pastel" id="toc-diagrama-de-pastel" class="nav-link" data-scroll-target="#diagrama-de-pastel">Diagrama de pastel</a></li>
+  <li><a href="#gráfico-de-lineas" id="toc-gráfico-de-lineas" class="nav-link" data-scroll-target="#gráfico-de-lineas">Gráfico de lineas</a></li>
+  </ul></li>
+  <li><a href="#presentación-de-gráficos-paletas-de-color-y-etiquetas" id="toc-presentación-de-gráficos-paletas-de-color-y-etiquetas" class="nav-link" data-scroll-target="#presentación-de-gráficos-paletas-de-color-y-etiquetas">Presentación de gráficos: paletas de color y etiquetas</a>
+  <ul class="collapse">
+  <li><a href="#paletas-cualitativas" id="toc-paletas-cualitativas" class="nav-link" data-scroll-target="#paletas-cualitativas">Paletas cualitativas</a></li>
+  <li><a href="#paletas-secuenciales" id="toc-paletas-secuenciales" class="nav-link" data-scroll-target="#paletas-secuenciales">Paletas secuenciales</a></li>
+  <li><a href="#paletas-divergentes" id="toc-paletas-divergentes" class="nav-link" data-scroll-target="#paletas-divergentes">Paletas divergentes</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Exploración y visualización de datos con Matplotlib y Seaborn en Python</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="resumen" class="level2">
+<h2 class="anchored" data-anchor-id="resumen">Resumen</h2>
+<p>Este capítulo aborda dos importantes bibliotecas de visualización de datos en Python: Matplotlib y Seaborn.</p>
+<p>Matplotlib, una librería open source creada en 2002 por John Hunter, es fundamental para la visualización de datos en Python, ofreciendo gráficos en dos dimensiones y visualizaciones dinámicas e interactivas. PyPlot, un módulo de Matplotlib, facilita la adición de elementos como líneas, imágenes o texto en los gráficos.</p>
+<p>Seaborn, construido sobre Matplotlib y creado por Michael Waskom, busca simplificar la creación de gráficos estadísticos. Sus características clave incluyen:</p>
+<p>Estética agradable con opciones de color y temas predefinidos. Integración con pandas, permitiendo el uso eficiente de DataFrames. Enfoque en visualizaciones estadísticas para análisis de datos. Facilidad de uso con funciones especializadas. Alta capacidad de personalización. Ambas bibliotecas tienen documentación extensa y valiosa para su uso óptimo. La integración con pandas es especialmente útil, como se muestra en los ejemplos de código.</p>
+<p>El capítulo continúa con una discusión sobre variables numéricas y categóricas, seguido de ejemplos prácticos para crear diversos tipos de gráficos utilizando Matplotlib y Seaborn, como gráficos de barras, de burbuja, radar, de pastel, de matriz y de líneas. Estos ejemplos muestran la versatilidad y eficiencia de ambas bibliotecas en la representación gráfica de datos.</p>
+<p>Finalmente, se destaca la importancia de la selección de colores y etiquetas en la presentación de gráficos. Se aborda cómo el color puede influir en la interpretación y percepción de los datos. Seaborn ofrece diversas paletas de colores (cualitativas, secuenciales y divergentes) para adaptarse a diferentes tipos de datos y visualizaciones. La librería Palettable también se menciona como una alternativa para la selección de paletas de colores. La elección correcta de etiquetas es crucial para evitar ambigüedades y facilitar la comprensión de los gráficos.</p>
+<p>En resumen, este capítulo proporciona una comprensión integral de Matplotlib y Seaborn, destacando sus capacidades, integración con otras bibliotecas y su rol esencial en la visualización de datos en Python.</p>
+</section>
+<section id="matplotlib-y-seaborn" class="level2">
+<h2 class="anchored" data-anchor-id="matplotlib-y-seaborn">Matplotlib y Seaborn</h2>
+<p>Matplotlib es una librería open source de Python con la que se pueden crear gráficos en dos dimensiones, visualizaciones dinámicas, interactivas, muy importante para la visualización de datos al momento de realizar un análisis. Fue creada en 2002 por John Hunter, neurobiólogo, quien buscaba una forma de replicar la creación gráfica de Matlab en Python. A pesar del fallecimiento de su creador en el año 2012, esta al ser open source, ha ido mejorando gracias al aporte de la comunidad hasta convertirse en una gran alternativa a Matlab.</p>
+<p>Con Matplotlib también se habla de PyPlot, el cual es un módulo que nos presenta funciones para añadir elementos a nuestros gráficos como líneas, imágenes o texto, posee una interfaz sencilla y es muy usado.</p>
+<p>Seaborn es una biblioteca de visualización de datos en Python que está construida sobre Matplotlib. Fue creado por Michael Waskom y tiene como objetivo hacer que la creación de gráficos estadísticos atractivos y informativos sea más fácil. Algunos puntos a resaltar serían:</p>
+<ol type="1">
+<li><p><strong>Estética agradable:</strong> Seaborn proporciona una interfaz de alto nivel para crear gráficos estadísticos atractivos y con estilo. Ofrece opciones de color predefinidas y temas, lo que facilita la creación de visualizaciones agradables sin tener que personalizar todos los detalles manualmente.</p></li>
+<li><p><strong>Integración con pandas:</strong> Seaborn se integra bien con pandas, otra biblioteca popular de Python para manipulación y análisis de datos. Puedes pasar fácilmente DataFrames de pandas a funciones de Seaborn para crear visualizaciones rápidas.</p></li>
+<li><p><strong>Visualizaciones estadísticas:</strong> Seaborn está diseñado específicamente para la visualización de datos estadísticos. Ofrece funciones para visualizar distribuciones univariadas y bivariadas, matrices de correlación, y más. Esto lo hace especialmente útil en entornos de análisis de datos y estadísticas.</p></li>
+<li><p><strong>Facilidad de uso:</strong> Seaborn simplifica la creación de gráficos complejos mediante funciones especializadas que facilitan la generación de diagramas de dispersión, diagramas de caja, gráficos de barras, entre otros.</p></li>
+<li><p><strong>Personalización:</strong> Aunque Seaborn proporciona una estética agradable de forma predeterminada, también permite una gran personalización. Puedes ajustar colores, estilos y otros aspectos visuales según tus preferencias.</p></li>
+</ol>
+<p>Cabe recordar que tanto Matplotlib como Seaborn tienen su respectiva documentación que vale la pena revisar, la misma ayudará a entender de mejor manera cómo usar las cientos de funciones que poseen cada una.</p>
+<p>Ahora veamos como llamar a estas librerias</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> datasets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Nota:</strong> Pandas es una librería que se integra de muy buena manera con estas dos, puesto que el uso de DataFrames es muy versátil con esta librería.</p>
+</blockquote>
+<div>
+<p style="text-align:center;">
+</p><p><img src="images/meme1.jpg" alt="JuveYell" width="300px"></p>
+<p></p>
+</div>
+</section>
+<section id="variables-numéricas-y-categóricas" class="level2">
+<h2 class="anchored" data-anchor-id="variables-numéricas-y-categóricas">Variables numéricas y categóricas</h2>
+<p>En esta parte vamos a dar un pequeño recordatorio de qué son cada una de las variables</p>
+<ul>
+<li><p><strong>Numéricas</strong>: Son aquellas que pueden ser representadas por cantidades numéricas, son discretas o continuas. Algunos ejemplos son la edad, el peso o la altura.</p></li>
+<li><p><strong>Categóricas</strong>: Son aquellas que representan diferentes grupos y no tienen un orden entre ellas. Pueden ser el género, etnia, etc</p></li>
+</ul>
+<p>Ahora veamos cómo crear estos gráficos usando ambas librerias.</p>
+<section id="gráfico-de-barras" class="level3">
+<h3 class="anchored" data-anchor-id="gráfico-de-barras">Gráfico de barras</h3>
+<p>Este gráfico es recomendable usarlo cuando comparas variables numéricas con una categórica. Es muy bueno para mostrar diferencias entre los datos de la variable categórica.</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos 3 variables </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>nombres <span class="op">=</span> [<span class="st">"Edgar"</span>, <span class="st">"María"</span>, <span class="st">"Pablo"</span>,<span class="st">"Alex"</span>]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>edad <span class="op">=</span> [<span class="dv">26</span>,<span class="dv">25</span>,<span class="dv">24</span>,<span class="dv">28</span>]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>estatura <span class="op">=</span> [<span class="dv">171</span>,<span class="dv">170</span>,<span class="dv">178</span>,<span class="dv">185</span>]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Vamos a crear un gráfico simple de barras, que muestre el nombre de cada uno y sus distintas edades</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.bar(nombres, edad, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Agregamos etiquetas y el título</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Nombre'</span>) <span class="co">#Eje x</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Edad'</span>) <span class="co">#Eje y</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Diagrama de Barras'</span>) <span class="co">#Titulo</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar el diagrama de barras</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="clase_6_files/figure-html/cell-3-output-1.png" width="585" height="449"></p>
+</div>
+</div>
+<p>Listo, hemos creado nuestro primer gráfico. Ahora, usaremos otra librearia para crear lo mismo</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creamos un datafrme con los datos anteriores</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>datos <span class="op">=</span> {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'nombres'</span>: [<span class="st">"Edgar"</span>, <span class="st">"María"</span>, <span class="st">"Pablo"</span>,<span class="st">"Alex"</span>],</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'edad'</span> : [<span class="dv">26</span>,<span class="dv">25</span>,<span class="dv">24</span>,<span class="dv">28</span>],</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estatura'</span>: [<span class="dv">171</span>,<span class="dv">180</span>,<span class="dv">189</span>,<span class="dv">165</span>]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span> pd.DataFrame(datos)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Se crea el gráfico</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span><span class="st">'nombres'</span>, y<span class="op">=</span><span class="st">'edad'</span>, data<span class="op">=</span> df)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Titulos y más</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Nombre'</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Edad'</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Diagrama de Barras'</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="clase_6_files/figure-html/cell-4-output-1.png" width="585" height="449"></p>
+</div>
+</div>
+<p>Como podemos observar, usando la primera opción no fue necesario crear un dataframe, sin embargo en la segunda tuvimos que hacer uso del mismo y además saber los nombres de las variables para saber qué vamos a graficar, por tanto el uso de una u otra dependerá de cada uno. Veamos más ejemplos de otros gráficos muy usados en el data storytelling.</p>
+</section>
+<section id="gráfico-de-barras-agrupado" class="level3">
+<h3 class="anchored" data-anchor-id="gráfico-de-barras-agrupado">Gráfico de barras agrupado</h3>
+<p>Es similar a un gráfico de barras solo que las categorías pueden mostrar más de una variable. Es recomendable usarlo cuando quieres contrastar dos variables relacionadas.</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usando matplotlib el código es el siguiente</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>x<span class="op">=</span> np.arange(<span class="dv">4</span>) <span class="co">#creamos un arreglo con numpy con el numero de variables, 4 nombres</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ancho <span class="op">=</span> <span class="fl">0.40</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Se crean ambos gráficos </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.bar(x<span class="op">-</span><span class="fl">0.2</span>, edad, ancho)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.bar(x<span class="op">+</span><span class="fl">0.2</span>, estatura, ancho)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="clase_6_files/figure-html/cell-5-output-1.png" width="575" height="411"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Usando Seaborn tenemos</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'nombres'</span>, y<span class="op">=</span><span class="st">'edad'</span>, label<span class="op">=</span><span class="st">'edad'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'nombres'</span>, y<span class="op">=</span><span class="st">'estatura'</span>, label<span class="op">=</span><span class="st">'estatura'</span>, color<span class="op">=</span><span class="st">'orange'</span>, bottom<span class="op">=</span>df[<span class="st">'edad'</span>])</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Configurar etiquetas y leyenda</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Nombres'</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Valores'</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Gráfico de Barras Agrupadas usando Seaborn'</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>&lt;matplotlib.legend.Legend at 0x25c5654da10&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="clase_6_files/figure-html/cell-6-output-2.png" width="593" height="450"></p>
+</div>
+</div>
+</section>
+<section id="gráfico-de-burbuja" class="level3">
+<h3 class="anchored" data-anchor-id="gráfico-de-burbuja">Gráfico de burbuja</h3>
+<p>Es un gráfico que muestra datos en tres dimensiones en un plano de dos, la tercera sería el tamaño de la burbuja, sirve para mostrar la difencia entre conjuntos de la misma variable u otras.</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Leemos el archivo de datos</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>archivo_excel <span class="op">=</span> <span class="st">'co2.xlsx'</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>datos_excel <span class="op">=</span> pd.read_excel(archivo_excel)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>col1<span class="op">=</span>datos_excel[<span class="st">'Country Name'</span>].head(<span class="dv">4</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>col2<span class="op">=</span> np.arange(<span class="dv">1</span>,<span class="dv">5</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>tamanio<span class="op">=</span> datos_excel[<span class="st">'2020'</span>].head(<span class="dv">4</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>plt.scatter(col1, col2, s<span class="op">=</span>tamanio, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Personalizar el gráfico</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Emiciones de CO2 en 2020'</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Países'</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar el gráfico</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="clase_6_files/figure-html/cell-7-output-1.png" width="573" height="450"></p>
+</div>
+</div>
+</section>
+<section id="gráfico-de-araña-radar-chart" class="level3">
+<h3 class="anchored" data-anchor-id="gráfico-de-araña-radar-chart">Gráfico de araña (radar chart)</h3>
+<p>Este gráfico es útil para comparar varias categorías o variables en relación a un conjunto de ejes en común.</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># usaremos nuestro archivo de emisiones de Co2 </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>datos1 <span class="op">=</span> datos_excel.loc[<span class="dv">8</span>,[<span class="st">'1990'</span>,<span class="st">'2000'</span>,<span class="st">'2010'</span>,<span class="st">'2020'</span>]] </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>datos2 <span class="op">=</span> datos_excel.loc[<span class="dv">12</span>,[<span class="st">'1990'</span>,<span class="st">'2000'</span>,<span class="st">'2010'</span>,<span class="st">'2020'</span>]] </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>datos11 <span class="op">=</span> datos1.tolist() </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>datos22 <span class="op">=</span> datos2.tolist() </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Primer gráfico </span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>categorias1 <span class="op">=</span> [<span class="st">'1990'</span>, <span class="st">'2000'</span>, <span class="st">'2010'</span>, <span class="st">'2020'</span>] </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>valores1 <span class="op">=</span> datos11 </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Segundo gráfico </span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>categorias2 <span class="op">=</span> [<span class="st">'1990'</span>, <span class="st">'2000'</span>, <span class="st">'2010'</span>, <span class="st">'2020'</span>] </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>valores2 <span class="op">=</span> datos22 </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># ángulo de cada eje</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>angulos <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi, <span class="bu">len</span>(categorias1), endpoint<span class="op">=</span><span class="va">False</span>) </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegurar que el gráfico es circular</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>valores1 <span class="op">+=</span> valores1[:<span class="dv">1</span>]</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>valores2 <span class="op">+=</span> valores2[:<span class="dv">1</span>]</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>angulos <span class="op">=</span> np.concatenate((angulos, [angulos[<span class="dv">0</span>]]))</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear subgráficos</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(subplot_kw<span class="op">=</span>{<span class="st">'projection'</span>: <span class="st">'polar'</span>})</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos el primer gráfico de telaraña</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>ax.plot(angulos, valores1, label<span class="op">=</span><span class="st">'Antigua y Barbuda'</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>ax.fill(angulos, valores1, alpha<span class="op">=</span><span class="fl">0.25</span>)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos el segundo gráfico de telaraña</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>ax.plot(angulos, valores2, label<span class="op">=</span><span class="st">'Burundi'</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>ax.fill(angulos, valores2, alpha<span class="op">=</span><span class="fl">0.25</span>)</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Personalizar el gráfico</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(angulos[:<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>ax.set_xticklabels(categorias1)</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar leyenda</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="clase_6_files/figure-html/cell-8-output-1.png" width="460" height="439"></p>
+</div>
+</div>
+</section>
+<section id="diagrama-de-pastel" class="level3">
+<h3 class="anchored" data-anchor-id="diagrama-de-pastel">Diagrama de pastel</h3>
+<p>Sirven para comparar porcentajes de cierta variable y es recomendable usarlo cuando se quiera resaltar el mayor porcentaje de datos en nuestras variables.</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#creamos nuevas variables </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>objeto <span class="op">=</span> [<span class="st">'Detergente A'</span>, <span class="st">'Detergente B'</span>, <span class="st">'Detergente C'</span>, <span class="st">'Detergente D'</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>cantidad <span class="op">=</span> [<span class="dv">34</span>,<span class="dv">26</span>,<span class="dv">11</span>,<span class="dv">30</span>]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>plt.pie(cantidad, labels<span class="op">=</span>objeto, autopct<span class="op">=</span><span class="st">'</span><span class="sc">%1.1f%%</span><span class="st">'</span>, startangle<span class="op">=</span><span class="dv">90</span>, colors<span class="op">=</span>[<span class="st">'lightblue'</span>, <span class="st">'lightgreen'</span>, <span class="st">'lightcoral'</span>,<span class="st">'red'</span>])</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Configuración adicional</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'equal'</span>)  </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Diagrama de Pastel'</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar el gráfico</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="clase_6_files/figure-html/cell-9-output-1.png" width="540" height="411"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Usando Seaborn, junto con matplotlib</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>colores <span class="op">=</span> sns.color_palette(<span class="st">"bright"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.pie(cantidad, labels<span class="op">=</span>objeto, colors<span class="op">=</span>colores, autopct<span class="op">=</span><span class="st">'</span><span class="sc">%1.1f%%</span><span class="st">'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Diagrama de Pastel'</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Aqui hemos usado la paleta de colores de seaborn </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="clase_6_files/figure-html/cell-10-output-1.png" width="454" height="409"></p>
+</div>
+</div>
+</section>
+<section id="gráfico-de-lineas" class="level3">
+<h3 class="anchored" data-anchor-id="gráfico-de-lineas">Gráfico de lineas</h3>
+<p>Es muy útil para mostrar como evolucionan los datos a través del tiempo.</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Crearemos variables con el PIB del país a traves de los años</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>anio <span class="op">=</span> [<span class="dv">2014</span>,<span class="dv">2015</span>,<span class="dv">2016</span>,<span class="dv">2017</span>,<span class="dv">2018</span>,<span class="dv">2019</span>,<span class="dv">2020</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>pib <span class="op">=</span> [<span class="fl">101.7</span>,<span class="fl">99.3</span>,<span class="fl">99.9</span>,<span class="fl">104.3</span>,<span class="fl">107.6</span>,<span class="fl">108.1</span>,<span class="fl">98.8</span>]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.plot(anio, pib, marker<span class="op">=</span><span class="st">'o'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'b'</span>, label<span class="op">=</span><span class="st">'Datos de ejemplo'</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Titulos y más</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Gráfico de Líneas'</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Año'</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'PIB'</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>plt.legend()  <span class="co"># Muestra la leyenda si se proporcionan etiquetas</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar el gráfico</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="clase_6_files/figure-html/cell-11-output-1.png" width="593" height="449"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usando Seaborn</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x<span class="op">=</span>anio, y<span class="op">=</span>pib, marker<span class="op">=</span><span class="st">'*'</span>, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Datos de ejemplo'</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Títulos y más</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Gráfico de Líneas con Seaborn'</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Eje X'</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Eje Y'</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar el gráfico</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="clase_6_files/figure-html/cell-12-output-1.png" width="597" height="455"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="presentación-de-gráficos-paletas-de-color-y-etiquetas" class="level2">
+<h2 class="anchored" data-anchor-id="presentación-de-gráficos-paletas-de-color-y-etiquetas">Presentación de gráficos: paletas de color y etiquetas</h2>
+<p>En el data storytelling el color juega un papel muy importante ya que estos deben ser relevantes. La percepción del color se estudia en varias disciplinas, desde psicología hasta optometría. La interpretación del significado del color esta fuertemente influenciada por factores ajenos a uno, como pueden ser la religión o las costumbres.</p>
+<p>Si lo que deseamos es comunicar de manera efectiva alguna información es escencial comprender las necesidades, costumbres y actitudes del receptor de la misma. Es así que para seleccionar el color podemos guiarnos por:</p>
+<ul>
+<li><p>Contraste en los colores:</p>
+<p>Al momento de escoger el color debemos darnos cuenta en como estos ayudan a resaltar una idea o mostrar una diferencia.</p></li>
+<li><p>Metáfora en los colores y degradados:</p>
+<p>Los colores como una metáfora se refiere a cuando los usamos con un significado en la sociedad, por ejemplo el rojo para decir parar o el verde para seguir. El degradado se refiere a escalas que crecen o decrecen según algunos valores.</p></li>
+</ul>
+<p>Para ahondar más en el tema hablemos de las paletas de colores en seaborn, esta librería facilita el uso de los mismos y nos da pistas de cómo encontrar la mejor solución para nuestro trabajo. Podemos clasificar las paletas en tres categorías:</p>
+<ul>
+<li><p>Paletas cualitativas</p></li>
+<li><p>Paletas secuenciales</p></li>
+<li><p>Paletas divergentes</p></li>
+</ul>
+<section id="paletas-cualitativas" class="level3">
+<h3 class="anchored" data-anchor-id="paletas-cualitativas">Paletas cualitativas</h3>
+<p>Es recomendable usar las mismas con datos categóricos, ya que su variación se enceuntra en el componente del tono. Uno puede ver los diez tonos usando el siguiente código</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sns.color_palette()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<svg width="550" height="55"><rect x="0" y="0" width="55" height="55" style="fill:#4c72b0;stroke-width:2;stroke:rgb(255,255,255)"></rect><rect x="55" y="0" width="55" height="55" style="fill:#dd8452;stroke-width:2;stroke:rgb(255,255,255)"></rect><rect x="110" y="0" width="55" height="55" style="fill:#55a868;stroke-width:2;stroke:rgb(255,255,255)"></rect><rect x="165" y="0" width="55" height="55" style="fill:#c44e52;stroke-width:2;stroke:rgb(255,255,255)"></rect><rect x="220" y="0" width="55" height="55" style="fill:#8172b3;stroke-width:2;stroke:rgb(255,255,255)"></rect><rect x="275" y="0" width="55" height="55" style="fill:#937860;stroke-width:2;stroke:rgb(255,255,255)"></rect><rect x="330" y="0" width="55" height="55" style="fill:#da8bc3;stroke-width:2;stroke:rgb(255,255,255)"></rect><rect x="385" y="0" width="55" height="55" style="fill:#8c8c8c;stroke-width:2;stroke:rgb(255,255,255)"></rect><rect x="440" y="0" width="55" height="55" style="fill:#ccb974;stroke-width:2;stroke:rgb(255,255,255)"></rect><rect x="495" y="0" width="55" height="55" style="fill:#64b5cd;stroke-width:2;stroke:rgb(255,255,255)"></rect></svg>
+</div>
+</div>
+<p>Uno puede comparar esta paleta de colores con la derterminada de matplotlib la cual es más intensa, además seaborn cuenta con 6 variaciones de la misma.</p>
+</section>
+<section id="paletas-secuenciales" class="level3">
+<h3 class="anchored" data-anchor-id="paletas-secuenciales">Paletas secuenciales</h3>
+<p>Esta paleta es apropiada cuando los datos varían desde valores bajos hasta valores altos. En donde varía esta paleta es en la luminancia. Existen varias paletas con esta característica en Seaborn por lo que tenemos varias opciones para elegir, a continuación mostramos algunas que se pueden visualizar</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sns.color_palette(<span class="st">"rocket"</span>, as_cmap<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>sns.color_palette(<span class="st">"mako"</span>, as_cmap<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Paletas de una solo color</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>sns.light_palette(<span class="st">"seagreen"</span>, as_cmap<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>sns.dark_palette(<span class="st">"#69d"</span>, reverse<span class="op">=</span><span class="va">True</span>, as_cmap<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div style="vertical-align: middle;"><strong>blend</strong> </div><div class="cmap"><img alt="blend colormap" title="blend" style="border: 1px solid #555;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAABACAYAAABsv8+/AAAAFHRFWHRUaXRsZQBibGVuZCBjb2xvcm1hcKH0gPAAAAAadEVYdERlc2NyaXB0aW9uAGJsZW5kIGNvbG9ybWFwX6spFgAAADB0RVh0QXV0aG9yAE1hdHBsb3RsaWIgdjMuNy4xLCBodHRwczovL21hdHBsb3RsaWIub3JnKq/4TQAAADJ0RVh0U29mdHdhcmUATWF0cGxvdGxpYiB2My43LjEsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcECWdqAAABy0lEQVR4nO3WQVLCQBRAwehhvZOH8yxxIWBBCMwYys3r3kQZ48yvFKn39vH5tS7Lsqzruvw4XU+/nz9dNuvny3p//XLb/fvOP/yu399nsz58vsfr6805hufaXT841/D5Jue62WfzPEbnuux7dO698z2ee3qup3Nfn2987tnzHXsu83Nf//343Pf3Gf5+TT6X3f+7e9/1PtPvlc3+f537fJmca/q9MTjXy96Xe+d7Nvfkff/+vjx2vte9L2/Od7s+Otfhua/nel8AgBwBAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACBIAABAkAAAgCABAABBAgAAggQAAAQJAAAIEgAAECQAACDoG3CzbP81+Rr3AAAAAElFTkSuQmCC"></div><div style="vertical-align: middle; max-width: 514px; display: flex; justify-content: space-between;"><div style="float: left;"><div title="#6699ddff" style="display: inline-block; width: 1em; height: 1em; margin: 0; vertical-align: middle; border: 1px solid #555; background-color: #6699ddff;"></div> under</div><div style="margin: 0 auto; display: inline-block;">bad <div title="#00000000" style="display: inline-block; width: 1em; height: 1em; margin: 0; vertical-align: middle; border: 1px solid #555; background-color: #00000000;"></div></div><div style="float: right;">over <div title="#242629ff" style="display: inline-block; width: 1em; height: 1em; margin: 0; vertical-align: middle; border: 1px solid #555; background-color: #242629ff;"></div></div>
+</div>
+</div>
+</div></section>
+<section id="paletas-divergentes" class="level3">
+<h3 class="anchored" data-anchor-id="paletas-divergentes">Paletas divergentes</h3>
+<p>Estas se usan para datos en donde los valores altos como los bajos son de interés, a menudo con punto medio sin tanta importancia. Aquí debemos tener en cuenta que debe haber dos tonos dominantes, uno en cada polo.</p>
+<p>Para ver lo que nos ofrece Seaborn podemos usar el siguiente código</p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>sns.color_palette(<span class="st">"vlag"</span>, as_cmap<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>sns.color_palette(<span class="st">"icefire"</span>, as_cmap<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div style="vertical-align: middle;"><strong>icefire</strong> </div><div class="cmap"><img alt="icefire colormap" title="icefire" style="border: 1px solid #555;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAABACAYAAABsv8+/AAAAFnRFWHRUaXRsZQBpY2VmaXJlIGNvbG9ybWFwvkjy7gAAABx0RVh0RGVzY3JpcHRpb24AaWNlZmlyZSBjb2xvcm1hcBlmQ5cAAAAwdEVYdEF1dGhvcgBNYXRwbG90bGliIHYzLjcuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZyqv+E0AAAAydEVYdFNvZnR3YXJlAE1hdHBsb3RsaWIgdjMuNy4xLCBodHRwczovL21hdHBsb3RsaWIub3JnBAlnagAAAm1JREFUeJzt1sFx2zAQBVCAVP8VpZIUkCpMIgeDdAAJke7/vct6FwuYMx7P/Prrz+9WSinH2UoppZxnKf/27+bHar/N8w/7Np+v9lbvzecf1r5/TvNP+3WtH+21vtfufqpH7RdKr98fXI8yzOs0367+np/TvPd9fvX1PMb+OF6el3uv9+1rmJfza5p/19b7Np3/zI+xn/Z/5vPeMeydq/Nez/P4/zv9D3C2eW+u5/ju3Z8v98rT+VTLtFfadK/3ZT6/5mNtZZ5/q1dtU/+mbv2nu6/15fl23at1nNfx/Hk+9vvifP9wf1/N+xfM7+2L95/O73l5PX+6N+8t+qf9N/X+/W3ot/6H/dlrQ73Pr/3t9fk9317Pt61Mfa/763m95+W/87q3qa/DXr3u3/NV7Yu91v7gNa97f7DXVX/Pt3nvMe09+t5jsfeY3nmM56v5u3v39037i++6/v8AgCACAAAEEgAAIJAAAACBBAAACCQAAEAgAQAAAgkAABBIAACAQAIAAAQSAAAgkAAAAIEEAAAIJAAAQCABAAACCQAAEEgAAIBAAgAABBIAACCQAAAAgQQAAAgkAABAIAEAAAIJAAAQSAAAgEACAAAEEgAAIJAAAACBBAAACCQAAEAgAQAAAgkAABBIAACAQAIAAAQSAAAgkAAAAIEEAAAIJAAAQCABAAACCQAAEEgAAIBAAgAABBIAACCQAAAAgQQAAAgkAABAIAEAAAIJAAAQSAAAgEACAAAEEgAAIJAAAACBBAAACCQAAEAgAQAAAgkAABBIAACAQAIAAAQSAAAgkAAAAIEEAAAIJAAAQCABAAAC/QWSkzsLHuawCwAAAABJRU5ErkJggg=="></div><div style="vertical-align: middle; max-width: 514px; display: flex; justify-content: space-between;"><div style="float: left;"><div title="#bde7dbff" style="display: inline-block; width: 1em; height: 1em; margin: 0; vertical-align: middle; border: 1px solid #555; background-color: #bde7dbff;"></div> under</div><div style="margin: 0 auto; display: inline-block;">bad <div title="#00000000" style="display: inline-block; width: 1em; height: 1em; margin: 0; vertical-align: middle; border: 1px solid #555; background-color: #00000000;"></div></div><div style="float: right;">over <div title="#ffd4acff" style="display: inline-block; width: 1em; height: 1em; margin: 0; vertical-align: middle; border: 1px solid #555; background-color: #ffd4acff;"></div></div>
+</div>
+</div>
+<p>Cabe destacar que toda esta información se encuentra más detallada en la página oficial del paquete seaborn</p>
+<blockquote class="blockquote">
+<p>https://seaborn.pydata.org/tutorial/color_palettes.html</p>
+</blockquote>
+<p>Existe otra librería que nos deja escocger nuestras paletas de colores, esta es `Palettable`. Aquí esta un link directo a su página en github</p>
+<blockquote class="blockquote">
+<p>https://jiffyclub.github.io/palettable/</p>
+</blockquote>
+<p>Hablemos ahora de las etiquetas de los gráficos, las cuales facilitan la compresión del mismo y sirven de guía para quien va dirigido. Por la misma razón debemos escoger etiquetas que no se presten para ambigüedades. Al momento de poner nuestras etiquetas debemos pensar que otras interpetaciones puede tener nuestro gráfico y luego de ello escoger la mejor que resalte lo que deseamos expresar.</p>
+
+
+</div></section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./clase_4.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Variables aleatorias, funciones de distribución y estimación de parametros</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
