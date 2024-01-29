@@ -2,9 +2,23 @@
 title: "Clase_7"
 format: html
 editor: visual
+execute: 
+  eval: false
 ---
 
-# **Clase 7: Pruebas de hipótesis para la media entre grupos en Python**
+## De cervezas y Datos
+
+La prueba T de Student es una herramienta estadística fundamental, y su historia es tan interesante como su aplicación. Fue desarrollada por William Sealy Gosset, un químico y matemático que trabajaba en la cervecería Guinness en Dublín, Irlanda, a principios del siglo XX.
+
+Gosset se enfrentaba a un problema común en el control de calidad de la cerveza: tenía que trabajar con muestras pequeñas debido a limitaciones prácticas, pero necesitaba métodos eficaces para analizar la calidad y la consistencia del producto. Los métodos estadísticos existentes en esa época eran adecuados para muestras grandes, pero no para las pequeñas muestras con las que trabajaba Gosset.
+
+Para abordar este problema, Gosset desarrolló la prueba T, que era especialmente adecuada para estimar la media de una población y comparar medias entre dos grupos pequeños. Publicó su trabajo en 1908 bajo el seudónimo "Student" para proteger su identidad y la de su empleador, Guinness, que prefería mantener en secreto sus métodos de control de calidad. El artículo se tituló "The Probable Error of a Mean" y apareció en la revista "Biometrika".
+
+La prueba T de Student fue revolucionaria porque permitió a los investigadores hacer inferencias estadísticamente válidas a partir de muestras pequeñas. Esto tuvo un impacto significativo en campos como la agricultura, la ingeniería y, por supuesto, la calidad de los productos como la cerveza.
+
+Con el tiempo, la prueba T se expandió en varias variantes, como la prueba T de una muestra, la prueba T de dos muestras independientes, y la prueba T de muestras pareadas. Cada una de estas variantes se utiliza en circunstancias específicas, pero todas se basan en el principio fundamental de comparar medias y evaluar diferencias en términos de la variabilidad observada en los datos.
+
+La prueba T de Student sigue siendo una herramienta esencial en la estadística y es ampliamente utilizada en la investigación científica, la ingeniería, la economía, la psicología y muchos otros campos para la toma de decisiones basada en datos.
 
 ## Pruebas de hipótesis
 
@@ -58,8 +72,7 @@ Ahora que conocemos algunos casos que se nos podrían presentar vamos a ver como
 
 Primero debemos instalar la librería y de la misma llamar a la funcion stats, puedes hacerlo de la siguiente manera:
 
-```{python}
-pip install scipy
+```{python, eval = FALSE}
 
 from scipy import stats
 ```
