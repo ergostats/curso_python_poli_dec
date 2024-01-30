@@ -26,15 +26,15 @@ Las pruebas de hipótesis son una herramienta muy útil en la estadística infer
 
 Aquí introducimos el concepto de hipótesis nula e hipótesis alternativa , nivel de significación y errores Tipo I y Tipo II:
 
--   Hipótesis nula ( $H_0$ ): Es lo que queremos poner a prueba, lo que se cree en un inicio es verdad.
+-   **Hipótesis nula (** $H_0$ **):** Es lo que queremos poner a prueba, lo que se cree en un inicio es verdad.
 
--   Hipótesis alternativa ( $H_1$ ): Es lo que se acepta si los datos nos dan evidencia para rechazar la hipótesis nula, la negación de $H_0$.
+-   **Hipótesis alternativa (** $H_1$ **):** Es lo que se acepta si los datos nos dan evidencia para rechazar la hipótesis nula, la negación de $H_0$.
 
--   Nivel de significación ( $\alpha$): Representa la probabilidad de cometer un error de tipo I al rechazar incorrectamente la hipótesis nula.
+-   **Nivel de significación (** $\alpha$ **):** Representa la probabilidad de cometer un error de tipo I al rechazar incorrectamente la hipótesis nula.
 
--   Error Tipo I: Rechazar incorrectamente la hipóstesis nula cuando es verdadera.
+-   **Error Tipo I:** Rechazar incorrectamente la hipóstesis nula cuando es verdadera.
 
--   Error Tipo II: No rechazar la hipótesis nula cuando es falsa.
+-   **Error Tipo II:** No rechazar la hipótesis nula cuando es falsa.
 
 Definidas las hipótesis a contrastar se realiza una prueba donde se obtendrá un valor llamado *valor p*. Veremos cuando este es significativo (por lo general mayor que 0.05) y como se le usa para rechazar $H_0$. Otro punto a tomar en cuenta es nuestro tamaño de muestra, por lo general un número mayor a 30 es considerado grande y es posible usar algunos resultados estadísticos para aproximar nuestros resultados, si esto no ocurre tendremos que usar otras técnicas.
 
@@ -46,9 +46,9 @@ Aunque los paquetes hagan la mayoría de trabajo no esta de más saber los disti
 
 Es es el caso más común, en este desconocemos la varianza poblacional y por lo general se usa una distribucion $t$ de Student en lugar de una normal.
 
-En este caso usamos un estadístico de prueba $t=\frac{\bar{x}-u_0}{s/\sqrt{n}}$ donde $s$ es la desciación estándar y n el tamaño de la muestra y el cual sigue una distribución de Student con $n-1$ grados de libertad.
+En este caso usamos un estadístico de prueba $t=\frac{\bar{x}-u_0}{s/\sqrt{n}}$ donde $s$ es la desviación estándar y n el tamaño de la muestra y el cual sigue una distribución de Student con $n-1$ grados de libertad.
 
-Cabe recalcar que lo antes mencionado es solamente cuando tenemos una muestra, veamo ahora casos cuando queremos comparar dos muestras.
+Cabe recalcar que lo antes mencionado es solamente cuando tenemos una muestra, veamos ahora casos cuando queremos comparar dos muestras.
 
 ### Caso cuando las varianzas son desconocidas pero iguales
 
@@ -212,4 +212,43 @@ else:
 
 ```
 
-Se pueden cambiar más cosas para realizar pruebas de hipótesis (además de ver las funciones de distribucion y densidad de algunas distribuciones de probabilidad), se recomienda leer la documentación oficial de Scipy, la cual es la siguiente: https://docs.scipy.org/doc/scipy/reference/stats.html
+Se pueden cambiar más cosas para realizar pruebas de hipótesis (además de ver las funciones de distribución y densidad de algunas distribuciones de probabilidad), se recomienda leer la documentación oficial de Scipy, la cual es la siguiente: https://docs.scipy.org/doc/scipy/reference/stats.html
+
+## Pruebas de normalidad
+
+Ver si nuestros datos siguen una distribución normal es de suma importancia en la estadística inferencial ya que muchas pruebas asumen que existe una normalidad en los mismos.
+
+Algunas pruebas de normalidad son las siguientes:
+
+-   Prueba gráfica mediante un histograma:
+
+    En esta prueba queremos observar si nuestros datos sguen una distribución similar a la normal.
+
+-   Gráfico Q-Q:
+
+    En este comparamos los cuantiles observados con los esperados de una distribución normal. Si observamos que los puntos en este gráfico se aproximan a una línea diagonal, podemos decir que los datos siguen distribución normal.
+
+-   Prueba de Kolmogorov-Smirnov:
+
+    Este compara la distribución acumulativa de los datos con los de una normal.
+
+-   Prueba de Shapiro-Wilk:
+
+    En esta se tiene una prueba de hipótesis donde verificamos si los datos provienen de una distribución normal o no.
+
+Vamos a ver algunos ejemplos con la biblioteca Scipy
+
+```{python}
+#Podemos hacer un test de Saphiro-Wilk
+test_saphiro = stats.shapiro(australia)
+test_saphiro
+
+#También mostramos cómo ver podemos corroborar con un histograma
+plt.hist(australia)
+
+#Por último otro test es el de D'Agostino's K-squared
+test_Dangostino = stats.normaltest(australia)
+test_Dangostino 
+```
+
+> El test de Saphiro-Wilk no es aconsejado cuando los datos sobrepasan las 50 observaciones.
