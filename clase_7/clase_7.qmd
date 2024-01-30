@@ -36,7 +36,7 @@ Aquí introducimos el concepto de hipótesis nula e hipótesis alternativa , niv
 
 -   **Error Tipo II:** No rechazar la hipótesis nula cuando es falsa.
 
-Definidas las hipótesis a contrastar se realiza una prueba donde se obtendrá un valor llamado *valor p*. Veremos cuando este es significativo (por lo general mayor que 0.05) y como se le usa para rechazar $H_0$. Otro punto a tomar en cuenta es nuestro tamaño de muestra, por lo general un número mayor a 30 es considerado grande y es posible usar algunos resultados estadísticos para aproximar nuestros resultados, si esto no ocurre tendremos que usar otras técnicas.
+Definidas las hipótesis a contrastar se realiza una prueba donde se obtendrá un valor llamado *valor p*. Veremos cuando este es significativo (por lo general mayor que 0.05) y cómo se le usa para rechazar $H_0$. Otro punto a tomar en cuenta es nuestro tamaño de muestra, por lo general un número mayor a 30 es considerado grande y es posible usar algunos resultados estadísticos para aproximar nuestros resultados, si esto no ocurre tendremos que usar otras técnicas, como el uso de la prueba T de student, antes mencionada.
 
 ## Casos cuando existe varianza en los grupos
 
@@ -91,7 +91,7 @@ from scipy import stats
 
 
 # Leemos nuestro archivo de datos de CO2
-ruta_archivo_excel = 'C:/Users/Brad/Documents/curso_python_poli_dec/data/co2.xlsx'
+ruta_archivo_excel = 'data/co2.xlsx'
 
 # Creamos un objeto llamado datos para almacenarlo
 datos = pd.read_excel(ruta_archivo_excel)
