@@ -212,6 +212,43 @@ else:
 
 ```
 
+Veamos un último ejemplo usando lo visto en la clase anterior, agrupando por regiones, en este caso Europa y América Latina. Vamos a responder a la pregunta: " ¿los paises de Europa emitieron la misma cantidad de co2 que América Latina? " Por tanto tenemos el código siguiente:
+
+```{python}
+# Creamos un objeto llamado datos2 para almacenarl la hoja con loas regiones
+datos2 = pd.read_excel(ruta_archivo_excel,sheet_name=1)
+
+#Agrupamos por regiones
+europa=datos2[datos2["Region"]=="Europa y Asia central (excluido altos ingresos)"]
+latina=datos2[datos2["Region"]=="América Latina y el Caribe (excluido altos ingresos)"]
+
+#Unimos solo Europa
+datos3 = datos.merge(europa, on=["Country Name"],how = "right")
+#unimos america latina
+datos4 = datos.merge(latina, on=["Country Name"],how = "right")
+
+#Creamos una lista para ubicar la suma de cada pais
+fila_america=[]
+fila_europa=[]
+
+#Obtenemos esa suma de cada pais por region
+for i in range(0,23):
+    fila_america.append(np.sum(datos4.iloc[i,4:35]))
+for j in range(0,20):
+    fila_europa.append(np.sum(datos3.iloc[j,4:35]))
+
+#Creamos dos array
+tot_america=np.array(fila_america)
+tot_europa=np.array(fila_europa)
+
+#Realizamos la prueba de hipotesis
+prueba_hip = stats.ttest_ind(tot_america,tot_europa,equal_var=False)
+prueba_hip
+
+```
+
+Con esto no podemos rechazar la hipotesis de que ambas regiones tuvieron iguales emisiones en los años.
+
 Se pueden cambiar más cosas para realizar pruebas de hipótesis (además de ver las funciones de distribución y densidad de algunas distribuciones de probabilidad), se recomienda leer la documentación oficial de Scipy, la cual es la siguiente: https://docs.scipy.org/doc/scipy/reference/stats.html
 
 ## Pruebas de normalidad
