@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introducción al Lenguaje de Programación Python para Análisis Estadístico - 8&nbsp; Pruebas de hipótesis para la media entre grupos en Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./clase_6.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-title">Pruebas de hipótesis para la media entre grupos en Python</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introducción al Lenguaje de Programación Python para Análisis Estadístico</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Indice (en construcción)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Clase_1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción a Python y su entorno de desarrollo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Clase_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción al manejo de datos en Python con pandas</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Funciones y la importancia del análisis de datos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Variables aleatorias, funciones de distribución y estimación de parametros</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploración y visualización de datos con Matplotlib y Seaborn en Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_7.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Pruebas de hipótesis para la media entre grupos en Python</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#de-cervezas-y-datos" id="toc-de-cervezas-y-datos" class="nav-link active" data-scroll-target="#de-cervezas-y-datos">De cervezas y Datos</a></li>
+  <li><a href="#pruebas-de-hipótesis" id="toc-pruebas-de-hipótesis" class="nav-link" data-scroll-target="#pruebas-de-hipótesis">Pruebas de hipótesis</a></li>
+  <li><a href="#casos-cuando-existe-varianza-en-los-grupos" id="toc-casos-cuando-existe-varianza-en-los-grupos" class="nav-link" data-scroll-target="#casos-cuando-existe-varianza-en-los-grupos">Casos cuando existe varianza en los grupos</a>
+  <ul class="collapse">
+  <li><a href="#caso-cuando-la-varianza-poblacional-es-desconocida" id="toc-caso-cuando-la-varianza-poblacional-es-desconocida" class="nav-link" data-scroll-target="#caso-cuando-la-varianza-poblacional-es-desconocida">Caso cuando la varianza poblacional es desconocida</a></li>
+  <li><a href="#caso-cuando-las-varianzas-son-desconocidas-pero-iguales" id="toc-caso-cuando-las-varianzas-son-desconocidas-pero-iguales" class="nav-link" data-scroll-target="#caso-cuando-las-varianzas-son-desconocidas-pero-iguales">Caso cuando las varianzas son desconocidas pero iguales</a></li>
+  <li><a href="#caso-cuando-las-varianzas-son-desconocidas-pero-distintas" id="toc-caso-cuando-las-varianzas-son-desconocidas-pero-distintas" class="nav-link" data-scroll-target="#caso-cuando-las-varianzas-son-desconocidas-pero-distintas">Caso cuando las varianzas son desconocidas pero distintas</a></li>
+  </ul></li>
+  <li><a href="#biblioteca-scipy" id="toc-biblioteca-scipy" class="nav-link" data-scroll-target="#biblioteca-scipy">Biblioteca Scipy</a></li>
+  <li><a href="#pruebas-de-normalidad" id="toc-pruebas-de-normalidad" class="nav-link" data-scroll-target="#pruebas-de-normalidad">Pruebas de normalidad</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-title">Pruebas de hipótesis para la media entre grupos en Python</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="de-cervezas-y-datos" class="level2">
+<h2 class="anchored" data-anchor-id="de-cervezas-y-datos">De cervezas y Datos</h2>
+<p>La prueba T de Student es una herramienta estadística fundamental, y su historia es tan interesante como su aplicación. Fue desarrollada por William Sealy Gosset, un químico y matemático que trabajaba en la cervecería Guinness en Dublín, Irlanda, a principios del siglo XX.</p>
+<p>Gosset se enfrentaba a un problema común en el control de calidad de la cerveza: tenía que trabajar con muestras pequeñas debido a limitaciones prácticas, pero necesitaba métodos eficaces para analizar la calidad y la consistencia del producto. Los métodos estadísticos existentes en esa época eran adecuados para muestras grandes, pero no para las pequeñas muestras con las que trabajaba Gosset.</p>
+<p>Para abordar este problema, Gosset desarrolló la prueba T, que era especialmente adecuada para estimar la media de una población y comparar medias entre dos grupos pequeños. Publicó su trabajo en 1908 bajo el seudónimo “Student” para proteger su identidad y la de su empleador, Guinness, que prefería mantener en secreto sus métodos de control de calidad. El artículo se tituló “The Probable Error of a Mean” y apareció en la revista “Biometrika”.</p>
+<p>La prueba T de Student fue revolucionaria porque permitió a los investigadores hacer inferencias estadísticamente válidas a partir de muestras pequeñas. Esto tuvo un impacto significativo en campos como la agricultura, la ingeniería y, por supuesto, la calidad de los productos como la cerveza.</p>
+<p>Con el tiempo, la prueba T se expandió en varias variantes, como la prueba T de una muestra, la prueba T de dos muestras independientes, y la prueba T de muestras pareadas. Cada una de estas variantes se utiliza en circunstancias específicas, pero todas se basan en el principio fundamental de comparar medias y evaluar diferencias en términos de la variabilidad observada en los datos.</p>
+<p>La prueba T de Student sigue siendo una herramienta esencial en la estadística y es ampliamente utilizada en la investigación científica, la ingeniería, la economía, la psicología y muchos otros campos para la toma de decisiones basada en datos.</p>
+</section>
+<section id="pruebas-de-hipótesis" class="level2">
+<h2 class="anchored" data-anchor-id="pruebas-de-hipótesis">Pruebas de hipótesis</h2>
+<p>Las pruebas de hipótesis son una herramienta muy útil en la estadística inferencial, la cual usamos para tomar una decisión sobre una población basandonos en una muestra de la misma. Son usadas para evaluar afirmaciones o suposiciones sobre una característica desconocida de una población.</p>
+<p>Aquí introducimos el concepto de hipótesis nula e hipótesis alternativa , nivel de significación y errores Tipo I y Tipo II:</p>
+<ul>
+<li><p><strong>Hipótesis nula (</strong> <span class="math inline">\(H_0\)</span> <strong>):</strong> Es lo que queremos poner a prueba, lo que se cree en un inicio es verdad.</p></li>
+<li><p><strong>Hipótesis alternativa (</strong> <span class="math inline">\(H_1\)</span> <strong>):</strong> Es lo que se acepta si los datos nos dan evidencia para rechazar la hipótesis nula, la negación de <span class="math inline">\(H_0\)</span>.</p></li>
+<li><p><strong>Nivel de significación (</strong> <span class="math inline">\(\alpha\)</span> <strong>):</strong> Representa la probabilidad de cometer un error de tipo I al rechazar incorrectamente la hipótesis nula.</p></li>
+<li><p><strong>Error Tipo I:</strong> Rechazar incorrectamente la hipóstesis nula cuando es verdadera.</p></li>
+<li><p><strong>Error Tipo II:</strong> No rechazar la hipótesis nula cuando es falsa.</p></li>
+</ul>
+<p>Definidas las hipótesis a contrastar se realiza una prueba donde se obtendrá un valor llamado <em>valor p</em>. Veremos cuando este es significativo (por lo general mayor que 0.05) y cómo se le usa para rechazar <span class="math inline">\(H_0\)</span>. Otro punto a tomar en cuenta es nuestro tamaño de muestra, por lo general un número mayor a 30 es considerado grande y es posible usar algunos resultados estadísticos para aproximar nuestros resultados, si esto no ocurre tendremos que usar otras técnicas, como el uso de la prueba T de student, antes mencionada.</p>
+</section>
+<section id="casos-cuando-existe-varianza-en-los-grupos" class="level2">
+<h2 class="anchored" data-anchor-id="casos-cuando-existe-varianza-en-los-grupos">Casos cuando existe varianza en los grupos</h2>
+<p>Aunque los paquetes hagan la mayoría de trabajo no esta de más saber los distintos casos que existen en estas pruebas de hipótesis</p>
+<section id="caso-cuando-la-varianza-poblacional-es-desconocida" class="level3">
+<h3 class="anchored" data-anchor-id="caso-cuando-la-varianza-poblacional-es-desconocida">Caso cuando la varianza poblacional es desconocida</h3>
+<p>Es es el caso más común, en este desconocemos la varianza poblacional y por lo general se usa una distribucion <span class="math inline">\(t\)</span> de Student en lugar de una normal.</p>
+<p>En este caso usamos un estadístico de prueba <span class="math inline">\(t=\frac{\bar{x}-u_0}{s/\sqrt{n}}\)</span> donde <span class="math inline">\(s\)</span> es la desviación estándar y n el tamaño de la muestra y el cual sigue una distribución de Student con <span class="math inline">\(n-1\)</span> grados de libertad.</p>
+<p>Cabe recalcar que lo antes mencionado es solamente cuando tenemos una muestra, veamos ahora casos cuando queremos comparar dos muestras.</p>
+</section>
+<section id="caso-cuando-las-varianzas-son-desconocidas-pero-iguales" class="level3">
+<h3 class="anchored" data-anchor-id="caso-cuando-las-varianzas-son-desconocidas-pero-iguales">Caso cuando las varianzas son desconocidas pero iguales</h3>
+<p>Este caso es de los casos más comunes, aquí tenemos dos medias cuyas varianzas son desconocidas. Primero debemos hacer una prueba F <span class="math inline">\((F=\frac{s_1^2}{s_2^2})\)</span> para probar si las varianzas son iguales y luego podemos usar el estadístico siguiente <span class="math display">\[
+t=\frac{(\bar{x}_1-\bar{x}_2)-(u_1-u_2)}{s_p\sqrt{1/n_1+1/n_2}}
+\]</span> donde <span class="math display">\[
+s^2_p=\frac{s_1^2(n_1-1)+s_2^2(n_2-1)}{n_1+n_2-2}
+\]</span> con grados de libertad dados por <span class="math inline">\(v=n_1+n_2-2\)</span></p>
+</section>
+<section id="caso-cuando-las-varianzas-son-desconocidas-pero-distintas" class="level3">
+<h3 class="anchored" data-anchor-id="caso-cuando-las-varianzas-son-desconocidas-pero-distintas">Caso cuando las varianzas son desconocidas pero distintas</h3>
+<p>Si luego de realizar la prueba F sobre las varianzas tenemos que no se pueden considerar iguales tenemos que uasr el siguiente estadístico <span class="math display">\[
+t=\frac{(\bar{x}_1-\bar{x}_2)-(u_1-u_2)}{\sqrt{s_1^2/n_1+s_2^2/n_2}}
+\]</span> donde los grados de libertad vienen dados por <span class="math display">\[
+v=\frac{(s_1^2/n_1+s_2^2/n_2)^2}{\frac{(s_1^2)^2}{(n_1-1)n_1^2}+\frac{(s_2^2)^2}{(n_2-1)n_2^2}}
+\]</span> y este valor rara vez será un número entero, por lo que será redondeado al menor entero más cercano.</p>
+</section>
+</section>
+<section id="biblioteca-scipy" class="level2">
+<h2 class="anchored" data-anchor-id="biblioteca-scipy">Biblioteca Scipy</h2>
+<p>Ahora que conocemos algunos casos que se nos podrían presentar vamos a ver como usar Python para solventarlos.</p>
+<p>Primero debemos instalar la librería y de la misma llamar a la funcion stats, puedes hacerlo de la siguiente manera:</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Listo, ahora veamos algunos casos</p>
+<ul>
+<li><p>Caso de una sola población:</p>
+<p>Pongamos el siguiente caso, tomando nustro archivo de emisiones de CO2 y con la media poblacional. Supongamos que Australia cree que la media de emisiones en estos 30 años es de 340000 kt de C02, con esto hacemos nuestra prueba de hipótesis.</p></li>
+</ul>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cargamos las librerias </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Leemos nuestro archivo de datos de CO2</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>ruta_archivo_excel <span class="op">=</span> <span class="st">'data/co2.xlsx'</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos un objeto llamado datos para almacenarlo</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>datos <span class="op">=</span> pd.read_excel(ruta_archivo_excel)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Seleccionar los dos países</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>fila_seleccionada <span class="op">=</span> datos.iloc[<span class="dv">9</span>,<span class="dv">4</span>:]</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Tranformamos</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>australia <span class="op">=</span> np.array(fila_seleccionada) </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculamos medidas de dispersion para despues</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>media_muestra <span class="op">=</span> np.mean(australia)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>desviacion <span class="op">=</span> np.std(australia)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">#Definimos u_0</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>u_0 <span class="op">=</span> <span class="dv">340000</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co">#Realizamos el test</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> stats.ttest_1samp(australia,u_0)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co">#comprobamos nuestro valor p</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>resultado.pvalue<span class="op">&lt;</span><span class="fl">0.05</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Como podemos observar no tenemos evidencia suficiente para rechazar la hipotesis dicha al principio, esto puede ser gracias a la desviacion de los datos, las brechas entre ellos debido al incremento en las industrias en el país, pero sirve para ilustrar cómo realizar pruebas de hipótesis.</p>
+<p>Podemos incluso corroborar el estadístico que obtenemos con el siguiente código</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Hagamos de forma manual para corroborar </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>t_prueba<span class="op">=</span>(media_muestra<span class="op">-</span>u_0)<span class="op">/</span>(desviacion<span class="op">/</span>np.sqrt(<span class="bu">len</span>(australia)))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Vemos el estadistico calculado manualmente</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t_prueba)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Obtenemos el estadítico de la función anterior</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(resultado.statistic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Si bien los resultados difieren por decimales esto es normal ya que la librería usa un número mayor de decimales</p>
+</blockquote>
+<ul>
+<li><p>Caso de dos poblaciones:</p>
+<p>Tomemos nuestros datos sobre las emiciones de CO2 por cada país, tomemos dos de ellos, Emiratos Árabes y Argentina, y propongamos las siguientes hipotesis</p>
+<ul>
+<li><p><span class="math inline">\(H_0\)</span> : Ambos países tienen, en promedio, las mismas emisiones de CO2 ( <span class="math inline">\(u_1=u_2\)</span> ).</p></li>
+<li><p><span class="math inline">\(H_1\)</span> : Las medias son distintas.</p></li>
+</ul>
+<p>Veamos como dar una respuesta usando python</p></li>
+</ul>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Seleccionar los dos países</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fila_seleccionada1 <span class="op">=</span> datos.iloc[<span class="dv">5</span>,<span class="dv">4</span>:]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>fila_seleccionada2 <span class="op">=</span> datos.iloc[<span class="dv">6</span>,<span class="dv">4</span>:]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Tranformamos</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>emiratos <span class="op">=</span> np.array(fila_seleccionada1) </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>argentina <span class="op">=</span> np.array(fila_seleccionada2)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#buscamos el valor p mencionado</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>resultado2 <span class="op">=</span> stats.ttest_ind(emiratos, argentina,equal_var<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(resultado2.pvalue)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#solo en la nueva versión --&gt; print(resultado2.df) grados de libertad</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Con ello podemos ver que el valor p es mayor a 0.05, por lo que no rechazamos la hipotesis nula y podriamos considerar que ambos países tienen, en promedio, una emisión igual. Notemos que un parámetro de la función es <code>equal_var</code>este por defecto lleva el valor “True”, pero si conocemos que son dsitintas podemos cambiarlo.</p>
+<p>Incluso podemos realizar esto de manera manual para comprobar, el código es el siguiente</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#medidas que nos ayudaran a simplificar las operaciones</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>desv1 <span class="op">=</span> np.std(emiratos)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>media1 <span class="op">=</span> np.mean(emiratos)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>desv2 <span class="op">=</span> np.std(argentina)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>media2 <span class="op">=</span> np.mean(argentina)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>var1 <span class="op">=</span> desv1<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>var2 <span class="op">=</span> desv2<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Primero verificamos si las varianzas son iguales</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Utilizamos el estadítico F de prueba</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>F_prueba <span class="op">=</span> desv2<span class="op">**</span><span class="dv">2</span><span class="op">/</span>desv1<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>F_prueba</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Limites de rechazo prueba F</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>F_est1 <span class="op">=</span> stats.f.ppf(<span class="fl">0.975</span>,<span class="dv">30</span>,<span class="dv">30</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>F_est1</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>F_est2 <span class="op">=</span> stats.f.ppf(<span class="fl">0.025</span>,<span class="dv">30</span>,<span class="dv">30</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>F_est2</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Rechazamos la hipotesis de que las varianzas son iguales, por tanto realizamos el análisis tomando en cuenta el tercer caso explicado anteriormente</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>t_calculado <span class="op">=</span> (media1<span class="op">-</span>media2)<span class="op">/</span>np.sqrt((desv1<span class="op">**</span><span class="dv">2</span><span class="op">/</span><span class="dv">31</span>)<span class="op">+</span>(desv2<span class="op">**</span><span class="dv">2</span><span class="op">/</span><span class="dv">31</span>))</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>t_calculado</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">#grados de libertad</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>v_arriba <span class="op">=</span> ((var1<span class="op">/</span><span class="dv">31</span>)<span class="op">+</span>(var2<span class="op">/</span><span class="dv">31</span>))<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>v_abajo <span class="op">=</span> ((var1<span class="op">/</span><span class="dv">31</span>)<span class="op">**</span><span class="dv">2</span><span class="op">/</span><span class="dv">30</span>)<span class="op">+</span>((var2<span class="op">/</span><span class="dv">31</span>)<span class="op">**</span><span class="dv">2</span><span class="op">/</span><span class="dv">30</span>)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> v_arriba<span class="op">/</span>v_abajo</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>v </span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co">#limites de rechazo para t</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>t_est1<span class="op">=</span> stats.t.ppf(<span class="fl">0.025</span>,<span class="dv">47</span>) </span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>t_est1</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>t_est2 <span class="op">=</span> stats.t.ppf(<span class="fl">0.975</span>,<span class="dv">47</span>)</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>t_est2</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co">#Vemos que decidimos</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> t_est1<span class="op">&lt;=</span>t_calculado<span class="op">&lt;=</span>t_est2:</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"No se rechaza H_0"</span>)</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Se rechaza H_0"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Veamos un último ejemplo usando lo visto en la clase anterior, agrupando por regiones, en este caso Europa y América Latina. Vamos a responder a la pregunta: ” ¿los paises de Europa emitieron la misma cantidad de co2 que América Latina? ” Por tanto tenemos el código siguiente:</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos un objeto llamado datos2 para almacenarl la hoja con loas regiones</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>datos2 <span class="op">=</span> pd.read_excel(ruta_archivo_excel,sheet_name<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Agrupamos por regiones</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>europa<span class="op">=</span>datos2[datos2[<span class="st">"Region"</span>]<span class="op">==</span><span class="st">"Europa y Asia central (excluido altos ingresos)"</span>]</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>latina<span class="op">=</span>datos2[datos2[<span class="st">"Region"</span>]<span class="op">==</span><span class="st">"América Latina y el Caribe (excluido altos ingresos)"</span>]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Unimos solo Europa</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>datos3 <span class="op">=</span> datos.merge(europa, on<span class="op">=</span>[<span class="st">"Country Name"</span>],how <span class="op">=</span> <span class="st">"right"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#unimos america latina</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>datos4 <span class="op">=</span> datos.merge(latina, on<span class="op">=</span>[<span class="st">"Country Name"</span>],how <span class="op">=</span> <span class="st">"right"</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Creamos una lista para ubicar la suma de cada pais</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>fila_america<span class="op">=</span>[]</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>fila_europa<span class="op">=</span>[]</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Obtenemos esa suma de cada pais por region</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">23</span>):</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    fila_america.append(np.<span class="bu">sum</span>(datos4.iloc[i,<span class="dv">4</span>:<span class="dv">35</span>]))</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">20</span>):</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    fila_europa.append(np.<span class="bu">sum</span>(datos3.iloc[j,<span class="dv">4</span>:<span class="dv">35</span>]))</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#Creamos dos array</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>tot_america<span class="op">=</span>np.array(fila_america)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>tot_europa<span class="op">=</span>np.array(fila_europa)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#Realizamos la prueba de hipotesis</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>prueba_hip <span class="op">=</span> stats.ttest_ind(tot_america,tot_europa,equal_var<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>prueba_hip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Con esto no podemos rechazar la hipotesis de que ambas regiones tuvieron iguales emisiones en los años.</p>
+<p>Se pueden cambiar más cosas para realizar pruebas de hipótesis (además de ver las funciones de distribución y densidad de algunas distribuciones de probabilidad), se recomienda leer la documentación oficial de Scipy, la cual es la siguiente: https://docs.scipy.org/doc/scipy/reference/stats.html</p>
+</section>
+<section id="pruebas-de-normalidad" class="level2">
+<h2 class="anchored" data-anchor-id="pruebas-de-normalidad">Pruebas de normalidad</h2>
+<p>Ver si nuestros datos siguen una distribución normal es de suma importancia en la estadística inferencial ya que muchas pruebas asumen que existe una normalidad en los mismos.</p>
+<p>Algunas pruebas de normalidad son las siguientes:</p>
+<ul>
+<li><p>Prueba gráfica mediante un histograma:</p>
+<p>En esta prueba queremos observar si nuestros datos sguen una distribución similar a la normal.</p></li>
+<li><p>Gráfico Q-Q:</p>
+<p>En este comparamos los cuantiles observados con los esperados de una distribución normal. Si observamos que los puntos en este gráfico se aproximan a una línea diagonal, podemos decir que los datos siguen distribución normal.</p></li>
+<li><p>Prueba de Kolmogorov-Smirnov:</p>
+<p>Este compara la distribución acumulativa de los datos con los de una normal.</p></li>
+<li><p>Prueba de Shapiro-Wilk:</p>
+<p>En esta se tiene una prueba de hipótesis donde verificamos si los datos provienen de una distribución normal o no.</p></li>
+</ul>
+<p>Vamos a ver algunos ejemplos con la biblioteca Scipy</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Podemos hacer un test de Saphiro-Wilk</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>test_saphiro <span class="op">=</span> stats.shapiro(australia)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>test_saphiro</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#También mostramos cómo ver podemos corroborar con un histograma</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.hist(australia)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Por último otro test es el de D'Agostino's K-squared</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>test_Dangostino <span class="op">=</span> stats.normaltest(australia)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>test_Dangostino </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>El test de Saphiro-Wilk no es aconsejado cuando los datos sobrepasan las 50 observaciones.</p>
+</blockquote>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./clase_6.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Exploración y visualización de datos con Matplotlib y Seaborn en Python</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,291 @@
+---
+title: "Clase_7"
+format: html
+editor: visual
+execute: 
+  eval: false
+---
+
+## De cervezas y Datos
+
+La prueba T de Student es una herramienta estadística fundamental, y su historia es tan interesante como su aplicación. Fue desarrollada por William Sealy Gosset, un químico y matemático que trabajaba en la cervecería Guinness en Dublín, Irlanda, a principios del siglo XX.
+
+Gosset se enfrentaba a un problema común en el control de calidad de la cerveza: tenía que trabajar con muestras pequeñas debido a limitaciones prácticas, pero necesitaba métodos eficaces para analizar la calidad y la consistencia del producto. Los métodos estadísticos existentes en esa época eran adecuados para muestras grandes, pero no para las pequeñas muestras con las que trabajaba Gosset.
+
+Para abordar este problema, Gosset desarrolló la prueba T, que era especialmente adecuada para estimar la media de una población y comparar medias entre dos grupos pequeños. Publicó su trabajo en 1908 bajo el seudónimo "Student" para proteger su identidad y la de su empleador, Guinness, que prefería mantener en secreto sus métodos de control de calidad. El artículo se tituló "The Probable Error of a Mean" y apareció en la revista "Biometrika".
+
+La prueba T de Student fue revolucionaria porque permitió a los investigadores hacer inferencias estadísticamente válidas a partir de muestras pequeñas. Esto tuvo un impacto significativo en campos como la agricultura, la ingeniería y, por supuesto, la calidad de los productos como la cerveza.
+
+Con el tiempo, la prueba T se expandió en varias variantes, como la prueba T de una muestra, la prueba T de dos muestras independientes, y la prueba T de muestras pareadas. Cada una de estas variantes se utiliza en circunstancias específicas, pero todas se basan en el principio fundamental de comparar medias y evaluar diferencias en términos de la variabilidad observada en los datos.
+
+La prueba T de Student sigue siendo una herramienta esencial en la estadística y es ampliamente utilizada en la investigación científica, la ingeniería, la economía, la psicología y muchos otros campos para la toma de decisiones basada en datos.
+
+## Pruebas de hipótesis
+
+Las pruebas de hipótesis son una herramienta muy útil en la estadística inferencial, la cual usamos para tomar una decisión sobre una población basandonos en una muestra de la misma. Son usadas para evaluar afirmaciones o suposiciones sobre una característica desconocida de una población.
+
+Aquí introducimos el concepto de hipótesis nula e hipótesis alternativa , nivel de significación y errores Tipo I y Tipo II:
+
+-   **Hipótesis nula (** $H_0$ **):** Es lo que queremos poner a prueba, lo que se cree en un inicio es verdad.
+
+-   **Hipótesis alternativa (** $H_1$ **):** Es lo que se acepta si los datos nos dan evidencia para rechazar la hipótesis nula, la negación de $H_0$.
+
+-   **Nivel de significación (** $\alpha$ **):** Representa la probabilidad de cometer un error de tipo I al rechazar incorrectamente la hipótesis nula.
+
+-   **Error Tipo I:** Rechazar incorrectamente la hipóstesis nula cuando es verdadera.
+
+-   **Error Tipo II:** No rechazar la hipótesis nula cuando es falsa.
+
+Definidas las hipótesis a contrastar se realiza una prueba donde se obtendrá un valor llamado *valor p*. Veremos cuando este es significativo (por lo general mayor que 0.05) y cómo se le usa para rechazar $H_0$. Otro punto a tomar en cuenta es nuestro tamaño de muestra, por lo general un número mayor a 30 es considerado grande y es posible usar algunos resultados estadísticos para aproximar nuestros resultados, si esto no ocurre tendremos que usar otras técnicas, como el uso de la prueba T de student, antes mencionada.
+
+## Casos cuando existe varianza en los grupos
+
+Aunque los paquetes hagan la mayoría de trabajo no esta de más saber los distintos casos que existen en estas pruebas de hipótesis
+
+### Caso cuando la varianza poblacional es desconocida
+
+Es es el caso más común, en este desconocemos la varianza poblacional y por lo general se usa una distribucion $t$ de Student en lugar de una normal.
+
+En este caso usamos un estadístico de prueba $t=\frac{\bar{x}-u_0}{s/\sqrt{n}}$ donde $s$ es la desviación estándar y n el tamaño de la muestra y el cual sigue una distribución de Student con $n-1$ grados de libertad.
+
+Cabe recalcar que lo antes mencionado es solamente cuando tenemos una muestra, veamos ahora casos cuando queremos comparar dos muestras.
+
+### Caso cuando las varianzas son desconocidas pero iguales
+
+Este caso es de los casos más comunes, aquí tenemos dos medias cuyas varianzas son desconocidas. Primero debemos hacer una prueba F $(F=\frac{s_1^2}{s_2^2})$ para probar si las varianzas son iguales y luego podemos usar el estadístico siguiente $$
+t=\frac{(\bar{x}_1-\bar{x}_2)-(u_1-u_2)}{s_p\sqrt{1/n_1+1/n_2}}
+$$ donde $$
+s^2_p=\frac{s_1^2(n_1-1)+s_2^2(n_2-1)}{n_1+n_2-2}
+$$ con grados de libertad dados por $v=n_1+n_2-2$
+
+### Caso cuando las varianzas son desconocidas pero distintas
+
+Si luego de realizar la prueba F sobre las varianzas tenemos que no se pueden considerar iguales tenemos que uasr el siguiente estadístico $$
+t=\frac{(\bar{x}_1-\bar{x}_2)-(u_1-u_2)}{\sqrt{s_1^2/n_1+s_2^2/n_2}}
+$$ donde los grados de libertad vienen dados por $$
+v=\frac{(s_1^2/n_1+s_2^2/n_2)^2}{\frac{(s_1^2)^2}{(n_1-1)n_1^2}+\frac{(s_2^2)^2}{(n_2-1)n_2^2}}
+$$ y este valor rara vez será un número entero, por lo que será redondeado al menor entero más cercano.
+
+## Biblioteca Scipy
+
+Ahora que conocemos algunos casos que se nos podrían presentar vamos a ver como usar Python para solventarlos.
+
+Primero debemos instalar la librería y de la misma llamar a la funcion stats, puedes hacerlo de la siguiente manera:
+
+```{python, eval = FALSE}
+
+from scipy import stats
+```
+
+Listo, ahora veamos algunos casos
+
+-   Caso de una sola población:
+
+    Pongamos el siguiente caso, tomando nustro archivo de emisiones de CO2 y con la media poblacional. Supongamos que Australia cree que la media de emisiones en estos 30 años es de 340000 kt de C02, con esto hacemos nuestra prueba de hipótesis.
+
+```{python}
+#Cargamos las librerias 
+import pandas as pd
+import numpy as np 
+from scipy import stats
+
+
+# Leemos nuestro archivo de datos de CO2
+ruta_archivo_excel = 'data/co2.xlsx'
+
+# Creamos un objeto llamado datos para almacenarlo
+datos = pd.read_excel(ruta_archivo_excel)
+
+#Seleccionar los dos países
+fila_seleccionada = datos.iloc[9,4:]
+
+
+#Tranformamos
+australia = np.array(fila_seleccionada) 
+
+#Calculamos medidas de dispersion para despues
+media_muestra = np.mean(australia)
+desviacion = np.std(australia)
+
+#Definimos u_0
+u_0 = 340000
+
+#Realizamos el test
+
+resultado = stats.ttest_1samp(australia,u_0)
+
+#comprobamos nuestro valor p
+resultado.pvalue<0.05
+
+
+```
+
+Como podemos observar no tenemos evidencia suficiente para rechazar la hipotesis dicha al principio, esto puede ser gracias a la desviacion de los datos, las brechas entre ellos debido al incremento en las industrias en el país, pero sirve para ilustrar cómo realizar pruebas de hipótesis.
+
+Podemos incluso corroborar el estadístico que obtenemos con el siguiente código
+
+```{python}
+## Hagamos de forma manual para corroborar 
+t_prueba=(media_muestra-u_0)/(desviacion/np.sqrt(len(australia)))
+
+#Vemos el estadistico calculado manualmente
+print(t_prueba)
+
+#Obtenemos el estadítico de la función anterior
+print(resultado.statistic)
+```
+
+> Si bien los resultados difieren por decimales esto es normal ya que la librería usa un número mayor de decimales
+
+-   Caso de dos poblaciones:
+
+    Tomemos nuestros datos sobre las emiciones de CO2 por cada país, tomemos dos de ellos, Emiratos Árabes y Argentina, y propongamos las siguientes hipotesis
+
+    -   $H_0$ : Ambos países tienen, en promedio, las mismas emisiones de CO2 ( $u_1=u_2$ ).
+
+    -   $H_1$ : Las medias son distintas.
+
+    Veamos como dar una respuesta usando python
+
+```{python}
+
+#Seleccionar los dos países
+fila_seleccionada1 = datos.iloc[5,4:]
+fila_seleccionada2 = datos.iloc[6,4:]
+
+#Tranformamos
+emiratos = np.array(fila_seleccionada1) 
+argentina = np.array(fila_seleccionada2)
+
+#buscamos el valor p mencionado
+resultado2 = stats.ttest_ind(emiratos, argentina,equal_var=False)
+print(resultado2.pvalue)
+#solo en la nueva versión --> print(resultado2.df) grados de libertad
+```
+
+Con ello podemos ver que el valor p es mayor a 0.05, por lo que no rechazamos la hipotesis nula y podriamos considerar que ambos países tienen, en promedio, una emisión igual. Notemos que un parámetro de la función es `equal_var`este por defecto lleva el valor "True", pero si conocemos que son dsitintas podemos cambiarlo.
+
+Incluso podemos realizar esto de manera manual para comprobar, el código es el siguiente
+
+```{python}
+#medidas que nos ayudaran a simplificar las operaciones
+desv1 = np.std(emiratos)
+media1 = np.mean(emiratos)
+desv2 = np.std(argentina)
+media2 = np.mean(argentina)
+var1 = desv1**2
+var2 = desv2**2
+
+#Primero verificamos si las varianzas son iguales
+#Utilizamos el estadítico F de prueba
+F_prueba = desv2**2/desv1**2
+F_prueba
+
+#Limites de rechazo prueba F
+F_est1 = stats.f.ppf(0.975,30,30)
+F_est1
+F_est2 = stats.f.ppf(0.025,30,30)
+F_est2
+
+# Rechazamos la hipotesis de que las varianzas son iguales, por tanto realizamos el análisis tomando en cuenta el tercer caso explicado anteriormente
+
+t_calculado = (media1-media2)/np.sqrt((desv1**2/31)+(desv2**2/31))
+t_calculado
+
+#grados de libertad
+v_arriba = ((var1/31)+(var2/31))**2
+v_abajo = ((var1/31)**2/30)+((var2/31)**2/30)
+v = v_arriba/v_abajo
+v 
+
+#limites de rechazo para t
+t_est1= stats.t.ppf(0.025,47) 
+t_est1
+t_est2 = stats.t.ppf(0.975,47)
+t_est2
+
+#Vemos que decidimos
+if t_est1<=t_calculado<=t_est2:
+    print("No se rechaza H_0")
+else:
+    print("Se rechaza H_0")
+
+```
+
+Veamos un último ejemplo usando lo visto en la clase anterior, agrupando por regiones, en este caso Europa y América Latina. Vamos a responder a la pregunta: " ¿los paises de Europa emitieron la misma cantidad de co2 que América Latina? " Por tanto tenemos el código siguiente:
+
+```{python}
+# Creamos un objeto llamado datos2 para almacenarl la hoja con loas regiones
+datos2 = pd.read_excel(ruta_archivo_excel,sheet_name=1)
+
+#Agrupamos por regiones
+europa=datos2[datos2["Region"]=="Europa y Asia central (excluido altos ingresos)"]
+latina=datos2[datos2["Region"]=="América Latina y el Caribe (excluido altos ingresos)"]
+
+#Unimos solo Europa
+datos3 = datos.merge(europa, on=["Country Name"],how = "right")
+#unimos america latina
+datos4 = datos.merge(latina, on=["Country Name"],how = "right")
+
+#Creamos una lista para ubicar la suma de cada pais
+fila_america=[]
+fila_europa=[]
+
+#Obtenemos esa suma de cada pais por region
+for i in range(0,23):
+    fila_america.append(np.sum(datos4.iloc[i,4:35]))
+for j in range(0,20):
+    fila_europa.append(np.sum(datos3.iloc[j,4:35]))
+
+#Creamos dos array
+tot_america=np.array(fila_america)
+tot_europa=np.array(fila_europa)
+
+#Realizamos la prueba de hipotesis
+prueba_hip = stats.ttest_ind(tot_america,tot_europa,equal_var=False)
+prueba_hip
+
+```
+
+Con esto no podemos rechazar la hipotesis de que ambas regiones tuvieron iguales emisiones en los años.
+
+Se pueden cambiar más cosas para realizar pruebas de hipótesis (además de ver las funciones de distribución y densidad de algunas distribuciones de probabilidad), se recomienda leer la documentación oficial de Scipy, la cual es la siguiente: https://docs.scipy.org/doc/scipy/reference/stats.html
+
+## Pruebas de normalidad
+
+Ver si nuestros datos siguen una distribución normal es de suma importancia en la estadística inferencial ya que muchas pruebas asumen que existe una normalidad en los mismos.
+
+Algunas pruebas de normalidad son las siguientes:
+
+-   Prueba gráfica mediante un histograma:
+
+    En esta prueba queremos observar si nuestros datos sguen una distribución similar a la normal.
+
+-   Gráfico Q-Q:
+
+    En este comparamos los cuantiles observados con los esperados de una distribución normal. Si observamos que los puntos en este gráfico se aproximan a una línea diagonal, podemos decir que los datos siguen distribución normal.
+
+-   Prueba de Kolmogorov-Smirnov:
+
+    Este compara la distribución acumulativa de los datos con los de una normal.
+
+-   Prueba de Shapiro-Wilk:
+
+    En esta se tiene una prueba de hipótesis donde verificamos si los datos provienen de una distribución normal o no.
+
+Vamos a ver algunos ejemplos con la biblioteca Scipy
+
+```{python}
+#Podemos hacer un test de Saphiro-Wilk
+test_saphiro = stats.shapiro(australia)
+test_saphiro
+
+#También mostramos cómo ver podemos corroborar con un histograma
+plt.hist(australia)
+
+#Por último otro test es el de D'Agostino's K-squared
+test_Dangostino = stats.normaltest(australia)
+test_Dangostino 
+```
+
+> El test de Saphiro-Wilk no es aconsejado cuando los datos sobrepasan las 50 observaciones.
