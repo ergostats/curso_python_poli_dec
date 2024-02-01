@@ -1,5 +1,5 @@
 ---
-title: "Clase_7"
+title: "Pruebas de hipótesis para la media entre grupos en Python "
 format: html
 editor: visual
 execute: 

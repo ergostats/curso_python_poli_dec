@@ -17,6 +17,7 @@ book:
     - clase_3.qmd
     - clase_4.qmd
     - clase_6.qmd
+    - clase_7.qmd
 format:
   html:
     number-sections: false
