@@ -1,0 +1,173 @@
+---
+title: "Análisis de correlación y modelos de regresión en Python"
+format: 
+  html:
+    mermaid:
+      theme: neutral
+editor: visual
+execute: 
+  eval: true
+---
+
+
+## Los conjuntos de entrenamiento y de prueba
+
+### Importancia de Separar las Muestras en Entrenamiento y Prueba
+
+Al sumergirnos en el análisis de regresión, solemos dividir nuestros datos en conjuntos de entrenamiento y prueba. Esta práctica es fundamental en la ciencia de datos y la estadística para evaluar la eficacia de nuestros modelos. Veamos las razones detrás de esta división, sus implicaciones y algunas consideraciones importantes para nuestro análisis.
+
+La división de datos en conjuntos de `entrenamiento` y `prueba` tiene un propósito esencial: **evaluar la capacidad de generalización de nuestro modelo**. En otras palabras, queremos asegurarnos de que nuestro modelo no solo aprenda los datos con los que se entrena sino que también pueda hacer predicciones precisas sobre datos nuevos que nunca antes había visto.
+
+### Entrenamiento vs. Prueba
+
+-   **Conjunto de Entrenamiento**: Utilizamos estos datos para entrenar nuestro modelo, permitiéndole aprender la relación entre las variables independientes y dependientes.
+-   **Conjunto de Prueba**: Este conjunto se utiliza para evaluar el rendimiento del modelo entrenado, actuando como datos nuevos para el modelo.
+
+Para generar nuestros datos de prueba y entrenamiento vamos a cargar los siguientes módulos y funciuones:
+
+```{python}
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from statsmodels.regression.linear_model import OLS
+import statsmodels.api as sm
+import pandas as pd
+from scipy import stats
+```
+
+### Implicaciones de No Separar los Datos
+
+Si no dividimos nuestros datos y, en cambio, entrenamos y evaluamos el modelo en el mismo conjunto, corremos el riesgo de **sobreajuste**. El sobreajuste ocurre cuando nuestro modelo aprende los datos de entrenamiento tan bien que incluye el ruido estadístico en sus predicciones. Esto significa que, aunque el modelo puede funcionar excepcionalmente bien en el conjunto de datos de entrenamiento, probablemente tendrá un rendimiento pobre en datos nuevos, porque ha "memorizado" los datos en lugar de aprender las relaciones subyacentes.
+
+### Consideraciones Clave
+
+#### Tamaño de la División
+
+Una pregunta común es cómo decidir el tamaño del conjunto de entrenamiento y de prueba. Una regla general es la división 80/20 o 70/30, donde el mayor porcentaje corresponde al conjunto de entrenamiento. Sin embargo, esto puede variar dependiendo del tamaño total de tus datos. Con conjuntos de datos grandes, una menor proporción (como 90/10) aún puede proporcionar un conjunto de prueba de tamaño suficiente.
+
+#### Aleatoriedad
+
+Es importante asegurar que la división entre los conjuntos de entrenamiento y prueba sea aleatoria. Esto ayuda a garantizar que ambos conjuntos sean representativos del conjunto de datos completo, evitando sesgos en el entrenamiento y evaluación del modelo.
+
+#### Estratificación
+
+En casos donde se trabaja con datos categóricos desbalanceados, la estratificación puede asegurar que los conjuntos de entrenamiento y prueba reflejen la distribución de las categorías del conjunto de datos completo. Esto es crucial para mantener la validez de nuestra evaluación del modelo.
+
+```{python}
+
+# Preparación de datos para una prueba de hipótesis (eliminación de NA)
+datos = datos[~datos["dcronica"].isna()]
+datos = datos[~datos["n_hijos"].isna()]
+
+# Cargar el conjunto de datos de Boston
+
+x = datos["dcronica"]
+y = datos["n_hijos"]
+
+# Dividir los datos en conjuntos de entrenamiento y prueba
+X_train, X_test, y_train, y_test = train_test_split(x.values.reshape(-1, 1), y.values, test_size=0.2, random_state=42)
+```
+
+#### Validación Cruzada
+
+Una vez familiarizados con la división básica de entrenamiento y prueba, podríais explorar técnicas más avanzadas como la validación cruzada. Esta técnica implica dividir el conjunto de datos en múltiples subconjuntos y realizar el entrenamiento y la prueba varias veces, cada vez con un subconjunto diferente como conjunto de prueba. Esto proporciona una evaluación más robusta del rendimiento del modelo.
+
+### Ajuste del modelo:
+
+La separación de los datos en conjuntos de entrenamiento y prueba es un paso crítico en la construcción de modelos predictivos. No solo nos permite evaluar la capacidad de generalización de nuestro modelo sino que también protege contra el sobreajuste, asegurando que nuestras conclusiones y predicciones sean fiables y aplicables a datos nuevos. Como estudiantes, al aplicar estas prácticas, desarrollaréis una sólida comprensión de cómo preparar y evaluar modelos en la ciencia de datos, un paso crucial para vuestros futuros proyectos y carreras profesionales. ¡Experimentad, practicad y nunca dejéis de aprender!
+
+`LinearRegression` y `OLS` (Ordinary Least Squares) son dos métodos utilizados para realizar una regresión lineal en Python. `LinearRegression` es una clase de la biblioteca `sklearn.linear_model`, mientras que `OLS` es una función de la biblioteca `statsmodels`.
+
+Ambos métodos buscan minimizar la suma de los cuadrados de las diferencias entre los valores observados y los valores predichos por el modelo, pero hay algunas diferencias en cómo se utilizan y en la información que proporcionan.
+
+Aquí hay un ejemplo de cómo se pueden usar ambos métodos con el conjunto de datos de Boston de la biblioteca `sklearn.datasets`:
+
+```{python}
+# Ajustar un modelo LinearRegression
+lr = LinearRegression()
+lr.fit(X_train, y_train)
+
+# Con OLS
+
+x_train_sm = sm.add_constant(X_train)
+
+est = sm.OLS(y_train, x_train_sm)
+
+est2 = est.fit()
+
+
+# Imprimir los coeficientes de los modelos
+print("Coeficientes del modelo LinearRegression:")
+print(lr.coef_)
+
+print(est2.summary())
+
+```
+
+Ambos métodos te darán los coeficientes del modelo de regresión lineal, pero `OLS` también proporciona mucha más información estadística, como los p-valores y los intervalos de confianza para los coeficientes, que puedes obtener con `result.summary()`.
+
+Por otro lado, `LinearRegression` es más fácil de usar con los métodos de validación cruzada y ajuste de hiperparámetros de `sklearn`, y puede ser más eficiente para conjuntos de datos grandes.
+
+Para graficar los residuos de tu modelo OLS, puedes usar la biblioteca `matplotlib`. Aquí te dejo un ejemplo de cómo hacerlo:
+
+``` python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Ajustar un modelo OLS y obtener los residuos
+# Asumiendo que 'result' es el resultado de tu modelo OLS
+residuos = result.resid
+
+# Crear una figura y un eje
+fig, ax = plt.subplots()
+
+# Graficar los residuos
+ax.scatter(range(len(residuos)), residuos, color='blue')
+
+# Graficar las líneas en y=-1 y y=1
+ax.hlines(-1, xmin=0, xmax=len(residuos), colors='black', linestyles='dashed')
+ax.hlines(1, xmin=0, xmax=len(residuos), colors='black', linestyles='dashed')
+
+# Cambiar el color de los puntos que están fuera del intervalo [-1, 1] a rojo
+mask = np.abs(residuos) > 1
+ax.scatter(np.arange(len(residuos))[mask], residuos[mask], color='red')
+
+# Añadir etiquetas a los ejes
+ax.set_xlabel('Índice de la observación')
+ax.set_ylabel('Residuo')
+
+# Mostrar el gráfico
+plt.show()
+```
+
+Este código crea un gráfico de dispersión de los residuos de tu modelo OLS. Las líneas entrecortadas en y=-1 y y=1 se dibujan con la función `hlines`. Luego, se cambia el color de los puntos que están fuera del intervalo \[-1, 1\] a rojo. Finalmente, se añaden etiquetas a los ejes y se muestra el gráfico.
+
+Para probar si los errores de un modelo de regresión están normalmente distribuidos, puedes utilizar la prueba de normalidad de Shapiro-Wilk o la prueba de normalidad de Anderson-Darling. Ambas pruebas están disponibles en la biblioteca `scipy.stats` de Python. Aquí te muestro cómo puedes hacerlo con la prueba de Shapiro-Wilk:
+
+``` python
+from scipy import stats
+
+# Asumiendo que 'result' es el resultado de tu modelo OLS
+residuos = result.resid
+
+# Realizar la prueba de Shapiro-Wilk
+shapiro_test = stats.shapiro(residuos)
+
+# Imprimir el resultado
+print(f"Estadístico de Shapiro-Wilk: {shapiro_test[0]}")
+print(f"Valor p: {shapiro_test[1]}")
+```
+
+Este código realiza la prueba de Shapiro-Wilk en los residuos de tu modelo y luego imprime el estadístico de la prueba y el valor p. Si el valor p es menor que el nivel de significancia que has elegido (por ejemplo, 0.05), entonces puedes rechazar la hipótesis nula de que los residuos están normalmente distribuidos.
+
+Además de las pruebas de normalidad, también es común utilizar un gráfico Q-Q (quantile-quantile) para visualizar si los residuos están normalmente distribuidos. Aquí te muestro cómo puedes hacerlo con `statsmodels`:
+
+``` python
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
+
+# Crear un gráfico Q-Q de los residuos
+sm.qqplot(residuos, line='s')
+plt.show()
+```
+
+En un gráfico Q-Q, si los residuos están normalmente distribuidos, los puntos deberían caer aproximadamente en la línea diagonal.
