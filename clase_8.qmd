@@ -1,0 +1,397 @@
+---
+title: "Análisis de correlación y modelos de regresión en Python"
+format: 
+  html:
+    mermaid:
+      theme: neutral
+editor: visual
+execute: 
+  eval: true
+---
+
+$$
+\newcommand{\purple}[1]{\color{purple}{#1}}
+\newcommand{\red}[1]{\color{red}{#1}}
+\newcommand{\blue}[1]{\color{blue}{#1}}
+\newcommand{\grey}[1]{\color{grey}{#1}}
+$$ Para empezar nuestro análisis vamos a conversar sobre la probabilidad condicional. Con un pequeño ejemplo. Vale la pena mencionar que los ejemplos que vamos a utilizar pertenecen a un país ficticio a menos que empleemos datos reales, en cuyo caso te diremos para que cargues los datos necesarios para empezar el análisis. En ese sentido vamos a empezar con una definición de **probabilidad condicional** e independencia de objetos.
+
+Partamos del ejemplo en la unidad 4 sobre el lanzamiento de dos dados. Cambiemos ligeramente el experimento y analicemos la probabilidad de tener la combinación $(3,5)$ tras lanzar el mismo dado dos veces. Este fenómeno se puede dar de dos maneras:
+
+La primera es que en el primer lanzamiento tengamos un 3 y en el segundo un 5, es decir:
+
+$$
+P(A \cap  B) = P(A) \times P(B|A)
+$$ O al revés, es decir, que en el primer lanzamiento tengamos un 5 y en el segundo un 3:
+
+$$
+P(A \cap  B) = P(B) \times P(A|B)
+$$
+
+Como puedes ver lo que vemos es que para cada caso $P(A|B)$ y $P(B|A)$ es igual a $1/6$ ya que en el primer lanzamiento ($P(A)$ o $P(B)$ respectivamente) no hay algo que altere el resultado del segundo lanzamiento. En este caso decimos que los eventos son **independientes**. Es decir que la probabilidad de un evento no afecta la probabilidad de otro evento. En otras palabras $P(A|B) = P(A)$ o $P(B|A) = P(B)$
+
+Pero veamos otro ejemplo donde podamos apreciar la probabilidad condicional. En una clase de 20 estudiantes, donde 12 son mujeres y 8 son hombres ¿Cual sería la probabilidad de que los dos primeros estudiantes en entregar el examen sean hombres?. Hagamos un diagrama de arbol para entender mejor el problema.
+
+#### Primero en entregar
+
+```{mermaid}
+
+
+graph LR
+  
+    A(Aula)
+    subgraph Primero en entregar
+      B("Hombre")
+      C("Mujer")
+    end
+    
+
+    A --> B
+    A --> C
+    
+```
+
+#### Primeras probabilidades
+
+La clase está completa:
+
+```{mermaid}
+
+graph LR
+  
+    A(Aula)
+    subgraph Primero en entregar
+      B("Hombre (8/20)")
+      C("Mujer (12/20)")
+    end
+    
+
+    A --> B
+    A --> C
+    
+```
+
+#### Segundo en entregar
+
+```{mermaid}
+
+graph LR
+  
+    A(Aula)
+    subgraph Primero en entregar
+      B("Hombre (8/20)")
+      C("Mujer (12/20)")
+    end
+    subgraph Segundo en entregar
+      D("Hombre")
+      E("Mujer")
+      F("Hombre")
+      G("Mujer")
+    end
+    
+
+    A --> B
+    A --> C
+    B --> D
+    B --> E
+    C --> F
+    C --> G
+
+
+```
+
+#### Segundas probabilidades
+
+```{mermaid}
+
+graph LR
+  
+    A(Aula)
+    subgraph Primero en entregar
+      B("Hombre (8/20)")
+      C("Mujer (12/20)")
+    end
+    subgraph Segundo en entregar
+      D("Hombre (7/19)")
+      E("Mujer (12/19)")
+      F("Hombre (8/19)")
+      G("Mujer (11/19)")
+    end
+    
+
+    A --> B
+    A --> C
+    B --> D
+    B --> E
+    C --> F
+    C --> G
+
+
+```
+
+De izquierda a derecha vamos a seguir la historia de de este evento. En este caso, el primer estudiante en entregar la prueba será de $8/20$ hombre, mientras que la probabilidad de que el segundo estudiante sea hombre es $7/19$ ya que el primer estudiante fue hombre y ya entrego el examen.
+
+```{mermaid}
+
+graph LR
+  
+    A(Aula)
+    subgraph Primero en entregar
+      B("Hombre (8/20)")
+      C("Mujer (12/20)")
+    end
+    subgraph Segundo en entregar
+      D("Hombre (7/19)")
+      E("Mujer (12/19)")
+      F("Hombre (8/19)")
+      G("Mujer (11/19)")
+    end
+    
+
+    A --> B
+    A --> C
+    B --> D
+    B --> E
+    C --> F
+    C --> G
+    
+    linkStyle 2 stroke:purple
+    linkStyle 0 stroke:purple
+
+
+```
+
+Si $A$ es el evento en que el primer estudiante es hombre y $B$ es el evento en que el segundo estudiante es hombre, entonces la probabilidad de que ambos sean hombres es:
+
+$$
+P(A \cap  B) = \frac{8}{20} \times \frac{7}{19} = \frac{14}{95}
+$$ En este caso la probabilidad del segundo evento está condicionada al primer evento. Es decir, la probabilidad de que el segundo estudiante sea hombre depende de que el primer estudiante sea hombre. En este caso decimos que los eventos son **dependientes**. Es decir que la probabilidad de un evento afecta la probabilidad de otro evento. En otras palabras $P(A|B) \neq P(A)$ o $P(B|A) \neq P(B)$.
+
+## Teorema de Bayes
+
+Hagamos un ejemplo con Python que nos ayude a visualizar de mejor manera la probabilidad condicional. Empecemos con unos datos, lo que tienes en tus manos es una muestra del 10% de la población presente en la Encuesta Nacional de Desnutrición Infantil (ENDI), trabajaremos con algunas variables:
+
+```{python}
+
+
+import pandas as pd
+import numpy as np
+
+datos = pd.read_table("data/sample_endi_10p.txt",delimiter = "\t")
+
+datos.columns
+
+```
+
+Nuestro objetivo será emplear estos datos para calcular la probabilidad de encontrar en nuestra muestra un infante de sexo femenino que tenga desnutrición crónica infantil. Empecemos con una tabla rápida para calcular las proporciones adecuadas:
+
+```{python}
+
+# Podemos ver los conteos:
+pd.crosstab(datos["sexo"],datos["dcronica"])
+
+# E incluir los totales:
+pd.crosstab(datos["sexo"],datos["dcronica"], margins = True)
+```
+
+Ahora calculemos las proporciones:
+
+```{python}
+
+# Fijense que no estoy usando los margenes ¿Qué pasa si los incluimos?
+
+cruce = pd.crosstab(datos["sexo"],datos["dcronica"])
+
+total_global = cruce.sum().sum()
+
+proporcion = pd.crosstab(datos["sexo"],datos["dcronica"],margins = True) /total_global
+
+print(proporcion)
+
+
+```
+
+Si volvemos a nuestro ejercicio, consideramos a $B$ como el evento de que se seleccione un infante de sexo femenino, y $A$ como el evento en que el infante seleccionado tiene desnutrición crónica (valor igual a 1) tendriamos lo siguiente:
+
+> Primero para el evento dado: $$P(B) =  P(B \cap A) + P(B \cap A^c) = 0.412.. + 0.089.. = 0.501823$$ Luego vemos a que $P(A \cap B) = 0.088879$
+>
+> Entonces la probabilidad condicional $$P(A|B) = \frac{P(A \cap B)}{P(B)} = 0.177111$$
+
+Pero que tal si ahora le damos la vuelta al ejercicio ¿Cual sería la probabilidad de que habiendo elegido un niño al azar sin desnutrición crónica, este resulte ser mujer?
+
+> Primero para el evento dado: $$P(A) =  P(A \cap B) + P(A \cap B^c) = 0.189608$$ Luego vemos a que $P(A \cap B) = 0.088879$\$
+>
+> Entonces la probabilidad condicional $$P(A|B) = \frac{P(A \cap B)}{P(B)} = 0.468751$$
+
+Interesante verdad, en este caso importa de que población estamos hablando a la hora de tomar las proporciones.
+
+Ahora veamos con Python como podemos hacer los cálculos de variables agrupadas en este estilo de forma adecuada, pero en este caso vamos a emplear funciones `lambda` para calcular el numero de hijos promedio en los hogares de los con y sin desnutrición infantil:
+
+```{python}
+
+pivot_table = pd.pivot_table(datos, values='n_hijos', index=['sexo', 'dcronica'], 
+                             aggfunc={'n_hijos': [ 'mean', 
+                                            ("casos", lambda x: x.count()),
+                                            ("proporcion", lambda x: x.count()/len(datos))
+                                            ]})
+
+```
+
+### Conceptos Clave de la Regresión Lineal
+
+Para entender la fórmula de la esperanza condicional de $Y$ dado $X=x$, primero debemos comprender qué significa en el contexto de la probabilidad y la estadística. La esperanza condicional, o el valor esperado condicional, es una medida de tendencia central para una variable aleatoria (Y) dado que otra variable aleatoria (X) toma un valor específico $x$. En el marco de la regresión lineal, la esperanza condicional nos ayuda a predecir el valor medio esperado de (Y) para un valor dado de (X), basándonos en la relación lineal entre estas dos variables.
+
+La fórmula general para la esperanza condicional de (Y) dado (X=x) se expresa mediante la integral de (y) veces la función de densidad condicional de $Y$ dado $X=x$, sobre todos los posibles valores de \$y4. Matemáticamente, esto se representa como:
+
+$$ E[Y|X=x] = \int y \cdot f_{Y|X}(y|x) \, dy $$
+
+Donde:
+
+-   $E[Y|X=x]$ es la esperanza condicional de (Y) dado (X=x).
+-   $f_{Y|X}(y|x)$ es la función de densidad de probabilidad condicional de (Y) dado (X=x).
+-   La integral se calcula sobre todo el rango de posibles valores de (y).
+-   **Regresión Lineal**: Es una técnica estadística utilizada para estudiar la relación entre dos variables continuas. En este caso, estamos mirando cómo las compras (variable independiente `x`) se relacionan con las ventas (variable dependiente `y`).
+-   **Esperanza Condicionada**: Se refiere a la expectativa de una variable aleatoria dado el valor de otra. En la regresión lineal, buscamos la expectativa de `y` dado un valor específico de `x`.
+
+La regresión lineal es una herramienta poderosa para entender cómo una variable dependiente `y` está relacionada con una variable independiente `x`. Usamos una línea (la más "ajustada" posible) para describir esta relación. La ecuación general de una línea es:
+
+$$y = \alpha + \beta x + \epsilon $$
+
+Donde:
+
+-   ($y$) es la variable dependiente (en nuestro caso, vamos a emplear las ventas de empresas de una misma industria).
+-   ($x$) es la variable independiente (en este caso, compras de las empresas).
+-   ($\alpha$) es la intersección con el eje Y o el valor de `y` cuando (x = 0). Representa el valor base de ventas sin ninguna compra.
+-   ($\beta$) es la pendiente de la línea, que indica cuánto cambia `y` por cada unidad de cambio en `x`.
+
+### Estimación de los Coeficientes
+
+La regresión lineal intenta encontrar los valores de (\alpha) y (\beta) que minimizan la suma de los cuadrados de los errores ((\epsilon)) entre los valores observados de `y` y los valores predichos por nuestra ecuación lineal. Esto se conoce como el método de mínimos cuadrados. Las fórmulas para calcular (\alpha) y (\beta) son:
+
+$$\beta = \frac{\sum_{i=1}^{n} (x_i - \overline{x})(y_i - \overline{y})}{\sum_{i=1}^{n} (x_i - \overline{x})^2} $$
+
+$$ \alpha = \overline{y} - \beta\overline{x} $$
+
+Donde:
+
+-   $x_i$ y $y_i$ son los valores individuales de `x` y `y`.
+-   $\overline{x}$ y $\overline{y}$ son los promedios de `x` y `y`, respectivamente.
+-   $n$ es el número total de observaciones.
+
+Es importante aclarar que ($\alpha$) en sí mismo no es "la media" de `y`, pero sí representa el punto donde la línea de regresión cruza el eje Y, es decir, el valor esperado de `y` cuando `x` es 0. Sin embargo, si centramos nuestra atención en la ecuación de ($\alpha$), podemos ver cómo está influenciada por los promedios de `x` y `y` a través de ($\beta$).
+
+La regresión lineal se puede entender como la estimación de la esperanza condicional de `y` dado `x`, $E[y|x]$. Esto significa que para cualquier valor de `x`, la regresión lineal nos da el mejor pronóstico, en promedio, de `y`. En otras palabras, nos dice qué valor esperar para `y` basándonos en el valor de `x`, teniendo en cuenta la relación lineal identificada entre estas dos variables.
+
+## Vamos a ver la regresión lineal en todo su poder:
+
+Primero, vamos a crear algunos datos "perfectos" para entender cómo funciona la regresión lineal. Ya te explicaremos por que "perfectos".
+
+``` python
+np.random.seed(1984) # Para reproducibilidad
+x = np.random.rand(100) * 10 # 100 puntos de compra
+alpha = 3.5 # La media
+error = np.random.randn(100) # Error normalmente distribuido
+y = alpha + 1.7 * x + error # Ventas simuladas
+```
+
+En este fragmento de código:
+
+-   `np.random.seed(1984)`: Esto asegura que cada vez que ejecutes el código, los números aleatorios generados sean los mismos. Es útil para reproducibilidad.
+-   `x`: Representa nuestras variables independientes, en este caso, puntos de compra. Imagínalo como la cantidad de dinero gastado en publicidad.
+-   `alpha` y `error`: `alpha` es el término de intercepción en nuestra ecuación lineal, y `error` añade variabilidad aleatoria a nuestros datos, simulando la impredecibilidad del mundo real.
+-   `y`: Es nuestra variable dependiente, representando las ventas. Está calculada a partir de una relación lineal con `x` más algún error aleatorio.
+
+Ahora, ajustaremos un modelo de regresión lineal a nuestros datos simulados.
+
+``` python
+model = LinearRegression()
+resultado = model.fit(x.reshape(-1, 1), y) # Ajustar el modelo
+```
+
+Aquí, `LinearRegression()` crea un nuevo modelo de regresión lineal, y `model.fit()` ajusta este modelo a nuestros datos. La parte `x.reshape(-1, 1)` simplemente reforma `x` para que tenga la forma correcta (una columna de valores en lugar de una lista plana), lo cual es necesario para el método `fit()`.
+
+Vamos a ver qué tan bien nuestro modelo se ajustó a los datos.
+
+``` python
+print(f"Alpha real: {alpha}, Alpha estimado: {model.intercept_}")
+print(f"Coeficiente real: 1.7, Coeficiente estimado: {model.coef_[0]}")
+```
+
+Esto nos mostrará el valor de `alpha` y el coeficiente que nuestro modelo estimó en comparación con los valores reales que usamos para generar los datos.
+
+Finalmente, visualizamos nuestros datos simulados y la línea de regresión ajustada.
+
+``` python
+plt.scatter(x, y, color='blue', label='Datos Simulados')
+plt.plot(x, model.predict(x.reshape(-1, 1)), color='red', label='Línea de Regresión')
+plt.xlabel('Compras')
+plt.ylabel('Ventas')
+plt.legend()
+plt.show()
+```
+
+Esto nos da una representación visual clara de cómo la línea de regresión se ajusta a los datos simulados.
+
+#### Supuestos de Normalidad en OLS
+
+Cuando usamos Mínimos Cuadrados Ordinarios (OLS, por sus siglas en inglés) para ajustar una regresión lineal, asumimos que los errores (`error` en nuestro ejemplo) siguen una distribución normal. Esto es crucial para la inferencia estadística posterior, como calcular intervalos de confianza y realizar pruebas de hipótesis. En nuestro ejemplo simulado, respetamos este supuesto al generar `error` con `np.random.randn(100)`, que simula errores normalmente distribuidos.
+
+#### La Realidad de los Datos en el Mundo Real
+
+Aunque este ejemplo nos proporciona una comprensión clara de cómo funciona la regresión lineal, en el mundo real, los datos raramente son tan "limpios". Los verdaderos conjuntos de datos suelen tener errores no normales, valores atípicos, y a menudo no siguen una relación lineal tan nítida. Por eso, es crucial realizar un análisis exploratorio de datos (EDA, por sus siglas en inglés) antes de ajustar cualquier modelo y considerar transformaciones de datos o modelos más complejos si es necesario.
+
+## Supuestos de la regresión lineal
+
+Además, la regresión lineal OLS tiene una serie de supuestos que deben cumplirse para que los resultados sean válidos, incluyendo:
+
+-   **Linealidad**: La relación entre las variables independientes y la variable dependiente es lineal.
+-   **Independencia**: Las observaciones son independientes entre sí.
+-   **Homoscedasticidad**: La varianza de los errores es constante a lo largo de todas las observaciones.
+-   **Normalidad**: Los errores están normalmente distribuidos.
+
+
+# La regresión lineal como una prueba de diferencia de media
+
+Usualmente, el valor del estadístico T en los resultados de una regresión lineal OLS (Ordinary Least Squares) y el valor del estadístico T de una prueba t de dos muestras independientes (ttest_ind) no son directamente comparables, ya que se utilizan en contextos diferentes y se calculan de diferentes maneras.
+
+1.  En una regresión lineal OLS, el estadístico T se utiliza para probar la hipótesis nula de que un coeficiente de regresión es igual a cero (es decir, que la variable correspondiente no tiene efecto sobre la variable dependiente). Se calcula dividiendo el coeficiente de regresión por su error estándar.
+
+2.  En una prueba t de dos muestras independientes (ttest_ind), el estadístico T se utiliza para probar la hipótesis nula de que las medias de dos grupos son iguales. Se calcula como la diferencia entre las medias de los dos grupos dividida por la raíz cuadrada de la suma de las varianzas de los dos grupos dividida por sus tamaños de muestra.
+
+Para que los resultados de estas dos pruebas sean comparables, tendrías que estar probando exactamente la misma hipótesis en ambos casos, lo cual no es típicamente el caso. Por otro lado, la prueba t de dos muestras independientes también tiene sus propios supuestos, incluyendo la independencia de las observaciones y la igualdad de varianzas en los dos grupos (aunque hay versiones de la prueba que no requieren este último supuesto).
+
+Ahora consideremos el siguiente escenario:
+
+1.  Los datos que disponemos incluye la variable `dcronica` la cual toma valores de 1 para niños con condición de desnutrición crónica infantil mientras que toma el valor de 0 cuando el niño no tiene esta condición (no siempre significa que el niño este sano, pero para el ejercicio vamos a asumir este escenario).
+2.  Por construcción la condición de un niño no afecta la condición de un segundo niño. Pueden compartir las mismas condiciones del hogar y la vivienda, es verdad, sin embargo vamos a considerar que estos eventos descritos en la variable `dcronica` son **independientes**.
+
+Debido a que este escenario cumple los mismos supuestos que la regresión lineal podemos emplear esta última como una prueba de hipótesis para la diferencia de medias. Vamos a ver como funciona.
+
+Primero con la prueba
+
+```{python}
+
+
+# Creamos los vectores:
+desnutricion = datos.loc[datos["dcronica"] == 1,"n_hijos"]
+no_desnutric = datos.loc[datos["dcronica"] != 1,"n_hijos"]
+
+# Fijate en el estadistico T del parametro estimado:
+stats.ttest_ind(desnutricion,no_desnutric,alternative="greater")
+
+# Recordemos la media
+pd.pivot_table(datos, values="n_hijos", index=[ "dcronica"], aggfunc=["count", "sum", "mean", "max"])
+```
+
+Ahora con regresión:
+
+```{python}
+
+x = datos["dcronica"]
+y = datos["n_hijos"]
+
+est = sm.OLS(y, sm.add_constant(x))
+est2 = est.fit()
+
+print(est2.summary())
+```
