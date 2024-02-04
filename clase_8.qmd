@@ -9,12 +9,8 @@ execute:
   eval: true
 ---
 
-$$
-\newcommand{\purple}[1]{\color{purple}{#1}}
-\newcommand{\red}[1]{\color{red}{#1}}
-\newcommand{\blue}[1]{\color{blue}{#1}}
-\newcommand{\grey}[1]{\color{grey}{#1}}
-$$ Para empezar nuestro análisis vamos a conversar sobre la probabilidad condicional. Con un pequeño ejemplo. Vale la pena mencionar que los ejemplos que vamos a utilizar pertenecen a un país ficticio a menos que empleemos datos reales, en cuyo caso te diremos para que cargues los datos necesarios para empezar el análisis. En ese sentido vamos a empezar con una definición de **probabilidad condicional** e independencia de objetos.
+
+Para empezar nuestro análisis vamos a conversar sobre la probabilidad condicional. Con un pequeño ejemplo. Vale la pena mencionar que los ejemplos que vamos a utilizar pertenecen a un país ficticio a menos que empleemos datos reales, en cuyo caso te diremos para que cargues los datos necesarios para empezar el análisis. En ese sentido vamos a empezar con una definición de **probabilidad condicional** e independencia de objetos.
 
 Partamos del ejemplo en la unidad 4 sobre el lanzamiento de dos dados. Cambiemos ligeramente el experimento y analicemos la probabilidad de tener la combinación $(3,5)$ tras lanzar el mismo dado dos veces. Este fenómeno se puede dar de dos maneras:
 
@@ -22,7 +18,9 @@ La primera es que en el primer lanzamiento tengamos un 3 y en el segundo un 5, e
 
 $$
 P(A \cap  B) = P(A) \times P(B|A)
-$$ O al revés, es decir, que en el primer lanzamiento tengamos un 5 y en el segundo un 3:
+$$ 
+
+O al revés, es decir, que en el primer lanzamiento tengamos un 5 y en el segundo un 3:
 
 $$
 P(A \cap  B) = P(B) \times P(A|B)
@@ -31,6 +29,14 @@ $$
 Como puedes ver lo que vemos es que para cada caso $P(A|B)$ y $P(B|A)$ es igual a $1/6$ ya que en el primer lanzamiento ($P(A)$ o $P(B)$ respectivamente) no hay algo que altere el resultado del segundo lanzamiento. En este caso decimos que los eventos son **independientes**. Es decir que la probabilidad de un evento no afecta la probabilidad de otro evento. En otras palabras $P(A|B) = P(A)$ o $P(B|A) = P(B)$
 
 Pero veamos otro ejemplo donde podamos apreciar la probabilidad condicional. En una clase de 20 estudiantes, donde 12 son mujeres y 8 son hombres ¿Cual sería la probabilidad de que los dos primeros estudiantes en entregar el examen sean hombres?. Hagamos un diagrama de arbol para entender mejor el problema.
+
+```{mermaid}
+flowchart LR
+  A[Hard edge] --> B(Round edge)
+  B --> C{Decision}
+  C --> D[Result one]
+  C --> E[Result two]
+```
 
 #### Primero en entregar
 
@@ -165,7 +171,9 @@ Si $A$ es el evento en que el primer estudiante es hombre y $B$ es el evento en 
 
 $$
 P(A \cap  B) = \frac{8}{20} \times \frac{7}{19} = \frac{14}{95}
-$$ En este caso la probabilidad del segundo evento está condicionada al primer evento. Es decir, la probabilidad de que el segundo estudiante sea hombre depende de que el primer estudiante sea hombre. En este caso decimos que los eventos son **dependientes**. Es decir que la probabilidad de un evento afecta la probabilidad de otro evento. En otras palabras $P(A|B) \neq P(A)$ o $P(B|A) \neq P(B)$.
+$$ 
+
+En este caso la probabilidad del segundo evento está condicionada al primer evento. Es decir, la probabilidad de que el segundo estudiante sea hombre depende de que el primer estudiante sea hombre. En este caso decimos que los eventos son **dependientes**. Es decir que la probabilidad de un evento afecta la probabilidad de otro evento. En otras palabras $P(A|B) \neq P(A)$ o $P(B|A) \neq P(B)$.
 
 ## Teorema de Bayes
 
@@ -367,19 +375,34 @@ Ahora consideremos el siguiente escenario:
 
 Debido a que este escenario cumple los mismos supuestos que la regresión lineal podemos emplear esta última como una prueba de hipótesis para la diferencia de medias. Vamos a ver como funciona.
 
-Primero con la prueba
+Primero con la prueba T para diferencia de medias independientes:
 
 ```{python}
+from scipy import stats
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from statsmodels.regression.linear_model import OLS
+import statsmodels.api as sm
 
+
+# Preparación de datos para una prueba de hipótesis (eliminación de NA)
+datos = datos[~datos["dcronica"].isna()]
+datos = datos[~datos["n_hijos"].isna()]
 
 # Creamos los vectores:
 desnutricion = datos.loc[datos["dcronica"] == 1,"n_hijos"]
 no_desnutric = datos.loc[datos["dcronica"] != 1,"n_hijos"]
 
 # Fijate en el estadistico T del parametro estimado:
-stats.ttest_ind(desnutricion,no_desnutric,alternative="greater")
+prueba = stats.ttest_ind(desnutricion,no_desnutric,alternative="greater")
 
-# Recordemos la media
+print(prueba)
+```
+
+Recordemos la media de los grupos:
+
+```{python}
+
 pd.pivot_table(datos, values="n_hijos", index=[ "dcronica"], aggfunc=["count", "sum", "mean", "max"])
 ```
 
@@ -395,3 +418,6 @@ est2 = est.fit()
 
 print(est2.summary())
 ```
+
+Fíjate como la media del número de hijos en los hogares en los que viven los niños *sin desnutrición crónica* se presentan en el termino `const` (2.2466), mientras que el coeficiente asociado a `dcronica` es la diferencia de la media del número de hijos en los hogares en que viven los *niños **con** desnutrición crónica* menos la media del número de hijos en los hogares en que viven los *niños **sin
+** desnutrición crónica* (0.2976). Por último observa como el **estádistico T** de la prueba de diferencia de medias con `stats.ttest_ind` es el mismo que el valor `t` asociado al coeficiente `dcronica` en la tabla de regresión. (4.211)

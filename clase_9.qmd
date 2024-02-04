@@ -1,9 +1,6 @@
 ---
 title: "Análisis de correlación y modelos de regresión en Python"
-format: 
-  html:
-    mermaid:
-      theme: neutral
+format: html
 editor: visual
 execute: 
   eval: true
