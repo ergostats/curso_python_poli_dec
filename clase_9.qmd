@@ -6,6 +6,70 @@ execute:
   eval: true
 ---
 
+## Variables dummies
+
+Para obtener variables dummies de un data frame primero debemos saber cual variable es categórica, veamos lo siguiente
+
+```{python}
+ruta = "data/sample_endi_10p.txt"
+data = pd.read_table(ruta,delimiter = "\t")
+data
+```
+
+Con esto observamos que la variable 'etnia' es categórica, con 4 categorías. Con la siguiente función podemos crear un data frame con estas variables convertidas en dummies/indicadoras
+
+```{python}
+#Tiene 3 argumentos: el nombre del data frame, la variable categorica y la categoria sobre la cual se va a basar el modelo
+def sacar_dummies(df,var,cat): 
+    dummies = pd.get_dummies(df[var],prefix='dummie')
+    #Eliminamos una de las dummies
+    dummie = dummies.drop('dummie_'+ cat, axis=1)
+    #Agrupamos los dos data frames
+    df = pd.concat([df,dummies], axis=1)
+    #Eliminamos la columna original
+    df = df.drop(var, axis=1)
+    return(df)
+  
+#Así sería nuestra función en acción
+nuevo_df = sacar_dummies(data,'etnia','Indígena')
+nuevo_df
+```
+
+Ya con este nuevo data frame podremos trabajar normalmente, ahora se muestra una explicación sobre cómo tratar con dummies
+
+## Introducción a las Variables Dummy en Regresiones Lineales:
+
+En regresiones lineales, las variables dummy se utilizan para modelar efectos cualitativos. Se representan mediante variables binarias que toman el valor de 0 o 1 para indicar la ausencia o presencia de una característica específica. Formalmente, una variable dummy (D_i) para la categoría (i) toma el valor de 1 si la observación pertenece a esa categoría y 0 en caso contrario. Por ejemplo, en un modelo de oferta y demanda para un bien, podemos introducir variables dummy para representar diferentes estaciones del año. La regresión puede expresarse como: 
+
+$$
+
+Y = \beta\_0 + \beta\_1 X + \beta*2 D*{invierno} + \epsilon
+
+$$
+
+Donde (Y) es la variable dependiente (demanda), (X) es la variable independiente (precio), $\beta_0$ es la intercepción, $\beta_1$ es el coeficiente asociado con (X), $\beta_2$ es el coeficiente de la variable dummy de invierno, y $\epsilon$ es el término de error.
+
+### Interpretación de Coeficientes de Variables Dummy:
+
+La interpretación de los coeficientes de las variables dummy se realiza comparando con la categoría de referencia, que es aquella para la cual la variable dummy toma el valor de 0. Consideremos un modelo económico que analiza el efecto del nivel de educación en el salario, controlando el efecto del género. Utilizamos una variable dummy $D_{mujer}$ que toma el valor de 1 si el individuo es mujer y 0 si es hombre. Entonces, el modelo sería:
+
+$$
+Salario = \beta_0 + \beta_1 Educación + \beta_2 D_{mujer} + \epsilon
+$$
+
+Donde $\beta_{mujer}$ representa la diferencia salarial entre mujeres y hombres, manteniendo constante el nivel de educación.
+
+### Ejemplos Económicos de Variables Dummy en Regresiones Lineales:
+
+Supongamos que queremos estudiar el efecto de la membresía en un sindicato en los salarios de los trabajadores. Podemos introducir una variable dummy $D_{sindicato}$ que tome el valor de 1 si el trabajador es miembro del sindicato y 0 si no lo es. El modelo sería: 
+
+$$
+
+Salario = \beta_0 + \beta_1 Experiencia + \beta_2 D_{sindicato} + \epsilon
+
+$$
+
+Donde $\beta_{sindicato}$ nos indicaría la diferencia salarial entre los trabajadores sindicalizados y no sindicalizados.
 
 ## Los conjuntos de entrenamiento y de prueba
 
