@@ -23,7 +23,7 @@ Con esto observamos que la variable 'etnia' es categórica, con 4 categorías. C
 def sacar_dummies(df,var,cat): 
     dummies = pd.get_dummies(df[var],prefix='dummie')
     #Eliminamos una de las dummies
-    dummie = dummies.drop('dummie_'+ cat, axis=1)
+    dummies = dummies.drop('dummie_'+ cat, axis=1)
     #Agrupamos los dos data frames
     df = pd.concat([df,dummies], axis=1)
     #Eliminamos la columna original
