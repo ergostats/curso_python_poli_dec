@@ -20,6 +20,7 @@ book:
     - clase_7.qmd
     - clase_8.qmd
     - clase_9.qmd
+    - Clase_5.qmd
 format:
   html:
     number-sections: false

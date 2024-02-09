@@ -1,8 +1,9 @@
 ---
-title: "Clase 5:Limpieza y transformación de datos con pandas en Python"
-author: "Paul Yungan"
+title: "Limpieza y transformación de datos con pandas en Python"
 format: html
 editor: visual
+execute: 
+  eval: false
 ---
 
 # Limpieza y transformación de datos con pandas en Python
