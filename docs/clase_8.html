@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./clase_9.html" rel="next">
 <link href="./clase_7.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -184,6 +185,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./clase_8.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Análisis de correlación y modelos de regresión en Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_9.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Análisis de correlación y modelos de regresión en Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Clase_5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Limpieza y transformación de datos con pandas en Python</span></a>
   </div>
 </li>
     </ul>
@@ -456,21 +467,21 @@ P(A \cap  B) = \frac{8}{20} \times \frac{7}{19} = \frac{14}{95}
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Hombre</td>
-<td>872</td>
-<td>221</td>
-<td>1093</td>
+<td>889</td>
+<td>207</td>
+<td>1096</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">Mujer</td>
-<td>906</td>
-<td>195</td>
-<td>1101</td>
+<td>907</td>
+<td>176</td>
+<td>1083</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">All</td>
-<td>1778</td>
-<td>416</td>
-<td>2194</td>
+<td>1796</td>
+<td>383</td>
+<td>2179</td>
 </tr>
 </tbody>
 </table>
@@ -492,9 +503,9 @@ P(A \cap  B) = \frac{8}{20} \times \frac{7}{19} = \frac{14}{95}
 <div class="cell-output cell-output-stdout">
 <pre><code>dcronica       0.0       1.0       All
 sexo                                  
-Hombre    0.397448  0.100729  0.498177
-Mujer     0.412944  0.088879  0.501823
-All       0.810392  0.189608  1.000000</code></pre>
+Hombre    0.407985  0.094998  0.502983
+Mujer     0.416246  0.080771  0.497017
+All       0.824231  0.175769  1.000000</code></pre>
 </div>
 </div>
 <p>Si volvemos a nuestro ejercicio, consideramos a <span class="math inline">\(B\)</span> como el evento de que se seleccione un infante de sexo femenino, y <span class="math inline">\(A\)</span> como el evento en que el infante seleccionado tiene desnutrición crónica (valor igual a 1) tendriamos lo siguiente:</p>
@@ -640,7 +651,7 @@ All       0.810392  0.189608  1.000000</code></pre>
 <span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prueba)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>TtestResult(statistic=4.210509617301763, pvalue=1.3265622420660088e-05, df=2146.0)</code></pre>
+<pre><code>TtestResult(statistic=3.983297056146362, pvalue=3.5121018710766035e-05, df=2136.0)</code></pre>
 </div>
 </div>
 <p>Recordemos la media de los grupos:</p>
@@ -677,17 +688,17 @@ All       0.810392  0.189608  1.000000</code></pre>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0.0</td>
-<td>1740</td>
-<td>3909.0</td>
-<td>2.246552</td>
+<td>1760</td>
+<td>3990.0</td>
+<td>2.267045</td>
 <td>11.0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1.0</td>
-<td>408</td>
-<td>1038.0</td>
-<td>2.544118</td>
-<td>9.0</td>
+<td>378</td>
+<td>970.0</td>
+<td>2.566138</td>
+<td>11.0</td>
 </tr>
 </tbody>
 </table>
@@ -707,25 +718,25 @@ All       0.810392  0.189608  1.000000</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>                            OLS Regression Results                            
 ==============================================================================
-Dep. Variable:                n_hijos   R-squared:                       0.008
-Model:                            OLS   Adj. R-squared:                  0.008
-Method:                 Least Squares   F-statistic:                     17.73
-Date:                Sun, 04 Feb 2024   Prob (F-statistic):           2.65e-05
-Time:                        15:04:02   Log-Likelihood:                -3585.2
-No. Observations:                2148   AIC:                             7174.
-Df Residuals:                    2146   BIC:                             7186.
+Dep. Variable:                n_hijos   R-squared:                       0.007
+Model:                            OLS   Adj. R-squared:                  0.007
+Method:                 Least Squares   F-statistic:                     15.87
+Date:                Fri, 09 Feb 2024   Prob (F-statistic):           7.02e-05
+Time:                        17:03:44   Log-Likelihood:                -3633.6
+No. Observations:                2138   AIC:                             7271.
+Df Residuals:                    2136   BIC:                             7283.
 Df Model:                           1                                         
 Covariance Type:            nonrobust                                         
 ==============================================================================
                  coef    std err          t      P&gt;|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-const          2.2466      0.031     72.938      0.000       2.186       2.307
-dcronica       0.2976      0.071      4.211      0.000       0.159       0.436
+const          2.2670      0.032     71.805      0.000       2.205       2.329
+dcronica       0.2991      0.075      3.983      0.000       0.152       0.446
 ==============================================================================
-Omnibus:                      629.392   Durbin-Watson:                   1.987
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):             1970.053
-Skew:                           1.476   Prob(JB):                         0.00
-Kurtosis:                       6.647   Cond. No.                         2.66
+Omnibus:                      746.423   Durbin-Watson:                   2.084
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             3072.850
+Skew:                           1.659   Prob(JB):                         0.00
+Kurtosis:                       7.847   Cond. No.                         2.72
 ==============================================================================
 
 Notes:
@@ -978,6 +989,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./clase_9.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Análisis de correlación y modelos de regresión en Python</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

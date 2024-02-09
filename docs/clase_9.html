@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introducción al Lenguaje de Programación Python para Análisis Estadístico - Análisis de correlación y modelos de regresión en Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Clase_5.html" rel="next">
+<link href="./clase_8.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./clase_9.html"><span class="chapter-title">Análisis de correlación y modelos de regresión en Python</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introducción al Lenguaje de Programación Python para Análisis Estadístico</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Indice (en construcción)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Clase_1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción a Python y su entorno de desarrollo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Clase_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción al manejo de datos en Python con pandas</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Funciones y la importancia del análisis de datos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Variables aleatorias, funciones de distribución y estimación de parametros</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploración y visualización de datos con Matplotlib y Seaborn en Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Pruebas de hipótesis para la media entre grupos en Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_8.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Análisis de correlación y modelos de regresión en Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_9.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Análisis de correlación y modelos de regresión en Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Clase_5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Limpieza y transformación de datos con pandas en Python</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#selección-de-modelos-según-el-tipo-de-variable-y-variable-dependiente" id="toc-selección-de-modelos-según-el-tipo-de-variable-y-variable-dependiente" class="nav-link active" data-scroll-target="#selección-de-modelos-según-el-tipo-de-variable-y-variable-dependiente">Selección de Modelos según el Tipo de Variable (Y) (Variable Dependiente)</a></li>
+  <li><a href="#selección-de-modelos-según-el-tipo-de-variable-x-variables-independientes" id="toc-selección-de-modelos-según-el-tipo-de-variable-x-variables-independientes" class="nav-link" data-scroll-target="#selección-de-modelos-según-el-tipo-de-variable-x-variables-independientes">Selección de Modelos según el Tipo de Variable (X) (Variables Independientes)</a></li>
+  <li><a href="#variables-dummies" id="toc-variables-dummies" class="nav-link" data-scroll-target="#variables-dummies">Variables dummies</a></li>
+  <li><a href="#introducción-a-las-variables-dummy-en-regresiones-lineales" id="toc-introducción-a-las-variables-dummy-en-regresiones-lineales" class="nav-link" data-scroll-target="#introducción-a-las-variables-dummy-en-regresiones-lineales">Introducción a las Variables Dummy en Regresiones Lineales:</a>
+  <ul class="collapse">
+  <li><a href="#interpretación-de-coeficientes-de-variables-dummy" id="toc-interpretación-de-coeficientes-de-variables-dummy" class="nav-link" data-scroll-target="#interpretación-de-coeficientes-de-variables-dummy">Interpretación de Coeficientes de Variables Dummy:</a></li>
+  <li><a href="#ejemplos-económicos-de-variables-dummy-en-regresiones-lineales" id="toc-ejemplos-económicos-de-variables-dummy-en-regresiones-lineales" class="nav-link" data-scroll-target="#ejemplos-económicos-de-variables-dummy-en-regresiones-lineales">Ejemplos Económicos de Variables Dummy en Regresiones Lineales:</a></li>
+  </ul></li>
+  <li><a href="#los-conjuntos-de-entrenamiento-y-de-prueba" id="toc-los-conjuntos-de-entrenamiento-y-de-prueba" class="nav-link" data-scroll-target="#los-conjuntos-de-entrenamiento-y-de-prueba">Los conjuntos de entrenamiento y de prueba</a>
+  <ul class="collapse">
+  <li><a href="#importancia-de-separar-las-muestras-en-entrenamiento-y-prueba" id="toc-importancia-de-separar-las-muestras-en-entrenamiento-y-prueba" class="nav-link" data-scroll-target="#importancia-de-separar-las-muestras-en-entrenamiento-y-prueba">Importancia de Separar las Muestras en Entrenamiento y Prueba</a></li>
+  <li><a href="#entrenamiento-vs.-prueba" id="toc-entrenamiento-vs.-prueba" class="nav-link" data-scroll-target="#entrenamiento-vs.-prueba">Entrenamiento vs.&nbsp;Prueba</a></li>
+  <li><a href="#implicaciones-de-no-separar-los-datos" id="toc-implicaciones-de-no-separar-los-datos" class="nav-link" data-scroll-target="#implicaciones-de-no-separar-los-datos">Implicaciones de No Separar los Datos</a></li>
+  <li><a href="#consideraciones-clave" id="toc-consideraciones-clave" class="nav-link" data-scroll-target="#consideraciones-clave">Consideraciones Clave</a></li>
+  </ul></li>
+  <li><a href="#creando-un-modelo-logit-para-la-desnutrición-crónica-infantil" id="toc-creando-un-modelo-logit-para-la-desnutrición-crónica-infantil" class="nav-link" data-scroll-target="#creando-un-modelo-logit-para-la-desnutrición-crónica-infantil">Creando un modelo Logit para la desnutrición crónica infantil</a>
+  <ul class="collapse">
+  <li><a href="#importación-de-bibliotecas" id="toc-importación-de-bibliotecas" class="nav-link" data-scroll-target="#importación-de-bibliotecas">Importación de bibliotecas</a></li>
+  <li><a href="#preparación-de-los-datos" id="toc-preparación-de-los-datos" class="nav-link" data-scroll-target="#preparación-de-los-datos">Preparación de los datos</a></li>
+  <li><a href="#división-de-datos" id="toc-división-de-datos" class="nav-link" data-scroll-target="#división-de-datos">División de datos</a></li>
+  <li><a href="#modelo-de-regresión-logística" id="toc-modelo-de-regresión-logística" class="nav-link" data-scroll-target="#modelo-de-regresión-logística">Modelo de regresión logística</a></li>
+  <li><a href="#comentarios-finales-antes-de-ir-al-código" id="toc-comentarios-finales-antes-de-ir-al-código" class="nav-link" data-scroll-target="#comentarios-finales-antes-de-ir-al-código">Comentarios Finales antes de ir al código</a></li>
+  <li><a href="#consideracions-finales-sobre-el-ajuste-del-modelo-y-la-separación-de-muestras" id="toc-consideracions-finales-sobre-el-ajuste-del-modelo-y-la-separación-de-muestras" class="nav-link" data-scroll-target="#consideracions-finales-sobre-el-ajuste-del-modelo-y-la-separación-de-muestras">Consideracions finales sobre el ajuste del modelo y la separación de muestras:</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Análisis de correlación y modelos de regresión en Python</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Vamos a recordar dos tipos de Variables</p>
+<ol type="1">
+<li><p><strong>Variables Numéricas</strong>: Estas variables representan cantidades medidas y pueden ser de dos tipos: discretas (contables, como número de hijos) o continuas (medibles, como peso o altura).</p></li>
+<li><p><strong>Variables Categóricas</strong>: Representan categorías o grupos que no tienen un orden inherente (nominales) o que tienen un orden o jerarquía (ordinales), como tipo de vivienda (casa, departamento) o nivel de educación.</p></li>
+</ol>
+<section id="selección-de-modelos-según-el-tipo-de-variable-y-variable-dependiente" class="level3">
+<h3 class="anchored" data-anchor-id="selección-de-modelos-según-el-tipo-de-variable-y-variable-dependiente">Selección de Modelos según el Tipo de Variable (Y) (Variable Dependiente)</h3>
+<ul>
+<li><strong>(Y) es Numérica</strong>: Se enfocan en modelos de regresión.
+<ul>
+<li><strong>Regresión Lineal Simple o Múltiple</strong>: Cuando (X) es numérica y la relación con (Y) parece ser lineal.</li>
+<li><strong>Regresión Polinomial</strong>: Si la relación entre (X) y (Y) es curvilínea.</li>
+<li><strong>Árboles de Decisión de Regresión y Modelos de Ensamble (Random Forest, Gradient Boosting)</strong>: Cuando (X) puede ser una mezcla de variables numéricas y categóricas y se busca flexibilidad en la modelación.</li>
+</ul></li>
+<li><strong>(Y) es Categórica</strong>: Enfoque en modelos de clasificación.
+<ul>
+<li><strong>Regresión Logística</strong>: Cuando (Y) es binaria (dos categorías) y (X) numérica o categórica.</li>
+<li><strong>Árboles de Decisión de Clasificación y Modelos de Ensamble (Random Forest, Gradient Boosting)</strong>: Útil para (Y) con múltiples categorías y (X) mixtas.</li>
+<li><strong>Máquinas de Soporte Vectorial (SVM)</strong>: Para clasificación binaria o multiclase con un enfoque en maximizar el margen de separación.</li>
+</ul></li>
+</ul>
+</section>
+<section id="selección-de-modelos-según-el-tipo-de-variable-x-variables-independientes" class="level3">
+<h3 class="anchored" data-anchor-id="selección-de-modelos-según-el-tipo-de-variable-x-variables-independientes">Selección de Modelos según el Tipo de Variable (X) (Variables Independientes)</h3>
+<ul>
+<li><strong>Todas las (X) son Numéricas</strong>: Modelos de regresión lineal, polinomial, SVM (para (Y) categórica) y modelos de ensamble son generalmente adecuados.</li>
+<li><strong>Todas las (X) son Categóricas</strong>: Modelos como regresión logística (con codificación de variables) y árboles de decisión pueden manejar bien estas variables.</li>
+<li><strong>Mezcla de (X) Numéricas y Categóricas</strong>: La regresión multiple, los árboles de decisión y los modelos de ensamble son especialmente flexibles para manejar ambos tipos de variables sin necesidad de mucha preprocesación.</li>
+</ul>
+</section>
+<section id="variables-dummies" class="level2">
+<h2 class="anchored" data-anchor-id="variables-dummies">Variables dummies</h2>
+<p>Para obtener variables dummies de un data frame primero debemos saber cual variable es categórica, veamos lo siguiente</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ruta <span class="op">=</span> <span class="st">"data/sample_endi_10p.txt"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_table(ruta,delimiter <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Con esto observamos que la variable ‘etnia’ es categórica, con 4 categorías. Con la siguiente función podemos crear un data frame con estas variables convertidas en dummies/indicadoras</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Tiene 3 argumentos: el nombre del data frame, la variable categorica y la categoria sobre la cual se va a basar el modelo</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sacar_dummies(df,var,cat): </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    dummies <span class="op">=</span> pd.get_dummies(df[var],prefix<span class="op">=</span><span class="st">'dummie'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Eliminamos una de las dummies</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    dummies <span class="op">=</span> dummies.drop(<span class="st">'dummie_'</span><span class="op">+</span> cat, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Agrupamos los dos data frames</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.concat([df,dummies], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Eliminamos la columna original</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.drop(var, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(df)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Así sería nuestra función en acción</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>nuevo_df <span class="op">=</span> sacar_dummies(data,<span class="st">'etnia'</span>,<span class="st">'Indígena'</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>nuevo_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ya con este nuevo data frame podremos trabajar normalmente, ahora se muestra una explicación sobre cómo tratar con dummies</p>
+</section>
+<section id="introducción-a-las-variables-dummy-en-regresiones-lineales" class="level2">
+<h2 class="anchored" data-anchor-id="introducción-a-las-variables-dummy-en-regresiones-lineales">Introducción a las Variables Dummy en Regresiones Lineales:</h2>
+<p>En regresiones lineales, las variables dummy se utilizan para modelar efectos cualitativos. Se representan mediante variables binarias que toman el valor de 0 o 1 para indicar la ausencia o presencia de una característica específica. Formalmente, una variable dummy (D_i) para la categoría (i) toma el valor de 1 si la observación pertenece a esa categoría y 0 en caso contrario. Por ejemplo, en un modelo de oferta y demanda para un bien, podemos introducir variables dummy para representar diferentes estaciones del año. La regresión puede expresarse como:</p>
+<p>$$</p>
+<p>Y = _0 + _1 X + *2 D*{invierno} + </p>
+<p>$$</p>
+<p>Donde (Y) es la variable dependiente (demanda), (X) es la variable independiente (precio), <span class="math inline">\(\beta_0\)</span> es la intercepción, <span class="math inline">\(\beta_1\)</span> es el coeficiente asociado con (X), <span class="math inline">\(\beta_2\)</span> es el coeficiente de la variable dummy de invierno, y <span class="math inline">\(\epsilon\)</span> es el término de error.</p>
+<section id="interpretación-de-coeficientes-de-variables-dummy" class="level3">
+<h3 class="anchored" data-anchor-id="interpretación-de-coeficientes-de-variables-dummy">Interpretación de Coeficientes de Variables Dummy:</h3>
+<p>La interpretación de los coeficientes de las variables dummy se realiza comparando con la categoría de referencia, que es aquella para la cual la variable dummy toma el valor de 0. Consideremos un modelo económico que analiza el efecto del nivel de educación en el salario, controlando el efecto del género. Utilizamos una variable dummy <span class="math inline">\(D_{mujer}\)</span> que toma el valor de 1 si el individuo es mujer y 0 si es hombre. Entonces, el modelo sería:</p>
+<p><span class="math display">\[
+Salario = \beta_0 + \beta_1 Educación + \beta_2 D_{mujer} + \epsilon
+\]</span></p>
+<p>Donde <span class="math inline">\(\beta_{mujer}\)</span> representa la diferencia salarial entre mujeres y hombres, manteniendo constante el nivel de educación.</p>
+</section>
+<section id="ejemplos-económicos-de-variables-dummy-en-regresiones-lineales" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplos-económicos-de-variables-dummy-en-regresiones-lineales">Ejemplos Económicos de Variables Dummy en Regresiones Lineales:</h3>
+<p>Supongamos que queremos estudiar el efecto de la membresía en un sindicato en los salarios de los trabajadores. Podemos introducir una variable dummy <span class="math inline">\(D_{sindicato}\)</span> que tome el valor de 1 si el trabajador es miembro del sindicato y 0 si no lo es. El modelo sería:</p>
+<p>$$</p>
+<p>Salario = _0 + _1 Experiencia + D*{sindicato} + </p>
+<p>$$</p>
+<p>Donde <span class="math inline">\(\beta_{sindicato}\)</span> nos indicaría la diferencia salarial entre los trabajadores sindicalizados y no sindicalizados.</p>
+</section>
+</section>
+<section id="los-conjuntos-de-entrenamiento-y-de-prueba" class="level2">
+<h2 class="anchored" data-anchor-id="los-conjuntos-de-entrenamiento-y-de-prueba">Los conjuntos de entrenamiento y de prueba</h2>
+<section id="importancia-de-separar-las-muestras-en-entrenamiento-y-prueba" class="level3">
+<h3 class="anchored" data-anchor-id="importancia-de-separar-las-muestras-en-entrenamiento-y-prueba">Importancia de Separar las Muestras en Entrenamiento y Prueba</h3>
+<p>Al sumergirnos en el análisis de regresión, solemos dividir nuestros datos en conjuntos de entrenamiento y prueba. Esta práctica es fundamental en la ciencia de datos y la estadística para evaluar la eficacia de nuestros modelos. Veamos las razones detrás de esta división, sus implicaciones y algunas consideraciones importantes para nuestro análisis.</p>
+<p>La división de datos en conjuntos de <code>entrenamiento</code> y <code>prueba</code> tiene un propósito esencial: <strong>evaluar la capacidad de generalización de nuestro modelo</strong>. En otras palabras, queremos asegurarnos de que nuestro modelo no solo aprenda los datos con los que se entrena sino que también pueda hacer predicciones precisas sobre datos nuevos que nunca antes había visto.</p>
+</section>
+<section id="entrenamiento-vs.-prueba" class="level3">
+<h3 class="anchored" data-anchor-id="entrenamiento-vs.-prueba">Entrenamiento vs.&nbsp;Prueba</h3>
+<ul>
+<li><strong>Conjunto de Entrenamiento</strong>: Utilizamos estos datos para entrenar nuestro modelo, permitiéndole aprender la relación entre las variables independientes y dependientes.</li>
+<li><strong>Conjunto de Prueba</strong>: Este conjunto se utiliza para evaluar el rendimiento del modelo entrenado, actuando como datos nuevos para el modelo.</li>
+</ul>
+<p>Para generar nuestros datos de prueba y entrenamiento vamos a cargar los siguientes módulos y funciuones:</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.regression.linear_model <span class="im">import</span> OLS</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="implicaciones-de-no-separar-los-datos" class="level3">
+<h3 class="anchored" data-anchor-id="implicaciones-de-no-separar-los-datos">Implicaciones de No Separar los Datos</h3>
+<p>Si no dividimos nuestros datos y, en cambio, entrenamos y evaluamos el modelo en el mismo conjunto, corremos el riesgo de <strong>sobreajuste</strong>. El sobreajuste ocurre cuando nuestro modelo aprende los datos de entrenamiento tan bien que incluye el ruido estadístico en sus predicciones. Esto significa que, aunque el modelo puede funcionar excepcionalmente bien en el conjunto de datos de entrenamiento, probablemente tendrá un rendimiento pobre en datos nuevos, porque ha “memorizado” los datos en lugar de aprender las relaciones subyacentes.</p>
+</section>
+<section id="consideraciones-clave" class="level3">
+<h3 class="anchored" data-anchor-id="consideraciones-clave">Consideraciones Clave</h3>
+<section id="tamaño-de-la-división" class="level4">
+<h4 class="anchored" data-anchor-id="tamaño-de-la-división">Tamaño de la División</h4>
+<p>Una pregunta común es cómo decidir el tamaño del conjunto de entrenamiento y de prueba. Una regla general es la división 80/20 o 70/30, donde el mayor porcentaje corresponde al conjunto de entrenamiento. Sin embargo, esto puede variar dependiendo del tamaño total de tus datos. Con conjuntos de datos grandes, una menor proporción (como 90/10) aún puede proporcionar un conjunto de prueba de tamaño suficiente.</p>
+</section>
+<section id="aleatoriedad" class="level4">
+<h4 class="anchored" data-anchor-id="aleatoriedad">Aleatoriedad</h4>
+<p>Es importante asegurar que la división entre los conjuntos de entrenamiento y prueba sea aleatoria. Esto ayuda a garantizar que ambos conjuntos sean representativos del conjunto de datos completo, evitando sesgos en el entrenamiento y evaluación del modelo.</p>
+</section>
+<section id="estratificación" class="level4">
+<h4 class="anchored" data-anchor-id="estratificación">Estratificación</h4>
+<p>En casos donde se trabaja con datos categóricos desbalanceados, la estratificación puede asegurar que los conjuntos de entrenamiento y prueba reflejen la distribución de las categorías del conjunto de datos completo. Esto es crucial para mantener la validez de nuestra evaluación del modelo.</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Preparación de datos para una prueba de hipótesis (eliminación de NA)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>datos <span class="op">=</span> datos[<span class="op">~</span>datos[<span class="st">"dcronica"</span>].isna()]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>datos <span class="op">=</span> datos[<span class="op">~</span>datos[<span class="st">"n_hijos"</span>].isna()]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar el conjunto de datos de Boston</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> datos[<span class="st">"dcronica"</span>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> datos[<span class="st">"n_hijos"</span>]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Dividir los datos en conjuntos de entrenamiento y prueba</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(x.values.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), y.values, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="validación-cruzada" class="level4">
+<h4 class="anchored" data-anchor-id="validación-cruzada">Validación Cruzada</h4>
+<p>Una vez familiarizados con la división básica de entrenamiento y prueba, podríais explorar técnicas más avanzadas como la validación cruzada. Esta técnica implica dividir el conjunto de datos en múltiples subconjuntos y realizar el entrenamiento y la prueba varias veces, cada vez con un subconjunto diferente como conjunto de prueba. Esto proporciona una evaluación más robusta del rendimiento del modelo.</p>
+<p>Vamos a ver esta técnica con un modelo para determinar que tanto varia los resultados del modelo de acuerdo a los “Folds” de una validación cruzada con un ejemplo aplicando datos de la ENDI.</p>
+</section>
+</section>
+</section>
+<section id="creando-un-modelo-logit-para-la-desnutrición-crónica-infantil" class="level1">
+<h1>Creando un modelo Logit para la desnutrición crónica infantil</h1>
+<p>El script que te presentamos es un ejemplo de cómo llevar a cabo un análisis de regresión logística utilizando Python para estudiar la desnutrición infantil con datos de la Encuesta Nacional de Desnutrición Infantil (ENDI). A continuación, se desglosa y documenta el código paso a paso, con especial énfasis en la implementación de la validación cruzada.</p>
+<section id="importación-de-bibliotecas" class="level3">
+<h3 class="anchored" data-anchor-id="importación-de-bibliotecas">Importación de bibliotecas</h3>
+<p>El script comienza importando las bibliotecas necesarias para el análisis: - <strong>numpy</strong> y <strong>pandas</strong> para manipulación de datos. - <strong>train_test_split</strong> y <strong>KFold</strong> de <strong>sklearn.model_selection</strong> para dividir los datos en conjuntos de entrenamiento y prueba, y para implementar la validación cruzada, respectivamente. - <strong>LogisticRegression</strong> de <strong>sklearn.linear_model</strong> para el modelo de regresión logística. - <strong>StandardScaler</strong> de <strong>sklearn.preprocessing</strong> para estandarizar las variables numéricas. - <strong>accuracy_score</strong> de <strong>sklearn.metrics</strong> para calcular la precisión del modelo. - <strong>statsmodels.api</strong> para realizar una regresión logística con más detalles estadísticos.</p>
+</section>
+<section id="preparación-de-los-datos" class="level3">
+<h3 class="anchored" data-anchor-id="preparación-de-los-datos">Preparación de los datos</h3>
+<ul>
+<li>Se cargan los datos desde un archivo, filtrando las observaciones sin datos de desnutrición (<code>dcronica</code>).</li>
+<li>Se seleccionan las variables de interés (<code>n_hijos</code>, <code>region</code>, <code>sexo</code>, <code>condicion_empleo</code>) y se eliminan las filas con valores faltantes en estas variables.</li>
+<li>Se transforma la variable <code>region</code> a una variable categórica con valores “Sierra” y “Demas regiones”.</li>
+<li>Se estandarizan las variables numéricas (<code>n_hijos</code>) y se convierten las variables categóricas en variables dummy.</li>
+</ul>
+</section>
+<section id="división-de-datos" class="level3">
+<h3 class="anchored" data-anchor-id="división-de-datos">División de datos</h3>
+<ul>
+<li>Se divide el conjunto de datos en entrenamiento y prueba utilizando <code>train_test_split</code>, asegurando que el conjunto de prueba sea el 20% del total.</li>
+<li>Se convierten todas las variables a numéricas y, para el modelo de regresión logística de <strong>statsmodels</strong>, se limita el conjunto de entrenamiento a tres variables predictoras.</li>
+</ul>
+</section>
+<section id="modelo-de-regresión-logística" class="level3">
+<h3 class="anchored" data-anchor-id="modelo-de-regresión-logística">Modelo de regresión logística</h3>
+<ul>
+<li>Se ajusta un modelo de regresión logística utilizando <strong>statsmodels</strong>, lo cual permite obtener un resumen estadístico detallado del modelo.</li>
+<li>Se realiza una predicción con el modelo entrenado y se compara con los datos reales.</li>
+<li>La parte final del script, que se enfoca en la validación cruzada, parece estar incompleta o incorrectamente integrada, ya que:
+<ul>
+<li><strong>KFold</strong> se menciona pero no se inicializa explícitamente con un número de divisiones.</li>
+<li>La variable <code>kf</code> se usa como si se hubiera definido previamente, pero no hay una asignación visible en el código proporcionado.</li>
+<li><strong>LogisticRegression</strong> se menciona para ajustar el modelo dentro del bucle de validación cruzada, pero no se define ni se inicializa antes de su uso.</li>
+<li>La idea detrás de este fragmento es dividir el conjunto de entrenamiento en subconjuntos más pequeños, entrenar el modelo en cada subconjunto, y luego validar el modelo en otro subconjunto no utilizado durante el entrenamiento. Esta técnica ayuda a evaluar cómo el modelo generalizaría a un conjunto de datos independiente.</li>
+</ul></li>
+</ul>
+</section>
+<section id="comentarios-finales-antes-de-ir-al-código" class="level3">
+<h3 class="anchored" data-anchor-id="comentarios-finales-antes-de-ir-al-código">Comentarios Finales antes de ir al código</h3>
+<ul>
+<li>Para corregir y completar el enfoque de validación cruzada, se debería inicializar <code>KFold</code> correctamente y asegurarse de que todas las variables y modelos necesarios estén definidos antes de su uso.</li>
+<li>Además, es importante asegurarse de que el modelo y las métricas de evaluación seleccionadas sean coherentes a lo largo del análisis.</li>
+</ul>
+<p>Este script proporciona una base sólida para el análisis de regresión logística aplicado a datos de salud pública, aunque requiere algunas correcciones y mejoras, especialmente en la sección de validación cruzada, para ser completamente funcional y eficaz.</p>
+<section id="ahora-si-el-script" class="level4">
+<h4 class="anchored" data-anchor-id="ahora-si-el-script">Ahora si el script</h4>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importación de bibliotecas necesarias</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, KFold</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de datos</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>datos <span class="op">=</span> pd.read_csv(<span class="st">"data\sample_endi_model_10p.txt"</span>, sep<span class="op">=</span><span class="st">";"</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrado de filas con datos faltantes en la columna 'dcronica'</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>datos <span class="op">=</span> datos[<span class="op">~</span>datos[<span class="st">"dcronica"</span>].isna()]</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Selección de variables de interés</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>variables <span class="op">=</span> [<span class="st">'n_hijos'</span>, <span class="st">'region'</span>, <span class="st">'sexo'</span>, <span class="st">'condicion_empleo'</span>]</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminación de filas con valores faltantes en las variables seleccionadas</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> variables:</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    datos <span class="op">=</span> datos[<span class="op">~</span>datos[i].isna()]</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformación de la variable 'region' a categorías específicas</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>datos[<span class="st">"region"</span>] <span class="op">=</span> datos[<span class="st">"region"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="st">"Sierra"</span> <span class="cf">if</span> x <span class="op">==</span> <span class="dv">1</span> <span class="cf">else</span> <span class="st">"Demas regiones"</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Preparación de variables categóricas y numéricas</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>variables_categoricas <span class="op">=</span> [<span class="st">'region'</span>, <span class="st">'sexo'</span>, <span class="st">'condicion_empleo'</span>]</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>variables_numericas <span class="op">=</span> [<span class="st">'n_hijos'</span>]</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Estandarización de las variables numéricas</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>transformador <span class="op">=</span> StandardScaler()</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>datos_escalados <span class="op">=</span> datos.copy()</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>datos_escalados[variables_numericas] <span class="op">=</span> transformador.fit_transform(datos_escalados[variables_numericas])</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversión de variables categóricas a dummies</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>datos_dummies <span class="op">=</span> pd.get_dummies(datos_escalados, columns<span class="op">=</span>variables_categoricas, drop_first<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Preparación de los conjuntos de datos para el modelo</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> datos_dummies[[<span class="st">'n_hijos'</span>, <span class="st">'region_Sierra'</span>, <span class="st">'sexo_Mujer'</span>, <span class="st">'condicion_empleo_Empleada'</span>, <span class="st">'condicion_empleo_Inactiva'</span>, <span class="st">'condicion_empleo_Menor a 15 años'</span>]]</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> datos_dummies[<span class="st">"dcronica"</span>]</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>weights <span class="op">=</span> datos_dummies[<span class="st">'fexp_nino'</span>]</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="co"># División de los datos en conjuntos de entrenamiento y prueba</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test, weights_train, weights_test <span class="op">=</span> train_test_split(X, y, weights, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversión de todas las variables a numéricas</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> X_train.<span class="bu">apply</span>(pd.to_numeric, errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> y_train.<span class="bu">apply</span>(pd.to_numeric, errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> X_test.<span class="bu">apply</span>(pd.to_numeric, errors<span class="op">=</span><span class="st">'coerce'</span>) <span class="co"># Añadido para convertir también X_test a numérico</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Limitación del conjunto de entrenamiento a tres variables predictoras para el modelo statsmodels</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> X_train[[<span class="st">'n_hijos'</span>, <span class="st">'region_Sierra'</span>, <span class="st">'sexo_Mujer'</span>]]</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> X_test[[<span class="st">'n_hijos'</span>, <span class="st">'region_Sierra'</span>, <span class="st">'sexo_Mujer'</span>]] <span class="co"># Añadido para consistencia con X_train</span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajuste del modelo de regresión logística con statsmodels</span></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>modelo <span class="op">=</span> sm.Logit(y_train, X_train)</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> modelo.fit()</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.summary())</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicciones con el modelo entrenado</span></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> result.predict(X_train)</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>predictions_class <span class="op">=</span> (predictions <span class="op">&gt;</span> <span class="fl">0.5</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Inicialización de KFold para validación cruzada</span></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>accuracy_scores <span class="op">=</span> []</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajuste del modelo y validación cruzada</span></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>log_reg <span class="op">=</span> LogisticRegression() <span class="co"># Definición del modelo de regresión logística</span></span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> train_index, test_index <span class="kw">in</span> kf.split(X_train):</span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>    X_train_fold, X_test_fold <span class="op">=</span> X_train.iloc[train_index], X_train.iloc[test_index]</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>    y_train_fold, y_test_fold <span class="op">=</span> y_train.iloc[train_index], y_train.iloc[test_index]</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>    weights_train_fold, weights_test_fold <span class="op">=</span> weights_train.iloc[train_index], weights_train.iloc[test_index]</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>    log_reg.fit(X_train_fold, y_train_fold, sample_weight<span class="op">=</span>weights_train_fold)</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>    predictions <span class="op">=</span> log_reg.predict(X_test_fold)</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Cálculo de precisión o cualquier otra métrica necesaria</span></span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>    accuracy <span class="op">=</span> accuracy_score(y_test_fold, predictions, sample_weight<span class="op">=</span>weights_test_fold)</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>    accuracy_scores.append(accuracy)</span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a><span class="co"># Se podría imprimir el promedio de las precisiones para evaluar el desempeño general del modelo</span></span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Promedio de precisión en validación cruzada: </span><span class="sc">{</span>np<span class="sc">.</span>mean(accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="consideracions-finales-sobre-el-ajuste-del-modelo-y-la-separación-de-muestras" class="level3">
+<h3 class="anchored" data-anchor-id="consideracions-finales-sobre-el-ajuste-del-modelo-y-la-separación-de-muestras">Consideracions finales sobre el ajuste del modelo y la separación de muestras:</h3>
+<p>La separación de los datos en conjuntos de entrenamiento y prueba es un paso crítico en la construcción de modelos predictivos. No solo nos permite evaluar la capacidad de generalización de nuestro modelo sino que también protege contra el sobreajuste, asegurando que nuestras conclusiones y predicciones sean fiables y aplicables a datos nuevos. Como estudiantes, al aplicar estas prácticas, desarrollaréis una sólida comprensión de cómo preparar y evaluar modelos en la ciencia de datos, un paso crucial para vuestros futuros proyectos y carreras profesionales. ¡Experimentad, practicad y nunca dejéis de aprender!</p>
+<p><code>LinearRegression</code> y <code>OLS</code> (Ordinary Least Squares) son dos métodos utilizados para realizar una regresión lineal en Python. <code>LinearRegression</code> es una clase de la biblioteca <code>sklearn.linear_model</code>, mientras que <code>OLS</code> es una función de la biblioteca <code>statsmodels</code>.</p>
+<p>Ambos métodos buscan minimizar la suma de los cuadrados de las diferencias entre los valores observados y los valores predichos por el modelo, pero hay algunas diferencias en cómo se utilizan y en la información que proporcionan.</p>
+<p>Aquí hay un ejemplo de cómo se pueden usar ambos métodos con el conjunto de datos de Boston de la biblioteca <code>sklearn.datasets</code>:</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar un modelo LinearRegression</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> LinearRegression()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>lr.fit(X_train, y_train)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Con OLS</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>x_train_sm <span class="op">=</span> sm.add_constant(X_train)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>est <span class="op">=</span> sm.OLS(y_train, x_train_sm)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>est2 <span class="op">=</span> est.fit()</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir los coeficientes de los modelos</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Coeficientes del modelo LinearRegression:"</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lr.coef_)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(est2.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ambos métodos te darán los coeficientes del modelo de regresión lineal, pero <code>OLS</code> también proporciona mucha más información estadística, como los p-valores y los intervalos de confianza para los coeficientes, que puedes obtener con <code>result.summary()</code>.</p>
+<p>Por otro lado, <code>LinearRegression</code> es más fácil de usar con los métodos de validación cruzada y ajuste de hiperparámetros de <code>sklearn</code>, y puede ser más eficiente para conjuntos de datos grandes.</p>
+<p>Para graficar los residuos de tu modelo OLS, puedes usar la biblioteca <code>matplotlib</code>. Aquí te dejo un ejemplo de cómo hacerlo:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar un modelo OLS y obtener los residuos</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Asumiendo que 'result' es el resultado de tu modelo OLS</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>residuos <span class="op">=</span> result.resid</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear una figura y un eje</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar los residuos</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>ax.scatter(<span class="bu">range</span>(<span class="bu">len</span>(residuos)), residuos, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar las líneas en y=-1 y y=1</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>ax.hlines(<span class="op">-</span><span class="dv">1</span>, xmin<span class="op">=</span><span class="dv">0</span>, xmax<span class="op">=</span><span class="bu">len</span>(residuos), colors<span class="op">=</span><span class="st">'black'</span>, linestyles<span class="op">=</span><span class="st">'dashed'</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>ax.hlines(<span class="dv">1</span>, xmin<span class="op">=</span><span class="dv">0</span>, xmax<span class="op">=</span><span class="bu">len</span>(residuos), colors<span class="op">=</span><span class="st">'black'</span>, linestyles<span class="op">=</span><span class="st">'dashed'</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Cambiar el color de los puntos que están fuera del intervalo [-1, 1] a rojo</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.<span class="bu">abs</span>(residuos) <span class="op">&gt;</span> <span class="dv">1</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>ax.scatter(np.arange(<span class="bu">len</span>(residuos))[mask], residuos[mask], color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Añadir etiquetas a los ejes</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Índice de la observación'</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Residuo'</span>)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar el gráfico</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Este código crea un gráfico de dispersión de los residuos de tu modelo OLS. Las líneas entrecortadas en y=-1 y y=1 se dibujan con la función <code>hlines</code>. Luego, se cambia el color de los puntos que están fuera del intervalo [-1, 1] a rojo. Finalmente, se añaden etiquetas a los ejes y se muestra el gráfico.</p>
+<p>Para probar si los errores de un modelo de regresión están normalmente distribuidos, puedes utilizar la prueba de normalidad de Shapiro-Wilk o la prueba de normalidad de Anderson-Darling. Ambas pruebas están disponibles en la biblioteca <code>scipy.stats</code> de Python. Aquí te muestro cómo puedes hacerlo con la prueba de Shapiro-Wilk:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Asumiendo que 'result' es el resultado de tu modelo OLS</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>residuos <span class="op">=</span> result.resid</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Realizar la prueba de Shapiro-Wilk</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>shapiro_test <span class="op">=</span> stats.shapiro(residuos)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir el resultado</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Estadístico de Shapiro-Wilk: </span><span class="sc">{</span>shapiro_test[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Valor p: </span><span class="sc">{</span>shapiro_test[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Este código realiza la prueba de Shapiro-Wilk en los residuos de tu modelo y luego imprime el estadístico de la prueba y el valor p.&nbsp;Si el valor p es menor que el nivel de significancia que has elegido (por ejemplo, 0.05), entonces puedes rechazar la hipótesis nula de que los residuos están normalmente distribuidos.</p>
+<p>Además de las pruebas de normalidad, también es común utilizar un gráfico Q-Q (quantile-quantile) para visualizar si los residuos están normalmente distribuidos. Aquí te muestro cómo puedes hacerlo con <code>statsmodels</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear un gráfico Q-Q de los residuos</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>sm.qqplot(residuos, line<span class="op">=</span><span class="st">'s'</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>En un gráfico Q-Q, si los residuos están normalmente distribuidos, los puntos deberían caer aproximadamente en la línea diagonal.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./clase_8.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Análisis de correlación y modelos de regresión en Python</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Clase_5.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-title">Limpieza y transformación de datos con pandas en Python</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

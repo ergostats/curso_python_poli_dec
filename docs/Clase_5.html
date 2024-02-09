@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introducción al Lenguaje de Programación Python para Análisis Estadístico - Limpieza y transformación de datos con pandas en Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./clase_9.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Clase_5.html"><span class="chapter-title">Limpieza y transformación de datos con pandas en Python</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introducción al Lenguaje de Programación Python para Análisis Estadístico</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Indice (en construcción)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Clase_1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción a Python y su entorno de desarrollo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Clase_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introducción al manejo de datos en Python con pandas</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Funciones y la importancia del análisis de datos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Variables aleatorias, funciones de distribución y estimación de parametros</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploración y visualización de datos con Matplotlib y Seaborn en Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Pruebas de hipótesis para la media entre grupos en Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_8.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Análisis de correlación y modelos de regresión en Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clase_9.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Análisis de correlación y modelos de regresión en Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Clase_5.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Limpieza y transformación de datos con pandas en Python</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#limpieza-y-transformación-de-datos-con-pandas-en-python" id="toc-limpieza-y-transformación-de-datos-con-pandas-en-python" class="nav-link active" data-scroll-target="#limpieza-y-transformación-de-datos-con-pandas-en-python">Limpieza y transformación de datos con pandas en Python</a>
+  <ul class="collapse">
+  <li><a href="#sabías-que." id="toc-sabías-que." class="nav-link" data-scroll-target="#sabías-que.">¿Sabías que….?</a>
+  <ul class="collapse">
+  <li><a href="#objetivos-de-hoy" id="toc-objetivos-de-hoy" class="nav-link" data-scroll-target="#objetivos-de-hoy">Objetivos de hoy:</a></li>
+  </ul></li>
+  <li><a href="#limpieza-de-datos-tratamiento-de-valores-vacíos-y-duplicados-en-python." id="toc-limpieza-de-datos-tratamiento-de-valores-vacíos-y-duplicados-en-python." class="nav-link" data-scroll-target="#limpieza-de-datos-tratamiento-de-valores-vacíos-y-duplicados-en-python.">Limpieza de datos, tratamiento de valores vacíos y duplicados en Python.</a></li>
+  <li><a href="#métodos-de-imputación" id="toc-métodos-de-imputación" class="nav-link" data-scroll-target="#métodos-de-imputación">Métodos de Imputación</a>
+  <ul class="collapse">
+  <li><a href="#imputación-por-mediamedianamoda" id="toc-imputación-por-mediamedianamoda" class="nav-link" data-scroll-target="#imputación-por-mediamedianamoda">Imputación por Media/Mediana/Moda:</a></li>
+  <li><a href="#imputación-por-vecinos-más-cercanos-knn" id="toc-imputación-por-vecinos-más-cercanos-knn" class="nav-link" data-scroll-target="#imputación-por-vecinos-más-cercanos-knn">Imputación por Vecinos Más Cercanos (KNN):</a></li>
+  <li><a href="#imputación-por-regresión" id="toc-imputación-por-regresión" class="nav-link" data-scroll-target="#imputación-por-regresión">Imputación por regresión</a></li>
+  <li><a href="#imputación-múltiple-mice" id="toc-imputación-múltiple-mice" class="nav-link" data-scroll-target="#imputación-múltiple-mice">Imputación Múltiple (MICE)</a></li>
+  </ul></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Limpieza y transformación de datos con pandas en Python</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="limpieza-y-transformación-de-datos-con-pandas-en-python" class="level1">
+<h1>Limpieza y transformación de datos con pandas en Python</h1>
+<p>En el universo de la ciencia de datos, el manejo de datos crudos es el primer desafío que enfrentamos. Aquí es donde Pandas, la biblioteca de Python, se convierte en nuestra aliada clave. Este capítulo se sumerge en la esencia de la limpieza y transformación de datos, habilidades fundamentales para cualquier análisis significativo.</p>
+<p>La importancia radica en que la limpieza de datos sienta las bases para cualquier análisis. Pandas no solo facilita la eliminación de imperfecciones como valores nulos y duplicados, sino que también ofrece herramientas para transformar datos, adaptándolos a nuestras necesidades analíticas.</p>
+<p>Este capítulo no solo aborda lo técnico, sino también la importancia estratégica de la limpieza en todo el ciclo de vida de un proyecto de ciencia de datos. Desde la adquisición de datos hasta la preparación para modelos, estas habilidades son vitales en cada etapa del camino.</p>
+<section id="sabías-que." class="level2">
+<h2 class="anchored" data-anchor-id="sabías-que.">¿Sabías que….?</h2>
+<p>¿Sabías que el nombre “Pandas” proviene de las palabras “Panel Data”? Esta biblioteca fue creada por Wes McKinney en 2008 con el propósito de proporcionar herramientas de análisis de datos flexibles y de alto rendimiento. Desde entonces, Pandas se ha convertido en un pilar fundamental en la caja de herramientas de cualquier científico de datos que se precie.</p>
+<section id="objetivos-de-hoy" class="level3">
+<h3 class="anchored" data-anchor-id="objetivos-de-hoy">Objetivos de hoy:</h3>
+<ul>
+<li>Dominaremos las Habilidades Básicas de Limpieza: Comprenderemos y aplicaremos técnicas esenciales de limpieza de datos, como la identificación y manejo de valores faltantes, duplicados y atípicos.</li>
+<li>Explorararemos Métodos de Transformación: Aprenderemos a transformar datos para adaptarlos a nuestras necesidades analíticas, ya sea mediante la modificación de tipos de datos, la creación de nuevas variables o la combinación de conjuntos de datos.</li>
+</ul>
+<p>¡Prepárate para explorar el poder de Pandas y transformar tus datos en conocimiento valioso!</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># importante instalar : </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">##pip install pandas pyreadstat</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#import pyreadstat</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> KNNImputer</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> impyute.imputation.cs <span class="im">import</span> mice</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Trabajaremos con la data ‘EMPRESAS2021_periodo_2012_2021.sav’.</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_spss (<span class="vs">r"data/directorio_empresas\data_original/EMPRESAS2021_periodo_2012_2021.sav"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Esta data corresponde a datos de La Encuesta Estructural Empresarial 2019.</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Recodifiquemos las variables y verificamos los tipos de variables ## Recodificación de variables y creación de nuevas variables a partir de datos existentes utilizando pandas.</p>
+<ol type="1">
+<li>definiremos el datos Identificamos el tipo de datos que tiene nuestra tabla de datos.<br>
+</li>
+</ol>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">##tipos category </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.select_dtypes(include<span class="op">=</span>[<span class="st">'category'</span>]).columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">##tipos object </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.select_dtypes(include<span class="op">=</span>[<span class="st">'object'</span>]).columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">##tipos float64 </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.select_dtypes(include<span class="op">=</span>[<span class="st">'float64'</span>]).columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Como detectamos la variabale id_empresa esta python le detecto como un número, ahora le definiremos como una variable categorica, en este caso le definimos de ‘str’ (cadena):</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'id_empresa'</span>] <span class="op">=</span> df[<span class="st">'id_empresa'</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (df[<span class="st">'id_empresa'</span>].dtype)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Como ejemplo, si necesitamos cambiar el tipo de dato de multiples variables podemos reaizarlo con la siguiente linea de código: ‘df = df.astype({’variable1’: float64, ‘variable2’: str, ‘variable3’: int …})’</p>
+</section>
+</section>
+<section id="limpieza-de-datos-tratamiento-de-valores-vacíos-y-duplicados-en-python." class="level2">
+<h2 class="anchored" data-anchor-id="limpieza-de-datos-tratamiento-de-valores-vacíos-y-duplicados-en-python.">Limpieza de datos, tratamiento de valores vacíos y duplicados en Python.</h2>
+<p>En el ámbito económico y de la ciencia de datos, la calidad de los datos es esencial para la toma de decisiones informadas y el desarrollo de modelos precisos. En esta sección, nos sumergiremos en el proceso de limpieza de datos utilizando la biblioteca Pandas en Python, una herramienta omnipresente en la comunidad de análisis de datos.</p>
+<p>Exploraremos estrategias específicas para abordar valores vacíos y duplicados, destacando las capacidades de Pandas para gestionar estos desafíos de manera eficiente. Desde la identificación de celdas nulas hasta la detección y eliminación de registros duplicados, aprenderemos a utilizar las funciones clave de Pandas para mejorar la calidad de los conjuntos de datos.</p>
+<p>A lo largo de ejemplos prácticos y aplicaciones en contextos económicos y científicos de datos, proporcionaremos insights valiosos sobre cómo aprovechar al máximo Pandas para optimizar la preparación de datos. Estas habilidades son fundamentales para garantizar que los economistas y científicos de datos puedan realizar análisis robustos y fundamentar sus conclusiones en datos confiables.</p>
+<p>Detectamos de nuestra tabla de datos valores nulos o vacios por variable.</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">##creamos una df para saber cuantas NAs hay por vaiable y su porcentaje</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>var_missing <span class="op">=</span> df.isna().<span class="bu">sum</span>()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>tabla_missing <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'variable'</span>: var_missing.index,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'num_nulos'</span>: var_missing.values,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'porc_nulos'</span> : (var_missing<span class="op">/</span><span class="bu">len</span>(df))</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#pd.set_option('display.max_rows', None) </span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>display(tabla_missing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>En la anterior tabla mostramos los datos perdidos o NA por variable y su respectivo porcentaje del total de observaciones.</p>
+<p>Para el ejercicio de elegiremos las variables : - anio - forma_institucional - tamano_cop - gsectores -propietarios_sexo - ventas_totales -exportaciones_netas - ventas_nacionales</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> df[[ <span class="st">'anio'</span>, <span class="st">'forma_institucional'</span>, <span class="st">'tamano_cop'</span>, <span class="st">'gsectores'</span>, <span class="st">'propietarios_sexo'</span>, <span class="st">'ventas_totales'</span>, <span class="st">'exportaciones_netas'</span>, <span class="st">'ventas_nacionales'</span>]]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (df_1.head(<span class="dv">5</span>))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df_1.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="métodos-de-imputación" class="level2">
+<h2 class="anchored" data-anchor-id="métodos-de-imputación">Métodos de Imputación</h2>
+<p>En el proceso de análisis de datos, es frecuente enfrentarse a conjuntos de datos que presentan valores faltantes, los cuales requieren ser tratados para llevar a cabo un análisis o modelado preciso. Arreglar esto es clave para hacer análisis o modelos precisos. Para llenar esos huecos, usamos trucos llamados técnicas de imputación, que básicamente son maneras de poner valores en los espacios vacíos. Pero aquí está el truco: NO hay una solución única que funcione para todos los casos. ¿Por qué? Pues, porque la mejor forma de lidiar con esos vacíos depende de por qué se fueron o de dónde vinieron. No todos los métodos valen para todo. Entender la razón detrás de esos huecos es clave para elegir la mejor estrategia y conseguir resultados confiables. ¡Así que, a llenar esos huecos de manera inteligente! 😉✨</p>
+<p>Para los siguientes ejemplos de imputación revisaremos los datos perdidos pero iniciamos con un analisis univariado de las variables continuas.</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">## df para pruebas</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df_2 <span class="op">=</span> df_1</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    pd.DataFrame ({</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'variable'</span>: df_2.isna().<span class="bu">sum</span>().index,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'num_nulos'</span>: df_2.isna().<span class="bu">sum</span>().values,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'porc_nulos'</span>:df_2.isna().<span class="bu">sum</span>()<span class="op">/</span> <span class="bu">len</span>(df_2)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"ticks"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sns.pairplot(df_2[[<span class="st">'ventas_totales'</span>, <span class="st">'exportaciones_netas'</span>, <span class="st">'ventas_nacionales'</span>]], height<span class="op">=</span><span class="dv">2</span>, diag_kind<span class="op">=</span><span class="st">"hist"</span>, diag_kws<span class="op">=</span><span class="bu">dict</span>(bins<span class="op">=</span><span class="dv">20</span>))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Observamos que los datos presentan una concentración notable o un sesgo hacia la derecha. Para contrarrestar este efecto, podemos aplicar ingeniería de variables, lo que nos permitirá suavizar la distribución. Una técnica comúnmente utilizada es aplicar el logaritmo a la variable más 1.</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_2[[<span class="st">'log_ventas_totales'</span>, <span class="st">'log_exportaciones_netas'</span>, <span class="st">'log_ventas_nacionales'</span>]] <span class="op">=</span> np.log1p(df_2[[<span class="st">'ventas_totales'</span>, <span class="st">'exportaciones_netas'</span>, <span class="st">'ventas_nacionales'</span>]])</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_2.head(<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"ticks"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>sns.pairplot(df_2[[<span class="st">'log_ventas_totales'</span>, <span class="st">'log_exportaciones_netas'</span>, <span class="st">'log_ventas_nacionales'</span>]], height<span class="op">=</span><span class="dv">2</span>, diag_kind<span class="op">=</span><span class="st">"hist"</span>, diag_kws<span class="op">=</span><span class="bu">dict</span>(bins<span class="op">=</span><span class="dv">20</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_2.describe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_2.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A pesar de haber suavizado la distribución de los datos, notamos una presencia notable de valores iguales a cero. En este contexto, con el fin de facilitar el análisis, procederemos a eliminar las observaciones que presentan un valor de cero en las tres variables que estamos estudiando.</p>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_2 <span class="op">=</span> df_2.loc[(df_2[[<span class="st">'log_ventas_totales'</span>, <span class="st">'log_exportaciones_netas'</span>, <span class="st">'log_ventas_nacionales'</span>]] <span class="op">==</span> <span class="dv">0</span>).<span class="bu">all</span>(axis<span class="op">=</span><span class="dv">1</span>)]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_2.head(<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df_2.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_2.describe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"ticks"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>sns.pairplot(df_2[[<span class="st">'log_ventas_totales'</span>, <span class="st">'log_exportaciones_netas'</span>, <span class="st">'log_ventas_nacionales'</span>]], height<span class="op">=</span><span class="dv">2</span>, diag_kind<span class="op">=</span><span class="st">"hist"</span>, diag_kws<span class="op">=</span><span class="bu">dict</span>(bins<span class="op">=</span><span class="dv">20</span>))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ahora, tras realizar esta breve pero esencial limpieza de datos, procedemos a examinar el porcentaje de valores nulos en esta tabla de datos depurada.</p>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    pd.DataFrame ({</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'variable'</span>: df_2.isna().<span class="bu">sum</span>().index,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'num_nulos'</span>: df_2.isna().<span class="bu">sum</span>().values,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'porc_nulos'</span>:df_2.isna().<span class="bu">sum</span>()<span class="op">/</span> <span class="bu">len</span>(df_2)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">##funcion para generar una taba summary</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tabla_summ(df, variables):</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    summary <span class="op">=</span> pd.DataFrame(index<span class="op">=</span>variables)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    summary[<span class="st">'Count'</span>] <span class="op">=</span> df[variables].count()</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    summary[<span class="st">'Mean'</span>] <span class="op">=</span> df[variables].mean()</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    summary[<span class="st">'Std Dev'</span>] <span class="op">=</span> df[variables].std()</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    summary[<span class="st">'Min'</span>] <span class="op">=</span> df[variables].<span class="bu">min</span>()</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    summary[<span class="st">'25%'</span>] <span class="op">=</span> df[variables].quantile(<span class="fl">0.25</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    summary[<span class="st">'50%'</span>] <span class="op">=</span> df[variables].median()</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    summary[<span class="st">'75%'</span>] <span class="op">=</span> df[variables].quantile(<span class="fl">0.75</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    summary[<span class="st">'Max'</span>] <span class="op">=</span> df[variables].<span class="bu">max</span>()</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    summary[<span class="st">'Missing'</span>] <span class="op">=</span> df[variables].isnull().<span class="bu">sum</span>()</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    summary[<span class="st">'Missing %'</span>] <span class="op">=</span> (summary[<span class="st">'Missing'</span>] <span class="op">/</span> <span class="bu">len</span>(df)) </span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>var <span class="op">=</span> [<span class="st">'ventas_totales'</span>,  <span class="st">'exportaciones_netas'</span>,<span class="st">'ventas_nacionales'</span>,<span class="st">'log_ventas_totales'</span>,<span class="st">'log_exportaciones_netas'</span>,<span class="st">'log_ventas_nacionales'</span>]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>summary_result <span class="op">=</span> tabla_summ(df_2, var)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>display(summary_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="imputación-por-mediamedianamoda" class="level3">
+<h3 class="anchored" data-anchor-id="imputación-por-mediamedianamoda">Imputación por Media/Mediana/Moda:</h3>
+<ul>
+<li>Cuándo Usar: Ideal para variables numéricas con distribuciones no sesgadas. Rápido y simple.</li>
+<li>Ventajas: Simple y rápida. Apropiada para variables numéricas.</li>
+<li>Consideraciones: Puede no ser apropiado si los datos tienen sesgo o distribuciones atípicas.</li>
+</ul>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejemplo de imputación por media</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df2[<span class="st">'columna'</span>].fillna(df[<span class="st">'columna'</span>].mean(), inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="imputación-por-vecinos-más-cercanos-knn" class="level3">
+<h3 class="anchored" data-anchor-id="imputación-por-vecinos-más-cercanos-knn">Imputación por Vecinos Más Cercanos (KNN):</h3>
+<p>Imputación por Vecinos Más Cercanos (KNN) - Cuándo Usar: Útil cuando los valores faltantes están relacionados con valores cercanos en el espacio de características. - Ventajas: Utiliza información de variables relacionadas. Útil para datos con patrones complejos. - Consideraciones: Puede ser computacionalmente costoso.</p>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>imputer <span class="op">=</span> KNNImputer(n_neighbors<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>df_imputed <span class="op">=</span> pd.DataFrame(imputer.fit_transform(df_2), columns<span class="op">=</span>df_2.columns) <span class="co">### revisaremos ojooo#######</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="imputación-por-regresión" class="level3">
+<h3 class="anchored" data-anchor-id="imputación-por-regresión">Imputación por regresión</h3>
+<ul>
+<li>Cuándo Usar: Efectivo cuando existe una relación lineal entre las variables. Adecuado para variables continuas.</li>
+<li>Ventajas: Utiliza relaciones lineales entre variables.</li>
+<li>Consideraciones: Requiere que las variables predictoras estén correlacionadas con la variable a imputar.</li>
+</ul>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># REVISARRRRRR!!! EJEMPLO : VAR_2 A IMPUTAR</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>known_data <span class="op">=</span> df_2.dropna(subset<span class="op">=</span>[<span class="st">'VAR_2'</span>])</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>model.fit(known_data[[<span class="st">'feature1'</span>, <span class="st">'feature2'</span>]], known_data[<span class="st">'VAR_2'</span>])</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">'VAR_2'</span>].isna(), <span class="st">'VAR_2'</span>] <span class="op">=</span> model.predict(df.loc[df[<span class="st">'VAR_2'</span>].isna(), [<span class="st">'VAR_2'</span>, <span class="st">'VAR_2'</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="imputación-múltiple-mice" class="level3">
+<h3 class="anchored" data-anchor-id="imputación-múltiple-mice">Imputación Múltiple (MICE)</h3>
+<ul>
+<li>Cuándo Usar: Útil cuando se desea considerar la incertidumbre en el proceso de imputación. Adecuado para conjuntos de datos complejos.</li>
+<li>Ventajas: Considera la incertidumbre. Puede utilizarse para imputar múltiples variables simultáneamente</li>
+<li>Consideraciones: Puede ser computacionalmente intensivo y puede requerir ajustes adicionales.</li>
+</ul>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_imputed <span class="op">=</span> pd.DataFrame(mice(df.values), columns<span class="op">=</span>df.columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./clase_9.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Análisis de correlación y modelos de regresión en Python</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
