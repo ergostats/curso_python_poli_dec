@@ -1,0 +1,385 @@
+---
+title: "Análisis de correlación y modelos de regresión en Python"
+format: html
+editor: visual
+execute: 
+  eval: true
+---
+
+Vamos a recordar dos tipos de Variables
+
+1.  **Variables Numéricas**: Estas variables representan cantidades medidas y pueden ser de dos tipos: discretas (contables, como número de hijos) o continuas (medibles, como peso o altura).
+
+2.  **Variables Categóricas**: Representan categorías o grupos que no tienen un orden inherente (nominales) o que tienen un orden o jerarquía (ordinales), como tipo de vivienda (casa, departamento) o nivel de educación.
+
+### Selección de Modelos según el Tipo de Variable (Y) (Variable Dependiente)
+
+-   **(Y) es Numérica**: Se enfocan en modelos de regresión.
+    -   **Regresión Lineal Simple o Múltiple**: Cuando (X) es numérica y la relación con (Y) parece ser lineal.
+    -   **Regresión Polinomial**: Si la relación entre (X) y (Y) es curvilínea.
+    -   **Árboles de Decisión de Regresión y Modelos de Ensamble (Random Forest, Gradient Boosting)**: Cuando (X) puede ser una mezcla de variables numéricas y categóricas y se busca flexibilidad en la modelación.
+-   **(Y) es Categórica**: Enfoque en modelos de clasificación.
+    -   **Regresión Logística**: Cuando (Y) es binaria (dos categorías) y (X) numérica o categórica.
+    -   **Árboles de Decisión de Clasificación y Modelos de Ensamble (Random Forest, Gradient Boosting)**: Útil para (Y) con múltiples categorías y (X) mixtas.
+    -   **Máquinas de Soporte Vectorial (SVM)**: Para clasificación binaria o multiclase con un enfoque en maximizar el margen de separación.
+
+### Selección de Modelos según el Tipo de Variable (X) (Variables Independientes)
+
+-   **Todas las (X) son Numéricas**: Modelos de regresión lineal, polinomial, SVM (para (Y) categórica) y modelos de ensamble son generalmente adecuados.
+-   **Todas las (X) son Categóricas**: Modelos como regresión logística (con codificación de variables) y árboles de decisión pueden manejar bien estas variables.
+-   **Mezcla de (X) Numéricas y Categóricas**: La regresión multiple, los árboles de decisión y los modelos de ensamble son especialmente flexibles para manejar ambos tipos de variables sin necesidad de mucha preprocesación.
+
+## Variables dummies
+
+Para obtener variables dummies de un data frame primero debemos saber cual variable es categórica, veamos lo siguiente
+
+```{python}
+ruta = "data/sample_endi_10p.txt"
+data = pd.read_table(ruta,delimiter = "\t")
+data
+```
+
+Con esto observamos que la variable 'etnia' es categórica, con 4 categorías. Con la siguiente función podemos crear un data frame con estas variables convertidas en dummies/indicadoras
+
+```{python}
+#Tiene 3 argumentos: el nombre del data frame, la variable categorica y la categoria sobre la cual se va a basar el modelo
+def sacar_dummies(df,var,cat): 
+    dummies = pd.get_dummies(df[var],prefix='dummie')
+    #Eliminamos una de las dummies
+    dummies = dummies.drop('dummie_'+ cat, axis=1)
+    #Agrupamos los dos data frames
+    df = pd.concat([df,dummies], axis=1)
+    #Eliminamos la columna original
+    df = df.drop(var, axis=1)
+    return(df)
+  
+#Así sería nuestra función en acción
+nuevo_df = sacar_dummies(data,'etnia','Indígena')
+nuevo_df
+```
+
+Ya con este nuevo data frame podremos trabajar normalmente, ahora se muestra una explicación sobre cómo tratar con dummies
+
+## Introducción a las Variables Dummy en Regresiones Lineales:
+
+En regresiones lineales, las variables dummy se utilizan para modelar efectos cualitativos. Se representan mediante variables binarias que toman el valor de 0 o 1 para indicar la ausencia o presencia de una característica específica. Formalmente, una variable dummy (D_i) para la categoría (i) toma el valor de 1 si la observación pertenece a esa categoría y 0 en caso contrario. Por ejemplo, en un modelo de oferta y demanda para un bien, podemos introducir variables dummy para representar diferentes estaciones del año. La regresión puede expresarse como:
+
+\$\$
+
+Y = \beta\_0 + \beta\_1 X + \beta\*2 D\*{invierno} + \epsilon
+
+\$\$
+
+Donde (Y) es la variable dependiente (demanda), (X) es la variable independiente (precio), $\beta_0$ es la intercepción, $\beta_1$ es el coeficiente asociado con (X), $\beta_2$ es el coeficiente de la variable dummy de invierno, y $\epsilon$ es el término de error.
+
+### Interpretación de Coeficientes de Variables Dummy:
+
+La interpretación de los coeficientes de las variables dummy se realiza comparando con la categoría de referencia, que es aquella para la cual la variable dummy toma el valor de 0. Consideremos un modelo económico que analiza el efecto del nivel de educación en el salario, controlando el efecto del género. Utilizamos una variable dummy $D_{mujer}$ que toma el valor de 1 si el individuo es mujer y 0 si es hombre. Entonces, el modelo sería:
+
+$$
+Salario = \beta_0 + \beta_1 Educación + \beta_2 D_{mujer} + \epsilon
+$$
+
+Donde $\beta_{mujer}$ representa la diferencia salarial entre mujeres y hombres, manteniendo constante el nivel de educación.
+
+### Ejemplos Económicos de Variables Dummy en Regresiones Lineales:
+
+Supongamos que queremos estudiar el efecto de la membresía en un sindicato en los salarios de los trabajadores. Podemos introducir una variable dummy $D_{sindicato}$ que tome el valor de 1 si el trabajador es miembro del sindicato y 0 si no lo es. El modelo sería:
+
+\$\$
+
+Salario = \beta\_0 + \beta\_1 Experiencia + \beta*2 D\*{sindicato} + \epsilon
+
+\$\$
+
+Donde $\beta_{sindicato}$ nos indicaría la diferencia salarial entre los trabajadores sindicalizados y no sindicalizados.
+
+## Los conjuntos de entrenamiento y de prueba
+
+### Importancia de Separar las Muestras en Entrenamiento y Prueba
+
+Al sumergirnos en el análisis de regresión, solemos dividir nuestros datos en conjuntos de entrenamiento y prueba. Esta práctica es fundamental en la ciencia de datos y la estadística para evaluar la eficacia de nuestros modelos. Veamos las razones detrás de esta división, sus implicaciones y algunas consideraciones importantes para nuestro análisis.
+
+La división de datos en conjuntos de `entrenamiento` y `prueba` tiene un propósito esencial: **evaluar la capacidad de generalización de nuestro modelo**. En otras palabras, queremos asegurarnos de que nuestro modelo no solo aprenda los datos con los que se entrena sino que también pueda hacer predicciones precisas sobre datos nuevos que nunca antes había visto.
+
+### Entrenamiento vs. Prueba
+
+-   **Conjunto de Entrenamiento**: Utilizamos estos datos para entrenar nuestro modelo, permitiéndole aprender la relación entre las variables independientes y dependientes.
+-   **Conjunto de Prueba**: Este conjunto se utiliza para evaluar el rendimiento del modelo entrenado, actuando como datos nuevos para el modelo.
+
+Para generar nuestros datos de prueba y entrenamiento vamos a cargar los siguientes módulos y funciuones:
+
+```{python}
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from statsmodels.regression.linear_model import OLS
+import statsmodels.api as sm
+import pandas as pd
+from scipy import stats
+```
+
+### Implicaciones de No Separar los Datos
+
+Si no dividimos nuestros datos y, en cambio, entrenamos y evaluamos el modelo en el mismo conjunto, corremos el riesgo de **sobreajuste**. El sobreajuste ocurre cuando nuestro modelo aprende los datos de entrenamiento tan bien que incluye el ruido estadístico en sus predicciones. Esto significa que, aunque el modelo puede funcionar excepcionalmente bien en el conjunto de datos de entrenamiento, probablemente tendrá un rendimiento pobre en datos nuevos, porque ha "memorizado" los datos en lugar de aprender las relaciones subyacentes.
+
+### Consideraciones Clave
+
+#### Tamaño de la División
+
+Una pregunta común es cómo decidir el tamaño del conjunto de entrenamiento y de prueba. Una regla general es la división 80/20 o 70/30, donde el mayor porcentaje corresponde al conjunto de entrenamiento. Sin embargo, esto puede variar dependiendo del tamaño total de tus datos. Con conjuntos de datos grandes, una menor proporción (como 90/10) aún puede proporcionar un conjunto de prueba de tamaño suficiente.
+
+#### Aleatoriedad
+
+Es importante asegurar que la división entre los conjuntos de entrenamiento y prueba sea aleatoria. Esto ayuda a garantizar que ambos conjuntos sean representativos del conjunto de datos completo, evitando sesgos en el entrenamiento y evaluación del modelo.
+
+#### Estratificación
+
+En casos donde se trabaja con datos categóricos desbalanceados, la estratificación puede asegurar que los conjuntos de entrenamiento y prueba reflejen la distribución de las categorías del conjunto de datos completo. Esto es crucial para mantener la validez de nuestra evaluación del modelo.
+
+```{python}
+
+# Preparación de datos para una prueba de hipótesis (eliminación de NA)
+datos = datos[~datos["dcronica"].isna()]
+datos = datos[~datos["n_hijos"].isna()]
+
+# Cargar el conjunto de datos de Boston
+
+x = datos["dcronica"]
+y = datos["n_hijos"]
+
+# Dividir los datos en conjuntos de entrenamiento y prueba
+X_train, X_test, y_train, y_test = train_test_split(x.values.reshape(-1, 1), y.values, test_size=0.2, random_state=42)
+```
+
+#### Validación Cruzada
+
+Una vez familiarizados con la división básica de entrenamiento y prueba, podríais explorar técnicas más avanzadas como la validación cruzada. Esta técnica implica dividir el conjunto de datos en múltiples subconjuntos y realizar el entrenamiento y la prueba varias veces, cada vez con un subconjunto diferente como conjunto de prueba. Esto proporciona una evaluación más robusta del rendimiento del modelo.
+
+Vamos a ver esta técnica con un modelo para determinar que tanto varia los resultados del modelo de acuerdo a los "Folds" de una validación cruzada con un ejemplo aplicando datos de la ENDI.
+
+# Creando un modelo Logit para la desnutrición crónica infantil
+
+El script que te presentamos es un ejemplo de cómo llevar a cabo un análisis de regresión logística utilizando Python para estudiar la desnutrición infantil con datos de la Encuesta Nacional de Desnutrición Infantil (ENDI). A continuación, se desglosa y documenta el código paso a paso, con especial énfasis en la implementación de la validación cruzada.
+
+### Importación de bibliotecas
+
+El script comienza importando las bibliotecas necesarias para el análisis: - **numpy** y **pandas** para manipulación de datos. - **train_test_split** y **KFold** de **sklearn.model_selection** para dividir los datos en conjuntos de entrenamiento y prueba, y para implementar la validación cruzada, respectivamente. - **LogisticRegression** de **sklearn.linear_model** para el modelo de regresión logística. - **StandardScaler** de **sklearn.preprocessing** para estandarizar las variables numéricas. - **accuracy_score** de **sklearn.metrics** para calcular la precisión del modelo. - **statsmodels.api** para realizar una regresión logística con más detalles estadísticos.
+
+### Preparación de los datos
+
+-   Se cargan los datos desde un archivo, filtrando las observaciones sin datos de desnutrición (`dcronica`).
+-   Se seleccionan las variables de interés (`n_hijos`, `region`, `sexo`, `condicion_empleo`) y se eliminan las filas con valores faltantes en estas variables.
+-   Se transforma la variable `region` a una variable categórica con valores "Sierra" y "Demas regiones".
+-   Se estandarizan las variables numéricas (`n_hijos`) y se convierten las variables categóricas en variables dummy.
+
+### División de datos
+
+-   Se divide el conjunto de datos en entrenamiento y prueba utilizando `train_test_split`, asegurando que el conjunto de prueba sea el 20% del total.
+-   Se convierten todas las variables a numéricas y, para el modelo de regresión logística de **statsmodels**, se limita el conjunto de entrenamiento a tres variables predictoras.
+
+### Modelo de regresión logística
+
+-   Se ajusta un modelo de regresión logística utilizando **statsmodels**, lo cual permite obtener un resumen estadístico detallado del modelo.
+-   Se realiza una predicción con el modelo entrenado y se compara con los datos reales.
+-   La parte final del script, que se enfoca en la validación cruzada, parece estar incompleta o incorrectamente integrada, ya que:
+    -   **KFold** se menciona pero no se inicializa explícitamente con un número de divisiones.
+    -   La variable `kf` se usa como si se hubiera definido previamente, pero no hay una asignación visible en el código proporcionado.
+    -   **LogisticRegression** se menciona para ajustar el modelo dentro del bucle de validación cruzada, pero no se define ni se inicializa antes de su uso.
+    -   La idea detrás de este fragmento es dividir el conjunto de entrenamiento en subconjuntos más pequeños, entrenar el modelo en cada subconjunto, y luego validar el modelo en otro subconjunto no utilizado durante el entrenamiento. Esta técnica ayuda a evaluar cómo el modelo generalizaría a un conjunto de datos independiente.
+
+### Comentarios Finales antes de ir al código
+
+-   Para corregir y completar el enfoque de validación cruzada, se debería inicializar `KFold` correctamente y asegurarse de que todas las variables y modelos necesarios estén definidos antes de su uso.
+-   Además, es importante asegurarse de que el modelo y las métricas de evaluación seleccionadas sean coherentes a lo largo del análisis.
+
+Este script proporciona una base sólida para el análisis de regresión logística aplicado a datos de salud pública, aunque requiere algunas correcciones y mejoras, especialmente en la sección de validación cruzada, para ser completamente funcional y eficaz.
+
+#### Ahora si el script
+
+```{python}
+# Importación de bibliotecas necesarias
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split, KFold
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score
+import statsmodels.api as sm
+
+# Carga de datos
+datos = pd.read_csv("data\sample_endi_model_10p.txt", sep=";")
+
+# Filtrado de filas con datos faltantes en la columna 'dcronica'
+datos = datos[~datos["dcronica"].isna()]
+
+# Selección de variables de interés
+variables = ['n_hijos', 'region', 'sexo', 'condicion_empleo']
+
+# Eliminación de filas con valores faltantes en las variables seleccionadas
+for i in variables:
+    datos = datos[~datos[i].isna()]
+
+# Transformación de la variable 'region' a categorías específicas
+datos["region"] = datos["region"].apply(lambda x: "Sierra" if x == 1 else "Demas regiones")
+
+# Preparación de variables categóricas y numéricas
+variables_categoricas = ['region', 'sexo', 'condicion_empleo']
+variables_numericas = ['n_hijos']
+
+# Estandarización de las variables numéricas
+transformador = StandardScaler()
+datos_escalados = datos.copy()
+datos_escalados[variables_numericas] = transformador.fit_transform(datos_escalados[variables_numericas])
+
+# Conversión de variables categóricas a dummies
+datos_dummies = pd.get_dummies(datos_escalados, columns=variables_categoricas, drop_first=True)
+
+# Preparación de los conjuntos de datos para el modelo
+X = datos_dummies[['n_hijos', 'region_Sierra', 'sexo_Mujer', 'condicion_empleo_Empleada', 'condicion_empleo_Inactiva', 'condicion_empleo_Menor a 15 años']]
+y = datos_dummies["dcronica"]
+weights = datos_dummies['fexp_nino']
+
+# División de los datos en conjuntos de entrenamiento y prueba
+X_train, X_test, y_train, y_test, weights_train, weights_test = train_test_split(X, y, weights, test_size=0.2, random_state=42)
+
+# Conversión de todas las variables a numéricas
+X_train = X_train.apply(pd.to_numeric, errors='coerce')
+y_train = y_train.apply(pd.to_numeric, errors='coerce')
+X_test = X_test.apply(pd.to_numeric, errors='coerce') # Añadido para convertir también X_test a numérico
+
+# Limitación del conjunto de entrenamiento a tres variables predictoras para el modelo statsmodels
+X_train = X_train[['n_hijos', 'region_Sierra', 'sexo_Mujer']]
+X_test = X_test[['n_hijos', 'region_Sierra', 'sexo_Mujer']] # Añadido para consistencia con X_train
+
+# Ajuste del modelo de regresión logística con statsmodels
+modelo = sm.Logit(y_train, X_train)
+result = modelo.fit()
+print(result.summary())
+
+# Predicciones con el modelo entrenado
+predictions = result.predict(X_train)
+predictions_class = (predictions > 0.5).astype(int)
+
+# Inicialización de KFold para validación cruzada
+kf = KFold(n_splits=5, shuffle=True, random_state=42)
+accuracy_scores = []
+
+# Ajuste del modelo y validación cruzada
+log_reg = LogisticRegression() # Definición del modelo de regresión logística
+for train_index, test_index in kf.split(X_train):
+    X_train_fold, X_test_fold = X_train.iloc[train_index], X_train.iloc[test_index]
+    y_train_fold, y_test_fold = y_train.iloc[train_index], y_train.iloc[test_index]
+    weights_train_fold, weights_test_fold = weights_train.iloc[train_index], weights_train.iloc[test_index]
+    
+    log_reg.fit(X_train_fold, y_train_fold, sample_weight=weights_train_fold)
+    predictions = log_reg.predict(X_test_fold)
+    
+    # Cálculo de precisión o cualquier otra métrica necesaria
+    accuracy = accuracy_score(y_test_fold, predictions, sample_weight=weights_test_fold)
+    accuracy_scores.append(accuracy)
+
+# Se podría imprimir el promedio de las precisiones para evaluar el desempeño general del modelo
+print(f"Promedio de precisión en validación cruzada: {np.mean(accuracy
+
+```
+
+### Consideracions finales sobre el ajuste del modelo y la separación de muestras:
+
+La separación de los datos en conjuntos de entrenamiento y prueba es un paso crítico en la construcción de modelos predictivos. No solo nos permite evaluar la capacidad de generalización de nuestro modelo sino que también protege contra el sobreajuste, asegurando que nuestras conclusiones y predicciones sean fiables y aplicables a datos nuevos. Como estudiantes, al aplicar estas prácticas, desarrollaréis una sólida comprensión de cómo preparar y evaluar modelos en la ciencia de datos, un paso crucial para vuestros futuros proyectos y carreras profesionales. ¡Experimentad, practicad y nunca dejéis de aprender!
+
+`LinearRegression` y `OLS` (Ordinary Least Squares) son dos métodos utilizados para realizar una regresión lineal en Python. `LinearRegression` es una clase de la biblioteca `sklearn.linear_model`, mientras que `OLS` es una función de la biblioteca `statsmodels`.
+
+Ambos métodos buscan minimizar la suma de los cuadrados de las diferencias entre los valores observados y los valores predichos por el modelo, pero hay algunas diferencias en cómo se utilizan y en la información que proporcionan.
+
+Aquí hay un ejemplo de cómo se pueden usar ambos métodos con el conjunto de datos de Boston de la biblioteca `sklearn.datasets`:
+
+```{python}
+# Ajustar un modelo LinearRegression
+lr = LinearRegression()
+lr.fit(X_train, y_train)
+
+# Con OLS
+
+x_train_sm = sm.add_constant(X_train)
+
+est = sm.OLS(y_train, x_train_sm)
+
+est2 = est.fit()
+
+
+# Imprimir los coeficientes de los modelos
+print("Coeficientes del modelo LinearRegression:")
+print(lr.coef_)
+
+print(est2.summary())
+
+```
+
+Ambos métodos te darán los coeficientes del modelo de regresión lineal, pero `OLS` también proporciona mucha más información estadística, como los p-valores y los intervalos de confianza para los coeficientes, que puedes obtener con `result.summary()`.
+
+Por otro lado, `LinearRegression` es más fácil de usar con los métodos de validación cruzada y ajuste de hiperparámetros de `sklearn`, y puede ser más eficiente para conjuntos de datos grandes.
+
+Para graficar los residuos de tu modelo OLS, puedes usar la biblioteca `matplotlib`. Aquí te dejo un ejemplo de cómo hacerlo:
+
+``` python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Ajustar un modelo OLS y obtener los residuos
+# Asumiendo que 'result' es el resultado de tu modelo OLS
+residuos = result.resid
+
+# Crear una figura y un eje
+fig, ax = plt.subplots()
+
+# Graficar los residuos
+ax.scatter(range(len(residuos)), residuos, color='blue')
+
+# Graficar las líneas en y=-1 y y=1
+ax.hlines(-1, xmin=0, xmax=len(residuos), colors='black', linestyles='dashed')
+ax.hlines(1, xmin=0, xmax=len(residuos), colors='black', linestyles='dashed')
+
+# Cambiar el color de los puntos que están fuera del intervalo [-1, 1] a rojo
+mask = np.abs(residuos) > 1
+ax.scatter(np.arange(len(residuos))[mask], residuos[mask], color='red')
+
+# Añadir etiquetas a los ejes
+ax.set_xlabel('Índice de la observación')
+ax.set_ylabel('Residuo')
+
+# Mostrar el gráfico
+plt.show()
+```
+
+Este código crea un gráfico de dispersión de los residuos de tu modelo OLS. Las líneas entrecortadas en y=-1 y y=1 se dibujan con la función `hlines`. Luego, se cambia el color de los puntos que están fuera del intervalo \[-1, 1\] a rojo. Finalmente, se añaden etiquetas a los ejes y se muestra el gráfico.
+
+Para probar si los errores de un modelo de regresión están normalmente distribuidos, puedes utilizar la prueba de normalidad de Shapiro-Wilk o la prueba de normalidad de Anderson-Darling. Ambas pruebas están disponibles en la biblioteca `scipy.stats` de Python. Aquí te muestro cómo puedes hacerlo con la prueba de Shapiro-Wilk:
+
+``` python
+from scipy import stats
+
+# Asumiendo que 'result' es el resultado de tu modelo OLS
+residuos = result.resid
+
+# Realizar la prueba de Shapiro-Wilk
+shapiro_test = stats.shapiro(residuos)
+
+# Imprimir el resultado
+print(f"Estadístico de Shapiro-Wilk: {shapiro_test[0]}")
+print(f"Valor p: {shapiro_test[1]}")
+```
+
+Este código realiza la prueba de Shapiro-Wilk en los residuos de tu modelo y luego imprime el estadístico de la prueba y el valor p. Si el valor p es menor que el nivel de significancia que has elegido (por ejemplo, 0.05), entonces puedes rechazar la hipótesis nula de que los residuos están normalmente distribuidos.
+
+Además de las pruebas de normalidad, también es común utilizar un gráfico Q-Q (quantile-quantile) para visualizar si los residuos están normalmente distribuidos. Aquí te muestro cómo puedes hacerlo con `statsmodels`:
+
+``` python
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
+
+# Crear un gráfico Q-Q de los residuos
+sm.qqplot(residuos, line='s')
+plt.show()
+```
+
+En un gráfico Q-Q, si los residuos están normalmente distribuidos, los puntos deberían caer aproximadamente en la línea diagonal.

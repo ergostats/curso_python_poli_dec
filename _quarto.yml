@@ -18,6 +18,8 @@ book:
     - clase_4.qmd
     - clase_6.qmd
     - clase_7.qmd
+    - clase_8.qmd
+    - clase_9.qmd
 format:
   html:
     number-sections: false
