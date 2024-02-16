@@ -39,13 +39,13 @@ Ya con este nuevo data frame podremos trabajar normalmente, ahora se muestra una
 
 ## Introducción a las Variables Dummy en Regresiones Lineales:
 
-En regresiones lineales, las variables dummy se utilizan para modelar efectos cualitativos. Se representan mediante variables binarias que toman el valor de 0 o 1 para indicar la ausencia o presencia de una característica específica. Formalmente, una variable dummy (D_i) para la categoría (i) toma el valor de 1 si la observación pertenece a esa categoría y 0 en caso contrario. Por ejemplo, en un modelo de oferta y demanda para un bien, podemos introducir variables dummy para representar diferentes estaciones del año. La regresión puede expresarse como: 
+En regresiones lineales, las variables dummy se utilizan para modelar efectos cualitativos. Se representan mediante variables binarias que toman el valor de 0 o 1 para indicar la ausencia o presencia de una característica específica. Formalmente, una variable dummy (D_i) para la categoría (i) toma el valor de 1 si la observación pertenece a esa categoría y 0 en caso contrario. Por ejemplo, en un modelo de oferta y demanda para un bien, podemos introducir variables dummy para representar diferentes estaciones del año. La regresión puede expresarse como:
 
-$$
+\$\$
 
-Y = \beta\_0 + \beta\_1 X + \beta*2 D*{invierno} + \epsilon
+Y = \beta\_0 + \beta\_1 X + \beta\*2 D\*{invierno} + \epsilon
 
-$$
+\$\$
 
 Donde (Y) es la variable dependiente (demanda), (X) es la variable independiente (precio), $\beta_0$ es la intercepción, $\beta_1$ es el coeficiente asociado con (X), $\beta_2$ es el coeficiente de la variable dummy de invierno, y $\epsilon$ es el término de error.
 
@@ -61,13 +61,13 @@ Donde $\beta_{mujer}$ representa la diferencia salarial entre mujeres y hombres,
 
 ### Ejemplos Económicos de Variables Dummy en Regresiones Lineales:
 
-Supongamos que queremos estudiar el efecto de la membresía en un sindicato en los salarios de los trabajadores. Podemos introducir una variable dummy $D_{sindicato}$ que tome el valor de 1 si el trabajador es miembro del sindicato y 0 si no lo es. El modelo sería: 
+Supongamos que queremos estudiar el efecto de la membresía en un sindicato en los salarios de los trabajadores. Podemos introducir una variable dummy $D_{sindicato}$ que tome el valor de 1 si el trabajador es miembro del sindicato y 0 si no lo es. El modelo sería:
 
-$$
+\$\$
 
-Salario = \beta_0 + \beta_1 Experiencia + \beta_2 D_{sindicato} + \epsilon
+Salario = \beta\_0 + \beta\_1 Experiencia + \beta*2 D\*{sindicato} + \epsilon
 
-$$
+\$\$
 
 Donde $\beta_{sindicato}$ nos indicaría la diferencia salarial entre los trabajadores sindicalizados y no sindicalizados.
 
