@@ -1,0 +1,137 @@
+---
+title: "Actividades  del curso"
+editor: visual
+---
+
+## Construcción de las bases
+
+Los datos fueron recopilados de el registro de estudiantes matriculados en el curso, a la vez se tomaron las respuestas a las actividades que se plantearon en Github. La base de datos final se puede encontrar en la carpeta `data_act`.
+
+### Variables
+
+Las variables que se encuentran en el archivo son las siguientes:
+
+-   **Nombre completo:** Corresponde al nombre del estudiante.
+
+-   **Correo:** Es el correo que el estudiante usó para las actividades en Google Forms.
+
+-   **Python:** Es la actividad a ser calificada, toma el valor de 1 si el estudiante la realizó, el nombre es seguido por un número del 1 al 5 para saber a cuál nos referimos.
+
+-   **Dias:** Se refiere al número de días que tardó el estudiante en responder la actividad. Va seguida a si mismo de los número 1-5 para saber a cuál se refiere.
+
+-   **notas\_:** Esta es la calificación de la actividad que se calculó tomando en cuenta si presentó la actividad, el tiempo que tardó en subir la misma y una aplicación de la función sigmoide para calcular los valores y no perjudicar a los estudiantes. Tambíen esta seguida de un número para saber a qué actividad nos referimos
+
+-   **nota_final:** Es la calificación final del curso, es sobre 10 puntos. Para la misma se toma en cuenta las 4 primeras actividades que corresponden al 40% y el resto a la quinta actividad.
+
+## Creación del sistema de notas
+
+En esta parte damos parte detalladamente de cómo se realizó la calificación.
+
+1.  Empezamos cargando librerias y la base con las dos primeras variables mencionadas anteriormente
+
+    ```{python}
+    import pandas as pd
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import math 
+
+    base = pd.read_excel("data_act/base_actividades.xlsx")
+    base
+    ```
+
+2.  Procedemos a crear funciones que nos ayudarán con la calificación
+
+    ```{python}
+    #Dividimos el intervalo de [8,15] en segmentos iguales
+    tama= (2-0.5)/7
+    puntos = [0.5+tama*i for i in range(1,7)]
+    puntos.insert(0,0.5)
+    puntos.append(2)
+    puntos.reverse()
+
+
+    #Creamos una tupla para asignar cada valor con el de la funcion sigmoide
+    a = list(zip(range(8,16),puntos))
+
+    #Definimos esta función que a cada elemento en la tupla anterior le devuelve despues de pasarle por una función sigmoide
+    def sigmoide(i):
+        for tupla in a:
+            if tupla[0]==i:
+                return 1/(1+math.exp(-tupla[1]))
+              
+              
+              
+              
+              
+    #esta funcion acepta la base y la cambia, nos da las notas de cada actividad 
+    def calcular_notas(base):
+        for j in range(1,5):
+            resultado=[]
+            for i,k in zip(base['Python'+str(j)],range(0,35)):
+                if i==1:
+                    x= base.at[k,'Dias'+str(j)]
+                    if 0<=x<=7:
+                        resultado.append(1)
+                    elif 8<=x<=15:
+                        resultado.append(sigmoide(x)) 
+                    else:
+                        resultado.append(0.5)
+                else:
+                    resultado.append(0)
+            base['notas_'+str(j)]=resultado
+
+
+
+    #Creamos la función que nos permite calcular la nota de la actividad 5
+    def nota_5(base):
+        resultado=[]
+        for i in base['Python5']:
+            if i ==1:
+                resultado.append(6)
+            else:
+                resultado.append(0)
+        base['notas_5']=resultado
+
+
+    #esta función recibe el data frame y calcula la nota final para caada estudiante
+    def nota_final(base):
+        columnas_sum=['notas_1','notas_2','notas_3','notas_4','notas_5']
+        base['nota_final']=base[columnas_sum].sum(axis=1)
+        
+
+    ```
+
+3.  Ya con las funciones anteriores procedemos a pasar nuestra base por cada una de ellas
+
+    ```{python}
+    #calculamos las notas hasta la actividad 4
+    calcular_notas(base)
+    #calculamos las notas de la última actividad
+    nota_5(base)
+    #calculamos la nota final para cada uno
+    nota_final(base)
+
+    base
+    ```
+
+4.  Creamos un gráfico que nos ayude en la visualización de cuáles estudiantes aprueban y cuáles no
+
+    ```{python}
+    #gráfico:
+    num_fil=len(base)
+    x= range(num_fil)
+
+    colores = ['red' if i < 7 else 'blue' for i in base['nota_final']]
+
+    plt.bar(base['Nombre completo'],base['nota_final'],color=colores,width= 0.8,edgecolor='black')
+    plt.xticks(base['Nombre completo'],rotation=90)
+    plt.subplots_adjust(left=0.01, right=1.5, top=1, bottom=0.01)
+    plt.show()
+    ```
+
+5.  Por último guardamos el data frame en un archivo de excel.
+
+    ```{python}
+    ruta= 'data_act/notas_finales.xlsx'
+    base.to_excel(ruta,index=False)
+    ```
