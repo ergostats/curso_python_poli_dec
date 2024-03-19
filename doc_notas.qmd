@@ -1,35 +1,127 @@
 ---
-title: "Actividades  del curso"
+title: "Actividades y notas finales del curso: Introducción al lenguaje de programación Python para el análisis estadístico"
 editor: visual
+execute: 
+  echo: false
+toc: true
 ---
 
-## Construcción de las bases
+## Actividades Obligatorias
 
-Los datos fueron recopilados de el registro de estudiantes matriculados en el curso, a la vez se tomaron las respuestas a las actividades que se plantearon en Github. La base de datos final se puede encontrar en la carpeta `data_act`.
+En esta sección se describe las actividades que realizaron los estudiantes, estas tenían que ser realizadas lo más pronto posible para así no tener penalización en la nota final.
+
+### Python 1: Introducción a Python y su entorno de desarrollo
+
+Esta actividad se realizó luego de nuestra priemera clase, en la misma se pide descargar un script y correr el mismo, siguiendo las direcciones que este mostraba. Por último los estudiantes deben subir una captura de pantalla con el resultado.
+
+#### Tecnologías usadas:
+
+-   Github: En ella se subió el script y los estudiantes subieron su aporte.
+
+-   Visual Studio Code: Se usó como IDE para el desarrollo de la actividad.
+
+#### Enlace a la actividad:
+
+Se puede ver las respuestas de los estudiantes así como la actividad en el siguiente enlace: <https://github.com/ergostats/python_nido_buho/issues/3>
+
+### Python 2: Lectura de archivos con Pandas
+
+En esta actividad se pidió a los estudiantes replicar lo visto en clase, crear un script y crear un repositorio propio. Por último se pidió subir el enlace del repositorio creado donde debe estar el script creado, además de reaccionar a los de otros compañeros.
+
+#### Tecnologías usadas:
+
+-   Github: Usada para crear el repositorio y subir los trabajos de cada alumno.
+
+-   Visual Studio Code: Se usó como IDE para programar.
+
+#### Enlace a la actividad:
+
+En el siguiente enlace se puede ver las colaboraciones de los estudiantes: <https://github.com/ergostats/python_nido_buho/issues/4>
+
+### Python 3: Una revisión sobre los usos de python
+
+Para esta actividad se pidió leer una parte de la guía del estudiante y escribir una reflexión sobre la lectura, luego se pidió subir la misma.
+
+#### Tecnologías usadas:
+
+-   Github: Se usó el repositorio para subir los aportes de cada estudiante.
+
+#### Enlace a la actividad:
+
+Se puede ver los aportes de cada uno en el siguiente enlace: <https://github.com/ergostats/python_nido_buho/issues/5>
+
+### Python 4: Haciendo uso de la visualización para contar una historia
+
+Para esta actividad se pidió formar grupos y luego se asignó un indicador a cada uno. Con ello se pidió responder tres preguntas al final del análisis.
+
+#### Tecnologías usadas:
+
+-   Github: Se usó para subir los aportes de cada gupo.
+
+-   Visual Studio Code: Se usó como IDE para el desarrollo.
+
+-   Excel: En este formato se descargó la información inicial.
+
+#### Enlace a la actividad:
+
+Se puede encontrar en el siguiente enlace: <https://github.com/ergostats/python_nido_buho/issues/8>
+
+### Python 5: Proyecto final
+
+En este proyecto se puso en práctica todo lo visto durante el curso por lo que se pidió realizar un análisis a fondo de una base de datos a la vez que se realiza un modelo.
+
+#### Tecnologías usadas:
+
+-   Github: Repositorio donde se subió el trabajo final.
+
+-   Visual Studio Code: La IDE usada para programar.
+
+#### Enlace a la actividad:
+
+Se puede encontrar las instrucciones en el siguiente enlace: <https://ergostats.github.io/python_nido_buho/>
+
+## Actividades complementarias
+
+En la siguiente taba se muestran las actividades complementarias que se fueron realizando a lo largo del curso, estas fueron realizadas a manera de preguntas interactivas en medio de cada clase a través de la plataforma Slido. Por mencionar que dichas actividades no eran calificadas, mas sirvieron como un descanso y despertar la curiosidad de los estudiantes.
+
+|   Clase    |                                 Pregunta                                 | Respuestas por clase |
+|:----------------:|:----------------------------------:|:----------------:|
+|     1      |                    Reconocer herramientas open source                    |        33/33         |
+|     2      |                       Reconocer tipos de variables                       |        26/31         |
+|     7      |               Prueba de hipótesis y distribución adecuada                |        18/20         |
+| 9 (inicio) | Pobabilidad condicional, funciones lambda y modelos de regresión simples |        19/25         |
+| 9 (medio)  |       Determinar qué ocurre al cambiar la categoría de referencia        |        12/25         |
+|     10     |              Uso de variables dummy en modelos de regresión              |        16/17         |
+
+## Creación de la base inicial
+
+Los datos fueron recopilados de el registro de estudiantes matriculados en el curso, a la vez se tomaron las respuestas a las actividades que se plantearon en Github. La base de datos final se puede encontrar en la carpeta `data_act` (la carpeta esta en mismo repositorio).
 
 ### Variables
 
-Las variables que se encuentran en el archivo son las siguientes:
+Las variables que se muestran tanto en la base inicial como en la final son las siguientes:
 
--   **Nombre completo:** Corresponde al nombre del estudiante.
+-   **Nombre completo:** Es el nombre del estudiante inscrito.
 
--   **Correo:** Es el correo que el estudiante usó para las actividades en Google Forms.
+-   **Correo:** El correo que usó cada uno para las actividades en Google Forms.
 
--   **Python:** Es la actividad a ser calificada, toma el valor de 1 si el estudiante la realizó, el nombre es seguido por un número del 1 al 5 para saber a cuál nos referimos.
+-   **Python:** Es la actividad a ser calificada, toma el valor de 1 si el estudiante la realizó. El nombre es seguido por un número del 1 al 4 para saber a cuál nos referimos. La excepción es la variable "Python5", la cual es la nota obtenida por el estuduante en el proyecto final.
 
--   **Dias:** Se refiere al número de días que tardó el estudiante en responder la actividad. Va seguida a si mismo de los número 1-5 para saber a cuál se refiere.
+-   **Dias:** Se refiere al número de días que tardó el estudiante en responder la actividad. Va seguida de el número 1 al 4 para saber a cuál se refiere.
 
--   **notas\_:** Esta es la calificación de la actividad que se calculó tomando en cuenta si presentó la actividad, el tiempo que tardó en subir la misma y una aplicación de la función sigmoide para calcular los valores y no perjudicar a los estudiantes. Tambíen esta seguida de un número para saber a qué actividad nos referimos
+-   **notas\_:** Esta es la calificación de la actividad que se calculó tomando en cuenta si presentó la actividad, el tiempo que tardó en subir la misma y una aplicación de la función sigmoide para calcular los valores y no perjudicar a los estudiantes. Tambíen esta seguida de un número para saber a qué actividad nos referimos.
 
--   **nota_final:** Es la calificación final del curso, es sobre 10 puntos. Para la misma se toma en cuenta las 4 primeras actividades que corresponden al 40% y el resto a la quinta actividad.
+-   **nota_final:** Es la calificación final del curso, es sobre 10 puntos. Para la misma se toma en cuenta las 4 primeras actividades que corresponden al 40% y el pryecto final, con un 60%.
 
 ## Creación del sistema de notas
 
-En esta parte damos parte detalladamente de cómo se realizó la calificación.
+En esta parte damos parte de cómo se realizó la calificación de las actividades de los estudiantes y también el código que se elaboró para obtener las mismas.
 
-1.  Empezamos cargando librerias y la base con las dos primeras variables mencionadas anteriormente
+1.  Empezamos cargando librerias y leemos el archivo excel con la base y las variables mencionadas anteriormente (hasta la variable "Dias").
 
     ```{python}
+    #| echo: true
+
     import pandas as pd
     import numpy as np
     import matplotlib.pyplot as plt
@@ -39,9 +131,11 @@ En esta parte damos parte detalladamente de cómo se realizó la calificación.
     base
     ```
 
-2.  Procedemos a crear funciones que nos ayudarán con la calificación
+2.  Procedemos a crear funciones que nos ayudarán con la calificación. En esta parte vamos a destacar el uso de la función sigmoide para el tratamiento de las notas de las cuatro primeras actividades. Llamarla funcón sigmoide es muy general, pues este nombre se da a funciones con una forma de "S", el verdadero nombre de esta función es función logística y se decidió usarla gracias a su monotonía creciente, así pues quienes tarden menos en responder tendran una nota cada vez más cerca de 1, pues el rango de esta función va de $(0,1)$; para terminar de usasrla debemos acotar su dominio, pues este es todo $R$, por tanto creamos un arreglo que asigne a los números de 8 a 15 valores de 2 a 0.5. Por último solo aplicamos la función antes descrita a aquellos que tardaron entre 8 a 15 días en entregar su trabajo.
 
     ```{python}
+    #| echo: true
+
     #Dividimos el intervalo de [8,15] en segmentos iguales
     tama= (2-0.5)/7
     puntos = [0.5+tama*i for i in range(1,7)]
@@ -61,13 +155,11 @@ En esta parte damos parte detalladamente de cómo se realizó la calificación.
               
               
               
-              
-              
     #esta funcion acepta la base y la cambia, nos da las notas de cada actividad 
     def calcular_notas(base):
         for j in range(1,5):
             resultado=[]
-            for i,k in zip(base['Python'+str(j)],range(0,35)):
+            for i,k in zip(base['Python'+str(j)],range(0,len(base.index))):
                 if i==1:
                     x= base.at[k,'Dias'+str(j)]
                     if 0<=x<=7:
@@ -83,27 +175,27 @@ En esta parte damos parte detalladamente de cómo se realizó la calificación.
 
 
     #Creamos la función que nos permite calcular la nota de la actividad 5
+
     def nota_5(base):
         resultado=[]
         for i in base['Python5']:
-            if i ==1:
-                resultado.append(6)
-            else:
-                resultado.append(0)
+            nota=(6*i)/10
+            resultado.append(nota)
         base['notas_5']=resultado
-
 
     #esta función recibe el data frame y calcula la nota final para caada estudiante
     def nota_final(base):
-        columnas_sum=['notas_1','notas_2','notas_3','notas_4','notas_5']
-        base['nota_final']=base[columnas_sum].sum(axis=1)
+      columnas_sum=['notas_1','notas_2','notas_3','notas_4','notas_5']
+      base['nota_final']=base[columnas_sum].sum(axis=1)
         
 
     ```
 
-3.  Ya con las funciones anteriores procedemos a pasar nuestra base por cada una de ellas
+3.  Ya con las funciones anteriores procedemos a pasar nuestra base por cada una de ellas y obtener la calificación final de cada estudiante.
 
     ```{python}
+    #| echo: true
+
     #calculamos las notas hasta la actividad 4
     calcular_notas(base)
     #calculamos las notas de la última actividad
@@ -111,27 +203,98 @@ En esta parte damos parte detalladamente de cómo se realizó la calificación.
     #calculamos la nota final para cada uno
     nota_final(base)
 
-    base
     ```
 
-4.  Creamos un gráfico que nos ayude en la visualización de cuáles estudiantes aprueban y cuáles no
+4.  Por último guardamos el data frame, con las notas finales, en un archivo de excel.
 
     ```{python}
-    #gráfico:
-    num_fil=len(base)
-    x= range(num_fil)
+    #| echo: true
 
-    colores = ['red' if i < 7 else 'blue' for i in base['nota_final']]
-
-    plt.bar(base['Nombre completo'],base['nota_final'],color=colores,width= 0.8,edgecolor='black')
-    plt.xticks(base['Nombre completo'],rotation=90)
-    plt.subplots_adjust(left=0.01, right=1.5, top=1, bottom=0.01)
-    plt.show()
-    ```
-
-5.  Por último guardamos el data frame en un archivo de excel.
-
-    ```{python}
-    ruta= 'data_act/notas_finales.xlsx'
+    ruta= 'data_act/notas_finales2.xlsx'
     base.to_excel(ruta,index=False)
     ```
+
+## Resultados
+
+A continuación presentamos algunos indicadores sobre los resultados obtenidos por los estudiantes:
+
+```{python}
+## Con esta parte podemos calcular cual es la tasa de respuesta a las 4 actividades 
+
+tasa_respuesta = []
+for i in range(1,5):
+    tasa_respuesta.append(base['Python'+str(i)].sum())
+
+tasa=[]
+for i in range(0,len(tasa_respuesta)):
+    tasa.append((tasa_respuesta[i]/len(base.index))*100)
+
+    
+```
+
+| Actividad | Tasa de respuesta | Entregas a tiempo |
+|-----------|:-----------------:|:-----------------:|
+| Python1   |      88.89 %      |        32         |
+| Python2   |      80.56 %      |        24         |
+| Python3   |      69.44 %      |        17         |
+| Python4   |      80.56 %      |        17         |
+
+```{python}
+# Con esto vemos cuantos estudiantes presentaron a tiempo sus actividades, siempre 
+# y cuando la hayan presentado
+a_tiempo = []
+for i in range(1,5):
+    filtro= (base['Python'+str(i)]==1) & (base['Dias'+str(i)]<=7)
+    a_tiempo.append(len(base[filtro]))
+```
+
+```{python}
+#Calculamos el promedio de las 4 primeras actividades y de la ultima actividad
+
+base['suma_fila']= base[['notas_1', 'notas_2', 'notas_3', 'notas_4']].sum(axis=1)
+promedio_act4 = base['suma_fila'].mean()
+
+promedio5 = base['notas_5'].mean()
+```
+
+Además presentamos el promedio del curso, de las primeras cuatro actividades y la última; tomemos en cuenta que las primeras cuatro actividades tienen una ponderación del 40% y la última del 60%.
+
+| Actividad  | Promedio |
+|------------|----------|
+| Python 1-4 | 2.99     |
+| Python 5   |          |
+
+Por último presentamos una gráfica que nos muestra qué estudiantes lograron aprobar el curso, los mismos muestran de color azul.
+
+```{python}
+num_fil=len(base)
+x= range(num_fil)
+
+colores = ['red' if i < 7 else 'blue' for i in base['nota_final']]
+
+plt.bar(base['Nombre completo'],base['nota_final'],color=colores,width= 0.8,edgecolor='black')
+plt.xticks(base['Nombre completo'],rotation=90)
+plt.subplots_adjust(left=0.01, right=1.5, top=1, bottom=0.01)
+plt.show()
+```
+
+Para una mejor visualización del porcentaje de alumnos que aprobaron el curso mostramos el siguiente gráfico de pastel.
+
+```{python}
+notas_mayor7 = base[base['nota_final']>=7]
+num7 = len(notas_mayor7)
+num_tot = len(base)
+porcentaje = (num7/num_tot)*100
+
+#Creamos el gráfico de pastel
+plt.figure(figsize=(8,8))
+plt.pie([num7,num_tot-num7],
+       labels = ['Nota final mayor a 7', 'Notal final menor a 7'],
+       autopct = '%1.1f%%',
+       colors = ['blue', 'red'],
+       startangle = 90)
+plt.title("Estudiantes con nota final mayor a 7")
+plt.axis('equal')
+plt.show()
+    
+```
